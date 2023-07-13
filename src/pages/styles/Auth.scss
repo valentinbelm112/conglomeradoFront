@@ -1,0 +1,34 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+   
+  }
+  
+  .container-image img{
+    margin-top: 2%;
+    width: 30%;
+  }
+  .block_left {
+    height: 120vh;
+    background: linear-gradient(to bottom right, #076024, #00b65f);
+  }
+  
+  .block_right {
+    height: 120vh;
+    background-color: #eeeded;
+  }
+  
+  .logo {
+    position: absolute;
+    top: 0;
+    left: 58%;
+    margin-top: 50px;
+    width: 200px;
+  }
+  
+  .button-container {
+    width: 250px;
+    margin-top: 20px;
+  }
+  
