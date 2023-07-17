@@ -26,6 +26,9 @@ const ListSociosConglomerados =()=>{
     }
     return (
         <>
+        <div className="navbar-sidebar-directivos">
+            
+        </div>
         <NavbarConglomerado/>
         <div className="container-list-socios">
              <div className="row">

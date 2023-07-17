@@ -1,4 +1,5 @@
 @import 'vars';
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 nav {
     display: flex;
     background-color: white;
@@ -8,6 +9,19 @@ nav {
     border-bottom: 1px solid var(--very-light-pink);
   }
 
+  .title-user-login{
+   
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+    order: -1;
+    font-weight: 500;
+    margin-right: 6px;
+}
   .menu {
     display: none;
   }

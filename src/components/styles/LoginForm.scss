@@ -1,24 +1,23 @@
 
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 .login-page {
-	margin-top: 25%;
-	width: 100%;
-	height: 100vh;
-	padding: 24% 0 0;
+	
+    width: 104%;
+    height: 46vh;
 
-	margin: auto;
+	
 }
 
 .login-page .form {
 	position: relative;
 	z-index: 1;
 	background: #FFFFFF;
-	max-width: 50%;
+	max-width: 80%;
 
 	margin: 0 auto 100px;
-	padding: 45px;
+	padding: 21px;
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
 		rgba(0, 0, 0, 0.24);
@@ -37,7 +36,6 @@
 }
 
 .login-page .form button {
-	font-family: "Roboto", sans-serif;
 	text-transform: uppercase;
 	outline: 0;
 	background: #4CAF50;
@@ -49,6 +47,7 @@
 	-webkit-transition: all 0.3 ease;
 	transition: all 0.3 ease;
 	cursor: pointer;
+	font-family: 'Playfair Display', serif;
 }
 
 .login-page .form button:hover, .form button:active, .form button:focus {
@@ -71,6 +70,12 @@
 }
 
 
+.login-page  .container-login-conglomerado{
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	font-family: 'Playfair Display', serif;
+}
 
 //body {
 //	background: #A4CDF2; /* fallback for old browsers */

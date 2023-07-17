@@ -56,6 +56,10 @@ const FormLogin =(props)=>{
     return(
         <div className="login-page">
             <div className="form">
+              <div className="tile container-login-conglomerado">
+                 Iniciar Sesión
+                </div>
+                  <br />
                 <form action="" className="login-form" onSubmit={enviarDatos}>
                      <input 
                      name="email"
@@ -69,7 +73,7 @@ const FormLogin =(props)=>{
                      placeholder="Password" 
                      className="lblPass" 
                      onChange={handleInputChange}/>
-				     <button className="btnSing">login</button>
+				     <button className="btnSing">Iniciar Sesión</button>
                      
                 </form>
                 
