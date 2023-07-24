@@ -6,6 +6,7 @@ import axios from "axios";
 import DownloadIcon from '@mui/icons-material/Download';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import ExcelDownloadButton from './ExcelDownloadFormatoConsejo';
 const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
   const [closeFormulario, setCloseFormulario] = useState(false)
 
@@ -175,7 +176,7 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
                   <div className="col-md-8">
                     <div className="tilte-icono-descargar-plantilla-consejo-directivo">
                       <div className="tilte-icono-descargar-plantilla-consejo-directivo-p">
-                        Descargar plantilla
+                       <ExcelDownloadButton/>
                       </div>
                       <div>
                         <DownloadIcon style={{ color: `green` }} />

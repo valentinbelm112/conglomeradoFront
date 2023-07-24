@@ -20,6 +20,7 @@ import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 
+
 const ConsejoDirectivo = () => {
  const [refrescar ,setRefrescar]=useState([])
 
