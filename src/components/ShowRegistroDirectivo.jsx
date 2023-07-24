@@ -34,7 +34,7 @@ const ShowRegistroDirectivo = ({RefrescarInformacion}) => {
                 <div className="row  container-showr-documents-directivos-child-row">
                 <input id="cerrar-modal" name="modal" type="radio" />
             <label for="cerrar-modal">
-              <CloseIcon  style={{ position: `absolute`,marginLeft:`42.3%` }} className="icono-close-register-directivo-show-ins" /> </label>
+              <CloseIcon  style={{ position: `absolute`,marginLeft:`41%`,margintop:`2%` }} className="icono-close-register-directivo-show-ins" /> </label>
                     <div className="col-4 container-show-documents-directivos-child-col ">
                         <div className="show-documents-version">
                             Version ##
@@ -55,17 +55,12 @@ const ShowRegistroDirectivo = ({RefrescarInformacion}) => {
                     </div>
                     <div className="col-8">
                         <div className="row">
-                            <div className="col-8">
-                               
-                            </div>
-                            <div className="col-4"  >
-                                Descargar
-                            </div>
+                            
                         </div>
                         <div className="container-image-show-zoom">
                      
                        <div>
-                        <img onClick={() => setOpen(true)} src="https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1" style={{width:`100%`,height:`90vh`}} alt="" />
+                        <img onClick={() => setOpen(true)} src="https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1" style={{width:`100%`,height:`87vh`}} alt="" />
                         </div> 
 
                       <Lightbox

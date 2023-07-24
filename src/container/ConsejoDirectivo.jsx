@@ -150,7 +150,7 @@ const ConsejoDirectivo = () => {
                     //Inscripcion de asociaciones
                     //</button>
                   }
-                  <div>Ver Documento</div>
+                  <div className="container-title-show-iamgen-ins-label">Ver Documento</div>
                   <input id="mostrar-modal-documento" name="modal" type="radio" />
                   
                   <label for="mostrar-modal-documento"> <PreviewIcon /> </label>
@@ -161,7 +161,7 @@ const ConsejoDirectivo = () => {
 
                 </div>
                 <div className="col-md-4 container-title-show-iamgen-ins">
-                   <div>Añadir Registro</div>
+                   <div className="container-title-show-iamgen-ins-label">Añadir Registro</div>
                   <input id="mostrar-modal" name="modal" type="radio" />
 
                   <label onClick={handleClickOpenFrom} for="mostrar-modal"> <PostAddIcon  /> </label>
@@ -172,7 +172,7 @@ const ConsejoDirectivo = () => {
 
                 </div>
                 <div className="col-md-4 container-title-show-iamgen-ins">
-                   <div>(+) Documento</div>
+                   <div className="container-title-show-iamgen-ins-label">(+) Documento</div>
                   <input id="mostrar-modal" name="modal" type="radio" />
 
                   <label for="mostrar-modal"> <ContentPasteSearchIcon /> </label>

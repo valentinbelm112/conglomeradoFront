@@ -13,7 +13,8 @@
     border-radius: 2%;
     //border: 1px solid var(--very-light-pink);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-  
+    display: flex;
+    justify-content: center;
 
 }
 .container-image-show-zoom{
@@ -41,7 +42,7 @@
     height: 5% !important;
     width: 2.6% !important;
     border-radius: 20px;
-   
+   background-color: rgb(14, 13, 13);
 }
 
 
