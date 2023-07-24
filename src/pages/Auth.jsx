@@ -3,7 +3,7 @@ import FormLogin from "../components/FormLogin.jsx";
 import "../pages/styles/Auth.scss";
 import img1Carousel from "./assets/img1Carrusel.png";
 import img2Carousel from "./assets/img2Carousel.png";
-import Carousel from "react-elastic-carousel";
+import Carousel from "@itseasy21/react-elastic-carousel";
 const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 1 },

@@ -1,6 +1,7 @@
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import CardOptions from "../components/CardOptions";
 import SidebarMenu from "../components/SidebarMenu";
+import { ToastContainer, toast } from 'react-toastify';
 const HomeConglomerado=()=>{
 
 
@@ -8,6 +9,7 @@ const HomeConglomerado=()=>{
         <div>
          <NavbarConglomerado/>
          <SidebarMenu/>
+          <ToastContainer />
         </div>
     );
 }

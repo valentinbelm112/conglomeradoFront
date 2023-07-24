@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Routes  } from "react-router-dom";
 import Auth from "../pages/Auth.jsx";
 import PerfilSociosConglomerados from "../pages/PerfilSociosConglomerados.jsx";
 import HomeConglomerado from "../pages/HomeConglomerado.jsx";
-import ConsejoDirectivo from "../pages/ConsejoDirectivo.jsx";
 import SidebarMenu from "../components/SidebarMenu.jsx";
-import FormRegistrosDirectivos from "../components/FormRegistrosDirectivos.jsx";
+import ListPropietarios from "../pages/PadronPropietarios.jsx"
+import ListExpedientesPropietarios from "../pages/ListExpedientesPropietarios.jsx";
+import ConsejoDirectivoView from "../container/ConsejoDirectivo.jsx"
 const App=()=>{
  
 
@@ -16,9 +17,10 @@ const App=()=>{
           <Route path="/login" element={<Auth/>} />
           <Route path="/home-conglomerado" element={<HomeConglomerado/>} />
           <Route path="/perfil-socios" element={<PerfilSociosConglomerados/>} />
-          <Route path="/register-directivos" element={<ConsejoDirectivo/>} />
+          <Route path="/register-directivos" element={<ConsejoDirectivoView/>} />
           <Route path="/sidebar" element={<SidebarMenu/>} />
-          <Route path="/form" element={<FormRegistrosDirectivos/>} />
+          <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
+          <Route path="/expediente" element={<ListExpedientesPropietarios/>} />
           </Routes >
         </BrowserRouter>
     );

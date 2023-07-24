@@ -1,0 +1,164 @@
+.container-order-a-z-propietario{
+    display: flex;
+
+}
+
+.title-codigo-propietario{
+    background: none;
+	border: none;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	overflow: visible;
+	padding: 0;
+	text-align: inherit;
+	text-transform: none;
+}
+
+.search-register-propietarios{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+}
+
+
+#mostrar-form-documento-propietarios-upload {
+	display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        display: table;
+        color: #fff;
+        line-height: 2.5;
+        padding: 0 1em;
+        
+        cursor: pointer;
+        border-radius: 7px;
+        
+		&:hover {
+			background: darken(rgb(158, 201, 235),10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal {
+        top: 64px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
+
+
+.registrar-nuevo-propietarios-add-delete-export-import{
+    padding-top: 5px;
+}
+
+#mostrar-form-documento-propietarios-person-add{
+    display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        display: table;
+        color: #fff;
+        line-height: 2.5;
+        padding: 0 1em;
+        cursor: pointer;
+        border-radius: 7px;
+        width: 100%;
+		&:hover {
+			background: darken(rgb(158, 201, 235),10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal {
+        top: 64px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }  
+}
+
+#mostrar-form-documento-propietarios-person-add-delete{
+    display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        display: table;
+        color: #fff;
+        line-height: 2.5;
+        padding: 0 1em;
+        cursor: pointer;
+        border-radius: 7px;
+        width: 100%;
+		&:hover {
+			background: darken(rgb(158, 201, 235),10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal {
+        top: 64px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }   
+}
+
+#mostrar-form-documento-propietarios-person-add-export{
+    display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        display: table;
+        color: #fff;
+        line-height: 2.5;
+        padding: 0 1em;
+        cursor: pointer;
+        border-radius: 7px;
+        width: 100%;
+		&:hover {
+			background: darken(rgb(158, 201, 235),10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal {
+        top: 64px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }    
+}
+
+#mostrar-form-documento-propietarios-person-add-import{
+    display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        display: table;
+        color: #fff;
+        line-height: 2.5;
+        padding: 0 1em;
+        cursor: pointer;
+        border-radius: 7px;
+        width: 90%;
+		&:hover {
+			background: darken(rgb(158, 201, 235),10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal {
+        top: 64px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }     
+}
+.conatiner-registro-padron-propietarios{
+    width: 100%;
+}

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { serverURL } from "../utils/Configuration";
 const FormLogin =(props)=>{
     
     const navigate = useNavigate();
@@ -27,9 +28,8 @@ const FormLogin =(props)=>{
         console.log("Enviando datos" +datos.email);
      
         const user = await axios.post(
-            //url: "http://localhost:3001/api/auth/sign-in/",
-     
-            "http://localhost:9100/api/auth/generatetoken", 
+    
+            `${serverURL}/api/auth/generatetoken`,
      
            {
              username: datos.email,
@@ -41,7 +41,7 @@ const FormLogin =(props)=>{
             console.log("holass");
             //saveToLocalStorage(data);
             //login();
-            navigate('/ruta-destino');
+            navigate('/home-conglomerado');
            
            
           })
@@ -64,7 +64,7 @@ const FormLogin =(props)=>{
                      <input 
                      name="email"
                      type="text" 
-                     placeholder="Usuario"
+                      placeholder="Usuario"
                       className="lblUsuario" 
                       onChange={handleInputChange}/>
                      <input 
@@ -73,7 +73,7 @@ const FormLogin =(props)=>{
                      placeholder="Password" 
                      className="lblPass" 
                      onChange={handleInputChange}/>
-				     <button className="btnSing">Iniciar Sesión</button>
+				            <button className="btnSing">Iniciar Sesión</button>
                      
                 </form>
                 

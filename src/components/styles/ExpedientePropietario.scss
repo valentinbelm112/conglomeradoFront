@@ -1,0 +1,94 @@
+
+@import 'vars';
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.title-container-expediente-propietario{
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #076024;
+
+}
+
+.container-expediente-propietario .Partida-registral-propietario-title{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.Partida-registral-propietario-title-p{
+    font-family: "Roboto", sans-serif;
+}
+
+.container-expediente-contactChoice1-propietario{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding-right: 5px;
+
+}
+
+.container--expediente-propietario{
+    display: flex;
+    justify-content: center;
+}
+.foto-expediente-propietario{
+    width: 70%;
+    height: 50%;
+}
+
+.title-info-personal-expediente{
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #ea1f1f;
+}
+.container-info-personal{
+    display: flex;
+   
+}
+.title-datos-personales-expediente-filter{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+.container-partida-filter-expediente{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.title-numero-partida{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.title-oficina-registral{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.title-area{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+.title-estado{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+.title-tipo-dominio{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.title-acciones-drechos{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold; 
+}
+
+.title-direccion-propietarios{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold; 
+}
+.title-co-conyugue-propietario{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold; 
+}
