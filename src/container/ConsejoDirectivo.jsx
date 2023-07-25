@@ -19,12 +19,15 @@ import { UseDeleteConsejoDirectivo } from "../hooks/useDeleteConsejoDirectivo";
 import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
+import UseGetDoccumentoConsejoDirectivo from "../hooks/useGetDocumentoConsejoDirectivo";
 
 
 const ConsejoDirectivo = () => {
  const [refrescar ,setRefrescar]=useState([])
 
   const { directivos, isLoading } = useGetConsejoDirectivo(`${serverURL}/CGM/listar`,setRefrescar);
+ 
+  const {documento,isLoadingDoc} =UseGetDoccumentoConsejoDirectivo(`${serverURL}/CGM/Documento-detalle-directivo`)
   //setRefrescar(directivos.data);
   
 
@@ -53,6 +56,15 @@ const ConsejoDirectivo = () => {
    setRefrescar(response.data)
   }
 
+
+  if (isLoading || isLoadingDoc) {
+
+    return (
+    <>
+      <Container_Nav_Sidb_Load/>
+    </>
+    )
+  }
 
   
   return (
@@ -157,7 +169,7 @@ const ConsejoDirectivo = () => {
                   <label for="mostrar-modal-documento"> <PreviewIcon /> </label>
 
                   <div id="modal-show-document">
-                    <ShowRegistroDirectivo  />
+                    <ShowRegistroDirectivo  Detalledocumento={documento} />
                   </div>
 
                 </div>

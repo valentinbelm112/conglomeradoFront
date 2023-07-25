@@ -8,17 +8,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import ExcelDownloadButton from './ExcelDownloadFormatoConsejo';
 const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
-  const [closeFormulario, setCloseFormulario] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const [datos, setDatos] = useState({
     fecha_documento: "",
     fecha_desde: "",
     fecha_hasta: "",
-    obserbaciones: "",
-    fecha_actualizacion: "",
+    observaciones: "",
     codigo_asociacion: ""
   });
-  const [fecha_documento, setFecha_Documento] = useState(new Date());
+  const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
+
 
   // onchange states
   const [excelFile, setExcelFile] = useState(null);
@@ -47,15 +47,23 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
   
     const formData = new FormData();
 
+   
+
     console.log(typeof datos.fecha_documento + "Fechaaaaaa tipo datos")
     formData.append('file_upload_excel', excelFile)
     formData.append('file_upload_pdf', pdfFile)
+    formData.append('fecha_documento', datos.fecha_documento)
+    formData.append('fecha_desde', datos.fecha_desde)
+    formData.append('fecha_hasta', datos.fecha_hasta)
+    formData.append('obserbaciones', datos.observaciones)
+    formData.append('codigo_asociacion', datos.codigo_asociacion)
 
+    console.log(datos.obserbaciones + "Observaciones")
     console.log(pdfFile + "Enviando data de la imagen");
 
     // Realizar la solicitud POST con Axios
     //http://localhost:8080/upload/imagenes
-    fetch('http://localhost:8080/upload/imagenes', {
+    fetch('http://localhost:9090/CGM/Upload-info-directivo', {
       method: 'POST',
       body: formData
     })
@@ -241,7 +249,7 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
               </div>
               <div className="input-obserbaciones-registro-directivo">
                 <textarea
-                  name="observacion"
+                  name="observaciones"
                   type="text"
                   className="form-control input-obserbaciones-reg-directivo "
                   onChange={handleInputChange} />
@@ -250,17 +258,7 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
             </div>
 
             <div className="btn-register-directivo-info" style={{ width: `100%` }}>
-              {/*
-    <div className="col-md-8">
-
-    </div>
-    <div className="col-md-4">
-      <div className="row botones-registro-consejo-directivo">
-       
-        <div className="col-md-6">
-        <button type="button" class="btn btn-secondary">Cancelar</button>
-      </div>*/
-              }
+            
 
               <button type="submit" class="btn-enviar-carga-masiva-directivos">Inscribir Asociación
               </button>

@@ -9,15 +9,15 @@ import Download from "yet-another-react-lightbox/plugins/download";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/plugins/captions.css";
 import CloseIcon from '@mui/icons-material/Close';
-const ShowRegistroDirectivo = ({RefrescarInformacion}) => {
+import { format } from 'date-fns';
+const ShowRegistroDirectivo = (props) => {
     const [open, setOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-
+    console.log(props);
     const images = [
         "https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1"
       ]
     const [combo,SetCombo]=useState(1)
-     
+    const fechaHoraString = "2023-07-26T05:00:00.000+00:00";
  
 
     const handleChange = (event) => {
@@ -37,18 +37,21 @@ const ShowRegistroDirectivo = ({RefrescarInformacion}) => {
               <CloseIcon  style={{ position: `absolute`,marginLeft:`41%`,margintop:`2%` }} className="icono-close-register-directivo-show-ins" /> </label>
                     <div className="col-4 container-show-documents-directivos-child-col ">
                         <div className="show-documents-version">
-                            Version ##
+                            Version :1
                         </div>
                         <div className="show-document-change-date">
-                            Fecha de Actualizacion
+                            Fecha de Actualizacion :
                         </div>
                         <div>
-                            13/10/06
+                       
+                        { format(new Date(props?.Detalledocumento.data?.des_fecha_actualizacion), "dd-MM-yyyy HH:mm:ss")}
                         </div>
                         <div className="show-document-date">
                             Fecha del documento
                         </div>
-                        <div>Año 2021 | mes marzo</div>
+                        <div>
+                        { format(new Date(props?.Detalledocumento.data.des_fecha_documento), "dd-MM-yyyy HH:mm:ss")}
+                        </div>
                         <div className="show-document-consejo-directivo">
                             Documento del consejo directivo actualizado
                         </div>
@@ -60,7 +63,7 @@ const ShowRegistroDirectivo = ({RefrescarInformacion}) => {
                         <div className="container-image-show-zoom">
                      
                        <div>
-                        <img onClick={() => setOpen(true)} src="https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1" style={{width:`100%`,height:`87vh`}} alt="" />
+                        <img onClick={() => setOpen(true)} src={props?.Detalledocumento.data.des_link_documento_inscrito} style={{width:`100%`,height:`87vh`}} alt="" />
                         </div> 
 
                       <Lightbox
