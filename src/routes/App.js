@@ -20,7 +20,7 @@ const App=()=>{
           <Route path="/register-directivos" element={<ConsejoDirectivoView/>} />
           <Route path="/sidebar" element={<SidebarMenu/>} />
           <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
-          <Route path="/expediente" element={<ListExpedientesPropietarios/>} />
+          <Route path="/expediente/:id" element={<ListExpedientesPropietarios/>} />
           </Routes >
         </BrowserRouter>
     );

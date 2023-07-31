@@ -1,14 +1,17 @@
 import axios from 'axios';
-const makeApiRequest = async () => {
+import { getAccessToken } from './useGetAccesTocken';
+import { refreshAccessToken } from './useGetRefreshToken';
+export const useGetReniec = async (apiUrl) => {
     try {
-      let accessToken = await getAccessToken();
+      let accessToken = await getAccessToken("https://190.81.122.244:9443/oauth2/token");
   
+      console.log(accessToken +"Accestoken")
       const headers = {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json', // Ajusta el tipo de contenido según tu API
       };
   
-      const response = await axios.get(apiUrl, { headers });
+     /* const response = await axios.get(apiUrl, { headers });
       console.log(response.data); // Aquí puedes procesar la respuesta según tus necesidades
     } catch (error) {
       if (error.response && error.response.status === 401 && error.response.data.error === 'invalid_token') {
@@ -31,5 +34,13 @@ const makeApiRequest = async () => {
       } else {
         console.error('Error making API request:', error);
       }
+
+      */
+     
     }
+    catch (error) {
+      console.error('Error getting access token:', error);
+      throw error;
+    }
+    
   };
