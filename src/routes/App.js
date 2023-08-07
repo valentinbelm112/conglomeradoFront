@@ -7,7 +7,7 @@ import SidebarMenu from "../components/SidebarMenu.jsx";
 import ListPropietarios from "../pages/PadronPropietarios.jsx"
 import ListExpedientesPropietarios from "../pages/ListExpedientesPropietarios.jsx";
 import ConsejoDirectivoView from "../container/ConsejoDirectivo.jsx"
-import RegistrarNuevoPropietario from "../components/RegistrarNuevoPropietario.jsx";
+import PadronSociosView from "../pages/PadronSociosView.jsx";
 const App=()=>{
  
 
@@ -22,7 +22,7 @@ const App=()=>{
           <Route path="/sidebar" element={<SidebarMenu/>} />
           <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
           <Route path="/expediente/:id" element={<ListExpedientesPropietarios/>} />
-          <Route path="/formpropietario" element={<RegistrarNuevoPropietario/>} />
+          <Route path="/register-padron-socios" element={<PadronSociosView/>} />
           </Routes >
         </BrowserRouter>
     );

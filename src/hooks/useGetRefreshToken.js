@@ -2,12 +2,12 @@ import axios from 'axios';
 import { accesUrlTocken } from "../utils/Configuration";
 export const refreshAccessToken = async (refreshToken) => {
     try {
-      const response = await axios.post(tokenUrl, {
+      const response = await axios.post(refreshToken, {
         grant_type: 'refresh_token',
-        client_id: clientId,
-        client_secret: clientSecret,
-        refresh_token: refreshToken,
-        scope: scope,
+        client_id: 'refresh_token',
+        client_secret: 'refresh_token',
+        refresh_token: 'refresh_token',
+
       });
   
       return response.data.access_token;

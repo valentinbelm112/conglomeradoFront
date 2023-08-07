@@ -1,0 +1,335 @@
+.container-order-a-z-socio {
+  display: flex;
+
+}
+
+.title-codigo-socio {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  text-align: inherit;
+  text-transform: none;
+}
+
+.search-register-socios {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+
+#mostrar-form-documento-socios-upload {
+  display: none;
+
+  +label {
+    background: linear-gradient(to bottom right, #668a28, #84b332);
+    display: table;
+    color: #fff;
+    line-height: 2.5;
+    padding: 0 1em;
+
+    cursor: pointer;
+    border-radius: 7px;
+
+    &:hover {
+      background: darken(rgb(158, 201, 235), 10%);
+    }
+  }
+
+  &:checked {
+    &~#modal {
+      top: 64px;
+
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+
+
+.registrar-nuevo-socios-add-delete-export-import {
+  padding-top: 5px;
+}
+
+#mostrar-form-documento-socios-person-add {
+  display: none;
+
+  +label {
+    background: linear-gradient(to bottom right, #668a28, #84b332);
+    display: table;
+    color: #fff;
+    line-height: 2.5;
+    padding: 0 1em;
+    cursor: pointer;
+    border-radius: 7px;
+    width: 100%;
+
+    &:hover {
+      background: darken(rgb(158, 201, 235), 10%);
+    }
+  }
+
+  &:checked {
+    &~#modal {
+      top: 64px;
+
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+#mostrar-form-documento-socios-person-add-delete {
+  display: none;
+
+  +label {
+    background: linear-gradient(to bottom right, #668a28, #84b332);
+    display: table;
+    color: #fff;
+    line-height: 2.5;
+    padding: 0 1em;
+    cursor: pointer;
+    border-radius: 7px;
+    width: 100%;
+
+    &:hover {
+      background: darken(rgb(158, 201, 235), 10%);
+    }
+  }
+
+  &:checked {
+    &~#modal {
+      top: 64px;
+
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+#mostrar-form-documento-socios-person-add-export {
+  display: none;
+
+  +label {
+    background: linear-gradient(to bottom right, #668a28, #84b332);
+    display: table;
+    color: #fff;
+    line-height: 2.5;
+    padding: 0 1em;
+    cursor: pointer;
+    border-radius: 7px;
+    width: 100%;
+
+    &:hover {
+      background: darken(rgb(158, 201, 235), 10%);
+    }
+  }
+
+  &:checked {
+    &~#modal {
+      top: 64px;
+
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+#mostrar-form-documento-socios-person-add-import {
+  display: none;
+
+  +label {
+    background: linear-gradient(to bottom right, #668a28, #84b332);
+    display: table;
+    color: #fff;
+    line-height: 2.5;
+    padding: 0 1em;
+    cursor: pointer;
+    border-radius: 7px;
+    width: 100%;
+
+    &:hover {
+      background: darken(rgb(158, 201, 235), 10%);
+    }
+  }
+
+  &:checked {
+    &~#modal {
+      top: 64px;
+
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+.conatiner-registro-padron-socios {
+  width: 100%;
+}
+
+.container-input-search-list-socios {
+  display: flex;
+  background-color: hsl(0, 3%, 56%);
+  ;
+  border-radius: 5px;
+  align-items: center;
+  height: 30px;
+ 
+}
+
+.container-input-search-list-socios input {
+  border-radius: 5px 0 0 5px;
+  border: 0.5px solid hsl(0, 3%, 56%);
+  height: 30px;
+ 
+}
+
+.container-input-search-list-socios input:focus {
+  outline: none;
+  /* Oculta el borde al recibir el foco */
+}
+
+#mostrar-form-documento-socios-person-add-export+label {
+  white-space: nowrap;
+  text-align: center;
+
+  /* Otros estilos para pantallas pequeñas */
+}
+
+#mostrar-form-documento-socios-person-add-delete+label {
+  white-space: nowrap;
+  text-align: center;
+  text-align: center;
+  /* Otros estilos para pantallas pequeñas */
+}
+
+#mostrar-form-documento-socios-person-add+label {
+  white-space: nowrap;
+  text-align: center;
+  /* Otros estilos para pantallas pequeñas */
+}
+
+#mostrar-form-documento-socios-person-add-import+label {
+  white-space: nowrap;
+  text-align: center;
+  /* Otros estilos para pantallas pequeñas */
+}
+
+@media screen and (max-width: 1025px){
+  .container-busqueda-upload-documentos{
+    margin-top: 2%;
+    /* width: 92%; */
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  #mostrar-form-documento-socios-person-add-export+label {
+    white-space: nowrap;
+     font-size: 13px;
+
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-delete+label {
+    white-space: nowrap;
+     font-size: 13px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add+label {
+    white-space: nowrap;
+     font-size: 13px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-import+label {
+    white-space: nowrap;
+     font-size: 13px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+}
+@media screen and (max-width: 767px) {
+  #mostrar-form-documento-socios-person-add-export+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-delete+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-import+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  .search-register-socios{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2%;
+  }
+  .upload-documents-socios {
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    margin-left: 2%;
+  }
+
+  .registrar-nuevo-socios-add-delete-export-import {
+    width: 53% !important;
+
+  }
+  .container-input-search-list-socios {
+   
+    width: 35%;
+  }
+  
+  .container-input-search-list-socios input {
+  
+    width: 89%;
+  }
+.container-busqueda-upload-documentos{
+  margin-top: 2% !important;
+}
+  .container-Sidebar-view-directivo {
+    position: relative;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 98%;
+  }
+
+  .Appfalse {
+    position: absolute;
+
+  }
+
+  .App {
+    position: absolute;
+
+  }
+}

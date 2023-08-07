@@ -7,12 +7,13 @@ export const useGetReniec = async () => {
      
       let accessToken = await getAccessToken();
   
+      console.log(accessToken +"Accestoken")
       const headers = {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json', // Ajusta el tipo de contenido según tu API
       };
   
-      const response = await axios.get(apiUrl, { headers });
+     /* const response = await axios.get(apiUrl, { headers });
       console.log(response.data); // Aquí puedes procesar la respuesta según tus necesidades
     } catch (error) {
       if (error.response && error.response.status === 401 && error.response.data.error === 'invalid_token') {
@@ -35,7 +36,8 @@ export const useGetReniec = async () => {
       } else {
         console.error('Error making API request:', error);
       }
+
+      */
+     
     }
-    */
-   return null
-  };
+  

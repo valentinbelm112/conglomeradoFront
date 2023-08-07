@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { accesUrlTocken } from "../utils/Configuration";
-export const getAccessToken = async () => {
+export const getAccessToken = async (accesUrlTocken) => {
     try {
       const response = await axios.post(accesUrlTocken, {
         grant_type: 'password',

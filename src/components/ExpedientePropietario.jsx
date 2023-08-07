@@ -51,9 +51,9 @@ const ExpedientePropietario=()=>{
                     </div>
                     <div className="container-expediente-radio-button">
                     <input type="radio" id="contactChoice1" name="contact" value="email" />
-                    <label for="contactChoice1" className="container-expediente-contactChoice1-propietario">Propietarios</label>
+                    <label htmlFor="contactChoice1" className="container-expediente-contactChoice1-propietario">Propietarios</label>
                     <input type="radio" id="contactChoice2" name="contact" value="phone" />
-                    <label for="contactChoice2" className="container-expediente-contactChoice1-propietario">Conyugue</label>
+                    <label htmlFor="contactChoice2" className="container-expediente-contactChoice1-propietario">Conyugue</label>
                     </div>
 
                     <div className="container--expediente-propietario">
