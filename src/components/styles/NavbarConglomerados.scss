@@ -141,7 +141,11 @@ nav {
   font-weight: 500;
   margin-right: 6px;
  }
-  @media (max-width: 640px) {
+ 
+ .icon-menu-nabvar{
+  display: none;
+ }
+  @media (max-width: 767px) {
     .nav-women1{
       height: 195px;
       display: flex;
@@ -159,6 +163,9 @@ nav {
    }
    .title-user-login{
     display: none;
+   }
+   .icon-menu-nabvar{
+    display: block;
    }
     .logo-nav{
       position: absolute;

@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import "./styles/NavbarConglomerados.scss";
 import { Link } from "react-router-dom";
 import logo_proempresa from "./assets/logo_proempresa.svg"
+import MenuIcon from '@mui/icons-material/Menu';
 
-const NavbarConglomerado = () => {
+const NavbarConglomerado = ({ Estado }) => {
 
 
 
@@ -63,6 +64,11 @@ const NavbarConglomerado = () => {
                   </li>
                 </Link>
               </ul>
+            </div>
+            <div className="container-menu-desplegable">
+              <li>
+                <h4 onClick={Estado} style={{cursor:"pointer"}} className="icon-menu-nabvar"><MenuIcon /></h4>
+              </li>
             </div>
         
         </ul>

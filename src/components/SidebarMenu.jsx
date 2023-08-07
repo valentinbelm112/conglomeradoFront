@@ -122,8 +122,9 @@ const SidebarMenu = () => {
                             <Link to="/register-padron-propietarios" className="no-style-link">
                                 <Item icon={<FeedIcon />} name="Padron propietarios" />
                             </Link>
-
+                            <Link to="/register-padron-socios" className="no-style-link">
                             <Item icon={<HandshakeIcon />} name="Padron socios" />
+                            </Link>
                             <Item icon={<AssignmentTurnedInRounded />} name="Padron Inquilinos" />
                         </div>
                     </div>
