@@ -43,12 +43,7 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
     event.preventDefault();
     console.log("Enviando")
     console.log("Enviando  +datos.fecha_documento");
-
-  
     const formData = new FormData();
-
-   
-
     console.log(typeof datos.fecha_documento + "Fechaaaaaa tipo datos")
     formData.append('file_upload_excel', excelFile)
     formData.append('file_upload_pdf', pdfFile)

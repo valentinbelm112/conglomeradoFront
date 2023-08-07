@@ -35,6 +35,8 @@ const ConsejoDirectivo = () => {
     const parrafo = document.querySelector('#modal');
       parrafo.style.top = '95px'
   };
+
+  
   const RefrescarInformacion = async() => {
    console.log( refrescar.length)
    console.log(refrescar)

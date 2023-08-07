@@ -1,6 +1,10 @@
 import axios from 'axios';
-const makeApiRequest = async () => {
-    try {
+
+
+
+export const useGetReniec = async () => {
+     /*try {
+     
       let accessToken = await getAccessToken();
   
       const headers = {
@@ -32,4 +36,6 @@ const makeApiRequest = async () => {
         console.error('Error making API request:', error);
       }
     }
+    */
+   return null
   };

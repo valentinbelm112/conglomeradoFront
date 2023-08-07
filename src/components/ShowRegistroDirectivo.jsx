@@ -44,7 +44,7 @@ const ShowRegistroDirectivo = (props) => {
                         </div>
                         <div>
                        
-                        { format(new Date(props?.Detalledocumento.data?.des_fecha_actualizacion), "dd-MM-yyyy HH:mm:ss")}
+                        { format(new Date(props?.Detalledocumento.data.des_fecha_actualizacion), "dd-MM-yyyy HH:mm:ss")}
                         </div>
                         <div className="show-document-date">
                             Fecha del documento

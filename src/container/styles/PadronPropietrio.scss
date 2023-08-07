@@ -27,6 +27,7 @@
 	display: none;
 	+ label {
         background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        text-align: center;
         display: table;
         color: #fff;
         line-height: 2.5;
@@ -60,6 +61,7 @@
     display: none;
 	+ label {
         background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        text-align: center;
         display: table;
         color: #fff;
         line-height: 2.5;
@@ -86,6 +88,7 @@
     display: none;
 	+ label {
         background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        text-align: center;
         display: table;
         color: #fff;
         line-height: 2.5;
@@ -112,6 +115,7 @@
     display: none;
 	+ label {
         background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        text-align: center;
         display: table;
         color: #fff;
         line-height: 2.5;
@@ -134,10 +138,11 @@
   }    
 }
 
-#mostrar-form-documento-propietarios-person-add-import{
+#mostrar-form-documento-propietarios-person-add{
     display: none;
 	+ label {
         background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+        text-align: center;
         display: table;
         color: #fff;
         line-height: 2.5;
@@ -150,8 +155,8 @@
 		}
 	}
   &:checked { 
-    & ~ #modal {
-        top: 64px;
+    & ~ #modal-mostrar-form-documento-propietarios-person-add-import {
+        top: 20px;
     
 	  }
     & ~ #cerrar-modal + label {
@@ -161,4 +166,48 @@
 }
 .conatiner-registro-padron-propietarios{
     width: 100%;
+}
+
+
+#modal-mostrar-form-documento-propietarios-person-add-import {
+	//background:rgba(#000,.9);
+    z-index: 9999;
+	color: #fff;
+	position: fixed;
+	top: -100vh;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	transition: all .5s;
+	p {
+		width: 60%;
+		height: 40%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		font-size: 1.5em;
+		text-align: center;
+	} 
+}
+
+#mostrar-form-documento-propietarios-person-add-import{
+  display: none;
++ label {
+      background: linear-gradient(to bottom right, #00b65f, #4de29a);
+      text-align: center;
+      display: table;
+      color: #fff;
+      line-height: 2.5;
+      padding: 0 1em;
+      cursor: pointer;
+      border-radius: 7px;
+      width: 100%;
+  &:hover {
+    background: darken(rgb(158, 201, 235),10%);
+  }
+}
+   
 }
