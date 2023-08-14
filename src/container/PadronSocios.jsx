@@ -1,4 +1,3 @@
-
 import React, { useState,useEffect } from "react";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
@@ -8,10 +7,9 @@ import "./styles/PadronSocios.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDownAZ } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
-
+import SearchBar from "../components/ButtonConglomerado";
 const ListProdronSocios = () => {
    const[open,setOpen]=useState(false);
 
@@ -49,241 +47,49 @@ const ListProdronSocios = () => {
             <SidebarMenu />
             </div>
            } 
-           <div class="favourite">
-          <div class="spinner">
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-            <div class="spinner_part"></div>
-          </div>
-          <div class="favourite_heart">
-            <div class="favourite_heart__left"></div>
-            <div class="favourite_heart__right"></div>
-          </div>
-          <div class="favourite_text">
-            <span>Favourite this</span>
-          </div>
-        </div>
+         
+      
           <div className="conatiner-registro-padron-socios">
             <div className="row container-busqueda-upload-documentos">
                 <div className="col-md-4 search-register-socios">
                 
                     <div className="container-input-search-list-socios">
-                        <input type="text"  placeholder="Buscar">
-
-                        </input>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} style={{color:`white`}}/>
+                        <SearchBar/>
                     </div>
                 </div>
                 <div className="col-md-8 upload-documents-socios">
                    
                     <div className="row">
-                        <div className="col-md-3 registrar-nuevo-socios-add-delete-export-import">
+                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
                             <div>
                                 <input id="mostrar-form-documento-socios-person-add" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add"> <PersonAddIcon /> Registrar </label>
+                                <label for="mostrar-form-documento-socios-person-add"> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
                             </div>
 
 
                         </div>
-                        <div className="col-md-3 registrar-nuevo-socios-add-delete-export-import">
+                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
                             <div>
                                 <input id="mostrar-form-documento-socios-person-add-delete" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add-delete"> <PersonRemoveIcon /> Dar de Baja </label>
+                                <label for="mostrar-form-documento-socios-person-add-delete"> <PersonRemoveIcon /> <span className="button-text">Dar de Baja</span> </label>
                             </div>
 
 
                         </div>
 
-                        <div className="col-md-3 registrar-nuevo-socios-add-delete-export-import">
+                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
                             <div>
                                 <input id="mostrar-form-documento-socios-person-add-export" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add-export"> <PublishIcon /> Importar </label>
+                                <label for="mostrar-form-documento-socios-person-add-export"> <PublishIcon /> <span className="button-text">Importar</span>  </label>
                             </div>
 
 
                         </div>
 
-                        <div className="col-md-3 registrar-nuevo-socios-add-delete-export-import">
+                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
                             <div>
                                 <input id="mostrar-form-documento-socios-person-add-import" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add-import"> <FileDownloadIcon /> Exportar</label>
+                                <label for="mostrar-form-documento-socios-person-add-import"> <FileDownloadIcon /> <span className="button-text">Exportar</span></label>
                             </div>
 
 

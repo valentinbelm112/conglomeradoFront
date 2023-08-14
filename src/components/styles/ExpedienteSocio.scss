@@ -1,0 +1,133 @@
+@import 'vars';
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.title-container-expediente-socio{
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #076024;
+
+}
+.Documentos-asociado-padron-socio{
+    color: green;
+    font-weight: bold;   
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.container-combo-socio{
+    display: inline-block; 
+    margin-right: 10px;
+  
+    
+}
+.title-cotitular-conyugue-p{
+    display: inline-block; /* O también puedes usar 'display: inline;' */
+    margin-right: 10px;
+    width: auto !important;
+    
+}
+
+.container-puesto-negocio-estado{
+    padding-top: 10px;
+}
+.container-dominio-acciones{
+    padding-top: 10px;
+}
+
+#myCombobox-socio{
+    border: none; /* Quita el borde */
+    background-color: #dfc47a; /* Agrega un fondo para resaltar el combobox */
+    padding: 5px; /* Agrega un espacio interno para un aspecto mejorado */
+    border-radius: 5px; /* Agrega esquinas redondeadas para un aspecto suave */
+}
+
+.container-expediente-socio .Partida-registral-socio-title{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    display: inline-block; /* O también puedes usar 'display: inline;' */
+}
+
+.Partida-registral-socio-title-p{
+    font-family: "Roboto", sans-serif;
+    display: inline-block; /* O también puedes usar 'display: inline;' */
+    margin-right: 10px; /* Agrega un margen derecho para separar los elementos */
+}
+
+.container-expediente-contactChoice1-socio{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding-right: 5px;
+
+}
+
+.container--expediente-socio{
+    display: flex;
+    justify-content: center;
+}
+.foto-expediente-socio{
+    width: 70%;
+    height: 50%;
+}
+
+.title-info-personal-expediente{
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #ea1f1f;
+}
+.container-info-personal{
+    display: flex;
+   
+}
+.title-datos-personales-expediente-filter{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+.container-partida-filter-expediente{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    display: inline-block; 
+    margin-right: 10px;
+}
+
+.title-numero-partida{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    
+}
+
+.title-oficina-registral{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.title-area{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+.title-estado{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+.title-tipo-dominio{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    
+}
+
+.title-acciones-drechos{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold; 
+}
+
+.title-direccion-socios{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold; 
+}
+.title-co-conyugue-socio{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold; 
+}
