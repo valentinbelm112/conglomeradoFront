@@ -32,16 +32,15 @@
   .sidebar{
     display: flex;
     width: 14rem;
-    height: 99%;
+    height: 90.5vh;
     justify-content: start;
     align-items: start;
     flex-direction: column;
     padding: 15px;
-    margin: 10px;
+    margin-top: 25.5px;
     background: linear-gradient(to bottom right, #076024, #00b65f);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(5.5px);
-    border-radius:10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
   }
   .lines_icon{

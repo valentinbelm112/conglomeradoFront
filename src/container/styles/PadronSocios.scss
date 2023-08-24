@@ -3,6 +3,11 @@
 
 }
 
+.upload-documents-socios {
+  padding: 15px !important;
+ 
+}
+
 .title-codigo-socio {
   background: none;
   border: none;
@@ -62,19 +67,33 @@
 
 #mostrar-form-documento-socios-person-add {
   display: none;
-
+ 
   +label {
-    background: linear-gradient(to bottom right, #668a28, #84b332);
-    display: table;
-    color: #fff;
-    line-height: 2.5;
-    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px; /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom right, #194b05, #10d677);
+    color: white;
+    border: none;
     cursor: pointer;
-    border-radius: 7px;
-    width: 100%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
 
     &:hover {
-      background: darken(rgb(158, 201, 235), 10%);
+     
+      width: 150px; /* Ancho automático */
+      background-color: #0056b3;
+        .button-text {
+        
+          display: inline-block;
+          opacity: 1;
+          transform: translateX(0);
+          
+        }
     }
   }
 
@@ -94,17 +113,31 @@
   display: none;
 
   +label {
-    background: linear-gradient(to bottom right, #668a28, #84b332);
-    display: table;
-    color: #fff;
-    line-height: 2.5;
-    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px; /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom right, rgb(173, 4, 4), rgb(214, 151, 151));
+    color: white;
+    border: none;
     cursor: pointer;
-    border-radius: 7px;
-    width: 100%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
 
     &:hover {
-      background: darken(rgb(158, 201, 235), 10%);
+     
+      width: 150px; /* Ancho automático */
+      background-color: #0056b3;
+        .button-text {
+        
+          display: inline-block;
+          opacity: 1;
+          transform: translateX(0);
+          
+        }
     }
   }
 
@@ -124,17 +157,31 @@
   display: none;
 
   +label {
-    background: linear-gradient(to bottom right, #668a28, #84b332);
-    display: table;
-    color: #fff;
-    line-height: 2.5;
-    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px; /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom right, #076024, #00b65f);
+    color: white;
+    border: none;
     cursor: pointer;
-    border-radius: 7px;
-    width: 100%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
 
     &:hover {
-      background: darken(rgb(158, 201, 235), 10%);
+     
+      width: 150px; /* Ancho automático */
+      background-color: #0056b3;
+        .button-text {
+        
+          display: inline-block;
+          opacity: 1;
+          transform: translateX(0);
+          
+        }
     }
   }
 
@@ -149,22 +196,44 @@
     }
   }
 }
+
+.button-text {
+  display: none;
+  margin-left: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
 
 #mostrar-form-documento-socios-person-add-import {
   display: none;
 
   +label {
-    background: linear-gradient(to bottom right, #668a28, #84b332);
-    display: table;
-    color: #fff;
-    line-height: 2.5;
-    padding: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px; /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom right, #001a09, #41e093);
+    color: white;
+    border: none;
     cursor: pointer;
-    border-radius: 7px;
-    width: 100%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
 
     &:hover {
-      background: darken(rgb(158, 201, 235), 10%);
+     
+      width: 150px; /* Ancho automático */
+      background-color: #0056b3;
+        .button-text {
+        
+          display: inline-block;
+          opacity: 1;
+          transform: translateX(0);
+          
+        }
     }
   }
 
@@ -179,6 +248,7 @@
     }
   }
 }
+
 
 .conatiner-registro-padron-socios {
   width: 100%;
@@ -186,7 +256,7 @@
 
 .container-input-search-list-socios {
   display: flex;
-  background-color: hsl(0, 3%, 56%);
+
   ;
   border-radius: 5px;
   align-items: center;
@@ -293,6 +363,7 @@
     margin-left: 2%;
   }
   .upload-documents-socios {
+    padding: 15px !important;
     display: flex;
     align-items: start;
     justify-content: flex-start;
@@ -333,3 +404,15 @@
 
   }
 }
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #e9e8e7 !important;
+  box-sizing: border-box;
+  height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+

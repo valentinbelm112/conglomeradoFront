@@ -106,7 +106,7 @@ const SidebarMenu = () => {
                         }}
                     >
                         <img
-                            src="https://ae01.alicdn.com/kf/H5be6a0fa5f584a8sa8420da2a7d4bc809r/RBRARE-Polaroid-Men-s-Goggle-Driving-Sunglasses-Men-Classic-Low-Profile-Sun-Glasses-For-Men-High.jpg"
+                            src="https://tramiteonline.unmsm.edu.pe/sgdfd/mat/resources/limitless/global_assets/images/avatar-set/man-2.png"
                             alt="profile_img"
                         />
                     </motion.div>
