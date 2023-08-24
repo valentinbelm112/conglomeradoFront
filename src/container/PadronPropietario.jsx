@@ -15,7 +15,10 @@ import RegistrarNuevoPropietario from "../components/RegistrarNuevoPropietario";
 import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
 import { useGetPadronPropietarioComponenteRender } from "../hooks/useGetPadronPropietario";
 import { UseGetPadronPropietario } from "../hooks/useGetPadronPropietario";
+import FormDarBajaPropietario from "../components/FormDarBajaPropietario";
+import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import FormInportPropietario from "../components/FormImportarPropietarios";
 const PadronPropietario = () => {
     const [refrescar ,setRefrescar]=useState([]);
     const [sortOrder, setSortOrder] = useState('asc');
@@ -56,6 +59,12 @@ const PadronPropietario = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
         parrafo.style.top = '95px'
       };
+
+const handleClickDarBajaOpenForm = () => {
+        const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
+        parrafo.style.top = '95px'
+      };
+    
     
     
     if (isLoading) {
@@ -75,16 +84,15 @@ const PadronPropietario = () => {
                 <div className="container-Sidebar-view-directivo">
                     <SidebarMenu />
                     <div className="conatiner-registro-padron-propietarios">
-                        <div className="row container-busqueda-upload-documentos">
+                    
+                        <div className="row container-busqueda-upload-documentos" style={{marginTop:`10px`}}>
                             <div className="col-md-4 search-register-propietarios">
-                                <div>
-                                    Buscar
-                                </div>
-                                <div className="container-input-search-list-propietarios">
-                                    <input type="text" >
+                                
+                                <div className="container-input-search-list-socios">
+                                    <input type="text"  placeholder="Buscar">
 
                                     </input>
-                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                    <FontAwesomeIcon icon={faMagnifyingGlass} style={{color:`white`}}/>
                                 </div>
                             </div>
                             <div className="col-md-8 upload-documents-propietarios">
@@ -107,7 +115,10 @@ const PadronPropietario = () => {
                                     <div className="col-md-3 registrar-nuevo-propietarios-add-delete-export-import">
                                         <div>
                                             <input id="mostrar-form-documento-propietarios-person-add-delete" name="modal" type="radio" />
-                                            <label for="mostrar-form-documento-propietarios-person-add-delete"> <PersonRemoveIcon /> Dar de Baja </label>
+                                            <label for="mostrar-form-documento-propietarios-person-add-delete" onClick={handleClickDarBajaOpenForm}> <PersonRemoveIcon /> Dar de Baja </label>
+                                            <div id="modal-mostrar-form-documento-propietarios-person-dar-baja">
+                                            <FormDarBajaPropietario RefrescarInformacion={RefrescarInformacion}  />
+                                        </div>
                                         </div>
 
 
@@ -117,6 +128,9 @@ const PadronPropietario = () => {
                                         <div>
                                             <input id="mostrar-form-documento-propietarios-person-add-export" name="modal" type="radio" />
                                             <label for="mostrar-form-documento-propietarios-person-add-export"> <PublishIcon /> Importar </label>
+                                            <div id="modal-mostrar-form-documento-propietarios-person-importar-excel">
+                                            <FormInportPropietario RefrescarInformacion={RefrescarInformacion}  />
+                                        </div>
                                         </div>
 
 
@@ -135,58 +149,59 @@ const PadronPropietario = () => {
 
                             </div>
                         </div>
-                        <div className="container-list-table-registro-propietarios">
+                           
+                        <div className="container-list-table-registro-propietarios" style={{marginTop:`13px`}}>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>
                                             <div className="container-order-a-z-propietario">
                                                 <div>
                                                     Codigo Propietario
                                                 </div>
                                                 <button className="title-codigo-propietario">
-                                                    <FontAwesomeIcon icon={faArrowDownAZ} />
+                                                    <FontAwesomeIcon icon={faArrowDownAZ}  style={{color:`red`}}/>
                                                 </button>
                                             </div>
 
                                         </th>
-                                        <th scope="col">
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>
                                             <div className="container-order-a-z-propietario">
                                                 <div>
                                                     Apellidos Completos
                                                 </div>
                                                 <button className="title-codigo-propietario" onClick={handleSortApellidos}>
-                                                    <FontAwesomeIcon icon={faArrowDownAZ} />
+                                                    <FontAwesomeIcon icon={faArrowDownAZ} style={{color:`red`}}/>
                                                 </button>
                                             </div></th>
-                                        <th scope="col">Nombres Completos</th>
-                                        <th scope="col">
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Nombres Completos</th>
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>
                                             <div className="container-order-a-z-propietario">
                                                 <div>
                                                     DNI
                                                 </div>
                                                 <button className="title-codigo-propietario" onClick={handleSort}>
-                                                    <FontAwesomeIcon icon={faArrowDownAZ} />
+                                                    <FontAwesomeIcon icon={faArrowDownAZ} style={{color:`red`}}/>
                                                 </button>
                                             </div>
                                         </th>
-                                        <th scope="col">Nª Partida</th>
-                                        <th scope="col">Oficina Principal</th>
-                                        <th scope="col">Tipo Dominio</th>
-                                        <th scope="col">Dirección</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Nª Partida</th>
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Oficina Principal</th>
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Tipo Dominio</th>
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Dirección</th>
+                                        <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Estado</th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
                                         refrescar.map((propietario)=>(
                                      <tr>
-                                        <td>{propietario.des_codigo_propietario}</td>
+                                        <td>{propietario.codigoPropietario}</td>
                                         <td>{propietario.des_Apellidos}</td>
                                         <td>{propietario.des_nombres}</td>
                                         <td>
-                                        <Link  to={`/expediente/${propietario.des_codigo_Dni}`} style={{ textDecoration: 'none',  color: 'inherit'}}>
+                                        <Link  to={`/expediente/${propietario.des_codigo_Dni}/${propietario.id}`} style={{ textDecoration: 'none',  color: 'inherit'}}>
                                         {propietario.des_codigo_Dni} 
                                         </Link> 
                                         </td>                                            
@@ -194,7 +209,7 @@ const PadronPropietario = () => {
                                         <td>{propietario.inmuebleEntities[0].des_oficina_registral}</td>
                                         <td>{propietario.inmuebleEntities[0].des_tipo_dominio}</td>
                                         <td>{propietario.inmuebleEntities[0].des_direccion}</td>
-                                        <td>@activo</td>                                                                                   
+                                        <td>{propietario.des_estado}</td>                                                                                   
                                     </tr>
 
                                     ))
@@ -209,6 +224,7 @@ const PadronPropietario = () => {
 
                     </div>
                 </div>
+                <ToastContainer/>
             </div>
 
         </>

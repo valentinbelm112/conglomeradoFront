@@ -1,35 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import "./styles/ExpedientePropietario.scss"
-const valorZoomScale = [
-    {
-        value: '1',
-        name: '1'
-    },
-    {
-        value: '2',
-        name: '2'
-
-    },
-    {
-        value: '3',
-        name: '3'
-
-    },
-    {
-        value: '4',
-        name: '4'
-
-    },
-    {
-        value: '5',
-        name: '5'
-
-    },
-];
-const ExpedientePropietario=()=>{
+const ExpedientePropietario=(props)=>{
     const [selectedValue, setSelectedValue] = useState('');
 
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+      }
+      console.log(props)
+    console.log(props.expediente.data)
     const handleChange = (event) => {
       setSelectedValue(event.target.value);
     };
@@ -57,7 +36,7 @@ const ExpedientePropietario=()=>{
                     </div>
 
                     <div className="container--expediente-propietario">
-                        <img src="https://media.licdn.com/dms/image/C4D03AQEhZq9QrIZpyw/profie-displayphoto-shrink_400_400/0/1645396258936?e=1695254400&v=beta&t=W1SudiT4AMNNe8rsRD8MmPI9_UsOFZkNjbdx-Y79FbI" alt="" className="foto-expediente-propietario"/>
+                        <img src={props.expediente.data.des_url_foto} alt="" className="foto-expediente-propietario"/>
                     </div>
                     <div className="container-info-personal-expediente-filter">
                         <div className="title-info-personal-expediente">
@@ -68,7 +47,7 @@ const ExpedientePropietario=()=>{
                             Nombres :
                         </div>
                             <div>
-                                #################
+                               {capitalizeFirstLetter(props.expediente.data.des_nombres.trim())}
                             </div>
                         </div>
                         
@@ -77,7 +56,8 @@ const ExpedientePropietario=()=>{
                             Apellidos :  
                         </div>
                         <div>
-                            #######################
+                        { `${capitalizeFirstLetter(props.expediente.data.des_apellido_paterno.trim())}  ${capitalizeFirstLetter(props.expediente.data.des_apellido_materno.trim())  }`  }
+                                              
                         </div>
         
                            </div>
@@ -87,7 +67,7 @@ const ExpedientePropietario=()=>{
                             Dni : 
                         </div>
                         <div>
-                            ####################
+                           {props.expediente.data.dni.trim()}
                         </div>
                             </div> 
                             <div className="container-info-personal">
@@ -95,7 +75,7 @@ const ExpedientePropietario=()=>{
                             Fecha de expedicion : 
                         </div>
                         <div>
-                            #########################
+                        2023-08-07
                         </div>
                                 </div>
                        
@@ -104,7 +84,7 @@ const ExpedientePropietario=()=>{
                             Sexo : 
                         </div>
                         <div>
-                            ############
+                        {props.expediente.data.des_genero.trim()}
                         </div>
                                      </div>
                     <div className="container-info-personal"> 
@@ -112,7 +92,7 @@ const ExpedientePropietario=()=>{
                             Fecha de Nacimiento :
                         </div>
                         <div>
-                            ###########
+                        2023-08-07
                         </div>
                     </div>
                     <div className="container-info-personal"> 
@@ -120,7 +100,7 @@ const ExpedientePropietario=()=>{
                             Deparatamento de nacimiento :
                         </div>
                         <div>
-                            ######
+                        {capitalizeFirstLetter(props.expediente.data.des_departamento_nacimiento.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal"> 
@@ -128,7 +108,7 @@ const ExpedientePropietario=()=>{
                             Grado de Instruccion : 
                         </div>
                         <div>
-                            ############
+                           {capitalizeFirstLetter(props.expediente.data.des_grado_instruccion.trim())}
                         </div>
                     </div>
                        
@@ -138,7 +118,7 @@ const ExpedientePropietario=()=>{
                             Estado Civil :
                         </div>
                         <div>
-                            ###################
+                        {capitalizeFirstLetter(props.expediente.data.des_estado_civil.trim())}
                         </div>
                     </div>
                         
@@ -148,7 +128,7 @@ const ExpedientePropietario=()=>{
                         </div>
 
                         <div>
-                            ###################
+                        {capitalizeFirstLetter(props.expediente.data.des_departamento_dom.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal"> 
@@ -156,7 +136,7 @@ const ExpedientePropietario=()=>{
                             Provincia de Domicilio :
                         </div>
                         <div>
-                            ###########
+                        {capitalizeFirstLetter(props.expediente.data.des_provincia_dom.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal"> 
@@ -164,7 +144,7 @@ const ExpedientePropietario=()=>{
                             Distrito de Domicilio :
                         </div>
                         <div>
-                            ##############
+                        {capitalizeFirstLetter(props.expediente.data.des_distrito_dom.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal">
@@ -172,7 +152,7 @@ const ExpedientePropietario=()=>{
                             Dirección de Domicilio :
                         </div>
                         <div>
-                           ############
+                        {capitalizeFirstLetter(props.expediente.data.des_direccion_dom.trim())}
                         </div>
                          </div>
                          <div className="container-info-personal">
@@ -190,15 +170,15 @@ const ExpedientePropietario=()=>{
                             Numero de telefono
                         </div>
                         <div>
-                            ##############
+                          ######
                         </div>
                     </div>
                     <div className="container-info-personal">
                     <div className="title-datos-personales-expediente-filter">
-                            Correo electronico
+                            Correo electronico : 
                         </div>
                         <div>
-                            ##############
+                            {props.padron.data.des_correo}
                         </div>
                     </div>
                        
@@ -228,14 +208,14 @@ const ExpedientePropietario=()=>{
                         <div className="row">
                         <div className="col-md-3 container-title-numero-partida">
                             <div className="title-numero-partida">Numero Partida</div>
-                            <div className="title-numero-partida-p">Numero Partida</div>
+                            <div className="title-numero-partida-p"> {props.padron.data.inmuebleEntities[0].num_partida_registral}</div>
                         </div>
                           <div className="col-md-3 container-title-oficina-registral">
                             <div className="title-oficina-registral">
                                 Oficina Registral
                             </div>
                             <div className="title-oficina-registral-p">
-                                Oficina Registral
+                            {props.padron.data.inmuebleEntities[0].des_oficina_registral}
                             </div>
 
                         </div>
@@ -244,7 +224,7 @@ const ExpedientePropietario=()=>{
                                 Area
                             </div>
                         <div className="title-area-p">
-                                Area
+                        {props.padron.data.inmuebleEntities[0].num_area}
                             </div>
 
                           </div>
@@ -263,7 +243,7 @@ const ExpedientePropietario=()=>{
                                     Tipo de dominio
                                 </div>
                                 <div className="title-tipo-dominio-p">
-                                    ##############
+                                {props.padron.data.inmuebleEntities[0].des_tipo_dominio}
                                 </div>
                             </div>
                             <div className="col-md-4">
@@ -271,7 +251,7 @@ const ExpedientePropietario=()=>{
                                     % Acciones y Derechos
                                 </div>
                                 <div className="title-acciones-drechos-p">
-                                    ##############
+                                {props.padron.data.inmuebleEntities[0].num_acciones_derechos}
                                 </div>
                             </div>
                         </div>
@@ -279,7 +259,7 @@ const ExpedientePropietario=()=>{
                             Direccion
                         </div>
                         <div className="title-direccion-propietarios-p">
-                            #############################
+                        {props.padron.data.inmuebleEntities[0].des_direccion}
                         </div>
                         <div className="title-co-conyugue-propietario">
                           Co-Propietario / Cónyugue del propietario

@@ -9,11 +9,14 @@ import { dataReniec } from "../utils/Configuration";
 import { serverURL } from "../utils/Configuration";
 const ListExpedientesPropietarios=()=>{
 
-    const { id } = useParams();
-    const {isLoading,dataPersona}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,id);
-   
-    if(isLoading && dataPersona){
+    const { id,id2} = useParams();
 
+    const {dataExpediente,isLoading,dataDetallePropietario}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,id,id2);
+   
+   
+   console.log(isLoading )
+    if(isLoading ){
+  
         return (
                 <Container_Nav_Sidb_Load/>
           );
@@ -24,7 +27,7 @@ const ListExpedientesPropietarios=()=>{
         <NavbarConglomerado />
           <div className="container-Sidebar-view-directivo">
                 <SidebarMenu />
-                <ExpedientePropietario/>
+                <ExpedientePropietario expediente={dataExpediente} padron={dataDetallePropietario}/>
           </div>
           
           

@@ -106,11 +106,11 @@ const ConsejoDirectivo = () => {
                 <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Nombres </th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">DNI</th>
-                    <th scope="col">Cargo</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Nombres </th>
+                    <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Apellidos</th>
+                    <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>DNI</th>
+                    <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Cargo</th>
+                    <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Acción</th>
                   </tr>
                 </thead>
                 

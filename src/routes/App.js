@@ -8,6 +8,7 @@ import ListPropietarios from "../pages/PadronPropietarios.jsx"
 import ListExpedientesPropietarios from "../pages/ListExpedientesPropietarios.jsx";
 import ConsejoDirectivoView from "../container/ConsejoDirectivo.jsx"
 import PadronSociosView from "../pages/PadronSociosView.jsx";
+import FormInportPropietario from "../components/FormImportarPropietarios.jsx";
 const App=()=>{
  
 
@@ -21,11 +22,14 @@ const App=()=>{
           <Route path="/register-directivos" element={<ConsejoDirectivoView/>} />
           <Route path="/sidebar" element={<SidebarMenu/>} />
           <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
-          <Route path="/expediente/:id" element={<ListExpedientesPropietarios/>} />
+          <Route path="/expediente/:id/:id2" element={<ListExpedientesPropietarios/>} />
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
+          <Route path="/baja" element={<FormInportPropietario/>} />
           </Routes >
         </BrowserRouter>
     );
 }
+
+
 
 export default App;
