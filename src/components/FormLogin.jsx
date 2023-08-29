@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { serverURL } from "../utils/Configuration";
 const FormLogin =(props)=>{
-    
+  const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [datos, setDatos] = useState({
         email: "",
@@ -22,7 +22,7 @@ const FormLogin =(props)=>{
       };
   
       const enviarDatos =async(event)=>{
-     
+        setIsLoading(true);
         event.preventDefault();
         console.log("Enviando")
         console.log("Enviando datos" +datos.email);
@@ -36,17 +36,20 @@ const FormLogin =(props)=>{
              password: datos.password,
            }
          ).then(({ data }) => {
-            toast.success("Inicio de sesión realizado con éxito");
+            setIsLoading(false);
             console.log(data);
             console.log("holass");
             //saveToLocalStorage(data);
             //login();
-            navigate('/home-conglomerado');
+            const successMessage = true;
+            navigate(`/home-conglomerado?successLogin=${successMessage}`);
            
            
           })
        .catch (error => {
         console.error( 'función enRechazo invocada: ', error );
+ 
+        setIsLoading(false);
         toast.error("Intente Nuevamente .");
       })
         
@@ -73,7 +76,15 @@ const FormLogin =(props)=>{
                      placeholder="Password" 
                      className="lblPass" 
                      onChange={handleInputChange}/>
-				            <button className="btnSing">Iniciar Sesión</button>
+
+                 <div className="button-container-spinner">
+				            <button className={isLoading ? 'btnSingLoading' : 'btnSing'} disabled={isLoading}>
+                    {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+                   
+                    </button>
+                    {isLoading && <div className="spinner"></div>}
+                    </div>
+                  
                      
                 </form>
                 

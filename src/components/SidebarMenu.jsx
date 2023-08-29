@@ -114,8 +114,9 @@ const SidebarMenu = () => {
                     <div className="groups">
                         {/* group 1 */}
                         <div className="group">
-
+                            <Link to="/home-conglomerado" className="no-style-link">
                             <Item icon={<HomeIcon />} name="Inicio" />
+                            </Link>
                             <Link to="/register-directivos" className="no-style-link">
                                 <Item icon={<FeedIcon />} name="Información general de la asociacion" />
                             </Link>

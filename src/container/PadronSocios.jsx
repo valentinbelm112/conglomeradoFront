@@ -9,6 +9,7 @@ import { faArrowDownAZ } from '@fortawesome/free-solid-svg-icons'
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import SearchBar from "../components/ButtonConglomerado";
+import { Height } from "@mui/icons-material";
 const ListProdronSocios = () => {
    const[open,setOpen]=useState(false);
 
@@ -35,18 +36,19 @@ const ListProdronSocios = () => {
 
 
     return (
-        <>
-<div className="navbar-sidebar-directivos">
+  
+<div className="navbar-sidebar-directivos" style={{height:`100%`}}>
         <NavbarConglomerado Estado={Estado}/>
+      
         <div className="container-Sidebar-view-directivo">
-           {
+           
+        {
             open?
            null
             : <div className={open===false&&"sidebar-transition"}>
             <SidebarMenu />
             </div>
            } 
-         
       
           <div className="conatiner-registro-padron-socios">
             <div className="row container-busqueda-upload-documentos">
@@ -99,7 +101,7 @@ const ListProdronSocios = () => {
                 </div>
             </div>
             <div className="table-responsive container-list-table-registro-socios">
-                <table class="table">
+                <table class="table table-bordered table-condensed table-hover table-striped">
                     <thead>
                         <tr >
                             <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap' }}>
@@ -185,7 +187,7 @@ const ListProdronSocios = () => {
           </div>
           </div>
 
-        </>
+   
        
     );
 }
