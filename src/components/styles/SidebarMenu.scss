@@ -1,4 +1,5 @@
 .App {
+  height: 100%;
     display: flex;
     font-family: "IBM Plex Sana Thai Looped", sans-serif;
     color: white;
@@ -6,23 +7,25 @@
     text-shadow: 1px 0px 2px #8dc4f0;
     width: 15rem;
   }
+  .sidebar-transition{
+    height: 100%;
+  }
   .Appfalse{
     transition: width 2s;
     width: 6rem;
-    
+    height: 100%;
   }
   .body_container {
     flex: 1;
   }
   .sidebar_container {
-    height: 87vh;
-    position: sticky;
+    height: 100%;
+    position: relative;
     top: 0;
     left: 0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    position: sticky;
     top: 0;
     left:0;
     display: flex;
@@ -32,13 +35,16 @@
   .sidebar{
     display: flex;
     width: 14rem;
-    height: 90.5vh;
+    height: 100%;
     justify-content: start;
     align-items: start;
     flex-direction: column;
     padding: 15px;
-    margin-top: 25.5px;
-    background: linear-gradient(to bottom right, #076024, #00b65f);
+  
+    position: absolute;
+    top: 0;
+    background: #053b6b;
+    
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(5.5px);
     border: 1px solid rgba( 255, 255, 255, 0.18 );
@@ -86,4 +92,9 @@
 .icon{
     margin-right: 0.5rem;
     margin-top: 6px
+}
+
+.no-style-link{
+  color: inherit;
+  text-decoration: none;
 }

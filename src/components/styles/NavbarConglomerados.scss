@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 nav {
     display: flex;
-    background-color: white;
+    background: linear-gradient(to left,#02335e 0,#1e5d88 25%,#3a87b3 50%,#30a3bb 75%,#63f2f5 100%);
     justify-content: space-between;
     
     padding: 0 24px;
@@ -67,9 +67,9 @@ nav {
   .navbar-right ul li a {
     text-decoration: none;
     color: var(--very-light-pink);
-    border: 1px solid var(--white);
     padding: 8px;
     border-radius: 8px;
+    
   }
   .navbar-left ul li a:hover,
   .navbar-right ul li a:hover {

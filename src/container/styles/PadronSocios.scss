@@ -8,6 +8,13 @@
  
 }
 
+.container-Sidebar-view-directivo {
+  height: 90.4% !important;
+}
+
+.navbar-sidebar-directivos{
+  height: 100%;
+}
 .title-codigo-socio {
   background: none;
   border: none;
@@ -411,8 +418,69 @@ body, html {
   background-color: #e9e8e7 !important;
   box-sizing: border-box;
   height: 100%;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
+
+
+
+
+@media  screen and (max-width: 1391px){
+  .conatiner-registro-padron-socios {
+    width: 90.5%;
+    margin-left: 4%;
+}
+
+/* Media query para pantallas medianas */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .conatiner-registro-padron-socios {
+    width: 68.5%;
+  
+}
+
+
+  /* Otros estilos aquí */
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .conatiner-registro-padron-socios {
+    width: 91.5%;
+    margin-left: 4%;
+}
+
+}
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 400px) {
+  .conatiner-registro-padron-socios {
+    margin-top: 5%;
+    width: 91.5%;
+    margin-left: 4%;
+}
+
+}
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 200px) {
+  .conatiner-registro-padron-socios {
+    width: 80.5%;
+    margin-left: 4%;
+}
+
+}
+/* Media query para pantallas grandes */
+@media screen and (min-width: 1025px) {
+  .conatiner-registro-padron-socios {
+    width: 73.5%;
+    margin-left: 4%;
+}
+
+
+  /* Otros estilos aquí */
+}
+
+
+
+
+}
 
