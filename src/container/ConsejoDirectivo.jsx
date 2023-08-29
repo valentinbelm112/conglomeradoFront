@@ -20,11 +20,12 @@ import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import UseGetDoccumentoConsejoDirectivo from "../hooks/useGetDocumentoConsejoDirectivo";
-
+import FormEditarDirectivos from "../components/FormEditarDirectivos";
 
 const ConsejoDirectivo = () => {
  const [refrescar ,setRefrescar]=useState([])
-
+ const [click,setClick]=useState(false)
+ const [extraerDatos ,SetExtraerDatos]=useState([])
   const { directivos, isLoading } = useGetConsejoDirectivo(`${serverURL}/CGM/listar`,setRefrescar);
  
   const {documento,isLoadingDoc} =UseGetDoccumentoConsejoDirectivo(`${serverURL}/CGM/Documento-detalle-directivo`)
@@ -36,12 +37,20 @@ const ConsejoDirectivo = () => {
       parrafo.style.top = '95px'
   };
 
+  const handleClickOpenEditFrom = (data) => {
+    setClick(!click)
+    SetExtraerDatos(data);
+   
+  };
+
+
   
   const RefrescarInformacion = async() => {
    console.log( refrescar.length)
    console.log(refrescar)
     const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
    setRefrescar(response.data)
+   setClick(!click)
    console.log(refrescar)
   }
 
@@ -137,20 +146,23 @@ const ConsejoDirectivo = () => {
                           </button>
 
                           <button className="btn-gestion-edit-info-directivo">
-                            <EditIcon color="primary" />
+                          <input id="mostrar-modal-editar" name="modal" type="radio" />
+
+                            <label onClick={(e)=>handleClickOpenEditFrom(directivo)} for="mostrar-modal-editar" >  <EditIcon color="primary"  /> </label>
                           </button>
+                                               
                         </div>
                       </td>
                     </tr>
 
                   )
                   )}
-
+             
                 </tbody>
               </table>
                 </div>
                 </div>
-           
+                {click&& <FormEditarDirectivos enviarDatos={extraerDatos} refrescarInformacion={RefrescarInformacion} onClickEstado={setClick} />}
             </div>
 
             <div className="col-md-4">

@@ -84,6 +84,9 @@
 	} 
 }
 
+
+
+
 #mostrar-modal {
 	display: none;
 	+ label {
@@ -111,6 +114,22 @@
     }
   }
 }
+
+#mostrar-modal-editar {
+	display: none;
+	+ label {
+      
+    cursor: pointer;
+      
+	}
+  &:checked { 
+    
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
 
 #cerrar-modal {
 	
@@ -231,3 +250,4 @@
 .container-title-show-iamgen-ins-label{
   text-align: center;
 }
+

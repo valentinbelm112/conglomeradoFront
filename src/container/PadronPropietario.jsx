@@ -32,7 +32,7 @@ const PadronPropietario = () => {
   const ExportarPropietario =()=>{
   
     UseGetExportPropietario(`${serverURL}/Propietarios/Obtener`);
-     
+    
 
   }
 
