@@ -7,7 +7,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { serverURL } from "../utils/Configuration";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDownAZ } from '@fortawesome/free-solid-svg-icons'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import SearchBar from "../components/ButtonConglomerado";
 import "./styles/PadronPropietrio.scss"
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
@@ -19,11 +19,29 @@ import FormDarBajaPropietario from "../components/FormDarBajaPropietario";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import FormInportPropietario from "../components/FormImportarPropietarios";
+import ArticleIcon from '@mui/icons-material/Article';
+import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
+import { South } from "@mui/icons-material";
+
 const PadronPropietario = () => {
     const [refrescar ,setRefrescar]=useState([]);
+    const [search,setSearch]=useState([]);
     const [sortOrder, setSortOrder] = useState('asc');
 
   // Función para cambiar el orden de clasificación
+  const ExportarPropietario =()=>{
+  
+    UseGetExportPropietario(`${serverURL}/Propietarios/Obtener`);
+     
+
+  }
+
+  const handleSearch = (e) => {
+    console.log('Valor del input:', e.value);
+    setSearch( refrescar.filter(item => item.des_codigo_Dni.includes(e.value)));
+    console.log("hola")
+  };
+
 
   const handleSort = () => {
     const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
@@ -88,23 +106,23 @@ const handleClickDarBajaOpenForm = () => {
                         <div className="row container-busqueda-upload-documentos" style={{marginTop:`10px`}}>
                             <div className="col-md-4 search-register-propietarios">
                                 
-                                <div className="container-input-search-list-socios">
-                                    <input type="text"  placeholder="Buscar">
-
-                                    </input>
-                                    <FontAwesomeIcon icon={faMagnifyingGlass} style={{color:`white`}}/>
+                            <div className="col-md-4 search-register-socios">
+                
+                                    <div className="container-input-search-list-socios">
+                                        <SearchBar onSearch={handleSearch}/>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-md-8 upload-documents-propietarios">
                                 <div>
                                     <input id="mostrar-form-documento-propietarios-upload" name="modal" type="radio" />
-                                    <label for="mostrar-form-documento-propietarios-upload"> Documento del Padron de Propietarios </label>
+                                    <label for="mostrar-form-documento-propietarios-upload"> <ArticleIcon/><span className="button-text">Documento del Padron de Propietarios </span> </label>
                                 </div>
                                 <div className="row">
-                                    <div className="col-md-3 registrar-nuevo-propietarios-add-delete-export-import">
+                                    <div className="col-auto registrar-nuevo-propietarios-add-delete-export-import">
                                         <div>
                                             <input id="mostrar-form-documento-propietarios-person-add" name="modal" type="radio" />
-                                            <label for="mostrar-form-documento-propietarios-person-add" onClick={handleClickOpenForm}> <PersonAddIcon /> Registrar </label>
+                                            <label for="mostrar-form-documento-propietarios-person-add" onClick={handleClickOpenForm}> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
                                             <div id="modal-mostrar-form-documento-propietarios-person-add-import">
                                             <RegistrarNuevoPropietario RefrescarInformacion={RefrescarInformacion}  />
                                         </div>
@@ -112,10 +130,10 @@ const handleClickDarBajaOpenForm = () => {
 
 
                                     </div>
-                                    <div className="col-md-3 registrar-nuevo-propietarios-add-delete-export-import">
+                                    <div className="col-auto registrar-nuevo-propietarios-add-delete-export-import">
                                         <div>
                                             <input id="mostrar-form-documento-propietarios-person-add-delete" name="modal" type="radio" />
-                                            <label for="mostrar-form-documento-propietarios-person-add-delete" onClick={handleClickDarBajaOpenForm}> <PersonRemoveIcon /> Dar de Baja </label>
+                                            <label for="mostrar-form-documento-propietarios-person-add-delete" onClick={handleClickDarBajaOpenForm}> <PersonRemoveIcon /><span className="button-text">Dar de Baja</span> </label>
                                             <div id="modal-mostrar-form-documento-propietarios-person-dar-baja">
                                             <FormDarBajaPropietario RefrescarInformacion={RefrescarInformacion}  />
                                         </div>
@@ -124,10 +142,10 @@ const handleClickDarBajaOpenForm = () => {
 
                                     </div>
 
-                                    <div className="col-md-3 registrar-nuevo-propietarios-add-delete-export-import">
+                                    <div className="col-auto registrar-nuevo-propietarios-add-delete-export-import">
                                         <div>
                                             <input id="mostrar-form-documento-propietarios-person-add-export" name="modal" type="radio" />
-                                            <label for="mostrar-form-documento-propietarios-person-add-export"> <PublishIcon /> Importar </label>
+                                            <label for="mostrar-form-documento-propietarios-person-add-export"> <PublishIcon /> <span className="button-text">Importar</span> </label>
                                             <div id="modal-mostrar-form-documento-propietarios-person-importar-excel">
                                             <FormInportPropietario RefrescarInformacion={RefrescarInformacion}  />
                                         </div>
@@ -136,10 +154,10 @@ const handleClickDarBajaOpenForm = () => {
 
                                     </div>
 
-                                    <div className="col-md-3 registrar-nuevo-propietarios-add-delete-export-import">
+                                    <div className="col-auto registrar-nuevo-propietarios-add-delete-export-import">
                                         <div>
                                             <input id="mostrar-form-documento-propietarios-person-add-import" name="modal" type="radio" />
-                                            <label for="mostrar-form-documento-propietarios-person-add-import"> <FileDownloadIcon /> Exportar</label>
+                                            <label for="mostrar-form-documento-propietarios-person-add-import"> <FileDownloadIcon /> <span onClick={ExportarPropietario}   className="button-text">Exportar</span> </label>
                                         </div>
 
 
@@ -195,7 +213,7 @@ const handleClickDarBajaOpenForm = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        refrescar.map((propietario)=>(
+                                      (search.length ===0 ? refrescar:search) .map((propietario)=>(
                                      <tr>
                                         <td>{propietario.codigoPropietario}</td>
                                         <td>{propietario.des_Apellidos}</td>

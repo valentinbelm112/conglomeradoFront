@@ -47,7 +47,7 @@ const ExpedientePropietario=(props)=>{
                             Nombres :
                         </div>
                             <div>
-                               {capitalizeFirstLetter(props.expediente.data.des_nombres.trim())}
+                               {capitalizeFirstLetter(props.expediente.data.des_nombres?.trim())}
                             </div>
                         </div>
                         
@@ -56,7 +56,7 @@ const ExpedientePropietario=(props)=>{
                             Apellidos :  
                         </div>
                         <div>
-                        { `${capitalizeFirstLetter(props.expediente.data.des_apellido_paterno.trim())}  ${capitalizeFirstLetter(props.expediente.data.des_apellido_materno.trim())  }`  }
+                        { `${capitalizeFirstLetter(props.expediente.data.des_apellido_paterno?.trim())}  ${capitalizeFirstLetter(props.expediente.data.des_apellido_materno.trim())  }`  }
                                               
                         </div>
         

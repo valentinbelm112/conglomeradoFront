@@ -6,7 +6,6 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import "./styles/PadronSocios.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDownAZ } from '@fortawesome/free-solid-svg-icons'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import SearchBar from "../components/ButtonConglomerado";
