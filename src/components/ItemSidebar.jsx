@@ -29,6 +29,7 @@ function Item({ icon, name }) {
             </motion.div>
             <motion.span
                 variants={subheading}
+                style={{fontSize: '.8129rem'}}
             >
                 {name}
             </motion.span>

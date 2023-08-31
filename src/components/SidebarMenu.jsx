@@ -55,6 +55,7 @@ const SidebarMenu = () => {
     };
     return (
         <div className={open ? "App" : "Appfalse"}>
+            
             <motion.div
                 data-open={open}
                 variants={sideContainerVariants}
@@ -69,6 +70,8 @@ const SidebarMenu = () => {
                     animate={`${open}`}
                     variants={sidebarVariants}
                 >
+                
+                     
                     {/* lines_icon */}
                     <motion.div
                         whileHover={{
@@ -96,37 +99,47 @@ const SidebarMenu = () => {
                         variants={profileVariants}
                         className="profile"
                         transition={{ duration: 0.4 }}
-                        whileHover={{
-                            backgroundColor: "rgba(255, 255, 255, 0.3)",
-                            boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-                            backdropFilter: "blur(5.5px)",
-                            WebkitBackdropFilter: "blur(5.5px)",
-                            border: "1px solid rgba( 255, 255, 255, 0.18 )",
-                            cursor: "pointer",
+                        style={{
+                          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+                          backdropFilter: 'blur(5.5px)',
+                          WebkitBackdropFilter: 'blur(5.5px)',
+                          border: '1px solid rgba(200, 200, 200, 0.5)', // Borde blanco con un toque de gris
+                          cursor: 'pointer',
+                  
+                          // Agrega las propiedades de estilo para los anillos y el sombreado
+                          border: '3px solid white', // Borde de anillos
+                          boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', // Sombreado negro claro
                         }}
                     >
                         <img
                             src="https://tramiteonline.unmsm.edu.pe/sgdfd/mat/resources/limitless/global_assets/images/avatar-set/man-2.png"
                             alt="profile_img"
                         />
+                          
+
                     </motion.div>
                     {/* groups */}
                     <div className="groups">
                         {/* group 1 */}
                         <div className="group">
+                        <div className="online-indicator">
+                            <div className="online-indicator-circle"/>
+                            <div className="online-indicator-title">En línea</div>
+                            </div>
                             <Link to="/home-conglomerado" className="no-style-link">
-                            <Item icon={<HomeIcon />} name="Inicio" />
+                            <Item icon={<HomeIcon />} name="Inicio"  style={{fontSize: '.8125rem'}}/>
                             </Link>
                             <Link to="/register-directivos" className="no-style-link">
-                                <Item icon={<FeedIcon />} name="Información general de la asociacion" />
+                                <Item icon={<FeedIcon />} style={{fontSize: '.8125rem'}} name="Información general de la asociacion" />
                             </Link>
                             <Link to="/register-padron-propietarios" className="no-style-link">
-                                <Item icon={<FeedIcon />} name="Padron propietarios" />
+                                <Item icon={<FeedIcon />} style={{fontSize: '.8125rem'}} name="Padron propietarios" />
                             </Link>
                             <Link to="/register-padron-socios" className="no-style-link">
-                            <Item icon={<HandshakeIcon />} name="Padron socios" />
+                            <Item icon={<HandshakeIcon />}  style={{fontSize: '.8125rem'}} name="Padron socios" />
                             </Link>
-                            <Item icon={<AssignmentTurnedInRounded />} name="Padron Inquilinos" />
+                            <Item icon={<AssignmentTurnedInRounded />}  style={{fontSize: '.8125rem'}} name="Padron Inquilinos" />
                         </div>
                     </div>
 
