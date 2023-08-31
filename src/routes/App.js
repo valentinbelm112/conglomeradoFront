@@ -9,10 +9,13 @@ import ListExpedientesPropietarios from "../pages/ListExpedientesPropietarios.js
 import ConsejoDirectivoView from "../container/ConsejoDirectivo.jsx"
 import PadronSociosView from "../pages/PadronSociosView.jsx";
 import ListExpedientesSocios from "../pages/ListExpedienteSocios.jsx";
+import useInitialAuth from "../hooks/useInitialAuth.js";
+import AuthContext from "../context/AuthContext.jsx";
 const App=()=>{
  
-
+  const useinitialAuth = useInitialAuth();
     return(
+      <AuthContext.Provider value={useinitialAuth}>
         <BrowserRouter>
         <Routes >
           
@@ -27,6 +30,7 @@ const App=()=>{
           <Route path="expediente-socio/:id" element={<ListExpedientesSocios/>} />
           </Routes >
         </BrowserRouter>
+        </AuthContext.Provider>
     );
 }
 
