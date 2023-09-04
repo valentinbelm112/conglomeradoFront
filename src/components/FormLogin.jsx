@@ -1,12 +1,15 @@
-import React, {  useState } from "react";
+import React, {  useState ,useContext} from "react";
 import "./styles/LoginForm.scss"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { serverURL } from "../utils/Configuration";
+import { saveToLocalStorage } from "../hooks/useLocalStorage";
+import AuthContext from "../context/AuthContext";
 const FormLogin =(props)=>{
   const [isLoading, setIsLoading] = useState(false);
+  const { login } = useContext(AuthContext);
     const navigate = useNavigate();
     const [datos, setDatos] = useState({
         email: "",
@@ -25,8 +28,7 @@ const FormLogin =(props)=>{
         setIsLoading(true);
         event.preventDefault();
         console.log("Enviando")
-        console.log("Enviando datos" +datos.email);
-     
+        console.log("Enviando datos" + datos.email);   
         const user = await axios.post(
     
             `${serverURL}/api/auth/generatetoken`,
@@ -38,13 +40,12 @@ const FormLogin =(props)=>{
          ).then(({ data }) => {
             setIsLoading(false);
             console.log(data);
-            console.log("holass");
-            //saveToLocalStorage(data);
-            //login();
+
+            saveToLocalStorage(data);
+            login();
             const successMessage = true;
             navigate(`/home-conglomerado?successLogin=${successMessage}`);
-           
-           
+            //console.log(data.nomColaborador);
           })
        .catch (error => {
         console.error( 'función enRechazo invocada: ', error );
@@ -56,6 +57,7 @@ const FormLogin =(props)=>{
        
     }
      
+    
     return(
         <div className="login-page">
             <div className="form">

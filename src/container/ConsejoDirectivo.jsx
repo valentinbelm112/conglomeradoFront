@@ -25,6 +25,7 @@ import FormEditarDirectivos from "../components/FormEditarDirectivos";
 const ConsejoDirectivo = () => {
  const [refrescar ,setRefrescar]=useState([])
  const [click,setClick]=useState(false)
+ const [showDcoument,SetShowDcoument]=useState(false)
  const [extraerDatos ,SetExtraerDatos]=useState([])
   const { directivos, isLoading } = useGetConsejoDirectivo(`${serverURL}/CGM/listar`,setRefrescar);
  
@@ -44,6 +45,9 @@ const ConsejoDirectivo = () => {
   };
 
 
+  const changeStateButon=()=>{
+    SetShowDcoument(!showDcoument)
+  }
   
   const RefrescarInformacion = async() => {
    console.log( refrescar.length)
@@ -77,7 +81,7 @@ const ConsejoDirectivo = () => {
     )
   }
 
-  
+
   return (
     <>
       <div className="navbar-sidebar-directivos">
@@ -94,7 +98,7 @@ const ConsejoDirectivo = () => {
 
 
                   <div className="title-consejo-directivo-periodo-vigente">
-                    Periodo vigente :16/07/2023 al 16/07/2023
+                    Periodo vigente :16/07/2023 al 16/11/2023
                   </div>
                 </div>
                 <div className="col-md-5">
@@ -180,10 +184,12 @@ const ConsejoDirectivo = () => {
                   <div className="container-title-show-iamgen-ins-label">Ver Documento</div>
                   <input id="mostrar-modal-documento" name="modal" type="radio" />
                   
-                  <label for="mostrar-modal-documento"> <PreviewIcon /> </label>
+                  <label for="mostrar-modal-documento"> <PreviewIcon onClick={changeStateButon} /> </label>
 
                   <div id="modal-show-document">
-                    <ShowRegistroDirectivo  Detalledocumento={documento} />
+                  <ShowRegistroDirectivo  Detalledocumento={documento} />
+                    
+                   
                   </div>
 
                 </div>

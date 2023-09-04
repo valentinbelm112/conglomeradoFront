@@ -17,7 +17,7 @@ const ShowRegistroDirectivo = (props) => {
         "https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1"
       ]
     const [combo,SetCombo]=useState(1)
-    const fechaHoraString = "2023-07-26T05:00:00.000+00:00";
+    
  
 
     const handleChange = (event) => {

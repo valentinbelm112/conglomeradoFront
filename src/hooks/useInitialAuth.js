@@ -5,7 +5,7 @@ const useInitialAuth = () => {
 
   const [auth, setAuth] = useState(null);
 
-
+  console.log("Agregando al load localstorage")
   const login = async (props) => {
     const payload = loadFromLocalStorage();
 

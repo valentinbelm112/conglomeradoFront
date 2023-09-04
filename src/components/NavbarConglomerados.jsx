@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import "./styles/NavbarConglomerados.scss";
 import { Link } from "react-router-dom";
 import logo_proempresa from "./assets/logo_proempresa.svg"
 import MenuIcon from '@mui/icons-material/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import AuthContext from "../context/AuthContext";
 
 const NavbarConglomerado = ({ Estado }) => {
-
+  const { auth } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
+  console.log(auth)
 
 
   return (
@@ -25,7 +28,11 @@ const NavbarConglomerado = ({ Estado }) => {
      
             <div className="container">
               <li>
-                <h4 className="title-user-login">Hola,</h4>
+                <h4 className="title-user-login" style={{color:`white`}}>Hola,</h4>
+                <h5 className="title-user-login" style={{color:`white`}}>
+                  
+                  {auth ? auth.nomColaborador : []}
+                  </h5>
               </li>
             </div>
             <div className="constainer-options-account">

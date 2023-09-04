@@ -47,6 +47,7 @@ const config = {
     const[isLoading,SetLoading]=useState(true);
     const [dataExpediente,SetDataExpediente]=useState(null);
     const [dataDetallePropietario,SetDataDetallePropietario]=useState(null);
+    const [propietariosPartida,SetPropietariosPartida]=useState(null);
 
     const codigo_asociacion="E00241";
           const objetoRequest=
@@ -70,10 +71,24 @@ const config = {
         if(existeCliente.data){
           const responsepostExpediente = await axios.get(`${serverURL}/Expediente/get?dni=${id}`)
           const padronPropietariosDetalle = await axios.get(`${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`)
+
+          const found = padronPropietariosDetalle.data.inmuebleEntities.map((element) =>  element.numPartida);
+
+          const propietariosConPartida = [];
+
+          padronPropietariosDetalle.data.inmuebleEntities.forEach(inmueble => {
+              if (found.includes(inmueble.numPartida)) {
+                const propietarios = inmueble.padronPropietariosentity;
+                propietariosConPartida.push(...propietarios);
+              }
+            });
+
+
+          console.log(found);
+          console.log(propietariosConPartida);
           console.log(responsepostExpediente);
-          console.log(responsepostExpediente)
           console.log(padronPropietariosDetalle);
-          console.log(responsepostExpediente)
+          SetPropietariosPartida(propietariosConPartida)
           SetDataExpediente(responsepostExpediente);
           SetDataDetallePropietario(padronPropietariosDetalle);
           SetLoading(false);
@@ -116,10 +131,24 @@ const config = {
             console.log(bodyExpediente)
             const responsepostExpediente = await axios.post(`${serverURL}/Expediente/save`,bodyExpediente.data)
             const padronPropietariosDetalle = await axios.get(`${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`)
+            const found = padronPropietariosDetalle.data.inmuebleEntities.map((element) =>  element.numPartida);
+
+            const propietariosConPartida = [];
+  
+            padronPropietariosDetalle.data.inmuebleEntities.forEach(inmueble => {
+                if (found.includes(inmueble.numPartida)) {
+                  const propietarios = inmueble.padronPropietariosentity;
+                  propietariosConPartida.push(...propietarios);
+                }
+              });
+
+            console.log(found);
+            console.log(propietariosConPartida);  
             console.log(responsepostExpediente);
             console.log(response.data.data)
             console.log(API);
             console.log(response)
+            SetPropietariosPartida(propietariosConPartida)
             SetDataDetallePropietario(padronPropietariosDetalle);
             SetDataExpediente(bodyExpediente);
             SetLoading(false);
@@ -140,7 +169,7 @@ const config = {
         doSomething();
       
       }, []);
-      return { dataExpediente, isLoading,dataDetallePropietario };
+      return { dataExpediente, isLoading,dataDetallePropietario,propietariosPartida };
 }
 
 

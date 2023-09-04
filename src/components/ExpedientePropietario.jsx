@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import "./styles/ExpedientePropietario.scss"
 const ExpedientePropietario=(props)=>{
     const [selectedValue, setSelectedValue] = useState('');
@@ -7,11 +8,17 @@ const ExpedientePropietario=(props)=>{
     function capitalizeFirstLetter(str) {
         return str?.charAt(0).toUpperCase() + str?.slice(1).toLowerCase();
       }
-      console.log(props)
+      console.log(props.padron.data)
     console.log(props.expediente.data)
+    console.log(props.propietario)
     const handleChange = (event) => {
       setSelectedValue(event.target.value);
     };
+    const changeStado = () => {
+        props.cambiarEstado();
+          };
+
+          
     return(
         <div className="container-expediente-propietario">
             <div className="title-container-expediente-propietario">
@@ -23,11 +30,9 @@ const ExpedientePropietario=(props)=>{
                        Partidas Registral del propietario: 
                     </div>
                     <div className="Partida-registral-propietario-title-p">
-                        1000345600
+                         {props.padron.data.inmuebleEntities[0].numPartida}
                     </div>
-                    <div className="Partida-registral-propietario-title-p">
-                        1000000000
-                    </div>
+                    
                     <div className="container-expediente-radio-button">
                     <input type="radio" id="contactChoice1" name="contact" value="email" />
                     <label htmlFor="contactChoice1" className="container-expediente-contactChoice1-propietario">Propietarios</label>
@@ -208,7 +213,7 @@ const ExpedientePropietario=(props)=>{
                         <div className="row">
                         <div className="col-md-3 container-title-numero-partida">
                             <div className="title-numero-partida">Numero Partida</div>
-                            <div className="title-numero-partida-p"> {props.padron.data.inmuebleEntities[0].num_partida_registral}</div>
+                            <div className="title-numero-partida-p"> {  props.padron.data.inmuebleEntities[0].numPartida}</div>
                         </div>
                           <div className="col-md-3 container-title-oficina-registral">
                             <div className="title-oficina-registral">
@@ -250,6 +255,7 @@ const ExpedientePropietario=(props)=>{
                                 <div className="title-acciones-drechos">
                                     % Acciones y Derechos
                                 </div>
+                                
                                 <div className="title-acciones-drechos-p">
                                 {props.padron.data.inmuebleEntities[0].num_acciones_derechos}
                                 </div>
@@ -262,28 +268,27 @@ const ExpedientePropietario=(props)=>{
                         {props.padron.data.inmuebleEntities[0].des_direccion}
                         </div>
                         <div className="title-co-conyugue-propietario">
-                          Co-Propietario / Cónyugue del propietario
+                        
+                          Co-Propietario / DNI  / Cónyugue del propietario
                         </div>
                         <div className="title-co-conyugue-propietario-p">
-                        #############################
-                        </div>
-                        <div className="row">
+                       {
+                          props.propietario.map((elemento, index)=>(
+                           (index>=1)&&( 
+                            <div className="informacion-inmueble-propietario">
+                            
+                            <div key={index}>{elemento.des_nombres} </div>
+                            <Link  to={`/expediente/${elemento.des_codigo_Dni}/${elemento.id}`} style={{ textDecoration: 'none',  color: 'inherit'}}>
+                            <div key={index} onClick={changeStado}>{elemento.des_codigo_Dni} </div>
+                            </Link>
+                            <div key={index}>{elemento.des_dni_conyugue} </div>
                            
-                                <div className="col-md-3">
-                                Blacker
-                                </div>
-                                <div className="col-md-3">
-                                Co-Propietario
-                                </div>
-                                <div className="col-md-3">
-                                    Dni
-                                </div>
-                                <div className="col-md-3">
-                                    Ir a su expediente
-                                </div>
-                           
-                        </div>
-                       
+                           </div>)
+                      
+                            
+                          ))
+                      }                       
+                       </div>
                     </div>
                     <div className="col-5">
                       <div className="title-fecha-baja">

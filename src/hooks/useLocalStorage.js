@@ -11,6 +11,7 @@ export function saveToLocalStorage(state) {
   
   export function loadFromLocalStorage() {
     try {
+      console.log( "Obteniendo LocalStorege");
       const serializerStateEcommerce = localStorage.getItem("stateSerializer");
       console.log(serializerStateEcommerce, "FFF");
       if (serializerStateEcommerce === null) return undefined;

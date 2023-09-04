@@ -223,7 +223,7 @@ const handleClickDarBajaOpenForm = () => {
                                         {propietario.des_codigo_Dni} 
                                         </Link> 
                                         </td>                                            
-                                        <td>{propietario.inmuebleEntities[0].num_partida_registral}</td>
+                                        <td>{propietario.inmuebleEntities[0].numPartida}</td>
                                         <td>{propietario.inmuebleEntities[0].des_oficina_registral}</td>
                                         <td>{propietario.inmuebleEntities[0].des_tipo_dominio}</td>
                                         <td>{propietario.inmuebleEntities[0].des_direccion}</td>
