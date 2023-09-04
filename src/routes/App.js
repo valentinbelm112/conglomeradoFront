@@ -11,6 +11,7 @@ import PadronSociosView from "../pages/PadronSociosView.jsx";
 import ListExpedientesSocios from "../pages/ListExpedienteSocios.jsx";
 import useInitialAuth from "../hooks/useInitialAuth.js";
 import AuthContext from "../context/AuthContext.jsx";
+import App2 from "../pages/App.jsx";
 const App=()=>{
  
   const useinitialAuth = useInitialAuth();
@@ -27,7 +28,8 @@ const App=()=>{
           <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
           <Route path="/expediente/:id/:id2" element={<ListExpedientesPropietarios/>} />
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
-          <Route path="expediente-socio/:id" element={<ListExpedientesSocios/>} />
+          <Route path="/expediente-socio/:id" element={<ListExpedientesSocios/>} />
+          <Route path="/ventana" element={<App2/>} />
           </Routes >
         </BrowserRouter>
         </AuthContext.Provider>

@@ -16,7 +16,7 @@ const NavbarConglomerado = ({ Estado }) => {
   return (
     <nav className="header sticky-top navbar-conglomerado-pro">
       <div>
-        <img src={""} alt="menu" className="menu" />
+        <div/>
       </div>
 
       <img src={logo_proempresa} alt="logo" className="logo-nav" />
