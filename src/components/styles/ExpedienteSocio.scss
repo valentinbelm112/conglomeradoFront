@@ -1,6 +1,9 @@
 @import 'vars';
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.container-expediente-socio{
+    margin: 5px;
+}
 .title-container-expediente-socio{
     font-family: 'Oswald', sans-serif;
     font-weight: bold;
@@ -8,6 +11,34 @@
     color: #076024;
 
 }
+#mostrar-modal-documento-socio {
+	display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #076024, #00b65f);
+        display: table;
+        margin: auto;
+        color: #fff;
+        line-height: 3.7;
+        padding: 0 1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 7%;
+        
+		&:hover {
+			background: darken(steelblue,10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal-show-document {
+        top: 20px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
 .Documentos-asociado-padron-socio{
     color: green;
     font-weight: bold;   
@@ -43,19 +74,19 @@
 }
 
 .container-expediente-socio .Partida-registral-socio-title{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
     display: inline-block; /* O también puedes usar 'display: inline;' */
 }
 
 .Partida-registral-socio-title-p{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     display: inline-block; /* O también puedes usar 'display: inline;' */
     margin-right: 10px; /* Agrega un margen derecho para separar los elementos */
 }
 
 .container-expediente-contactChoice1-socio{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 15px;
@@ -65,7 +96,7 @@
 
 .container--expediente-socio{
     display: flex;
-    justify-content: center;
+
 }
 .foto-expediente-socio{
     width: 70%;
@@ -83,7 +114,7 @@
    
 }
 .title-datos-personales-expediente-filter{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
 }
 .container-partida-filter-expediente{
@@ -94,40 +125,50 @@
 }
 
 .title-numero-partida{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
     
 }
 
 .title-oficina-registral{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
 }
 
 .title-area{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
 }
 .title-estado{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
 }
 .title-tipo-dominio{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold;
     
 }
 
 .title-acciones-drechos{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold; 
 }
 
 .title-direccion-socios{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold; 
 }
 .title-co-conyugue-socio{
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     font-weight: bold; 
+}
+
+.container-right-info-inmebles-doc{
+    border-left: 1px solid #b3aeae;
+}
+@media  screen and (max-width: 766px){
+    .foto-expediente-propietario {
+        width: 39%;
+        height: 50%;
+    }
 }
