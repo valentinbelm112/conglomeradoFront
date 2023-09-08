@@ -2,8 +2,27 @@ import React from "react";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import "./styles/ExpedientePropietario.scss"
+import ModalImagesConglomerado from "./ModalImagesConglomerado";
+import ImageUploader from "./ImageUploader"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 const ExpedientePropietario=(props)=>{
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedValue, setSelectedValue] = useState("");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+   
+
+    const ModeloProps1={
+       titulo:"Documento de compra-venta"
+    }
+  
+    const openModal = () => {
+      setModalIsOpen(true);
+    };
+  
+    const closeModal = () => {
+      setModalIsOpen(false);
+    };
+
 
     function capitalizeFirstLetter(str) {
         return str?.charAt(0).toUpperCase() + str?.slice(1).toLowerCase();
@@ -304,11 +323,29 @@ const ExpedientePropietario=(props)=>{
                     <div className="Documentos-asociado-padron-propietario">
                         Documentos del asociado
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida diam vel lectus consequat, in ullamcorper nulla suscipit. Morbi elementum tincidunt odio sed auctor. Cras malesuada dolor non pellentesque mollis. Pellentesq</p>
+                    <p>
+                    Adjuntar documentacion del asociado
+                    </p>
                     <div className="row">
-                        <div className="col-md-3">
+                    <div className="col-md-3">
+                    
+                        <input onClick={openModal} id="mostrar-modal-documento-socio" name="modal" type="radio"/>
 
-                        </div>
+                        <label for="mostrar-modal-documento-socio">
+                        {" "}
+                        <FontAwesomeIcon icon={faFolderOpen} />{" "}
+                        </label>
+                        <ModalImagesConglomerado
+                            isOpen={modalIsOpen}
+                            onClose={closeModal}
+                            components={[
+                                <ImageUploader info={ModeloProps1}/>
+                            ]}
+                            />
+                    </div>
+                    <div className="col-md-3"></div>
+                    <div className="col-md-3"></div>
+                    <div className="col-md-3"></div>
                     </div>
                    </div>
                 </div>

@@ -1,6 +1,23 @@
 .container-order-a-z-propietario{
     display: flex;
+    font-size: 12px;
+}
 
+.outer-table-registro-propietario {
+  overflow-y: auto;
+  height: 60vh;
+}
+
+.outer-table-registro-propietario {
+  width: 100%;
+  -layout: fixed;
+}
+
+.outer-table-registro-propietario th {
+  text-align: left;
+  top: 0;
+  position: sticky;
+  background-color: white;
 }
 
 .title-codigo-propietario{

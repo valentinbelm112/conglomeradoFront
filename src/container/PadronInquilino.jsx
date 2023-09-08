@@ -3,14 +3,14 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import PublishIcon from '@mui/icons-material/Publish';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import "./styles/PadronSocios.scss"
+import "./styles/PadronInquilino.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDownAZ } from '@fortawesome/free-solid-svg-icons'
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import SearchBar from "../components/ButtonConglomerado";
 import { Height } from "@mui/icons-material";
-const ListProdronSocios = () => {
+const ListProdronInquilino = () => {
    const[open,setOpen]=useState(false);
 
    const Estado=()=>{
@@ -50,50 +50,50 @@ const ListProdronSocios = () => {
             </div>
            } 
       
-          <div className="conatiner-registro-padron-socios">
-          <div className="title-socios-registrados">
-             Socios Registrados
+          <div className="conatiner-registro-padron-inquilino">
+          <div className="title-Inquilinos-registrados">
+             Inquilinos Registrados
               </div>
             <div className="row container-busqueda-upload-documentos">
-                <div className="col-md-4 search-register-socios">
+                <div className="col-md-4 search-register-inquilino">
                 
-                    <div className="container-input-search-list-socios">
+                    <div className="container-input-search-list-inquilino">
                         <SearchBar/>
                     </div>
                 </div>
-                <div className="col-md-8 upload-documents-socios">
-                   
+                <div className="col-md-8 upload-documents-inquilino">
+                
                     <div className="row">
-                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
+                        <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
                             <div>
-                                <input id="mostrar-form-documento-socios-person-add" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add"> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
+                                <input id="mostrar-form-documento-inquilino-person-add" name="modal" type="radio" />
+                                <label for="mostrar-form-documento-inquilino-person-add"> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
                             </div>
 
 
                         </div>
-                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
+                        <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
                             <div>
-                                <input id="mostrar-form-documento-socios-person-add-delete" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add-delete"> <PersonRemoveIcon /> <span className="button-text">Dar de Baja</span> </label>
-                            </div>
-
-
-                        </div>
-
-                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
-                            <div>
-                                <input id="mostrar-form-documento-socios-person-add-export" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add-export"> <PublishIcon /> <span className="button-text">Importar</span>  </label>
+                                <input id="mostrar-form-documento-inquilino-person-add-delete" name="modal" type="radio" />
+                                <label for="mostrar-form-documento-inquilino-person-add-delete"> <PersonRemoveIcon /> <span className="button-text">Dar de Baja</span> </label>
                             </div>
 
 
                         </div>
 
-                        <div className="col-auto registrar-nuevo-socios-add-delete-export-import">
+                        <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
                             <div>
-                                <input id="mostrar-form-documento-socios-person-add-import" name="modal" type="radio" />
-                                <label for="mostrar-form-documento-socios-person-add-import"> <FileDownloadIcon /> <span className="button-text">Exportar</span></label>
+                                <input id="mostrar-form-documento-inquilino-person-add-export" name="modal" type="radio" />
+                                <label for="mostrar-form-documento-inquilino-person-add-export"> <PublishIcon /> <span className="button-text">Importar</span>  </label>
+                            </div>
+
+
+                        </div>
+
+                        <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
+                            <div>
+                                <input id="mostrar-form-documento-inquilino-person-add-import" name="modal" type="radio" />
+                                <label for="mostrar-form-documento-inquilino-person-add-import"> <FileDownloadIcon /> <span className="button-text">Exportar</span></label>
                             </div>
 
 
@@ -104,43 +104,43 @@ const ListProdronSocios = () => {
                 </div>
             </div>
             <div class="card-body">
-                <div class="outer-table-registro-socios">   
-            <div className="table-responsive container-list-table-registro-socios">
+                <div class="outer-table-registro-inquilino ">
+            <div className="table-responsive container-list-table-registro-inquilino">
                 <table class="table table-bordered table-condensed table-hover table-striped">
                     <thead>
                         <tr >
-                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap' }}>
-                                <div className="container-order-a-z-socio">
+                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }}>
+                                <div className="container-order-a-z-inquilino">
                                     <div>
-                                        Codigo de socio
+                                        Codigo de Inquilino
                                     </div>
-                                    <button className="title-codigo-socio">
+                                    <button className="title-codigo-inquilino">
                                         <FontAwesomeIcon icon={faArrowDownAZ} style={{color:`red`}} />
                                     </button>
                                 </div>
 
                             </th>
-                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap' }}>
-                                <div className="container-order-a-z-socio">
+                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }}>
+                                <div className="container-order-a-z-inquilino">
                                     <div >
                                         Apellidos Completos
                                     </div>
-                                    <button className="title-codigo-socio">
+                                    <button className="title-codigo-inquilino">
                                         <FontAwesomeIcon icon={faArrowDownAZ} style={{color:`red`}}/>
                                     </button>
                                 </div></th>
                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px'}}>Nombres Completos</th>
                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }}>
-                                <div className="container-order-a-z-socio">
+                                <div className="container-order-a-z-inquilino">
                                     <div>
                                         DNI
                                     </div>
-                                    <button className="title-codigo-socio">
+                                    <button className="title-codigo-inquilino">
                                         <FontAwesomeIcon icon={faArrowDownAZ}  style={{color:`red`}}/>
                                     </button>
                                 </div>
                             </th>
-                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }}>Pabellón</th>
+                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }}>Pasaje</th>
                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }}>Puesto</th>
                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }} >Dirección</th>
                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap',fontSize:'12px' }}>Giro</th>
@@ -149,8 +149,7 @@ const ListProdronSocios = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style={{fontSize:'12px'}}>Mark</td>
+                           <td style={{fontSize:'12px'}}>Mark</td>
                             <td style={{fontSize:'12px'}}>Mark</td>
                             <td style={{fontSize:'12px'}}>Otto</td>
                             <td style={{fontSize:'12px'}}>@mdo</td>
@@ -159,10 +158,8 @@ const ListProdronSocios = () => {
                             <td style={{fontSize:'12px'}} >@mdo</td>
                             <td style={{fontSize:'12px'}} >Otto</td>
                             <td style={{fontSize:'12px'}} >activo</td>
-                        </tr>
-                       
-                     
                     </tbody>
+               
                 </table>
 
 
@@ -178,4 +175,4 @@ const ListProdronSocios = () => {
     );
 }
 
-export default ListProdronSocios;
+export default ListProdronInquilino;

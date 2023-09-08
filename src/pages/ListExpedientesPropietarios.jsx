@@ -33,7 +33,7 @@ const ListExpedientesPropietarios=()=>{
                 <Container_Nav_Sidb_Load/>
           );
     }
-
+    
     return (
         <div className="navbar-sidebar-directivos">
         <NavbarConglomerado />

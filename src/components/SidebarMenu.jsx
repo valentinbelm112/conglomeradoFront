@@ -139,7 +139,10 @@ const SidebarMenu = () => {
                             <Link to="/register-padron-socios" className="no-style-link">
                             <Item icon={<HandshakeIcon />}  style={{fontSize: '.8125rem'}} name="Padron socios" />
                             </Link>
+                            <Link to="/register-padron-inquilino" className="no-style-link">
                             <Item icon={<AssignmentTurnedInRounded />}  style={{fontSize: '.8125rem'}} name="Padron Inquilinos" />
+                            </Link>
+                        
                         </div>
                     </div>
 

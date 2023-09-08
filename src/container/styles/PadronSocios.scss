@@ -1,11 +1,39 @@
 .container-order-a-z-socio {
   display: flex;
+  font-size: 12px;
 
 }
+
+.outer-table-registro-socios {
+  overflow-y: auto;
+  height: 60vh;
+}
+
+.outer-table-registro-socios {
+  width: 100%;
+  -layout: fixed;
+}
+
+.outer-table-registro-socios th {
+  text-align: left;
+  top: 0;
+  position: sticky;
+  background-color: white;
+}
+
 
 .upload-documents-socios {
   padding: 15px !important;
  
+}
+
+.title-socios-registrados{
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(39, 26, 10);
+  font-family: 'Playfair Display', serif;
 }
 
 .container-Sidebar-view-directivo {
@@ -26,6 +54,7 @@
   padding: 0;
   text-align: inherit;
   text-transform: none;
+  
 }
 
 .search-register-socios {
@@ -416,7 +445,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-color: #e9e8e7 !important;
+  background-color: #e8eaf6 !important;
   box-sizing: border-box;
   height: 100%;
   margin: 0;

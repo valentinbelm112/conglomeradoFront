@@ -8,6 +8,7 @@ import ListPropietarios from "../pages/PadronPropietarios.jsx"
 import ListExpedientesPropietarios from "../pages/ListExpedientesPropietarios.jsx";
 import ConsejoDirectivoView from "../container/ConsejoDirectivo.jsx"
 import PadronSociosView from "../pages/PadronSociosView.jsx";
+import PadronInquilinoView from "../pages/PadronInquilinoView.jsx";
 import ListExpedientesSocios from "../pages/ListExpedienteSocios.jsx";
 import useInitialAuth from "../hooks/useInitialAuth.js";
 import AuthContext from "../context/AuthContext.jsx";
@@ -26,6 +27,7 @@ const App=()=>{
           <Route path="/register-directivos" element={<ConsejoDirectivoView/>} />
           <Route path="/sidebar" element={<SidebarMenu/>} />
           <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
+          <Route path="/register-padron-inquilino" element={<PadronInquilinoView/>} />
           <Route path="/expediente/:id/:id2" element={<ListExpedientesPropietarios/>} />
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
           <Route path="/expediente-socio/:id" element={<ListExpedientesSocios/>} />
