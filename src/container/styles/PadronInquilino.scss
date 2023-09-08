@@ -1,0 +1,502 @@
+.container-order-a-z-inquilino {
+    display: flex;
+    font-size: 12px;
+  }
+  .outer-table-registro-inquilino {
+    overflow-y: auto;
+    height: 60vh;
+  }
+
+  .outer-table-registro-inquilino {
+    width: 100%;
+    -layout: fixed;
+  }
+
+  .outer-table-registro-inquilino th {
+    text-align: left;
+    top: 0;
+    position: sticky;
+    background-color: white;
+  }
+  .title-Inquilinos-registrados{
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(39, 26, 10);
+    font-family: 'Playfair Display', serif;
+}
+  
+  .upload-documents-inquilino {
+    padding: 15px !important;
+   
+  }
+  
+  .container-Sidebar-view-directivo {
+    padding-top: 60px;
+    height: 90.7% !important;
+  }
+  
+  .navbar-sidebar-directivos{
+    height: 100%;
+  }
+  .title-codigo-inquilino {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    text-align: inherit;
+    text-transform: none;
+  }
+  
+  .search-register-inquilino {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  
+  
+  #mostrar-form-documento-inquilino-upload {
+    display: none;
+  
+    +label {
+      background: linear-gradient(to bottom right, #668a28, #84b332);
+      display: table;
+      color: #fff;
+      line-height: 2.5;
+      padding: 0 1em;
+  
+      cursor: pointer;
+      border-radius: 7px;
+  
+      &:hover {
+        background: darken(rgb(158, 201, 235), 10%);
+      }
+    }
+  
+    &:checked {
+      &~#modal {
+        top: 64px;
+  
+      }
+  
+      &~#cerrar-modal+label {
+        display: block;
+      }
+    }
+  }
+  
+  
+  
+  .registrar-nuevo-inquilino-add-delete-export-import {
+    padding-top: 5px;
+  }
+  
+  #mostrar-form-documento-inquilino-person-add {
+    display: none;
+   
+    +label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 25px; /* Mitad del tamaño del botón */
+      background: linear-gradient(to bottom right, #194b05, #10d677);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      overflow: hidden;
+      white-space: nowrap;
+  
+      &:hover {
+       
+        width: 150px; /* Ancho automático */
+        background-color: #0056b3;
+          .button-text {
+          
+            display: inline-block;
+            opacity: 1;
+            transform: translateX(0);
+            
+          }
+      }
+    }
+  
+    &:checked {
+      &~#modal {
+        top: 64px;
+  
+      }
+  
+      &~#cerrar-modal+label {
+        display: block;
+      }
+    }
+  }
+  
+  #mostrar-form-documento-inquilino-person-add-delete {
+    display: none;
+  
+    +label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 25px; /* Mitad del tamaño del botón */
+      background: linear-gradient(to bottom right, rgb(173, 4, 4), rgb(214, 151, 151));
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      overflow: hidden;
+      white-space: nowrap;
+  
+      &:hover {
+       
+        width: 150px; /* Ancho automático */
+        background-color: #0056b3;
+          .button-text {
+          
+            display: inline-block;
+            opacity: 1;
+            transform: translateX(0);
+            
+          }
+      }
+    }
+  
+    &:checked {
+      &~#modal {
+        top: 64px;
+  
+      }
+  
+      &~#cerrar-modal+label {
+        display: block;
+      }
+    }
+  }
+  
+  #mostrar-form-documento-inquilino-person-add-export {
+    display: none;
+  
+    +label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 25px; /* Mitad del tamaño del botón */
+      background: linear-gradient(to bottom right, #076024, #00b65f);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      overflow: hidden;
+      white-space: nowrap;
+  
+      &:hover {
+       
+        width: 150px; /* Ancho automático */
+        background-color: #0056b3;
+          .button-text {
+          
+            display: inline-block;
+            opacity: 1;
+            transform: translateX(0);
+            
+          }
+      }
+    }
+  
+    &:checked {
+      &~#modal {
+        top: 64px;
+  
+      }
+  
+      &~#cerrar-modal+label {
+        display: block;
+      }
+    }
+  }
+  
+  .button-text {
+    display: none;
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  
+  #mostrar-form-documento-inquilino-person-add-import {
+    display: none;
+  
+    +label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 25px; /* Mitad del tamaño del botón */
+      background: linear-gradient(to bottom right, #001a09, #41e093);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      overflow: hidden;
+      white-space: nowrap;
+  
+      &:hover {
+       
+        width: 150px; /* Ancho automático */
+        background-color: #0056b3;
+          .button-text {
+          
+            display: inline-block;
+            opacity: 1;
+            transform: translateX(0);
+            
+          }
+      }
+    }
+  
+    &:checked {
+      &~#modal {
+        top: 64px;
+  
+      }
+  
+      &~#cerrar-modal+label {
+        display: block;
+      }
+    }
+  }
+  
+  
+  .conatiner-registro-padron-inquilino {
+    width: 100%;
+  }
+  
+  .container-input-search-list-inquilino {
+    display: flex;
+  
+    ;
+    border-radius: 5px;
+    align-items: center;
+    height: 30px;
+   
+  }
+  
+  .container-input-search-list-inquilino input {
+    border-radius: 5px 0 0 5px;
+    border: 0.5px solid hsl(0, 3%, 56%);
+    height: 30px;
+   
+  }
+  
+  .container-input-search-list-inquilino input:focus {
+    outline: none;
+    /* Oculta el borde al recibir el foco */
+  }
+  
+  #mostrar-form-documento-inquilino-person-add-export+label {
+    white-space: nowrap;
+    text-align: center;
+  
+    /* Otros estilos para pantallas pequeñas */
+  }
+  
+  #mostrar-form-documento-inquilino-person-add-delete+label {
+    white-space: nowrap;
+    text-align: center;
+    text-align: center;
+    /* Otros estilos para pantallas pequeñas */
+  }
+  
+  #mostrar-form-documento-inquilino-person-add+label {
+    white-space: nowrap;
+    text-align: center;
+    /* Otros estilos para pantallas pequeñas */
+  }
+  
+  #mostrar-form-documento-inquilino-person-add-import+label {
+    white-space: nowrap;
+    text-align: center;
+    /* Otros estilos para pantallas pequeñas */
+  }
+  
+  @media screen and (max-width: 1025px){
+    .container-busqueda-upload-documentos{
+      margin-top: 2%;
+      /* width: 92%; */
+      display: flex;
+      flex-direction: column;
+    }
+  
+  
+    #mostrar-form-documento-inquilino-person-add-export+label {
+      white-space: nowrap;
+       font-size: 13px;
+  
+      /* Otros estilos para pantallas pequeñas */
+    }
+  
+    #mostrar-form-documento-inquilino-person-add-delete+label {
+      white-space: nowrap;
+       font-size: 13px;
+      /* Otros estilos para pantallas pequeñas */
+    }
+  
+    #mostrar-form-documento-inquilino-person-add+label {
+      white-space: nowrap;
+       font-size: 13px;
+      /* Otros estilos para pantallas pequeñas */
+    }
+  
+    #mostrar-form-documento-inquilino-person-add-import+label {
+      white-space: nowrap;
+       font-size: 13px;
+      /* Otros estilos para pantallas pequeñas */
+    }
+  }
+  @media screen and (max-width: 767px) {
+    #mostrar-form-documento-inquilino-person-add-export+label {
+      font-size: 12px;
+      /* Otros estilos para pantallas pequeñas */
+    }
+  
+    #mostrar-form-documento-inquilino-person-add-delete+label {
+      font-size: 12px;
+      /* Otros estilos para pantallas pequeñas */
+    }
+  
+    #mostrar-form-documento-inquilino-person-add+label {
+      font-size: 12px;
+      /* Otros estilos para pantallas pequeñas */
+    }
+  
+    #mostrar-form-documento-inquilino-person-add-import+label {
+      font-size: 12px;
+      /* Otros estilos para pantallas pequeñas */
+    }
+  
+    .search-register-inquilino{
+      display: flex;
+      justify-content: flex-start;
+      margin-left: 2%;
+    }
+    .upload-documents-inquilino {
+      padding: 15px !important;
+      display: flex;
+      align-items: start;
+      justify-content: flex-start;
+      margin-left: 2%;
+    }
+  
+    .registrar-nuevo-inquilino-add-delete-export-import {
+      width: 53% !important;
+  
+    }
+    .container-input-search-list-inquilino {
+     
+      width: 35%;
+    }
+    
+    .container-input-search-list-inquilino input {
+    
+      width: 89%;
+    }
+  .container-busqueda-upload-documentos{
+    margin-top: 2% !important;
+  }
+    .container-Sidebar-view-directivo {
+      position: relative;
+      display: flex;
+      /* justify-content: center; */
+      /* align-items: center; */
+      width: 98%;
+    }
+  
+    .Appfalse {
+      position: absolute;
+  
+    }
+  
+    .App {
+      position: absolute;
+  
+    }
+  }
+  
+
+  
+  
+  
+  @media  screen and (max-width: 1391px){
+    .conatiner-registro-padron-inquilino {
+      width: 90.5%;
+      margin-left: 4%;
+  }
+  
+  /* Media query para pantallas medianas */
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .conatiner-registro-padron-inquilino {
+      width: 68.5%;
+    
+  }
+  
+  
+    /* Otros estilos aquí */
+  }
+  
+  /* Media query para pantallas más pequeñas */
+  @media screen and (max-width: 768px) {
+    .conatiner-registro-padron-inquilino {
+      width: 91.5%;
+      margin-left: 4%;
+  }
+  
+  }
+  /* Media query para pantallas más pequeñas */
+  @media screen and (max-width: 400px) {
+    .conatiner-registro-padron-inquilino {
+      margin-top: 5%;
+      width: 91.5%;
+      margin-left: 4%;
+  }
+  
+  }
+  /* Media query para pantallas más pequeñas */
+  @media screen and (max-width: 200px) {
+    .conatiner-registro-padron-inquilino {
+      width: 80.5%;
+      margin-left: 4%;
+  }
+  
+  }
+  /* Media query para pantallas grandes */
+  @media screen and (min-width: 1025px) {
+    .conatiner-registro-padron-inquilino {
+      width: 73.5%;
+      margin-left: 4%;
+  }
+  
+  
+    /* Otros estilos aquí */
+  }
+  
+  
+  
+  
+  }
+  
+  
