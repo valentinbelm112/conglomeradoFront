@@ -10,43 +10,60 @@ import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SendIcon from '@mui/icons-material/Send';
 import "./styles/ImageUploader.scss"
-
+import axios from 'axios';
+import { serverURL } from '../utils/Configuration';
 const ImageUploader = (props) => {
   console.log(props)
   const [open, setOpen] = useState(false);
+  const [openCarga, setOpenCarga] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [dbImage, setDbImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [datosDocumento, setDatosDocumento] = useState({
+    id_propietario: 0,
+    ds_dni: "",
+    des_codigo_asoc: "",
+    des_tipo_doc: ""
+  });
+  const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
   // Supongamos que tienes una función para recuperar la imagen de la base de datos
-  const fetchImageFromDatabase = async () => {
-    try {
-      // Realiza una solicitud a la base de datos para obtener la imagen
-      const response = await fetch('URL_DE_TU_API_PARA_OBTENER_IMAGEN');
-      if (response.ok) {
-        const imageBlob = await response.blob();
-        setDbImage(URL.createObjectURL(imageBlob));
-      } else {
-        console.error('Error al recuperar la imagen de la base de datos');
-      }
-    } catch (error) {
-      console.error('Error al recuperar la imagen de la base de datos', error);
-    }
+  const fetchImageFromDatabase = async (desDni,codAs,desTipoDoc) => {
+   
+    
+   await axios.get(`${serverURL}/Documento/propByDni/tipdoc/codAS?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+      .then(response => {
+        // Handle the response data
+        console.log(response)
+        setDbImage(response.data.des_link_documento);
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error);
+      });
   };
 
   useEffect(() => {
-    // Llama a la función para recuperar la imagen cuando se monta el componente
-    fetchImageFromDatabase();
+    // Verifica si props.documentoPropietario[0].des_link_documento existe
+  if (props.documentoPropietario[0] && props.documentoPropietario[0].des_link_documento) {
+    // Llama a la función para recuperar la imagen
+    setDbImage(props.documentoPropietario[0].des_link_documento);
+  }
   }, []);
 
   const onDrop = (acceptedFiles) => {
     // Tomar solo la primera imagen si se cargan múltiples imágenes
     const firstImage = acceptedFiles[0];
     // Manejar la imagen cargada aquí
+    console.log(firstImage)
     setUploadedImage(firstImage);
+    
   };
+
+ 
+  
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -62,6 +79,22 @@ const ImageUploader = (props) => {
     setIsLightboxOpen(true);
     console.log(isLightboxOpen)
   };
+  
+  const handleZoomCarga = (event) => {
+    setOpenCarga(true)
+    console.log(isLightboxOpen)
+    event.stopPropagation(); // Detiene la propagación del evento de clic
+    // Abrir el modal al hacer clic en el botón de "Zoom"
+    console.log("DDDD")
+    setIsLightboxOpen(true);
+    console.log(isLightboxOpen)
+  };
+
+  const handleDeleteCarga = (event) => {
+    // Limpiar la imagen cargada
+    event.stopPropagation();
+    setUploadedImage(null);
+  };
 
   const handleDelete = (event) => {
     // Limpiar la imagen cargada
@@ -69,26 +102,55 @@ const ImageUploader = (props) => {
     setUploadedImage(null);
   };
 
-  
-  const handleSubmit = () => {
-    // Aquí puedes enviar la imagen al servidor si es necesario
-    // Puedes mostrar un indicador de carga mientras se envía la imagen
-    setIsUploading(true);
+  const handleUpload = async() => {
+    
+    // Verifica si se ha seleccionado una imagen.
+    if (uploadedImage) {
 
-    // Simulación de carga (en la realidad, enviarías la imagen al servidor)
-    setTimeout(() => {
-      setIsUploading(false);
-    }, 2000);
+      const reader = new FileReader();
+      reader.onload = () => {
+        setUploadedImage(reader.result);
+      };
+      // Crea un objeto FormData y agrega la imagen a él.
+      console.log(uploadedImage)
+      const formData = new FormData();
+      formData.append('file_upload_pdf', uploadedImage);
+      formData.append('id_propietario',2)
+      formData.append('ds_dni', "71858727")
+      formData.append('des_codigo_asoc', "E00241")
+      formData.append('des_tipo_doc', "DocProp")
+      
+      await axios.post(`${serverURL}/Propietarios/Upload-info-propietario`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+        .then((response) => {
+          fetchImageFromDatabase("71858727","E00241","DocProp");
+          // Maneja la respuesta del servidor si es necesario.
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Maneja cualquier error que ocurra durante la solicitud.
+          console.error(error);
+        });
+    } else {
+      alert('Por favor, seleccione una imagen antes de enviar.');
+    }
   };
 
+  
   return (
-    <>
+    <div className='container-image-upload-show-cgm'>
       <div className='title-socio-upload-image-padron'>{props.info.titulo}</div>
       <div style={containerStyles}>
       {/* Columna de carga con el Dropzone */}
       <div style={columnStyles}>
         <div {...getRootProps()} style={{ ...dropzoneStyles, width: '125px' }}>
-          <input {...getInputProps()} />
+          <input 
+          
+          
+          {...getInputProps()}/>
           {uploadedImage ? (
             <div style={imageContainerStyles}>
               <img
@@ -107,7 +169,7 @@ const ImageUploader = (props) => {
           )}
         </div>
         <div style={buttonStyles}>
-          <button onClick={handleSubmit} disabled={!uploadedImage || isUploading} style={{fontSize:`11px`}} type="button" className="btn btn-success">
+          <button onClick={handleUpload} disabled={!uploadedImage || isUploading} style={{fontSize:`11px`}} type="button" className="btn btn-success">
             Enviar <SendIcon style={{height:`15px`}}/>
           </button>
           {isUploading && <p>Subiendo imagen...</p>}
@@ -117,14 +179,23 @@ const ImageUploader = (props) => {
       {/* Columna de imagen recuperada de la base de datos */}
       <div style={columnStyles}>
         {dbImage && (
-          <div>
+           <>
             <img
               src={dbImage}
               alt={`Imagen de la base de datos`}
               style={imageStyles}
             />
+            <div style={buttonContainerStyles}>
+            <div onClick={handleZoomCarga}><ZoomInIcon/></div>
+          
+            <div onClick={handleDeleteCarga} style={{color:`red`}}><DeleteForeverIcon/></div>
           </div>
+           </>
+           
+        
         )}
+
+        
       </div>
 
      
@@ -139,9 +210,20 @@ const ImageUploader = (props) => {
         }  ]}
     
         />
+
+      <Lightbox
+        plugins={[Zoom,Download,Captions]}
+        open={openCarga}
+        close={() => setOpenCarga(false)}
+        slides={[
+        { src: dbImage ? dbImage : "",
+        title: "Documento de la inscripcion del consejo directivo"
+        }  ]}
+    
+        />
      
     </div>
-    </>
+    </div>
   
   );
 };
@@ -149,12 +231,16 @@ const containerStyles = {
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'flex-start',
+  height: '100%',
+    width: '100%',
 };
 
 const columnStyles = {
   marginRight: '20px',
   display: 'flex',
   flexDirection: 'column',
+  height: '90%',
+  
 };
 
 const dropzoneStyles = {
@@ -172,8 +258,8 @@ const imageContainerStyles = {
 };
 
 const imageStyles = {
-  maxWidth: '100%',
-  maxHeight: '103px',
+  width: '102%',
+  height: '100%',
   marginBottom: '10px',
 };
 

@@ -104,7 +104,7 @@ const ModalImagesConglomerado = ({ isOpen, onClose, components }) => {
       </div>
       <progress value={progress} max="100"></progress>
     </div>
-      <div>
+      <div style={{height:'87%'}}>
         {components[currentSection]}
       </div>
 
