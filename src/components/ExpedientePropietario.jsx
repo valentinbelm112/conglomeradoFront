@@ -339,7 +339,7 @@ const ExpedientePropietario=(props)=>{
                             isOpen={modalIsOpen}
                             onClose={closeModal}
                             components={[
-                                <ImageUploader info={ModeloProps1}/>
+                                <ImageUploader info={ModeloProps1} documentoPropietario={props.padron.data.documentoPropietarioEntities}/>
                             ]}
                             />
                     </div>

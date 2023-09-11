@@ -27,6 +27,25 @@ const PadronPropietario = () => {
     const [refrescar, setRefrescar] = useState([]);
     const [search, setSearch] = useState([]);
     const [sortOrder, setSortOrder] = useState('asc');
+    const [pdfFile, setPdfFile] = useState(null);
+
+
+
+      const handleFile = (e) => {
+  
+        let selectedFile = e.target.files[0];
+    
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+        reader.onload = async () => {
+          const base64Image = reader.result.split(',')[1];
+          setPdfFile(base64Image);
+        }
+        
+       
+    
+    
+      }
 
     // Función para cambiar el orden de clasificación
     const ExportarPropietario = () => {
@@ -83,7 +102,7 @@ const PadronPropietario = () => {
         parrafo.style.top = '95px'
     };
 
-
+   
 
     if (isLoading) {
 
