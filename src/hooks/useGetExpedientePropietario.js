@@ -1,177 +1,179 @@
-import axios from 'axios';
-import { useEffect,useState } from "react";
-import { serverURL } from '../utils/Configuration';
-/*
-export const useGetExpedientePropietario = async(API,id)=>{
-  const[isLoading,SetLoading]=useState(true);
-  const [dataExpediente,SetDataExpediente]=useState(null);
-  const objetoRequest=
-        {
-          codempresa:"0001",	
-           option:"7",
-           dni:id
-       }
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { serverURL } from "../utils/Configuration";
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-};
+export const useGetExpedientePropietario = (API, id, id2) => {
+  const [isLoading, SetLoading] = useState(true);
+  const [dataExpediente, SetDataExpediente] = useState(null);
+  const [dataDetallePropietario, SetDataDetallePropietario] = useState(null);
+  const [propietariosPartida, SetPropietariosPartida] = useState(null);
+  const [expedienteConyugue, SetExpedienteConyugue] = useState(null);
 
+  const codigo_asociacion = "E00241";
 
-  
-    //consultar si existe el cliente 
-    const existeCliente = await axios.get(`${serverURL}/Expediente?dni=${id}`);
-    console.log(existeCliente.data);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
-   if(existeCliente.data){
-    console.log("dentro validacion" +API)
-   
-    
-   }
-   else{
-    console.log("Else")
-    console.log(isLoading)
-    const existeCliente = await axios.get(`${serverURL}/Expediente?dni=${id}`);
-    console.log(existeCliente)
-    SetLoading(false)
-    SetDataExpediente(existeCliente.data);
-   
-   }
-   return {dataExpediente,isLoading};
-  }
-*/
+  const doSomething = async () => {
+    const padronPropietariosDetalle = await axios.get(
+      `${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`
+    );
+    const found = padronPropietariosDetalle.data.inmuebleEntities.map(
+      (element) => element.numPartida
+    );
 
-  export const useGetExpedientePropietario=(API,id,id2)=>{
-   
-    const[isLoading,SetLoading]=useState(true);
-    const [dataExpediente,SetDataExpediente]=useState(null);
-    const [dataDetallePropietario,SetDataDetallePropietario]=useState(null);
-    const [propietariosPartida,SetPropietariosPartida]=useState(null);
+    const propietariosConPartida = [];
 
-    const codigo_asociacion="E00241";
-          const objetoRequest=
-          {
-            codempresa:"0001",	
-            option:"7",
-            dni:id
-        }
-
-      const config = {
-      headers: {
-      'Content-Type': 'application/json'
+    padronPropietariosDetalle.data.inmuebleEntities.forEach((inmueble) => {
+      if (found.includes(inmueble.numPartida)) {
+        const propietarios = inmueble.padronPropietariosentity;
+        propietariosConPartida.push(...propietarios);
       }
+    });
+
+    SetPropietariosPartida(propietariosConPartida);
+    SetDataDetallePropietario(padronPropietariosDetalle);
+
+    //consultar si existen expedientes
+
+    const existeCliente = await axios.get(
+      `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.des_codigo_Dni}`
+    );
+    const existeClienteConyuge = await axios.get(
+      `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.des_dni_conyugue}`
+    );
+
+    if (existeCliente.data) {
+      const responsepostExpediente = await axios.get(
+        `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.des_codigo_Dni}`
+      );
+      SetDataExpediente(responsepostExpediente);
+    } else {
+      console.log("Else");
+      console.log(isLoading);
+      const objetoRequest = {
+        codempresa: "0001",
+        option: "7",
+        dni: padronPropietariosDetalle.data.des_codigo_Dni,
       };
-    
-    
-    const doSomething = async() =>{
-      
-        const existeCliente = await axios.get(`${serverURL}/Expediente?dni=${id}`);
-        
-        if(existeCliente.data){
-          const responsepostExpediente = await axios.get(`${serverURL}/Expediente/get?dni=${id}`)
-          const padronPropietariosDetalle = await axios.get(`${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`)
 
-          const found = padronPropietariosDetalle.data.inmuebleEntities.map((element) =>  element.numPartida);
+      await axios
+        .post(API, objetoRequest)
+        .then(async (response) => {
+          console.log(response.data.data.apellido_materno);
+          console.log(response.data);
+          const bodyExpediente = {
+            data: {
+              des_apellido_materno: response.data.data.apellido_materno,
+              des_apellido_paterno: response.data.data.apellido_paterno,
+              des_cargo: response.data.data.grado_instruccion,
+              des_correo_electronico: "cccc@gmail.com",
+              des_departamento_dom: response.data.data.departamento_domicilio,
+              des_departamento_nacimiento:
+                response.data.data.departamento_nacimiento,
+              des_direccion_dom: response.data.data.direccion,
+              des_distrito_dom: response.data.data.distrito_domicilio,
+              des_edad: "30",
+              des_email: "cccc@gmail.com",
+              des_estado_civil: response.data.data.estado_civil,
+              des_genero: response.data.data.sexo,
+              des_grado_instruccion: response.data.data.grado_instruccion,
+              des_nombres: response.data.data.nombres,
+              des_provincia_dom: response.data.data.provincia_domicilio,
+              des_telefono: "3434343434",
+              des_url_foto: response.data.data.urlFoto,
+              dni: response.data.data.dni,
+              fec_Fecha_nacimiento: "2023-08-07T21:47:30.828Z",
+            },
+          };
 
-          const propietariosConPartida = [];
+          const responsepostExpediente = await axios.post(
+            `${serverURL}/Expediente/save`,
+            bodyExpediente.data
+          );
 
-          padronPropietariosDetalle.data.inmuebleEntities.forEach(inmueble => {
-              if (found.includes(inmueble.numPartida)) {
-                const propietarios = inmueble.padronPropietariosentity;
-                propietariosConPartida.push(...propietarios);
-              }
-            });
-
-
-          console.log(found);
-          console.log(propietariosConPartida);
           console.log(responsepostExpediente);
-          console.log(padronPropietariosDetalle);
-          SetPropietariosPartida(propietariosConPartida)
-          SetDataExpediente(responsepostExpediente);
-          SetDataDetallePropietario(padronPropietariosDetalle);
+          console.log(response.data.data);
+          SetDataExpediente(bodyExpediente);
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud:", error);
+        });
+    }
+
+
+    //consultar conyugue
+    if (existeClienteConyuge.data) {
+      const responseExpedienteConyugue = await axios.get(
+        `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.des_dni_conyugue}`
+      );
+      SetExpedienteConyugue(responseExpedienteConyugue);
+      SetLoading(false);
+    } else {
+      console.log("Else");
+      console.log(isLoading);
+      const objetoRequest = {
+        codempresa: "0001",
+        option: "7",
+        dni: padronPropietariosDetalle.data.des_dni_conyugue,
+      };
+      await axios
+        .post(API, objetoRequest)
+        .then(async (response) => {
+          console.log(response.data.data.apellido_materno);
+          console.log(response.data);
+          const bodyExpediente = {
+            data: {
+              des_apellido_materno: response.data.data.apellido_materno,
+              des_apellido_paterno: response.data.data.apellido_paterno,
+              des_cargo: response.data.data.grado_instruccion,
+              des_correo_electronico: "cccc@gmail.com",
+              des_departamento_dom: response.data.data.departamento_domicilio,
+              des_departamento_nacimiento:
+                response.data.data.departamento_nacimiento,
+              des_direccion_dom: response.data.data.direccion,
+              des_distrito_dom: response.data.data.distrito_domicilio,
+              des_edad: "30",
+              des_email: "cccc@gmail.com",
+              des_estado_civil: response.data.data.estado_civil,
+              des_genero: response.data.data.sexo,
+              des_grado_instruccion: response.data.data.grado_instruccion,
+              des_nombres: response.data.data.nombres,
+              des_provincia_dom: response.data.data.provincia_domicilio,
+              des_telefono: "3434343434",
+              des_url_foto: response.data.data.urlFoto,
+              dni: response.data.data.dni,
+              fec_Fecha_nacimiento: "2023-08-07T21:47:30.828Z",
+            },
+          };
+
+          const responsepostExpediente = await axios.post(
+            `${serverURL}/Expediente/save`,
+            bodyExpediente.data
+          );
+
+          console.log(responsepostExpediente);
+          console.log(response.data.data);
+          SetDataExpediente(bodyExpediente);
           SetLoading(false);
-         
-          
-         }
-         else{
-          console.log("Else")
-          console.log(isLoading)
-           await axios.post(API,objetoRequest)
-          .then(async(response) => {
-           console.log(response.data.data.apellido_materno )
-           console.log(response.data )
-            const bodyExpediente={
-              data:{
-                "des_apellido_materno": response.data.data.apellido_materno,
-                "des_apellido_paterno": response.data.data.apellido_paterno,
-                "des_cargo":response.data.data.grado_instruccion,
-                "des_correo_electronico": "cccc@gmail.com",
-                "des_departamento_dom": response.data.data.departamento_domicilio,
-                "des_departamento_nacimiento": response.data.data.departamento_nacimiento,
-                "des_direccion_dom": response.data.data.direccion,
-                "des_distrito_dom": response.data.data.distrito_domicilio,
-                "des_edad": "30",
-                "des_email": "cccc@gmail.com",
-                "des_estado_civil": response.data.data.estado_civil,
-                "des_genero": response.data.data.sexo,
-                "des_grado_instruccion": response.data.data.grado_instruccion,
-                "des_nombres": response.data.data.nombres,
-                "des_provincia_dom": response.data.data.provincia_domicilio,
-                "des_telefono": "3434343434",
-                "des_url_foto":  response.data.data.urlFoto,
-                "dni": response.data.data.dni,
-                "fec_Fecha_nacimiento": "2023-08-07T21:47:30.828Z"
-              }
-             
-            }
+        })
+        .catch((error) => {
+          console.error("Error en la solicitud:", error);
+        });
+    }
+  };
 
-
-            console.log(bodyExpediente)
-            const responsepostExpediente = await axios.post(`${serverURL}/Expediente/save`,bodyExpediente.data)
-            const padronPropietariosDetalle = await axios.get(`${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`)
-            const found = padronPropietariosDetalle.data.inmuebleEntities.map((element) =>  element.numPartida);
-
-            const propietariosConPartida = [];
-  
-            padronPropietariosDetalle.data.inmuebleEntities.forEach(inmueble => {
-                if (found.includes(inmueble.numPartida)) {
-                  const propietarios = inmueble.padronPropietariosentity;
-                  propietariosConPartida.push(...propietarios);
-                }
-              });
-
-            console.log(found);
-            console.log(propietariosConPartida);  
-            console.log(responsepostExpediente);
-            console.log(response.data.data)
-            console.log(API);
-            console.log(response)
-            SetPropietariosPartida(propietariosConPartida)
-            SetDataDetallePropietario(padronPropietariosDetalle);
-            SetDataExpediente(bodyExpediente);
-            SetLoading(false);
-          })
-          .catch(error => {
-            console.error('Error en la solicitud:', error);
-          });
-       
-         
-         }
-       
-      
-     
-        }
-        
-    useEffect( () => {
-
-        doSomething();
-      
-      }, []);
-      return { dataExpediente, isLoading,dataDetallePropietario,propietariosPartida };
-}
-
-
-
-
+  useEffect(() => {
+    doSomething();
+  }, []);
+  return {
+    dataExpediente,
+    isLoading,
+    dataDetallePropietario,
+    propietariosPartida,
+    expedienteConyugue,
+  };
+};

@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import "./styles/ExpedientePropietario.scss"
@@ -9,8 +9,15 @@ import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 const ExpedientePropietario=(props)=>{
     const [selectedValue, setSelectedValue] = useState("");
     const [modalIsOpen, setModalIsOpen] = useState(false);
-   
+    const [expedienteSelect,setExpedienteSelect]=useState(null);
 
+    useEffect(() => {
+     
+          setExpedienteSelect(props.expediente.data);
+          console.log("expediente")
+          console.log(props.expediente.data)
+        
+      }, []);
     const ModeloProps1={
        titulo:"Documento de compra-venta"
     }
@@ -60,7 +67,7 @@ const ExpedientePropietario=(props)=>{
                     </div>
 
                     <div className="container--expediente-propietario">
-                        <img src={props.expediente.data.des_url_foto} alt="" className="foto-expediente-propietario"/>
+                        <img src={expedienteSelect?.des_url_foto} alt="" className="foto-expediente-propietario"/>
                     </div>
                     <div className="container-info-personal-expediente-filter">
                         <div className="title-info-personal-expediente">
@@ -71,7 +78,7 @@ const ExpedientePropietario=(props)=>{
                             Nombres :
                         </div>
                             <div>
-                               {capitalizeFirstLetter(props.expediente.data.des_nombres?.trim())}
+                               {capitalizeFirstLetter(expedienteSelect?.des_nombres?.trim())}
                             </div>
                         </div>
                         
@@ -80,7 +87,7 @@ const ExpedientePropietario=(props)=>{
                             Apellidos :  
                         </div>
                         <div>
-                        { `${capitalizeFirstLetter(props.expediente.data.des_apellido_paterno?.trim())}  ${capitalizeFirstLetter(props.expediente.data.des_apellido_materno?.trim())  }`  }
+                        { `${capitalizeFirstLetter(expedienteSelect?.des_apellido_paterno?.trim())}  ${capitalizeFirstLetter(expedienteSelect?.des_apellido_materno?.trim())  }`  }
                                               
                         </div>
         
@@ -91,7 +98,7 @@ const ExpedientePropietario=(props)=>{
                             Dni : 
                         </div>
                         <div>
-                           {props.expediente.data.dni?.trim()}
+                           {expedienteSelect?.dni?.trim()}
                         </div>
                             </div> 
                             <div className="container-info-personal">
@@ -108,7 +115,7 @@ const ExpedientePropietario=(props)=>{
                             Sexo : 
                         </div>
                         <div>
-                        {props.expediente.data.des_genero?.trim()}
+                        {expedienteSelect?.des_genero?.trim()}
                         </div>
                                      </div>
                     <div className="container-info-personal"> 
@@ -124,7 +131,7 @@ const ExpedientePropietario=(props)=>{
                             Deparatamento de nacimiento :
                         </div>
                         <div>
-                        {capitalizeFirstLetter(props.expediente.data.des_departamento_nacimiento?.trim())}
+                        {capitalizeFirstLetter(expedienteSelect?.des_departamento_nacimiento?.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal"> 
@@ -132,7 +139,7 @@ const ExpedientePropietario=(props)=>{
                             Grado de Instruccion : 
                         </div>
                         <div>
-                           {capitalizeFirstLetter(props.expediente.data.des_grado_instruccion?.trim())}
+                           {capitalizeFirstLetter(expedienteSelect?.des_grado_instruccion?.trim())}
                         </div>
                     </div>
                        
@@ -142,7 +149,7 @@ const ExpedientePropietario=(props)=>{
                             Estado Civil :
                         </div>
                         <div>
-                        {capitalizeFirstLetter(props.expediente.data.des_estado_civil?.trim())}
+                        {capitalizeFirstLetter(expedienteSelect?.des_estado_civil?.trim())}
                         </div>
                     </div>
                         
@@ -152,7 +159,7 @@ const ExpedientePropietario=(props)=>{
                         </div>
 
                         <div>
-                        {capitalizeFirstLetter(props.expediente.data.des_departamento_dom?.trim())}
+                        {capitalizeFirstLetter(expedienteSelect?.des_departamento_dom?.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal"> 
@@ -160,7 +167,7 @@ const ExpedientePropietario=(props)=>{
                             Provincia de Domicilio :
                         </div>
                         <div>
-                        {capitalizeFirstLetter(props.expediente.data.des_provincia_dom?.trim())}
+                        {capitalizeFirstLetter(expedienteSelect?.des_provincia_dom?.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal"> 
@@ -168,7 +175,7 @@ const ExpedientePropietario=(props)=>{
                             Distrito de Domicilio :
                         </div>
                         <div>
-                        {capitalizeFirstLetter(props.expediente.data.des_distrito_dom?.trim())}
+                        {capitalizeFirstLetter(expedienteSelect?.des_distrito_dom?.trim())}
                         </div>
                     </div>
                     <div className="container-info-personal">
@@ -176,7 +183,7 @@ const ExpedientePropietario=(props)=>{
                             Dirección de Domicilio :
                         </div>
                         <div>
-                        {capitalizeFirstLetter(props.expediente.data.des_direccion_dom?.trim())}
+                        {capitalizeFirstLetter(expedienteSelect?.des_direccion_dom?.trim())}
                         </div>
                          </div>
                          <div className="container-info-personal">
