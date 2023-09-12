@@ -348,6 +348,23 @@ p {
   width: 100%;
 }
 
+.btn-gestion-delete-info-propietario{
+	background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  text-align: inherit;
+  text-transform: none;
+  width: 25%;
+}
+
+.table-column-gestion-info-propietario{
+  display: flex;
+ justify-content: space-between;
+}
 
 #modal-mostrar-form-documento-propietarios-person-dar-baja {
 //background:rgba(#000,.9);
