@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import PublishIcon from '@mui/icons-material/Publish';
@@ -226,11 +228,12 @@ const PadronPropietario = () => {
                                                         </button>
                                                     </div>
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Nª Partida</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Oficina Principal</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Tipo Dominio</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Dirección</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Estado</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Nª Partida</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Oficina Principal</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Tipo Dominio</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Dirección</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Estado</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -250,6 +253,22 @@ const PadronPropietario = () => {
                                                         <td>{propietario.inmuebleEntities[0].des_tipo_dominio}</td>
                                                         <td>{propietario.inmuebleEntities[0].des_direccion}</td>
                                                         <td>{propietario.des_estado}</td>
+                                                        <td>
+                                                        <div className="table-column-gestion-info-propietario">
+                                                       
+                                                        <button className="btn-gestion-delete-info-propietario ">
+                                                            <DeleteForeverIcon style={{ color: `red` }} 
+                                                            />
+                                                        </button>
+
+                                                        <button className="btn-gestion-edit-info-directivo">
+                                                        <input id="mostrar-modal-editar" name="modal" type="radio" />
+
+                                                            <label  for="mostrar-modal-editar" >  <EditIcon color="primary"  /> </label>
+                                                        </button>
+                                                                            
+                                                        </div>
+                      </td>
                                                     </tr>
 
                                                 ))

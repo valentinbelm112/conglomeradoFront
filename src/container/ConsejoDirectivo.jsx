@@ -141,9 +141,7 @@ const ConsejoDirectivo = () => {
 
                       <td>
                         <div className="table-column-gestion-info-directivo">
-                          <div>
-                            
-                          </div>
+                         
                           <button className="btn-gestion-delete-info-directivo "onClick={() =>DeleteRegisterConsejo(directivo.id)}>
                             <DeleteForeverIcon style={{ color: `red` }} 
                             />
