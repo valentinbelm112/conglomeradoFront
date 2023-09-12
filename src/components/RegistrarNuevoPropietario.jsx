@@ -136,7 +136,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
                                 Registrar Nuevo Propietario</div>
                             <div className="container-form-upload-inscripcion-directivos">
 
-                                <div className="row">
+                                <div className="row" style={{width:'100%'}}>
                                     <div className="col-md-4">
                                         <div className="title-nuevo-propieatario-registro-formpadron-green  title-nuevo-propieatario-registro-formpadron-black-div">
                                             Codigo de Propietario
@@ -372,19 +372,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
 
 
                                         </input>
-                                        <br />
-                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            <label for="mostrar-modal1" id="searchInput-upload"> <PostAddIcon style={{ color: `green` }} /> </label>
-                                            Adjuntar Documento
-                                        </div>
-                                        <input
-                                            type="file"
-                                            name="file"
-                                            className="form-control upload-inscripcion-directivos"
-                                            id="mostrar-modal1"
-                                            onChange={handleInputChange}
-                                        >
-                                        </input>
+                                      
 
                                     </div>
                                 </div>

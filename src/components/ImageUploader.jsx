@@ -19,9 +19,7 @@ const ImageUploader = (props) => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [dbImage, setDbImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
   const [datosDocumento, setDatosDocumento] = useState({
     id_propietario: 0,
     ds_dni: "",
@@ -36,7 +34,7 @@ const ImageUploader = (props) => {
    await axios.get(`${serverURL}/Documento/propByDni/tipdoc/codAS?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
       .then(response => {
         // Handle the response data
-        console.log(response)
+        // console.log(response)
         setDbImage(response.data.des_link_documento);
       })
       .catch(error => {
@@ -46,10 +44,21 @@ const ImageUploader = (props) => {
   };
 
   useEffect(() => {
+ 
+    console.log(props.dataPropietario)
     // Verifica si props.documentoPropietario[0].des_link_documento existe
   if (props.documentoPropietario[0] && props.documentoPropietario[0].des_link_documento) {
     // Llama a la función para recuperar la imagen
     setDbImage(props.documentoPropietario[0].des_link_documento);
+  }
+
+  if(props.dataPropietario){
+    setDatosDocumento({
+      id_propietario: props.dataPropietario[0].id,
+      ds_dni: props.dataPropietario[0].des_codigo_Dni,
+      des_codigo_asoc: props.dataPropietario[0].codigoAsociacion,
+      des_tipo_doc: "DocProp"
+    })
   }
   }, []);
 
@@ -63,8 +72,6 @@ const ImageUploader = (props) => {
   };
 
  
-  
-
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: 'image/*', // Aceptar solo archivos de imagen
@@ -115,10 +122,10 @@ const ImageUploader = (props) => {
       console.log(uploadedImage)
       const formData = new FormData();
       formData.append('file_upload_pdf', uploadedImage);
-      formData.append('id_propietario',2)
-      formData.append('ds_dni', "71858727")
-      formData.append('des_codigo_asoc', "E00241")
-      formData.append('des_tipo_doc', "DocProp")
+      formData.append('id_propietario',datosDocumento.id_propietario)
+      formData.append('ds_dni',datosDocumento.ds_dni)
+      formData.append('des_codigo_asoc', datosDocumento.des_codigo_asoc)
+      formData.append('des_tipo_doc', datosDocumento.des_tipo_doc)
       
       await axios.post(`${serverURL}/Propietarios/Upload-info-propietario`, formData, {
         headers: {
@@ -126,7 +133,7 @@ const ImageUploader = (props) => {
         },
       })
         .then((response) => {
-          fetchImageFromDatabase("71858727","E00241","DocProp");
+          fetchImageFromDatabase(datosDocumento.ds_dni,datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
           // Maneja la respuesta del servidor si es necesario.
           console.log(response.data);
         })
@@ -177,7 +184,7 @@ const ImageUploader = (props) => {
       </div>
 
       {/* Columna de imagen recuperada de la base de datos */}
-      <div style={columnStyles}>
+      <div style={columnStylesUpload}>
         {dbImage && (
            <>
             <img
@@ -240,8 +247,19 @@ const columnStyles = {
   display: 'flex',
   flexDirection: 'column',
   height: '90%',
+
+
   
 };
+
+const columnStylesUpload= {
+  marginRight: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  height: '90%',
+  width: '100%',
+};
+
 
 const dropzoneStyles = {
   border: '2px dashed #ccc',
@@ -255,6 +273,7 @@ const dropzoneStyles = {
 
 const imageContainerStyles = {
   position: 'relative',
+  height: '85%',
 };
 
 const imageStyles = {

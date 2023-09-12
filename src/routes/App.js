@@ -6,7 +6,7 @@ import HomeConglomerado from "../pages/HomeConglomerado.jsx";
 import SidebarMenu from "../components/SidebarMenu.jsx";
 import ListPropietarios from "../pages/PadronPropietarios.jsx"
 import ListExpedientesPropietarios from "../pages/ListExpedientesPropietarios.jsx";
-import ConsejoDirectivoView from "../container/ConsejoDirectivo.jsx"
+import ConsejoDirectivoView from "../pages/ConsejoDirectivoView.jsx";
 import PadronSociosView from "../pages/PadronSociosView.jsx";
 import PadronInquilinoView from "../pages/PadronInquilinoView.jsx";
 import ListExpedientesSocios from "../pages/ListExpedienteSocios.jsx";
@@ -31,7 +31,6 @@ const App=()=>{
           <Route path="/expediente/:id/:id2" element={<ListExpedientesPropietarios/>} />
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
           <Route path="/expediente-socio/:id" element={<ListExpedientesSocios/>} />
-          <Route path="/ventana" element={<App2/>} />
           </Routes >
         </BrowserRouter>
         </AuthContext.Provider>

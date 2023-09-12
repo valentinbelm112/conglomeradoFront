@@ -9,9 +9,10 @@ const SearchBar = ({ onSearch }) => {
     setIsExpanded(!isExpanded);
   };
 
+  
    const handleInputChange = (event) => {
-
-    onSearch(event.target); // Pasar el evento target al componente padre
+    
+     onSearch(event.target); // Pasar el evento target al componente padre
   };
   return (
 

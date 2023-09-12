@@ -33,10 +33,6 @@ const ModeloProps5={
   titulo:"Contrato de alquiler"
 }
 
-
-
-
-
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -159,7 +155,7 @@ const ModeloProps5={
 
             <div className="container-info-personal">
               <div className="title-datos-personales-expediente-filter">
-                Deparatamento de Domicilio :
+                Departamento de Domicilio :
               </div>
 
               <div>###################</div>

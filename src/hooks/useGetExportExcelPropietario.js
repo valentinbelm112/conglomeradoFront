@@ -10,7 +10,7 @@ const UseGetExportPropietario = async (API) => {
     console.log(API)
         
     try{
-        const response = await axios.get(`${API}?Codigo_Asociacion=${codigo_asociacion}`); // Reemplaza con la URL real del servicio
+        const response = await axios.get(`${API}?Codigo_Asociacion=${codigo_asociacion}`); 
         
 
         const formattedData = response.data.map(item => {

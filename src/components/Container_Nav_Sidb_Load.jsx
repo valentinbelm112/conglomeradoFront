@@ -8,10 +8,9 @@ const Container_Nav_Sidb_Load=()=>{
     return(
         <>
         <NavbarConglomerado />
-         <div className="container-Sidebar-view-directivo">
-            
-              <SidebarMenu />
-              <Loader />
+         <div className="container-Sidebar-view-directivo">            
+            <SidebarMenu />
+           <Loader />
         </div>
         </>
 

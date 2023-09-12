@@ -121,6 +121,9 @@ const PadronPropietario = () => {
                 <div className="container-Sidebar-view-directivo">
                     <SidebarMenu />
                     <div className="conatiner-registro-padron-propietarios">
+                    <div className="title-Inquilinos-registrados">
+                        Propietarios Registrados
+                        </div>
 
                         <div className="row container-busqueda-upload-documentos" style={{ marginTop: `10px` }}>
                             <div className="col-md-4 search-register-propietarios">
@@ -192,7 +195,7 @@ const PadronPropietario = () => {
                                     <table class="table table-bordered table-condensed table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             Codigo Propietario
@@ -203,7 +206,7 @@ const PadronPropietario = () => {
                                                     </div>
 
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             Apellidos Completos
@@ -212,8 +215,8 @@ const PadronPropietario = () => {
                                                             <FontAwesomeIcon icon={faArrowDownAZ} style={{ color: `red` }} />
                                                         </button>
                                                     </div></th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Nombres Completos</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Nombres Completos</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             DNI
@@ -223,12 +226,11 @@ const PadronPropietario = () => {
                                                         </button>
                                                     </div>
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Nª Partida</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Oficina Principal</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Tipo Dominio</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Dirección</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Estado</th>
-
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Nª Partida</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Oficina Principal</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Tipo Dominio</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Dirección</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -239,11 +241,11 @@ const PadronPropietario = () => {
                                                         <td>{propietario.des_Apellidos}</td>
                                                         <td>{propietario.des_nombres}</td>
                                                         <td>
-                                                            <Link to={`/expediente/${propietario.des_codigo_Dni}/${propietario.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                                                {propietario.des_codigo_Dni}
+                                                            <Link to={`/expediente/${propietario.desDni}/${propietario.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                                {propietario.desDni}
                                                             </Link>
                                                         </td>
-                                                        <td>{propietario.inmuebleEntities[0].num_partida_registral}</td>
+                                                        <td>{propietario.inmuebleEntities[0].numPartida}</td>
                                                         <td>{propietario.inmuebleEntities[0].des_oficina_registral}</td>
                                                         <td>{propietario.inmuebleEntities[0].des_tipo_dominio}</td>
                                                         <td>{propietario.inmuebleEntities[0].des_direccion}</td>

@@ -25,17 +25,18 @@
 }
 
 .tilte-inscripcion-registro-padron-propietarios{
-    font-family: "Roboto", sans-serif;
+    font-family: "Playfair Display", serif;
     color: rgb(33, 33, 33);
     text-align: center;
     font-weight: bold;
-     font-size: 17px;
+     font-size: 18px;
     ///font-size: 12px;
     //font-weight: bold;
     padding: 1%;
-    background: linear-gradient(to bottom right, #edbb6b, #efd27c);
+    background: linear-gradient(to left, #0f5694 0, #1e5d88 25%, #3a87b3 50%, #30a3bb 75%, #63f2f5 100%);
     border-radius: 5px;
     height: 5%;
+    color: white;
 }
 
 .tilte-fecha-registro-directivo{
