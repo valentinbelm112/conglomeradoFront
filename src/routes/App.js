@@ -23,7 +23,6 @@ const App=()=>{
           
           <Route path="/login" element={<Auth/>} />
           <Route path="/home-conglomerado" element={<HomeConglomerado/>} />
-          <Route path="/perfil-socios" element={<PerfilSociosConglomerados/>} />
           <Route path="/register-directivos" element={<ConsejoDirectivoView/>} />
           <Route path="/sidebar" element={<SidebarMenu/>} />
           <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
@@ -31,6 +30,7 @@ const App=()=>{
           <Route path="/expediente/:id/:id2" element={<ListExpedientesPropietarios/>} />
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
           <Route path="/expediente-socio/:id" element={<ListExpedientesSocios/>} />
+          <Route path="/cgm/perfil" element={<PerfilSociosConglomerados/>} />
           <Route path="/ventana" element={<App2/>} />
           </Routes >
         </BrowserRouter>
