@@ -98,7 +98,7 @@ const handleClickCloseFrom = () => {
 
           <form action="" className="login-form" onSubmit={enviarDatos}>
           <div className="tilte-edit-registro-directivo">
-                                Registrar Nuevo Propietario</div>
+                                Editar Registro</div>
             <div className="nombre-edit-directivo">
               <div className="tilte-datos-edit-directivo">
                 Nombres:

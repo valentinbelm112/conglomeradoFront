@@ -54,9 +54,9 @@ const ImageUploader = (props) => {
 
   if(props.dataPropietario){
     setDatosDocumento({
-      id_propietario: props.dataPropietario[0].id,
-      ds_dni: props.dataPropietario[0].des_codigo_Dni,
-      des_codigo_asoc: props.dataPropietario[0].codigoAsociacion,
+      id_propietario: props.dataPropietario.id,
+      ds_dni: props.dataPropietario.desDni,
+      des_codigo_asoc: props.dataPropietario.codigoAsociacion,
       des_tipo_doc: "DocProp"
     })
   }

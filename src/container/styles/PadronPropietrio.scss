@@ -3,9 +3,18 @@
     font-size: 16px;
 }
 
+.container-list-table-registro-propietarios{
+
+}
+.upload-documents-propietarios{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .outer-table-registro-propietario {
   overflow-y: auto;
-  height: 60vh;
+  height: 50vh;
 }
 
 .outer-table-registro-propietario {
@@ -14,6 +23,7 @@
 }
 
 .outer-table-registro-propietario th {
+
   text-align: left;
   top: 0;
   position: sticky;
@@ -177,8 +187,9 @@
     align-items: center;
     width: 50px;
     height: 50px;
+    
     border-radius: 25px; /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom right, #194b05, #10d677);
+    background-image: linear-gradient(to bottom, #219653, #27AE60);
     color: white;
     border: none;
     cursor: pointer;
@@ -187,7 +198,7 @@
     white-space: nowrap;
 		&:hover {
 		  width: 150px; /* Ancho automático */
-      background-color: #0056b3;
+      background-color: #3693af;
         .button-text {
         
           display: inline-block;
@@ -246,7 +257,7 @@
   width: 50px;
   height: 50px;
   border-radius: 25px; /* Mitad del tamaño del botón */
-  background: linear-gradient(to bottom right, #076024, #00b65f);
+  background: linear-gradient(to right, #3498DB, #eb9045);
   color: white;
   border: none;
   cursor: pointer;
@@ -255,7 +266,7 @@
   white-space: nowrap;
   &:hover {
     width: 150px; /* Ancho automático */
-    background-color: #076024;
+    background-color: #3693af;
       .button-text {
       
         display: inline-block;
@@ -423,3 +434,58 @@ p {
 }
    
 }
+@media  screen and (max-width: 1391px){
+  .conatiner-registro-padron-propietarios {
+    width: 90.5%;
+    margin-left: 4%;
+}
+
+/* Media query para pantallas medianas */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .conatiner-registro-padron-propietarios {
+    width: 68.5%;
+  
+}
+
+
+  /* Otros estilos aquí */
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .conatiner-registro-padron-propietarios {
+    width: 91.5%;
+    margin-left: 4%;
+}
+
+}
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 400px) {
+  .conatiner-registro-padron-propietarios {
+    margin-top: 5%;
+    width: 91.5%;
+    margin-left: 4%;
+}
+
+}
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 200px) {
+  .conatiner-registro-padron-propietarios {
+    width: 80.5%;
+    margin-left: 4%;
+}
+
+}
+/* Media query para pantallas grandes */
+@media screen and (min-width: 1025px) {
+  .conatiner-registro-padron-propietarios {
+    width: 73.5%;
+    margin-left: 4%;
+}
+
+
+  /* Otros estilos aquí */
+}
+}
+
+

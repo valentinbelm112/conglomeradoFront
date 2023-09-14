@@ -6,26 +6,50 @@ import ModalImagesConglomerado from "./ModalImagesConglomerado";
 import ImageUploader from "./ImageUploader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
+import { South } from "@mui/icons-material";
+import { useNavigate } from 'react-router-dom';
 const ExpedientePropietario = (props) => {
   const [selectedValue, setSelectedValue] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [expedienteSelect, setExpedienteSelect] = useState(null);
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
-  const handleOptionSelectConyugue = () => {
+  const [coPropietarios,setCoPropietarios] = useState(null);
+  const [opcionSeleccionada, setOpcionSeleccionada] = useState('opcion1'); 
+
+  const navigate = useNavigate();
+
+  const handleOptionSelectConyugue = (event) => {
+    setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expedienteCony.data);
   };
 
-  const handleOptionSelectTitular = () => {
+
+  const handleOptionSelectTitular = (event) => {
+    setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expediente.data);
   };
 
   useEffect(() => {
-    if (props.padron.data.inmuebleEntities[0]) {
+
+    if (props.padron.data.inmuebleEntities.length > 0) {
       setInmuebleSelect(props.padron.data.inmuebleEntities[0]);
     }
     setExpedienteSelect(props.expediente.data);
-    console.log(props.expediente.data);
+
+
+    if (props.propietario.length > 0) {
+      const foundCopropietario = props.propietario[0].propietario.filter(
+        (element) =>element.des_nombres !== props.nombreExpedienteProp
+      );
+      setCoPropietarios(foundCopropietario);
+      console.log(foundCopropietario)
+    }
+    
+   
+   
+    console.log(props);
   }, []);
+
   const ModeloProps1 = {
     titulo: "Documento de compra-venta",
   };
@@ -34,9 +58,21 @@ const ExpedientePropietario = (props) => {
     setModalIsOpen(true);
   };
 
+
   const closeModal = () => {
     setModalIsOpen(false);
   };
+
+  const ChangeRouter = (dni,id) => {
+    console.log(dni + "Clic")
+    // Actualizar los valores del DNI y el ID aquí
+  
+    // Actualizar la URL
+    navigate(`/expediente/${dni}/${id}`);
+    window.location.reload();
+    //history.push(`/expediente/${dni}/${id}`);
+  };
+
 
   function capitalizeFirstLetter(str) {
     return str?.charAt(0).toUpperCase() + str?.slice(1).toLowerCase();
@@ -51,6 +87,23 @@ const ExpedientePropietario = (props) => {
     console.log(inmuebleEncontrado);
     setSelectedValue(event.target.value);
     setInmuebleSelect(inmuebleEncontrado);
+    
+    const foundCopropietario = props.propietario.filter(
+      (element) =>element.numPartida===event.target.value
+    )
+    
+    if(foundCopropietario.length>0){
+      console.log(foundCopropietario[0].propietario)
+      const coPropietarioDatos=foundCopropietario[0].propietario.filter(
+        (element) =>element.des_nombres !== props?.nombreExpedienteProp 
+      );
+  
+      console.log(coPropietarioDatos)
+      setCoPropietarios(coPropietarioDatos);
+
+    }
+  
+
   };
   const changeStado = () => {
     props.cambiarEstado();
@@ -66,16 +119,18 @@ const ExpedientePropietario = (props) => {
           <div className="Partida-registral-propietario-title">
             Partidas Registral del propietario:
           </div>
-          <div className="Partida-registral-propietario-title-p">
-            {props.padron.data.inmuebleEntities[0].numPartida}
-          </div>
-
+          {props.partidasRegistrales.map((item)=>(
+             <div className="Partida-registral-propietario-title-p">
+             {item}
+             </div>
+          ))}
           <div className="container-expediente-radio-button">
             <input
               type="radio"
               id="contactChoice1"
               name="contact"
-              value="email"
+              value="opcion1"
+              checked={opcionSeleccionada === 'opcion1'}
               onChange={handleOptionSelectTitular}
             />
             <label
@@ -88,7 +143,8 @@ const ExpedientePropietario = (props) => {
               type="radio"
               id="contactChoice2"
               name="contact"
-              value="phone"
+              value="opcion2"
+              checked={opcionSeleccionada === 'opcion2'}
               onChange={handleOptionSelectConyugue}
             />
             <label
@@ -257,18 +313,18 @@ const ExpedientePropietario = (props) => {
           <div className="container-partida-filter-expediente">
             <div>Selecionar Partida a Revisar</div>
             <div className="container-combo-socio">
-            <select
-              id="myCombobox-socio"
-              value={selectedValue}
-              onChange={handleChange}
-            >
-            
-              {props.padron.data.inmuebleEntities.map((inmueble) => (
-                <option key={inmueble.id} value={inmueble.numPartida}>
-                  {inmueble.numPartida}
-                </option>
-              ))}
-            </select>
+              <select
+                id="myCombobox-socio"
+                value={selectedValue}
+                onChange={handleChange}
+              >
+
+                {props.padron.data.inmuebleEntities.map((inmueble) => (
+                  <option key={inmueble.id} value={inmueble.numPartida}>
+                    {inmueble.numPartida}
+                  </option>
+                ))}
+              </select>
             </div>
             <p>Seleccionaste: {selectedValue}</p>
           </div>
@@ -320,28 +376,27 @@ const ExpedientePropietario = (props) => {
               <div className="title-direccion-propietarios-p">
                 {inmuebleSelect?.des_direccion}
               </div>
-              <div className="title-co-conyugue-propietario">
-                Co-Propietario / DNI / Cónyugue del propietario
-              </div>
-              <div className="title-co-conyugue-propietario-p">
-                {props.propietario.map(
+              <table className="tabla-co-propietario-datos">
+                <tr>
+                  <th className="title-co-propietarios-list">Co-Propietario</th>
+                  <th className="title-co-propietarios-dni">DNI</th>
+                  <th className="title-co-propietarios-dni-conyugue">Cónyuge del propietario</th>
+                </tr>
+                {coPropietarios?.length > 0 && (coPropietarios.map(
                   (elemento, index) =>
-                    index >= 1 && (
-                      <div className="informacion-inmueble-propietario">
-                        <div key={index}>{elemento.des_nombres} </div>
-                        <Link
-                          to={`/expediente/${elemento.des_codigo_Dni}/${elemento.id}`}
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          <div key={index} onClick={changeStado}>
-                            {elemento.des_codigo_Dni}{" "}
-                          </div>
-                        </Link>
-                        <div key={index}>{elemento.des_dni_conyugue} </div>
-                      </div>
-                    )
-                )}
-              </div>
+                   
+                      <tr className="nombre-co-propietario">
+                        <td  key={index}>{elemento.des_nombres} </td>
+                       
+                          <td className="dni-co-propietario" onClick={() => ChangeRouter(elemento.desDni,elemento.id)} key={index} >
+                            {elemento.desDni}{" "}
+                          </td>
+                       
+                        <td key={index}>{elemento.des_dni_conyugue} </td>
+                      </tr>
+                   
+                ))}
+              </table>
             </div>
             <div className="col-5">
               <div className="title-fecha-baja">Fecha baja</div>
@@ -374,7 +429,7 @@ const ExpedientePropietario = (props) => {
                       documentoPropietario={
                         props.padron.data.documentoPropietarioEntities
                       }
-                      dataPropietario={props.propietario}
+                      dataPropietario={ props.padron.data}
                     />,
                   ]}
                 />

@@ -8,7 +8,8 @@ export const useGetExpedientePropietario = (API, id, id2) => {
   const [dataDetallePropietario, SetDataDetallePropietario] = useState(null);
   const [propietariosPartida, SetPropietariosPartida] = useState(null);
   const [expedienteConyugue, SetExpedienteConyugue] = useState(null);
-  const codigo_asociacion = "E00241";
+  const [coPropietario, SetCoPropietario] = useState(null);
+  const[partidasRegistrales,setPartidasRegistrales] = useState(null);
 
   const doSomething = async () => {
     const padronPropietariosDetalle = await axios.get(
@@ -16,24 +17,41 @@ export const useGetExpedientePropietario = (API, id, id2) => {
     );
 
     
+
+   //capturar el nombre del  propeitario
+
+    const NombrePropietario=padronPropietariosDetalle.data.des_nombres;
+    console.log(NombrePropietario)
+
     const found = padronPropietariosDetalle.data.inmuebleEntities.map(
-      (element) => element.numPartida
+      (element) =>element.numPartida
     );
 
+    console.log(found)
     const propietariosConPartida = [];
 
     padronPropietariosDetalle.data.inmuebleEntities.forEach((inmueble) => {
       if (found.includes(inmueble.numPartida)) {
+        console.log(inmueble.numPartida)
         const propietarios = inmueble.padronPropietariosentity;
-        propietariosConPartida.push(...propietarios);
+        const PropietariosWihtPartidaR={
+          numPartida:inmueble.numPartida,
+          propietario:propietarios
+        }
+      
+        propietariosConPartida.push(PropietariosWihtPartidaR);
       }
     });
 
+
+   //console.log(propietariosConPartida)
     SetPropietariosPartida(propietariosConPartida);
     SetDataDetallePropietario(padronPropietariosDetalle);
-
+    SetCoPropietario(NombrePropietario)
+    setPartidasRegistrales(found)
     //consultar si existen expedientes
 
+    
     const existeCliente = await axios.get(
       `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.desDni}`
     );
@@ -175,5 +193,7 @@ export const useGetExpedientePropietario = (API, id, id2) => {
     dataDetallePropietario,
     propietariosPartida,
     expedienteConyugue,
+    coPropietario,
+    partidasRegistrales
   };
 };

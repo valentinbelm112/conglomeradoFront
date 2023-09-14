@@ -21,9 +21,8 @@ import FormDarBajaPropietario from "../components/FormDarBajaPropietario";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import FormInportPropietario from "../components/FormImportarPropietarios";
-import ArticleIcon from '@mui/icons-material/Article';
 import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
-import { South } from "@mui/icons-material";
+import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 
 const PadronPropietario = () => {
     const [refrescar, setRefrescar] = useState([]);
@@ -31,35 +30,30 @@ const PadronPropietario = () => {
     const [sortOrder, setSortOrder] = useState('asc');
     const [pdfFile, setPdfFile] = useState(null);
 
+    const { isLoading, dataPropietario } = UseGetPadronPropietario(`${serverURL}/Propietarios/Obtener`, setRefrescar)
+    console.log(dataPropietario);
 
-
-      const handleFile = (e) => {
-  
-        let selectedFile = e.target.files[0];
-    
-        const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
-        reader.onload = async () => {
-          const base64Image = reader.result.split(',')[1];
-          setPdfFile(base64Image);
-        }
-        
-       
-    
-    
+    const DeleteRegisterConsejo=async(id)=>{
+        console.log(id + "identificador")
+        //await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
+       // const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
+       //setRefrescar(response.data)
       }
+    
+    
 
-    // Función para cambiar el orden de clasificación
+
     const ExportarPropietario = () => {
 
-        UseGetExportPropietario(`${serverURL}/Propietarios/Obtener`);
+        UseGetExportPropietario(`${serverURL}/Propietarios/export-propietarios`);
 
 
     }
 
     const handleSearch = (e) => {
-        console.log('Valor del input:', e.value);
-        setSearch(refrescar.filter(item => item.des_codigo_Dni.includes(e.value)));
+        const searchText = e.value.toUpperCase(); // Convert search input to uppercase
+        console.log('Valor del input:', searchText);
+        setSearch(refrescar.filter(item => item.desDni.includes(e.value) || item.des_Apellidos.toUpperCase().includes(searchText) || item.des_nombres.toUpperCase().includes(searchText)));
         console.log("hola")
     };
 
@@ -68,7 +62,7 @@ const PadronPropietario = () => {
         const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
         setSortOrder(newOrder);
         const sortedPadronPropietario = [...refrescar].sort((a, b) =>
-            newOrder === 'asc' ? a.des_codigo_Dni.localeCompare(b.des_codigo_Dni) : b.des_codigo_Dni.localeCompare(a.des_codigo_Dni)
+            newOrder === 'asc' ? a.desDni.localeCompare(b.desDni) : b.desDni.localeCompare(a.desDni)
         );
         setRefrescar(sortedPadronPropietario);
     };
@@ -92,7 +86,7 @@ const PadronPropietario = () => {
     }
 
 
-    const { isLoading, dataPropietario } = UseGetPadronPropietario(`${serverURL}/Propietarios/Obtener`, setRefrescar)
+    
 
     const handleClickOpenForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
@@ -104,7 +98,7 @@ const PadronPropietario = () => {
         parrafo.style.top = '95px'
     };
 
-   
+
 
     if (isLoading) {
 
@@ -123,12 +117,12 @@ const PadronPropietario = () => {
                 <div className="container-Sidebar-view-directivo">
                     <SidebarMenu />
                     <div className="conatiner-registro-padron-propietarios">
-                    <div className="title-Inquilinos-registrados">
-                        Propietarios Registrados
+                        <div className="title-Inquilinos-registrados">
+                            Propietarios Registrados
                         </div>
 
                         <div className="row container-busqueda-upload-documentos" style={{ marginTop: `10px` }}>
-                            <div className="col-md-4 search-register-propietarios">
+                            <div className="col-md-3 search-register-propietarios">
 
                                 <div className="col-md-4 search-register-socios">
 
@@ -137,11 +131,8 @@ const PadronPropietario = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-8 upload-documents-propietarios">
-                                <div>
-                                    <input id="mostrar-form-documento-propietarios-upload" name="modal" type="radio" />
-                                    <label for="mostrar-form-documento-propietarios-upload"> <ArticleIcon /><span className="button-text">Documento del Padron de Propietarios </span> </label>
-                                </div>
+                            <div className="col-md-7 upload-documents-propietarios">
+                                
                                 <div className="row">
                                     <div className="col-auto registrar-nuevo-propietarios-add-delete-export-import">
                                         <div>
@@ -190,7 +181,22 @@ const PadronPropietario = () => {
 
 
                             </div>
-                        </div>
+                            <div className=" col-md-2 container-title-show-iamgen-ins">
+                            <input
+                 
+                                id="mostrar-modal-documento-socio"
+                                name="modal"
+                                type="radio"
+                                />
+
+                                <label for="mostrar-modal-documento-socio">
+                                {" "}
+                                <FontAwesomeIcon icon={faFolderOpen} />{" "}
+                                </label>
+
+                
+                  </div>
+                </div>
                         <div class="card-body">
                             <div class="outer-table-registro-propietario ">
                                 <div className="table-responsive container-list-table-registro-propietarios" style={{ marginTop: `13px` }}>
@@ -228,18 +234,19 @@ const PadronPropietario = () => {
                                                         </button>
                                                     </div>
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Nª Partida</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Oficina Principal</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Tipo Dominio</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Dirección</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Estado</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px' }}>Acción</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Nª Partida</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Oficina Principal</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Tipo Dominio</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Dirección</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Estado</th>
+                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
                                                 (search.length === 0 ? refrescar : search).map((propietario) => (
-                                                    <tr>
+                                                    propietario.inmuebleEntities.map((indexInmueble)=>(
+                                                        <tr>
                                                         <td>{propietario.codigoPropietario}</td>
                                                         <td>{propietario.des_Apellidos}</td>
                                                         <td>{propietario.des_nombres}</td>
@@ -248,28 +255,33 @@ const PadronPropietario = () => {
                                                                 {propietario.desDni}
                                                             </Link>
                                                         </td>
-                                                        <td>{propietario.inmuebleEntities[0].numPartida}</td>
-                                                        <td>{propietario.inmuebleEntities[0].des_oficina_registral}</td>
-                                                        <td>{propietario.inmuebleEntities[0].des_tipo_dominio}</td>
-                                                        <td>{propietario.inmuebleEntities[0].des_direccion}</td>
+                                                        <td>{indexInmueble.numPartida}</td>
+                                                        <td>{indexInmueble.des_oficina_registral}</td>
+                                                        <td>{indexInmueble.des_tipo_dominio}</td>
+                                                        <td>{indexInmueble.des_direccion}</td>
                                                         <td>{propietario.des_estado}</td>
                                                         <td>
-                                                        <div className="table-column-gestion-info-propietario">
-                                                       
-                                                        <button className="btn-gestion-delete-info-propietario ">
-                                                            <DeleteForeverIcon style={{ color: `red` }} 
-                                                            />
-                                                        </button>
+                                                            <div className="table-column-gestion-info-propietario">
 
-                                                        <button className="btn-gestion-edit-info-directivo">
-                                                        <input id="mostrar-modal-editar" name="modal" type="radio" />
+                                                                <button className="btn-gestion-delete-info-propietario " onClick={() =>DeleteRegisterConsejo()}>
+                                                                    <DeleteForeverIcon style={{ color: `red` }}
+                                                                    />
+                                                                </button>
 
-                                                            <label  for="mostrar-modal-editar" >  <EditIcon color="primary"  /> </label>
-                                                        </button>
-                                                                            
-                                                        </div>
-                      </td>
+                                                                <button className="btn-gestion-edit-info-directivo">
+                                                                    <input id="mostrar-modal-editar" name="modal" type="radio" />
+
+                                                                    <label for="mostrar-modal-editar" >  <EditIcon color="primary" /> </label>
+                                                                </button>
+
+                                                            </div>
+                                                        </td>
                                                     </tr>
+                                                    )
+
+                                                    )
+
+                                                   
 
                                                 ))
                                             }

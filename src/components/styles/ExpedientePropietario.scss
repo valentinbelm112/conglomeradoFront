@@ -84,6 +84,20 @@
     font-weight: bold; 
 }
 
+.title-co-propietarios-list{
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+}
+.title-co-propietarios-dni{
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+}
+
+.title-co-propietarios-dni-conyugue{
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+}
+
 .title-direccion-propietarios{
     font-family: "Roboto", sans-serif;
     font-weight: bold; 
@@ -111,6 +125,31 @@
     font-size: 30px;  
 }
 
+
+.tabla-co-propietario-datos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-co-propietario-datos th, .tabla-co-propietario-datos td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+.nombre-co-propietario {
+    width: 35%;
+}
+
+.dni-co-propietario {
+    width: 15%;
+}
+
+.conyuge-co-propietario {
+    width: 50%;
+}
 
 
 
