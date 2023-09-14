@@ -1,28 +1,30 @@
+import NavbarConglomerado from "../components/NavbarConglomerados";
+import SidebarMenu from "../components/SidebarMenu";
 import "./styles/PerfilConglomerado.scss"
 const PerfilSociosConglomerados=()=>{
     
     
     return(
-        <div className="container">
-      <div className="row">
+      <div className="navbar-sidebar-directivos">
+      <NavbarConglomerado />
+        <div className="container-Sidebar-view-directivo">
+              <SidebarMenu />
+              <div className="container" style={{zIndex:'1'}}>
+      <div className="row"  style={{paddingTop:'10px' ,}}>
         {/* Columna 1 */}
-        <div className="col-md-6">
+        <div className="col-md-5">
           <div className="card">
-            <div className="card-header bg-primary text-white text-center">
+            <div className="card-header  text-white text-center" style={{backgroundColor:'#3498db',height:'150px'}}>
               <img
-                src="/sgdfd/mat/resources/limitless/global_assets/images/avatar-set/man-2.png"
+                src="https://media.licdn.com/dms/image/D4D03AQHf79vVLS5CMw/profile-displayphoto-shrink_800_800/0/1667133462647?e=1700092800&v=beta&t=eLb8D31vTBqIuc5XFvl71dL1pFoTFjg_Ukl6ySQWkh8"
                 alt="Foto de perfil"
                 className="img-fluid rounded-circle"
-                width="150"
+                 style={{height:'100%',width:'30%'}}
               />
             </div>
             <div className="card-body">
-              <h5 className="card-title">Datos de Perfil</h5>
-              <p>Tipo Perfil: ALUMNO</p>
-              <p>Código: 17200037</p>
-              <p>Nombre: ANTÚNEZ GONZÁLES, VALENTÍN BELMUT</p>
-              <p>Celular: 940472373</p>
-              <p>Local: INGENIERÍA DE SISTEMAS E INFORMÁTICA</p>
+              <h5 className="card-title" style={{color: '#428bca'}}>NOMBRES</h5>
+              <p>ANTÚNEZ GONZÁLES, VALENTÍN BELMUT</p>
             </div>
           </div>
         </div>
@@ -31,25 +33,28 @@ const PerfilSociosConglomerados=()=>{
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Datos Personales</h5>
-              <p>Tipo de Documento:</p>
-              <p>Número de Documento:</p>
-              <p>Nombres:</p>
-              <p>Apellido Paterno:</p>
-              <p>Apellido Materno:</p>
-              <p>Correo Institucional:</p>
-              <p>Correo Personal:</p>
-              <p>Celular:</p>
-              <p>Teléfono Fijo:</p>
-              <p>Sexo:</p>
-              <p>Estado Civil:</p>
-              <p>Fecha de Nacimiento:</p>
-              <p>Dirección:</p>
+              <h5 className="card-title" style={{color: '#428bca'}}>DATOS PERSONALES</h5>
+              <p>DNI:</p>
+              <p>ESTADO CIVIL:</p>
+              <p>SEXO:</p>
+              <p>FECHA DE NACIMIENTO:</p>
+              <p>LUGAR DE NACIMIENTO:</p>
+              <p>TELÉFONO:</p>
+              <p>CELULAR:</p>
+              <p>DOMICILIO:</p>
+              <p>ESTADO CIVIL:</p>
+              <p>DOMICILIO:</p>
+              <p>DIRECCIÓN:</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+        </div>
+        
+        
+        </div>
+       
     );
 }
 
