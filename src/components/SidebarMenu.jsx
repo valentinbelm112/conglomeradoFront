@@ -13,12 +13,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import FeedIcon from '@mui/icons-material/Feed';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 
-const SidebarMenu = () => {
+const SidebarMenu = ({setTogle}) => {
     const [open, setOpen] = useState(true);
 
     // for collpsing sidebar
     const handleToggle = () => {
         setOpen(!open);
+        setTogle(!open)
     };
 
     const sideContainerVariants = {
@@ -54,7 +55,7 @@ const SidebarMenu = () => {
         },
     };
     return (
-        <div className={open ? "App" : "Appfalse"}>
+        <div className={open ? "App" : "Appfalse"} style={{zIndex: '99'}}>
             
             <motion.div
                 data-open={open}

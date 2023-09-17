@@ -3,8 +3,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 
-const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
+const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) => {
    
+    const [telefonoValido, setTelefonoValido] = useState(true);
+    const [pAccionesValido, setPAccionesValido] = useState(true);
+    const [areaValido, setAreaValido] = useState(true);
+    const [dniValido, setDniValido] = useState(true);
+    const [dniCValido, setDniCValido] = useState(true);
+
     const [datos, setDatos] = useState({
         des_Apellidos: "",
         des_codigo_Dni: "",
@@ -34,9 +40,38 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
         
     });
 
+    //Validar telefono 
+    const validateTelefono = (telefono) => {
+        // Elimina espacios en blanco y guiones si es necesario
+        const telefonoLimpio = telefono.replace(/\s+/g, '').replace(/-/g, '');
+      
+        // Verifica si el número de teléfono tiene exactamente 9 dígitos
+        return /^\d{9}$/.test(telefonoLimpio);
+      };
+
+     //Validar telefono 
+     const validateDNI = (dni) => {
+        // Elimina espacios en blanco y guiones si es necesario
+        const numeroRegex = /^[0-9]{8}$/;
+        return numeroRegex.test(dni);
+      };
+
+   const validarPorcentajeAcciones = (valor) => {
+        // Expresión regular para verificar números decimales en el rango de 1 a 100
+        const numeroRegex = /^(100(\.0{1,2})?|[1-9]?\d(\.\d{1,2})?)$/;
+        return numeroRegex.test(valor);
+      };
+
+      const validarNumeroDecimal = (cadena) => {
+        const regex = /^\d+(\.\d+)?$/;
+        return regex.test(cadena);
+      };
+
+
     const handleClickCloseForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
-        parrafo.style.top = '-100vh'
+        parrafo.style.top = '-586vh'
+        setClickR(!clickR)
       };
 
     const enviarDatos = async (event) => {
@@ -79,7 +114,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
                 RefrescarInformacion();
              // toast.success("Registro exitoso del consejo directivo");
               const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
-              parrafo.style.top = '-100vh'
+              parrafo.style.top = '-586vh'
     
             }
     
@@ -103,6 +138,9 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
             [name]: value
 
           }));
+          name === 'num_telefono'&&setTelefonoValido(validateTelefono(value) );
+          name === 'des_codigo_Dni'&&setDniValido(validateDNI(value));
+          name === 'des_dni_conyugue'&&setDniCValido(validateDNI(value));
         } else {
             setDatos((prevData) => ({
             ...prevData,
@@ -113,14 +151,18 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
                 [name]: value
 
               }
+
             ]
           }));
+          name === 'num_acciones_derechos'&&setPAccionesValido(validarPorcentajeAcciones(value) );
+          name === 'num_area'&&setAreaValido(validarNumeroDecimal(value) );
         }
+
       };
 
     return (
         <>
-            <div id="modal1" >
+            <div id={clickR?'modal1':'modal1-sombra-form-Prop'} >
                 <div className="container-registro-padron-propietario">
 
                     <div className="form form-registro-padron-propietario">
@@ -154,13 +196,15 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
 
                                         </input>
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            DNI
+                                            DNI   {!validateDNI && (
+                                                <span className="error-message-from-prop ">*No válido</span>
+                                                )}
                                         </div>
                                         <input
                                             type="text"
                                             name="des_codigo_Dni"
                                             value={datos.des_codigo_Dni}
-                                            className="form-control upload-inscripcion-directivos"
+                                            className={!dniValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
                                         >
 
@@ -214,18 +258,20 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
                                             Datos de contacto
                                         </div>
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            Número de telefono
+                                            Nª Telefono   {!telefonoValido && (
+                                                <span className="error-message-from-prop ">*No válido</span>
+                                                )}
                                         </div>
                                         <input
                                             type="number"
                                             name="num_telefono"
                                             value={datos.inmuebleEntities[0].num_telefono}
-                                            className="form-control upload-inscripcion-directivos"
+                                            className={!telefonoValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
-                                        >
+                                        />
+                                     
 
-
-                                        </input>
+                                        
                                     </div>
 
                                     <div className="col-md-4">
@@ -272,13 +318,15 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
 
                                         </input>
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            %Acciones y Derechos
+                                            %Acciones y Derechos{!pAccionesValido && (
+                                                <span className="error-message-from-prop ">*No válido</span>
+                                                )}
                                         </div>
                                         <input
                                             type="text"
                     
                                             name="num_acciones_derechos"
-                                            className="form-control upload-inscripcion-directivos"
+                                            className={!pAccionesValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             value={datos.inmuebleEntities[0].num_acciones_derechos}
                                             onChange={handleInputChange}
                                         >
@@ -303,7 +351,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
                                             Correo Electrónico
                                         </div>
                                         <input
-                                            type="text"
+                                            type="email"
                                             name="des_correo"
                                             value={datos.inmuebleEntities[0].des_correo}
                                             className="form-control upload-inscripcion-directivos"
@@ -330,13 +378,15 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
                                         </input>
 
                                         <div className="title-nuevo-propieatario-registro-formpadron-red title-nuevo-propieatario-registro-formpadron-black-div">
-                                            DNI del cónyugue
+                                            DNI del cónyugue {!dniCValido && (
+                                                <span className="error-message-from-prop ">*No válido</span>
+                                                )}
                                         </div>
                                         <input
                                             type="text"
                                             name="des_dni_conyugue"
                                             value={datos.des_dni_conyugue}
-                                            className="form-control upload-inscripcion-directivos"
+                                            className={!dniCValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
                                         >
 
@@ -346,13 +396,15 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion }) => {
                                         </input>
                                         <br />
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            Área(m2)
+                                            Área(m2) {!areaValido && (
+                                                <span className="error-message-from-prop ">*No válido</span>
+                                                )}
                                         </div>
                                         <input
                                             type="text"
                                             name="num_area"
                                             value={datos.inmuebleEntities[0].num_area}
-                                            className="form-control upload-inscripcion-directivos"
+                                            className={!areaValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
                                         >
 

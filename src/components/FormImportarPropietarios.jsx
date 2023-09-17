@@ -13,7 +13,7 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
 
     const handleClickCloseForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
-        parrafo.style.top = '-100vh'
+        parrafo.style.top = '-586vh'
     };
 
 
@@ -60,7 +60,7 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
                     RefrescarInformacion();
                      toast.success("Registro exitoso del consejo directivo");
                     const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-importar-excel');
-                    parrafo.style.top = '-100vh'
+                    parrafo.style.top = '-586vh'
 
                 }
 

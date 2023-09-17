@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -23,12 +23,14 @@ import { Link } from 'react-router-dom';
 import FormInportPropietario from "../components/FormImportarPropietarios";
 import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
-
 const PadronPropietario = () => {
+    const[open,setOpen]=useState(false);
+    const[openElement,setOpenElement]=useState(false);
     const [refrescar, setRefrescar] = useState([]);
     const [search, setSearch] = useState([]);
     const [sortOrder, setSortOrder] = useState('asc');
-    const [pdfFile, setPdfFile] = useState(null);
+    const [togle, setTogle] = useState(true);
+    const [clickR, setClickR] = useState(true);
 
     const { isLoading, dataPropietario } = UseGetPadronPropietario(`${serverURL}/Propietarios/Obtener`, setRefrescar)
     console.log(dataPropietario);
@@ -40,8 +42,30 @@ const PadronPropietario = () => {
        //setRefrescar(response.data)
       }
     
+      const Estado=()=>{
+        console.log("HHHH")
+        setOpen(!open)
+       }
     
+      useEffect(() => {
+        // Función para verificar el tamaño de la pantalla y actualizar el estado
+        const checkScreenSize = () => {
+            setOpen(window.innerWidth >767); // Cambiar a true si el ancho de la pantalla es menor a 768px
+           setOpenElement(window.innerWidth >767)
+       
+        };
 
+       
+    
+        // Verificar el tamaño de la pantalla al cargar el componente y cada vez que cambie el tamaño de la ventana
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+    
+        // Limpiar el event listener al desmontar el componente
+        return () => {
+          window.removeEventListener('resize', checkScreenSize);
+        };
+      }, []);
 
     const ExportarPropietario = () => {
 
@@ -91,6 +115,7 @@ const PadronPropietario = () => {
     const handleClickOpenForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
         parrafo.style.top = '95px'
+        setClickR(!clickR)
     };
 
     const handleClickDarBajaOpenForm = () => {
@@ -113,13 +138,20 @@ const PadronPropietario = () => {
     return (
         <>
             <div className="navbar-sidebar-directivos">
-                <NavbarConglomerado />
+                <NavbarConglomerado  Estado={Estado}/> 
                 <div className="container-Sidebar-view-directivo">
-                    <SidebarMenu />
-                    <div className="conatiner-registro-padron-propietarios">
+                {
+           <div className={`${openElement ?null   :`sidebar-menu-CGM  ${open ? 'active' : ''}`}`}>
+            <SidebarMenu setTogle={setTogle} />
+            </div>
+           } 
+
+         
+           <div className={`${togle ?'conatiner-registro-padron-propietarios'   :'conatiner-registro-padron-propietarios-select-togle-false' }`}>
                         <div className="title-Inquilinos-registrados">
                             Propietarios Registrados
                         </div>
+
 
                         <div className="row container-busqueda-upload-documentos" style={{ marginTop: `10px` }}>
                             <div className="col-md-3 search-register-propietarios">
@@ -139,7 +171,7 @@ const PadronPropietario = () => {
                                             <input id="mostrar-form-documento-propietarios-person-add" name="modal" type="radio" />
                                             <label for="mostrar-form-documento-propietarios-person-add" onClick={handleClickOpenForm}> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
                                             <div id="modal-mostrar-form-documento-propietarios-person-add-import">
-                                                <RegistrarNuevoPropietario RefrescarInformacion={RefrescarInformacion} />
+                                                <RegistrarNuevoPropietario RefrescarInformacion={RefrescarInformacion} clickR={clickR} setClickR={setClickR}/>
                                             </div>
                                         </div>
 
@@ -182,18 +214,21 @@ const PadronPropietario = () => {
 
                             </div>
                             <div className=" col-md-2 container-title-show-iamgen-ins">
-                            <input
+                                <div>
+                                <input
                  
-                                id="mostrar-modal-documento-socio"
-                                name="modal"
-                                type="radio"
-                                />
+                                        id="mostrar-modal-documento-propietario"
+                                        name="modal"
+                                        type="radio"
+                                        />
 
-                                <label for="mostrar-modal-documento-socio">
-                                {" "}
-                                <FontAwesomeIcon icon={faFolderOpen} />{" "}
-                                </label>
+                                        <label for="mostrar-modal-documento-propietario">
+                                        {" "}
+                                        <FontAwesomeIcon icon={faFolderOpen} />{" "}
+                                        </label>
 
+                                </div>
+                           
                 
                   </div>
                 </div>
@@ -203,7 +238,7 @@ const PadronPropietario = () => {
                                     <table class="table table-bordered table-condensed table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '7px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' ,color:'#56688a'}}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             Codigo Propietario
@@ -214,7 +249,7 @@ const PadronPropietario = () => {
                                                     </div>
 
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px',color:'#56688a' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             Apellidos Completos
@@ -223,8 +258,8 @@ const PadronPropietario = () => {
                                                             <FontAwesomeIcon icon={faArrowDownAZ} style={{ color: `red` }} />
                                                         </button>
                                                     </div></th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>Nombres Completos</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' }}>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px',color:'#56688a' }}>Nombres Completos</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px',color:'#56688a' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             DNI
@@ -234,12 +269,12 @@ const PadronPropietario = () => {
                                                         </button>
                                                     </div>
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Nª Partida</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Oficina Principal</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Tipo Dominio</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Dirección</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Estado</th>
-                                                <th scope="col" style={{ backgroundColor: 'lightblue', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px' }}>Acción</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Nª Partida</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Oficina Principal</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Tipo Dominio</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Dirección</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Estado</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -247,20 +282,20 @@ const PadronPropietario = () => {
                                                 (search.length === 0 ? refrescar : search).map((propietario) => (
                                                     propietario.inmuebleEntities.map((indexInmueble)=>(
                                                         <tr>
-                                                        <td>{propietario.codigoPropietario}</td>
-                                                        <td>{propietario.des_Apellidos}</td>
-                                                        <td>{propietario.des_nombres}</td>
-                                                        <td>
-                                                            <Link to={`/expediente/${propietario.desDni}/${propietario.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                                                {propietario.desDni}
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.codigoPropietario}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.des_Apellidos}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.des_nombres}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
+                                                            <Link to={`/expediente/${propietario.des_codigo_Dni}/${propietario.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                                {propietario.des_codigo_Dni}
                                                             </Link>
                                                         </td>
-                                                        <td>{indexInmueble.numPartida}</td>
-                                                        <td>{indexInmueble.des_oficina_registral}</td>
-                                                        <td>{indexInmueble.des_tipo_dominio}</td>
-                                                        <td>{indexInmueble.des_direccion}</td>
-                                                        <td>{propietario.des_estado}</td>
-                                                        <td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.numPartida}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_oficina_registral}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_tipo_dominio}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_direccion}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.des_estado}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
                                                             <div className="table-column-gestion-info-propietario">
 
                                                                 <button className="btn-gestion-delete-info-propietario " onClick={() =>DeleteRegisterConsejo()}>
@@ -295,7 +330,9 @@ const PadronPropietario = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+           </div>
+                  
+            
                 <ToastContainer />
             </div>
 

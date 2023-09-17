@@ -50,16 +50,16 @@ export const useGetExpedientePropietario = (API, id, id2) => {
     SetCoPropietario(NombrePropietario)
     setPartidasRegistrales(found)
     //consultar si existen expedientes
-
+   console.log(padronPropietariosDetalle)
     
     const existeCliente = await axios.get(
-      `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.desDni}`
+      `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.des_codigo_Dni}`
     );
 
   
     if (existeCliente.data) {
       const responsepostExpediente = await axios.get(
-        `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.desDni}`
+        `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.des_codigo_Dni}`
       );
    
       SetDataExpediente(responsepostExpediente);
@@ -69,7 +69,7 @@ export const useGetExpedientePropietario = (API, id, id2) => {
       const objetoRequest = {
         codempresa: "0001",
         option: "7",
-        dni: padronPropietariosDetalle.data.desDni,
+        dni: padronPropietariosDetalle.data.data.des_codigo_Dni,
       };
 
       await axios

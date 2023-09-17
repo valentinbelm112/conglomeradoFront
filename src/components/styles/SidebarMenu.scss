@@ -8,9 +8,17 @@
     text-shadow: 1px 0px 2px #8dc4f0;
     width: 15rem;
   }
-  .sidebar-transition{
-    height: 100%;
+  .sidebar-menu-CGM {
+    position: fixed;
+    top: 0;
+    left: -500px; /* Inicialmente, el sidebar está oculto */
+    transition: left 0.3s ease; /* Agrega una transición suave a la propiedad left */
+    z-index: 1000;
   }
+  .sidebar-menu-CGM.active {
+    left: 0; /* Muestra el sidebar */
+  }
+
   .Appfalse{
     transition: width 2s;
     width: 6rem;
