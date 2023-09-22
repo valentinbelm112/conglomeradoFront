@@ -1,0 +1,83 @@
+
+.container-edit-directivo {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
+.container-edit-directivo .form-edit-directivos{
+    width: 55%;
+    border-radius: 2%;
+    //border: 1px solid var(--very-light-pink);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    //background-color: #f0f0f0;
+    background: linear-gradient(to bottom right, #d4d3d3, #f0f0f0);
+}
+
+.icono-close-edit-directivo {
+    margin-left: -2%;
+    margin-top: 0.3%;
+    height: 8.9% !important;
+    width: 1.7% !important;
+    border-radius: 20px;
+    background-color: #554f4f;
+
+
+  }
+
+  .close-form-register-directivo{
+    margin-right: 1px;
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+    //background-color: red;
+    
+}
+
+.input-edit-directivo {
+     width: 98.5% !important; 
+}
+
+.tilte-edit-registro-directivo{
+    font-family: "Roboto", sans-serif;
+    color: rgb(33, 33, 33);
+    text-align: center;
+    font-weight: bold;
+     font-size: 17px;
+    ///font-size: 12px;
+    //font-weight: bold;
+    padding: 1%;
+    background: linear-gradient(to bottom right, #3498db, #92ccf3);
+    border-radius: 5px;
+    height: 5%;
+}
+
+#modal-edit-directivos {
+	color: #000000;
+    position: fixed;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    top: 95px;
+    left: 0;
+    height: 46%;
+    transition: all 0.5s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+	p {
+		width: 60%;
+		height: 40%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		font-size: 1.5em;
+		text-align: center;
+	} 
+}
+
+.tilte-datos-edit-directivo{
+    margin-left: 2%;
+}

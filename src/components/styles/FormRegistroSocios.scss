@@ -1,0 +1,227 @@
+
+.container-registro-padron-socio{
+    width: 100%;
+   // height: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.container-registro-padron-socio .form-registro-padron-socio{
+    width: 55%;
+    border-radius: 2%;
+    //border: 1px solid var(--very-light-pink);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    //background-color: #f0f0f0;
+    background: linear-gradient(to bottom right, #a4a1a1, #f0f0f0);
+}
+
+
+.title-nuevo-socio-registro-formpadron-black-div{
+    font-family: "Roboto", sans-serif;
+    color: rgb(33, 33, 33);
+   
+    font-weight: bold;
+     font-size: 15px;
+}
+
+
+.tilte-inscripcion-registro-padron-socios{
+    font-family: "Playfair Display", serif;
+    color: rgb(33, 33, 33);
+    text-align: center;
+    font-weight: bold;
+     font-size: 18px;
+    ///font-size: 12px;
+    //font-weight: bold;
+    padding: 1%;
+    background: linear-gradient(to left, #0f5694 0, #1e5d88 25%, #3a87b3 50%, #30a3bb 75%, #63f2f5 100%);
+    border-radius: 5px;
+    height: 5%;
+    color: white;
+}
+
+
+.tilte-fecha-registro-directivo{
+    font-family: "Roboto", sans-serif;
+    ///font-size: 12px;
+    //font-weight: bold;
+    padding: 1%;
+}
+
+.title-documento-consejo-directivo{
+    font-family: "Roboto", sans-serif;
+    ///font-size: 12px;
+    //font-weight: bold;
+    padding: 1%;
+}
+
+.title-periodo-registro-consejo-directivo{
+    font-family: "Roboto", sans-serif;
+    ///font-size: 12px;
+    //font-weight: bold;
+    padding: 1%;
+}
+
+.title-observaciones-registro-directivo{
+    font-family: "Roboto", sans-serif;
+    ///font-size: 12px;
+    //font-weight: bold;
+    padding: 1%; 
+}
+
+.botones-registro-consejo-directivo{
+    padding: 1%;  
+}
+
+.container-form-upload-inscripcion-directivos{
+    display: flex;
+    justify-content: center;
+}
+
+.container-form-upload-inscripcion-directivos .upload-inscripcion-directivos{
+width: 98%;
+}
+
+.upload-documento-registroconsejo-directivo .upload-inscripcion-directivos{
+    width: 98%;
+}
+.fecha-document-input{
+    width: 30% !important;
+}
+.fecha-document-container-input{
+    margin-left: 1%;
+}
+
+.upload-documento-registroconsejo-directivo{
+    display: flex;
+    justify-content: center;
+}
+
+.input-obserbaciones-registro-directivo{
+    display: flex;
+    justify-content: center;
+}
+
+.input-obserbaciones-reg-directivo{
+    width: 98% !important;
+}
+
+.close-form-register-directivo{
+    margin-right: 1px;
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+    //background-color: red;
+    
+}
+
+.title-periodo-registro-consejo-directivo-child{
+    display: flex;
+    
+
+}
+
+.title-periodo-inicio{
+    padding-left: 2%;
+}
+
+.title-periodo-final{
+   padding-left: 2%;
+}
+
+
+.btn-enviar-carga-masiva-directivos{
+    background-color: #dc972f;
+    height: 5vh;
+    padding: 0; border: none; background: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+
+
+}
+
+.icono-close-register-directivo{
+    margin-left: -1.9%;
+    margin-top: 0.1%;
+    height: 5% !important;
+    width: 2.6% !important;
+    border-radius: 20px;
+    background-color: #554f4f;
+}
+
+.tilte-icono-descargar-plantilla-consejo-directivo{
+    display: flex;
+    color: green;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+}
+
+.tilte-icono-descargar-plantilla-consejo-directivo-p{
+    cursor: pointer;
+    text-decoration: underline green;   
+}
+
+
+
+.btn-register-padron-socios-info{
+    margin-top: 1.5%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1%;
+   
+}
+ 
+.btn-register-padron-socios-info button {
+    width: 98%;
+   background-color: #787474;
+   
+}
+
+.input-error-form-prop{
+    box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.5) !important;
+}
+.error-message-from-prop{
+   color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+
+#modal1-sombra-form-Prop{
+    position: fixed;
+    inset: 0px;
+    background-color: rgba(99, 95, 95, 0.75) !important;
+}
+
+#modal1-sombra-form-Prop .container-registro-padron-socio{
+    margin-top: 5%;
+}
+
+
+.tile-form-register-socio-datos-personales{
+    font-family: "Roboto", sans-serif;
+    color: red;
+    font-weight: bold;
+     font-size: 17px;
+}
+
+
+.tile-form-register-socio-datos-inmueble{
+    font-family: "Roboto", sans-serif;
+    color: red;
+    font-weight: bold;
+     font-size: 17px;
+}
+
+
+.tile-form-register-socio-datos-contacto{
+    font-family: "Roboto", sans-serif;
+    color: red;
+    font-weight: bold;
+     font-size: 17px;
+}

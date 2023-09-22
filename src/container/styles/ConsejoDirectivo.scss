@@ -1,0 +1,253 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.container-Sidebar-view-directivo{
+    display: flex;
+    width: 98%;
+   
+ 
+}
+.outer-table-registro-directivo {
+    overflow-y: auto;
+    height: 60vh;
+  }
+
+  .outer-table-registro-directivo {
+    width: 100%;
+    -layout: fixed;
+  }
+
+  .outer-table-registro-directivo th {
+    text-align: left;
+    top: 0;
+    position: sticky;
+    background-color: white;
+  }
+
+.title-consejo-directivo{
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(39, 26, 10);
+    font-family: 'Playfair Display', serif;
+}
+
+.title-consejo-directivo-periodo-vigente{
+    font-size: 15px;
+    text-align: start;
+    font-family: 'Playfair Display', serif;
+    
+}
+.title-consejo-directivo-fecha{
+    font-size: 15px;
+    text-align: start;
+    font-family: 'Playfair Display', serif;
+}
+.title-consejo-directivo-exportar-formato-excel{
+    font-size: 15px;
+    text-align: start;
+    font-family: 'Playfair Display', serif;
+    color: green;
+    font-weight: bold;
+}
+
+
+.container-consejo-directivo-title-and-icon{
+    display: flex;
+	cursor: pointer;
+
+}
+
+
+#modal {
+	//background:rgba(#000,.9);
+	color: #000000;
+	position: fixed;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+	top: -100vh;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	transition: all .5s;
+	p {
+		width: 60%;
+		height: 40%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		font-size: 1.5em;
+		text-align: center;
+	} 
+}
+
+
+
+
+#mostrar-modal {
+	display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #076024, #00b65f);
+        display: table;
+        margin: auto;
+        color: #fff;
+        line-height: 3.7;
+        padding: 0 1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 7%;
+        
+		&:hover {
+			background: darken(steelblue,10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal {
+        top: 64px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
+#mostrar-modal-editar {
+	display: none;
+	+ label {
+      
+    cursor: pointer;
+      
+	}
+  &:checked { 
+    
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
+
+#cerrar-modal {
+	
+    display: none;
+	+ label {
+		display: table;
+		margin: auto;
+		color: #fff;
+		
+		padding: 0 1em;
+		text-transform: uppercase;
+        margin-right: 0;
+		cursor: pointer;
+		&:hover {
+			//background: darken(steelblue,10%);
+		}
+	}
+	&:checked {
+     & ~ #modal {
+      top: -100vh;
+    }
+    & + label {
+      display: none;
+    }
+  }
+}
+
+
+
+#mostrar-modal-documento {
+	display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #076024, #00b65f);
+        display: table;
+        margin: auto;
+        color: #fff;
+        line-height: 3.7;
+        padding: 0 1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 7%;
+        
+		&:hover {
+			background: darken(steelblue,10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal-show-document {
+        top: 20px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
+#modal-show-document {
+	//background:rgba(#000,.9);
+    z-index: 9999;
+	color: #fff;
+	position: fixed;
+	top: -100vh;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	transition: all .5s;
+	p {
+		width: 60%;
+		height: 40%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		font-size: 1.5em;
+		text-align: center;
+	} 
+}
+
+.btn-gestion-edit-info-directivo{
+	background: none;
+	border: none;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	overflow: visible;
+	padding: 0;
+	text-align: inherit;
+	text-transform: none;
+
+}
+
+.btn-gestion-delete-info-directivo{
+	background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  text-align: inherit;
+  text-transform: none;
+  width: 25%;
+}
+
+.container-title-show-iamgen-ins{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+
+.container-title-show-iamgen-ins-label{
+  text-align: center;
+}
+

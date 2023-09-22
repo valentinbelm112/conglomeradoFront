@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container-gestion-login-conglomerado {
+  background-color: #eeeded;
+}
+
+.container-image img {
+  margin-top: 2%;
+  width: 30%;
+}
+
+.block_left {
+  height: 100vh;
+  background: linear-gradient(to bottom right, #076024, #00b65f);
+}
+
+.container-login-conglomerado {
+  width: 100%;
+  height: 100%;
+
+}
+
+.block_right {
+  height: 100vh;
+  background-color: #eeeded;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 58%;
+  margin-top: 50px;
+  width: 200px;
+}
+
+.button-container {
+  width: 250px;
+  margin-top: 20px;
+}
+
+.corousel-container-conglomerado {
+  height: 100%;
+  margin-left: -2%;
+  width: 106% !important;
+}
+
+.itemCarrusel {
+  width: 100%;
+  height: 100vh;
+}
+
+.container-title-login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.container-login-conglomerado .container-title-login .title {
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}

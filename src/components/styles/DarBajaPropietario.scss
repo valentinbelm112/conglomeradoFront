@@ -1,0 +1,78 @@
+
+.title-nuevo-dar-baja-registro-formpadron-black-div {
+    font-family: "Roboto", sans-serif;
+    color: rgb(33, 33, 33);
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 2%;
+}
+
+.container-dar-baja-padron-propietario{
+    width: 100%;
+   // height: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.container-dar-baja-padron-propietario .form-registro-padron-propietario {
+    width: 35%;
+    border-radius: 2%;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom right, #a4a1a1, #f0f0f0);
+}
+
+
+
+
+.container-form-darbaja-padron-propietarios .upload-inscripcion-directivos{
+    width: 97%;
+    margin-left: 1.5%;
+    }
+
+.btn-dar-baja-padron-propietarios-info{
+        margin-top: 1.5%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1%;
+       
+    }
+     
+.btn-dar-baja-padron-propietarios-info  .btn-dar-baja-masiva-cancel {
+        width: 98%;
+       background-color: #a09c9c;
+       
+    }
+
+    .btn-dar-baja-padron-propietarios-info  .btn-dar-baja-masiva-acep {
+        width: 98%;
+       background-color: rgb(40, 102, 40);
+       
+    }
+
+.darbajapropietario-upload-cancel-acept{
+    width: 100%;
+}
+.btn-dar-baja-masiva-acep{
+        background-color: #dc972f;
+        height: 5vh;
+        padding: 0; border: none; background: none;
+        border-radius: 4px;
+        color: white;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+    
+    
+    }
+
+    .btn-dar-baja-masiva-cancel{
+        background-color: #dc972f;
+        height: 5vh;
+        padding: 0; border: none; background: none;
+        border-radius: 4px;
+        color: white;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+    
+    
+    }

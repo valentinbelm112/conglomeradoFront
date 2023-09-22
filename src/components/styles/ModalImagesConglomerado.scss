@@ -1,0 +1,58 @@
+/* ProgressBar.css */
+
+/* Cambia el color de la barra de progreso */
+.ReactModal__Overlay {
+    z-index: 1025; /* Establece el valor de z-index deseado */
+    background-color: rgb(99 95 95 / 75%) !important;
+   // background-color: transparent !important;
+  }
+progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px; /* Altura de la barra de progreso */
+    width: 100%; /* Ancho de la barra de progreso */
+  }
+  
+  progress[value]::-webkit-progress-bar {
+    background-color: transparent;
+    background-color: #b7bbbe; /* Color de la barra de progreso */
+    border-radius: 2px;
+  }
+  
+  progress[value]::-webkit-progress-value {
+    background-color: #00bcd4; /* Color de la barra de progreso */
+    border-radius: 2px;
+  }
+
+ /* Estilos para el contenedor principal */
+.progress-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Estilos para la barra de progreso */
+  progress {
+    width: 100%;
+    height: 20px; /* Altura de la barra de progreso */
+    margin-bottom: 10px; /* Espaciado entre la barra de progreso y los íconos */
+  }
+  
+  /* Estilos para los íconos de navegación */
+  .icons-container-upload-images {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .icons-container-upload-images .icon {
+    flex: 1;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 24px; /* Tamaño del ícono */
+    color: #000; /* Color del ícono */
+    cursor: pointer;
+  }
+  
+  .icons-container-upload-images .icon.current {
+    color: #00bcd4; /* Color del ícono de la sección actual */
+  }

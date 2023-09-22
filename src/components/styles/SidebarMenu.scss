@@ -1,0 +1,131 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.App {
+  height: 100%;
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    //background: linear-gradient(179deg, #176eb5, #d545d7);
+    text-shadow: 1px 0px 2px #8dc4f0;
+    width: 15rem;
+  }
+  .sidebar-transition{
+    height: 100%;
+  }
+  .Appfalse{
+    transition: width 2s;
+    width: 6rem;
+    height: 100%;
+  }
+  .body_container {
+    flex: 1;
+  }
+  .sidebar_container {
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    top: 0;
+    left:0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .sidebar{
+    position: fixed;
+    display: flex;
+    width: 14rem;
+    height: 100%;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    padding: 15px;
+    top: 60px;
+    background: #053b6b;
+    
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5.5px);
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
+  .lines_icon{
+    display: flex;
+    align-self: flex-end;
+    border-radius: 5px;
+  }
+  
+  .profile{
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  }
+  
+  .profile>img{
+    width: 100%;
+  border-radius: 50%;
+  }
+  
+  .groups{
+    display: flex;
+    flex-direction: column;
+    width: 100%
+  }
+  .group{
+    display: flex;
+    flex-direction: column;
+    width: 100%
+  }
+  h3{
+    font-size: 1rem;
+    margin: 10px 0px 10px 0px
+  }
+
+  .item{
+    display: flex;
+    padding: 14px 10px 6px 10px;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 10px;
+}
+.icon{
+    
+    margin-top: -6px;
+}
+
+.no-style-link{
+  color: inherit;
+  text-decoration: none;
+}
+
+.online-indicator-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #2ecc71;
+  display: inline-block;
+  margin-left: 15px;
+  animation: glow 2s infinite alternate; /* Animación de resplandor */
+  box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db; /* Efecto de sombra */
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db;
+  }
+  to {
+    box-shadow: 0 0 20px #3498db, 0 0 30px #3498db, 0 0 40px #3498db;
+  }
+}
+.online-indicator {
+  display: flex;
+  align-items: center;
+  height: 5%;
+  
+}
+
+.online-indicator-title{
+  margin-left: 3px;
+  font-size: 0.6129rem
+}

@@ -1,0 +1,46 @@
+@import 'vars';
+.container-list-socios{
+   // background-color: red;
+   width: 100%;
+   border-bottom: 1px solid var(--very-light-pink);
+   margin-top: 5%;
+}
+
+
+
+.input-form-socios #FormControlInput1Search{
+    height: 46px;
+}
+.btnAddsocio{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 140% !important;
+    margin-left: -21% !important;
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: var(--bs-modal-bg);
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: var(--bs-modal-border-radius);
+    outline: 0;
+}
+
+html,body{
+    overflow-x: hidden;
+    color:black;
+    font-family:'Opens Sans',helvetica;  
+    height:100%;
+    width:101%;
+    margin: 0px;
+    padding: 0px;
+  }

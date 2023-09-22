@@ -1,0 +1,592 @@
+.container-order-a-z-propietario {
+  display: flex;
+  font-size: 16px;
+}
+
+#mostrar-modal-documento-propietario {
+  display: none;
+
+  +label {
+    background: linear-gradient(to bottom, #f1c40f 0, #f39c12 100%);
+    display: table;
+    margin: auto;
+    color: #fff;
+    line-height: 3.7;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 7%;
+
+    &:hover {
+      background: darken(steelblue, 10%);
+    }
+  }
+
+  &:checked {
+    &~#modal-show-document {
+      top: 20px;
+
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+
+.upload-documents-propietarios {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outer-table-registro-propietario {
+  overflow-y: auto;
+  height: 50vh;
+}
+
+.outer-table-registro-propietario {
+  width: 100%;
+  -layout: fixed;
+}
+
+.outer-table-registro-propietario th {
+  text-align: left;
+  top: 0;
+  position: sticky;
+  background-color: white;
+}
+
+.title-codigo-propietario {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  text-align: inherit;
+  text-transform: none;
+}
+
+.search-register-propietarios {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mostrar-form-documento-propietarios-upload {
+  display: none;
+
+  +label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom right, #807110, #f6e67f);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      width: 350px;
+      /* Ancho automático */
+      background-color: #0056b3;
+
+      .button-text {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &:checked {
+    &~#modal {
+      top: 64px;
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+.registrar-nuevo-propietarios-add-delete-export-import {
+  padding-top: 5px;
+}
+
+
+
+#mostrar-form-documento-propietarios-person-add-export {
+  display: none;
+
+  +label {
+    background: linear-gradient(to bottom right, #668a28, #84b332);
+    text-align: center;
+    display: table;
+    color: #fff;
+    line-height: 2.5;
+    padding: 0 1em;
+    cursor: pointer;
+    border-radius: 7px;
+    width: 100%;
+
+    &:hover {
+      background: darken(rgb(158, 201, 235), 10%);
+    }
+  }
+
+  &:checked {
+    &~#modal {
+      top: 64px;
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+#mostrar-form-documento-propietarios-person-add {
+  display: none;
+
+  +label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+
+    border-radius: 25px;
+    /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom, #2ecc71 0, #27ae60 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      width: 150px;
+      /* Ancho automático */
+      background-color: #2ecc71;
+
+      .button-text {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &:checked {
+    &~#modal-mostrar-form-documento-propietarios-person-add-import {
+      top: 20px;
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+.conatiner-registro-padron-propietarios {
+  width: 100%;
+}
+
+#modal-mostrar-form-documento-propietarios-person-add-import {
+  //background:rgba(#000,.9);
+  z-index: 9999;
+  color: #fff;
+  position: fixed;
+  top: -580vh;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.5s;
+
+  p {
+    width: 60%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    font-size: 1.5em;
+    text-align: center;
+  }
+}
+
+#mostrar-form-documento-propietarios-person-add-export {
+  display: none;
+
+  +label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom, #3498db 0, #2980b9);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      width: 150px;
+      /* Ancho automático */
+      background-color: #3498db;
+
+      .button-text {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &:checked {
+    &~#modal-mostrar-form-documento-propietarios-person-importar-excel {
+      top: 170px;
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+.conatiner-registro-padron-propietarios {
+  width: 100%;
+}
+
+#modal-mostrar-form-documento-propietarios-person-importar-excel {
+  //background:rgba(#000,.9);
+  z-index: 9999;
+  color: #fff;
+  position: fixed;
+  top: -580vh;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.5s;
+
+  p {
+    width: 60%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    font-size: 1.5em;
+    text-align: center;
+  }
+}
+
+#mostrar-form-documento-propietarios-person-add-delete {
+  display: none;
+
+  +label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom, #e74c3c 0, #c0392b 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      width: 150px;
+      /* Ancho automático */
+      background-color: #e74c3c;
+
+      .button-text {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &:checked {
+    &~#modal-mostrar-form-documento-propietarios-person-dar-baja {
+      top: 20px;
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
+.conatiner-registro-padron-propietarios {
+  width: 100%;
+}
+
+.btn-gestion-delete-info-propietario {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  text-align: inherit;
+  text-transform: none;
+  width: 25%;
+}
+
+.table-column-gestion-info-propietario {
+  display: flex;
+  justify-content: space-between;
+}
+
+#modal-mostrar-form-documento-propietarios-person-dar-baja {
+  //background:rgba(#000,.9);
+  z-index: 9999;
+  color: #fff;
+  position: fixed;
+  top: -580vh;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.5s;
+
+  p {
+    width: 60%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    font-size: 1.5em;
+    text-align: center;
+  }
+}
+
+#mostrar-form-documento-propietarios-person-add-import {
+  display: none;
+
+  +label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom, #2ecc71 0, #27ae60 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      width: 150px;
+      /* Ancho automático */
+      background-color: #0056b3;
+
+      .button-text {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1391px) {
+  .conatiner-registro-padron-propietarios {
+    width: 81%;
+    margin-left: 2%;
+  }
+
+  .conatiner-registro-padron-propietarios-select-togle-false {
+    width: 90.5%;
+    margin-left: 2%;
+    transition: width 2s ease;
+    /* Agrega una transición suave a la propiedad left */
+  }
+
+  /* Otros estilos aquí */
+}
+
+@media screen and (max-width: 1391px) {
+  .conatiner-registro-padron-propietarios {
+    width: 85.5%;
+    margin-left: 2%;
+  }
+
+  .conatiner-registro-padron-propietarios-select-togle-false {
+    width: 82.5%;
+    margin-left: 2%;
+    transition: width 2s ease;
+    /* Agrega una transición suave a la propiedad left */
+  }
+}
+
+/* Media query para pantallas medianas */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .conatiner-registro-padron-propietarios {
+    width: 81.5%;
+  }
+
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
+
+  /* Otros estilos aquí */
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .conatiner-registro-padron-propietarios {
+    width: 91.5%;
+    margin-left: 2%;
+  }
+
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
+
+  #mostrar-form-documento-socios-person-add-export+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-delete+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-import+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  .search-register-propietarios {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2%;
+  }
+
+  .upload-documents-propietarios {
+    padding: 15px !important;
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    margin-left: 2%;
+  }
+
+  .container-title-show-iamgen-ins {
+    padding: 15px !important;
+    display: flex !important;
+    align-items: start !important;
+    justify-content: flex-start !important;
+    margin-left: 2% !important;
+  }
+
+  .registrar-nuevo-propietarios-add-delete-export-import {
+    flex: 0 0 3px !important;
+  }
+
+  .container-title-show-iamgen-ins #mostrar-modal-documento-socio+label {
+    margin-left: 0px;
+  }
+
+  .registrar-nuevo-propietarios-add-delete-export-import {
+    width: 53% !important;
+  }
+
+  .container-input-search-list-propietarios {
+    width: 35%;
+  }
+
+  .container-input-search-list-propietarios input {
+    width: 89%;
+  }
+
+  .container-busqueda-upload-documentos {
+    margin-top: 2% !important;
+  }
+
+  .container-Sidebar-view-directivo {
+    position: relative;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 98%;
+  }
+
+  .Appfalse {
+    position: absolute;
+  }
+
+  .App {
+    position: absolute;
+  }
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 400px) {
+  .conatiner-registro-padron-propietarios {
+    margin-top: 5%;
+    width: 91.5%;
+    margin-left: 2%;
+  }
+
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 200px) {
+  .conatiner-registro-padron-propietarios {
+    width: 80.5%;
+    margin-left: 2%;
+  }
+
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
+}
+
+/* Media query para pantallas grandes */
