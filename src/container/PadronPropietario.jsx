@@ -70,7 +70,6 @@ const PadronPropietario = ({EstadoGlobal}) => {
         };
       }, []);
 
-
     const ExportarPropietario = () => {
 
         UseGetExportPropietario(`${serverURL}/Propietarios/export-propietarios`);

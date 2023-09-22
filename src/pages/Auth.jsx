@@ -11,7 +11,6 @@ const breakPoints = [
     { width: 1200, itemsToShow: 1 },
 ];
 
-
 const Auth = () => {
     const [state, setState] = useState(0);
     const [stateinit, setStateinit] = useState(false);
