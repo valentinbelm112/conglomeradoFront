@@ -49,7 +49,7 @@ const FormLogin =(props)=>{
           })
        .catch (error => {
         console.error( 'función enRechazo invocada: ', error );
- 
+        saveToLocalStorage(error);
         setIsLoading(false);
         toast.error("Intente Nuevamente .");
       })

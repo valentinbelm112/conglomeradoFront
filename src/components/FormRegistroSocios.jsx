@@ -18,7 +18,7 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
         codSocio: "",
         desApellidos: "",
         des_nombres: "",
-        des_dni: "",
+        desDni: "",
         des_estado_civil: "",
         des_dni_conyugue: "",
         num_telefono: "",
@@ -30,8 +30,8 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
             {
 
                 des_codigo_asociacion: EstadoGlobal.des_codigo_asociacion,
-                num_pabellon : "",
-                num_puesto: "",
+                numPabellon : "",
+                numPuesto: "",
                 des_direccion: "",
                 des_giro: "",
                 des_negocio:"",
@@ -154,7 +154,7 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        if (name === 'des_nombres' || name === 'desApellidos' || name === 'des_dni' || name === 'codSocio' || name === 'des_correo' || name === 'des_dni_conyugue' || name === 'des_documento_link' || name === 'des_estado_civil' || name === 'des_nombres' || name === 'num_telefono') {
+        if (name === 'des_nombres' || name === 'desApellidos' || name === 'desDni' || name === 'codSocio' || name === 'des_correo' || name === 'des_dni_conyugue' || name === 'des_documento_link' || name === 'des_estado_civil' || name === 'des_nombres' || name === 'num_telefono') {
             setDatos((prevData) => ({
 
                 ...prevData,
@@ -162,7 +162,7 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
 
             }));
             name === 'num_telefono' && setTelefonoValido(validateTelefono(value));
-            name === 'des_dni' && setDniValido(validateDNI(value));
+            name === 'desDni' && setDniValido(validateDNI(value));
             name === 'des_dni_conyugue' && setDniCValido(validateDNI(value));
         }
 
@@ -180,8 +180,8 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
                 ]
             }));
             
-            name === 'num_pabellon' && setPabellonValido(validatePabellon(value));
-            name === 'num_puesto' && setPuestoValido(validatePuesto(value));
+            name === 'numPabellon' && setPabellonValido(validatePabellon(value));
+            name === 'numPuesto' && setPuestoValido(validatePuesto(value));
             name === 'num_area' && setAreaValido(validarNumeroDecimal(value));
         }
 
@@ -233,8 +233,8 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
                                         </div>
                                         <input
                                             type="text"
-                                            name="des_dni"
-                                            value={datos.des_dni}
+                                            name="desDni"
+                                            value={datos.desDni}
                                             className={!dniValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
                                         >
@@ -252,8 +252,8 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
                                         </div>
                                         <input
                                             type="text"
-                                            name="num_puesto"
-                                            value={datos.inmuebleSocioEntities[0].num_puesto}
+                                            name="numPuesto"
+                                            value={datos.inmuebleSocioEntities[0].numPuesto}
                                             className={!puestoValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
                                         >
@@ -335,9 +335,9 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
                                         </div>
                                         <input
                                             type="text"
-                                            name="num_pabellon"
+                                            name="numPabellon"
                                             className={!pabellonValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
-                                            value={datos.inmuebleSocioEntities[0].num_pabellon}
+                                            value={datos.inmuebleSocioEntities[0].numPabellon}
                                             onChange={handleInputChange}
                                         >
 

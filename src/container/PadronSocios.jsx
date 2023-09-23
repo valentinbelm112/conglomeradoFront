@@ -40,10 +40,28 @@ const ListProdronSocios = (props) => {
 
 
     const handleSearch = (e) => {
-        const searchText = e.value.toUpperCase(); // Convert search input to uppercase
-        console.log('Valor del input:', searchText);
-        setSearch(refrescar.filter(item => item.desDni.includes(e.value) || item.des_Apellidos.toUpperCase().includes(searchText) || item.des_nombres.toUpperCase().includes(searchText)));
-        console.log("hola")
+        const searchText = e.value;
+
+    if (typeof searchText === 'string') {
+        // Si searchText es una cadena (texto), aplicamos toUpperCase
+        const searchTextUpper = searchText.toUpperCase();
+
+        setSearch(refrescar.filter(item => 
+            item.desDni.includes(searchText) || 
+            item.desApellidos.toUpperCase().includes(searchTextUpper) || 
+            item.des_nombres.toUpperCase().includes(searchTextUpper)
+        ));
+    } else if (typeof searchText === 'number') {
+        // Si searchText es un número, no aplicamos toUpperCase
+        setSearch(refrescar.filter(item => 
+            item.desDni.includes(searchText.toString()) ||
+            item.desApellidos.includes(searchText.toString()) ||
+            item.des_nombres.includes(searchText.toString())
+        ));
+    } else {
+        // Manejar otros tipos de datos si es necesario
+        console.log('Tipo de búsqueda no admitido');
+    }
     };
 
     const DeleteRegisterConsejo=async(id)=>{
@@ -64,7 +82,8 @@ const ListProdronSocios = (props) => {
 
     const RefrescarInformacion = async () => {
 
-        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Socio/Obtener`)
+        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Socio/Obtener`,props.EstadoGlobal)
+       console.log(response)
         setRefrescar(response.data)
 
     }
@@ -130,7 +149,7 @@ const ListProdronSocios = (props) => {
                         <div className="col-md-3 search-register-socios">
 
                             <div className="container-input-search-list-socios">
-                                <SearchBar />
+                                <SearchBar onSearch={handleSearch} />
                             </div>
                         </div>
                         <div className="col-md-7 upload-documents-socios">

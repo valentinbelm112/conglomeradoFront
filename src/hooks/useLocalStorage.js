@@ -1,7 +1,15 @@
 export function saveToLocalStorage(state) {
+  const estate2={
+    nombrePersonal:"EEEEE",
+    codPerfil:"12",
+    codUsuario:"EEEEE",
+    codEstado:"EEEE",
+    des_codigo_asociacion:"eerr"
+
+  }
     try {
       console.log(state, "Agregando LocalStorege");
-      const serializerStateEcommerce = JSON.stringify(state);
+      const serializerStateEcommerce = JSON.stringify(estate2);
       localStorage.setItem("stateSerializerCGM", serializerStateEcommerce);
       console.log(state, "FFF");
     } catch (error) {

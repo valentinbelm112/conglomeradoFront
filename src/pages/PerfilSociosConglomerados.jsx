@@ -31,7 +31,7 @@ const PerfilSociosConglomerados=()=>{
             </div>
             <div className="card-body">
               <h5 className="card-title" style={{color: '#428bca'}}>NOMBRES</h5>
-              <p>  {auth ? auth.nomColaborador.toUpperCase() : []}</p>
+              <p>  {auth ? auth.nomColaborador?.toUpperCase() : []}</p>
             </div>
           </div>
         </div>

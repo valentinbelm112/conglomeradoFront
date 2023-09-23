@@ -12,8 +12,8 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
 
 
     const handleClickCloseForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
-        parrafo.style.top = '-100vh'
+        const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
+        parrafo.style.top = '-580vh'
     };
 
 

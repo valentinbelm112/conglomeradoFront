@@ -1,8 +1,9 @@
 import "./styles/RegistrarNuevoPropietario.scss"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
-
-const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) => {
+import { serverURL } from "../utils/Configuration";
+import { ToastContainer, toast } from 'react-toastify';
+const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR,EstadoGlobal}) => {
    
     const [telefonoValido, setTelefonoValido] = useState(true);
     const [pAccionesValido, setPAccionesValido] = useState(true);
@@ -12,17 +13,18 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
 
     const [datos, setDatos] = useState({
         des_Apellidos: "",
-        des_codigo_Dni: "",
-        des_codigo_propietario: "",
+        desDni: "",
+        codigoPropietario: "",
         des_correo: "",
         des_dni_conyugue: "",
         des_documento_link: "",
         des_estado_civil: "",
         des_nombres: "",
+        des_codigo_asociacion: EstadoGlobal.des_codigo_asociacion,
         num_telefono:"",
         inmuebleEntities:[
             {
-                des_codigo_asociacion:"",
+                des_codigo_asociacion: EstadoGlobal.des_codigo_asociacion,
                 des_departamento:"",
                 des_direccion:"",
                 des_oficina_registral:"",
@@ -30,7 +32,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
                 des_tipo_dominio:"",
                 num_acciones_derechos:"",
                 num_area:"",
-                num_partida_registral:"",
+                numPartida:"",
 
 
             }
@@ -68,7 +70,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
 
 
     const handleClickCloseForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
+        const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
         parrafo.style.top = '-586vh'
         setClickR(!clickR)
       };
@@ -86,7 +88,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
           
           console.log(datos )
 
-        fetch('http://localhost:9090/Propietarios/save', {
+        fetch(`${serverURL}/Propietarios/save`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -112,10 +114,10 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
             else {
                 console.log(data); // Maneja la respuesta del servidor aquí
                 RefrescarInformacion();
-             // toast.success("Registro exitoso del consejo directivo");
-              const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
+               toast.success("Registro exitoso del consejo directivo");
+              const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
               parrafo.style.top = '-586vh'
-    
+              setClickR(!clickR)
             }
     
           })
@@ -131,7 +133,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
 
       const handleInputChange = (event) => {
         const { name, value } = event.target;
-        if (name === 'des_nombres' || name === 'des_Apellidos'|| name === 'des_codigo_Dni'|| name === 'des_codigo_propietario' || name === 'des_correo' || name === 'des_dni_conyugue'|| name === 'des_documento_link' || name === 'des_estado_civil'|| name === 'des_nombres' || name === 'num_telefono') {
+        if (name === 'des_nombres' || name === 'des_Apellidos'|| name === 'desDni'|| name === 'codigoPropietario' || name === 'des_correo' || name === 'des_dni_conyugue'|| name === 'des_documento_link' || name === 'des_estado_civil'|| name === 'des_nombres' || name === 'num_telefono') {
           setDatos((prevData) => ({
 
             ...prevData,
@@ -139,7 +141,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
 
           }));
           name === 'num_telefono'&&setTelefonoValido(validateTelefono(value) );
-          name === 'des_codigo_Dni'&&setDniValido(validateDNI(value));
+          name === 'desDni'&&setDniValido(validateDNI(value));
           name === 'des_dni_conyugue'&&setDniCValido(validateDNI(value));
         } else {
             setDatos((prevData) => ({
@@ -186,8 +188,8 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
                                         <input
                                             
                                             type="text"
-                                            name="des_codigo_propietario"
-                                            value={datos.des_codigo_propietario}
+                                            name="codigoPropietario"
+                                            value={datos.codigoPropietario}
                                             className="form-control upload-inscripcion-directivos"
                                             onChange={handleInputChange}
                                         >
@@ -202,8 +204,8 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
                                         </div>
                                         <input
                                             type="text"
-                                            name="des_codigo_Dni"
-                                            value={datos.des_codigo_Dni}
+                                            name="desDni"
+                                            value={datos.desDni}
                                             className={!dniValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
                                         >
@@ -219,8 +221,8 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion ,clickR,setClickR}) =>
                                         </div>
                                         <input
                                             type="text"
-                                            name="num_partida_registral"
-                                            value={datos.inmuebleEntities[0].num_partida_registral}
+                                            name="numPartida"
+                                            value={datos.inmuebleEntities[0].numPartida}
                                             className="form-control upload-inscripcion-directivos"
                                             onChange={handleInputChange}
                                         >

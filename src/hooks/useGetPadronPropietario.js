@@ -26,9 +26,9 @@ export const UseGetPadronPropietario=(API,setRefrescar,auth)=>{
 }
 
 
-export const useGetPadronPropietarioComponenteRender = async (API) => {
+export const useGetPadronPropietarioComponenteRender = async (API,auth) => {
     const codigo_asociacion="E00241";
-    const response = await axios(`${API}?Codigo_Asociacion=${codigo_asociacion}`);
+    const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
   
 
     return { response};

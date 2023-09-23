@@ -78,14 +78,30 @@ const PadronPropietario = ({EstadoGlobal}) => {
     }
 
 
-
     const handleSearch = (e) => {
-        const searchText = e.value.toUpperCase(); // Convert search input to uppercase
-        console.log('Valor del input:', searchText);
-        setSearch(refrescar.filter(item => item.desDni.includes(e.value) || item.des_Apellidos.toUpperCase().includes(searchText) || item.des_nombres.toUpperCase().includes(searchText)));
-        console.log("hola")
-    };
+        const searchText = e.value;
 
+    if (typeof searchText === 'string') {
+        // Si searchText es una cadena (texto), aplicamos toUpperCase
+        const searchTextUpper = searchText.toUpperCase();
+
+        setSearch(refrescar.filter(item => 
+            item.desDni?.includes(searchText) || 
+            item.des_Apellidos?.toUpperCase().includes(searchTextUpper) || 
+            item.des_nombres?.toUpperCase().includes(searchTextUpper)
+        ));
+    } else if (typeof searchText === 'number') {
+        // Si searchText es un número, no aplicamos toUpperCase
+        setSearch(refrescar.filter(item => 
+            item.desDni?.includes(searchText.toString()) ||
+            item.des_Apellidos?.includes(searchText.toString()) ||
+            item.des_nombres?.includes(searchText.toString())
+        ));
+    } else {
+        // Manejar otros tipos de datos si es necesario
+        console.log('Tipo de búsqueda no admitido');
+    }
+    };
 
     
     const handleSort = () => {
@@ -114,7 +130,7 @@ const PadronPropietario = ({EstadoGlobal}) => {
 
     const RefrescarInformacion = async () => {
 
-        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Propietarios/Obtener`)
+        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Propietarios/Obtener`,EstadoGlobal)
         setRefrescar(response.data)
 
     }
@@ -122,7 +138,7 @@ const PadronPropietario = ({EstadoGlobal}) => {
 
     
     const handleClickOpenForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
+        const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
         parrafo.style.top = '95px'
         console.log(clickR)
         setClickR(!clickR)
@@ -186,7 +202,7 @@ const PadronPropietario = ({EstadoGlobal}) => {
                                             <input id="mostrar-form-documento-propietarios-person-add" name="modal" type="radio" />
                                             <label for="mostrar-form-documento-propietarios-person-add" onClick={handleClickOpenForm}> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
                                             <div id="modal-mostrar-form-documento-socios-person-add-import">
-                                                <RegistrarNuevoPropietario RefrescarInformacion={RefrescarInformacion} clickR={clickR} setClickR={setClickR}/>
+                                                <RegistrarNuevoPropietario RefrescarInformacion={RefrescarInformacion} clickR={clickR} setClickR={setClickR} EstadoGlobal={EstadoGlobal}/>
                                             </div>
                                         </div>
 
@@ -345,10 +361,11 @@ const PadronPropietario = ({EstadoGlobal}) => {
                             </div>
                         </div>
                     </div>
+                    <ToastContainer />
            </div>
                   
             
-                <ToastContainer />
+           
             </div>
 
         </>
