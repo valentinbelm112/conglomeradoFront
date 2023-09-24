@@ -1,15 +1,20 @@
-import React ,{useState,useEffect}from "react";
+import React ,{useState,useEffect,useContext}from "react";
 import { useParams } from "react-router-dom";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import ExpedientePropietarioSocio from "../components/ExpedientePropietarioSocio";
-import { useGetExpediente } from "../hooks/useGetExpediente";
+import { useGetExpedienteSocio } from "../hooks/useGetExpedienteSocio";
+import { serverURL } from "../utils/Configuration";
+import AuthContext from "../context/AuthContext";
+import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
 const ListExpedientesSocios=()=>{
     const[open,setOpen]=useState(false);
-    const { id } = useParams();
-    const hola = useGetExpediente(id);
-
-    const Estado=()=>{
+    const { login } = useContext(AuthContext);
+    const { id,id2} = useParams();
+    const [Estado,SetEstado]=useState(false);
+  
+    const {dataExpediente,isLoading,dataDetallePropietario,sociosPabellon,expedienteConyugue,coPropietario,pabellones}=useGetExpedienteSocio(`${serverURL}/cliente/consultar-reniec`,id,id2);
+    const Estado1=()=>{
         console.log("HHHH")
         setOpen(!open)
        }
@@ -29,10 +34,28 @@ const ListExpedientesSocios=()=>{
           window.removeEventListener('resize', checkScreenSize);
         };
       }, []);
+
+      useEffect(() => {
+        login();
+        console.log("Listen to Action");
       
+  }, [Estado]); // The second argument is an optional dependency array
+    
+    
+      const cambiarEstadoPadre = () => {
+      
+        SetEstado(!Estado); // Cambiar el valor booleano
+      
+        };
+   if(isLoading ){
+  
+          return (
+                  <Container_Nav_Sidb_Load/>
+            );
+      }
     return (
         <div className="navbar-sidebar-directivos" style={{height:`100%`}}>
-        <NavbarConglomerado  Estado={Estado}/>
+        <NavbarConglomerado  Estado={Estado1}/>
         <div className="container-Sidebar-view-directivo">
         {
             open?
@@ -41,7 +64,7 @@ const ListExpedientesSocios=()=>{
             <SidebarMenu />
             </div>
            } 
-          <ExpedientePropietarioSocio/>
+           <ExpedientePropietarioSocio expediente={dataExpediente} expedienteCony={expedienteConyugue} padron={dataDetallePropietario} propietario={sociosPabellon} cambiarEstado={cambiarEstadoPadre}  nombreExpedienteProp={coPropietario} pabellones={pabellones}/>
           </div>
           </div>
     );

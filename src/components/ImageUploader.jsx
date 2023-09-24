@@ -29,12 +29,13 @@ const ImageUploader = (props) => {
   const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
   // Supongamos que tienes una función para recuperar la imagen de la base de datos
   const fetchImageFromDatabase = async (desDni,codAs,desTipoDoc) => {
-   
-    
+   console.log(desDni)
+   console.log(codAs)
+   console.log(desTipoDoc)
    await axios.get(`${serverURL}/Documento/propByDni/tipdoc/codAS?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
       .then(response => {
         // Handle the response data
-        // console.log(response)
+        console.log(response)
         setDbImage(response.data.des_link_documento);
       })
       .catch(error => {
@@ -56,7 +57,7 @@ const ImageUploader = (props) => {
     setDatosDocumento({
       id_propietario: props.dataPropietario.id,
       ds_dni: props.dataPropietario.desDni,
-      des_codigo_asoc: props.dataPropietario.codigoAsociacion,
+      des_codigo_asoc: props.dataPropietario.codigoAsociacion=== undefined&&props.dataPropietario.des_codigo_asociacion,
       des_tipo_doc: "DocProp"
     })
   }
@@ -127,12 +128,13 @@ const ImageUploader = (props) => {
       formData.append('des_codigo_asoc', datosDocumento.des_codigo_asoc)
       formData.append('des_tipo_doc', datosDocumento.des_tipo_doc)
       
-      await axios.post(`${serverURL}/Propietarios/Upload-info-propietario`, formData, {
+      await axios.post(props.api, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
         .then((response) => {
+          
           fetchImageFromDatabase(datosDocumento.ds_dni,datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
           // Maneja la respuesta del servidor si es necesario.
           console.log(response.data);

@@ -29,7 +29,7 @@ const App=()=>{
           <Route path="/register-padron-inquilino" element={<PadronInquilinoView/>} />
           <Route path="/expediente/:id/:id2" element={<ListExpedientesPropietarios/>} />
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
-          <Route path="/expediente-socio/:id" element={<ListExpedientesSocios/>} />
+          <Route path="/expediente-socio/:id/:id2" element={<ListExpedientesSocios/>} />
           <Route path="/cgm/perfil" element={<PerfilSociosConglomerados/>} />
           <Route path="/ventana" element={<App2/>} />
           <Route path="/form2" element={<FormRegistroSocios/>} />

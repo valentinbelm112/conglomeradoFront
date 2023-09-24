@@ -9,7 +9,7 @@ export function saveToLocalStorage(state) {
   }
     try {
       console.log(state, "Agregando LocalStorege");
-      const serializerStateEcommerce = JSON.stringify(estate2);
+      const serializerStateEcommerce = JSON.stringify(state);
       localStorage.setItem("stateSerializerCGM", serializerStateEcommerce);
       console.log(state, "FFF");
     } catch (error) {

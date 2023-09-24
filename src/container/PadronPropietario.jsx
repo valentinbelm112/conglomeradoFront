@@ -106,12 +106,17 @@ const PadronPropietario = ({EstadoGlobal}) => {
     
     const handleSort = () => {
         const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        console.log(refrescar)
         setSortOrder(newOrder);
-        const sortedPadronPropietario = [...refrescar].sort((a, b) =>
-            newOrder === 'asc' ? a.desDni.localeCompare(b.desDni) : b.desDni.localeCompare(a.desDni)
-        );
-        
-
+    
+        const sortedPadronPropietario = [...refrescar].sort((a, b) => {
+            // Manejar los valores null
+            const desDniA = a.desDni || ''; // Si desDni es null, asigna una cadena vacía
+            const desDniB = b.desDni || ''; // Si desDni es null, asigna una cadena vacía
+    
+            return newOrder === 'asc' ? desDniA.localeCompare(desDniB) : desDniB.localeCompare(desDniA);
+        });
+    
         setRefrescar(sortedPadronPropietario);
     };
 
@@ -267,8 +272,8 @@ const PadronPropietario = ({EstadoGlobal}) => {
                             <div class="outer-table-registro-propietario ">
                                 <div className="table-responsive container-list-table-registro-propietarios" style={{ marginTop: `13px` }}>
                                     <table class="table table-bordered table-condensed table-hover table-striped">
-                                        <thead>
-                                            <tr>
+                                        <thead >
+                                            <tr >
                                                 <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '7px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' ,color:'#56688a'}}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>

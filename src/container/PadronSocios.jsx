@@ -278,7 +278,7 @@ const ListProdronSocios = (props) => {
                                                         <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{socio.desApellidos}</td>
                                                         <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{socio.des_nombres}</td>
                                                         <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
-                                                            <Link to={`/expediente/${socio.desDni}/${socio.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                            <Link to={`/expediente-socio/${socio.desDni}/${socio.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                                                 {socio.desDni}
                                                             </Link>
                                                         </td>
