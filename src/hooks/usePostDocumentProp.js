@@ -4,10 +4,6 @@ export const refreshAccessToken = async (refreshToken) => {
     try {
       
       const response = await axios.get(`${API}?Codigo_Asociacion=${codigo_asociacion}`); 
-
-      
-      //console.log(response);
-      //console.log(response);
       return response.data.access_token;
 
     } catch (error) {

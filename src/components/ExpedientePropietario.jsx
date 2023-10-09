@@ -6,9 +6,10 @@ import ModalImagesConglomerado from "./ModalImagesConglomerado";
 import ImageUploader from "./ImageUploader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
-import { South } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
+import { serverURL } from "../utils/Configuration";
 const ExpedientePropietario = (props) => {
+  
   const [selectedValue, setSelectedValue] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [expedienteSelect, setExpedienteSelect] = useState(null);
@@ -430,6 +431,7 @@ const ExpedientePropietario = (props) => {
                         props.padron.data.documentoPropietarioEntities
                       }
                       dataPropietario={ props.padron.data}
+                      api={`${serverURL}/Propietarios/Upload-info-propietario`}
                     />,
                   ]}
                 />

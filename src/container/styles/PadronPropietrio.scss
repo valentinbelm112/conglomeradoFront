@@ -41,11 +41,18 @@
 }
 
 .outer-table-registro-propietario {
+
   overflow-y: auto;
-  height: 50vh;
+  height: 60vh;
+
 }
 
+/* Deshabilitar overflow-x:auto en .table-responsive */
+.table-responsive {
+  overflow-x: initial !important;
+}
 .outer-table-registro-propietario {
+
   width: 100%;
   -layout: fixed;
 }

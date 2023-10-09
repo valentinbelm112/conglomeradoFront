@@ -32,7 +32,7 @@ const ImageUploader = (props) => {
    console.log(desDni)
    console.log(codAs)
    console.log(desTipoDoc)
-   await axios.get(`${serverURL}/Documento/propByDni/tipdoc/codAS?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+   await axios.get(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
       .then(response => {
         // Handle the response data
         console.log(response)
@@ -45,23 +45,29 @@ const ImageUploader = (props) => {
   };
 
   useEffect(() => {
- 
-    console.log(props.dataPropietario)
-    // Verifica si props.documentoPropietario[0].des_link_documento existe
-  if (props.documentoPropietario[0] && props.documentoPropietario[0].des_link_documento) {
+    setUploadedImage(null);
+    setDbImage(null)
+    
+
+    if (props.documentoPropietario !== undefined) {
     // Llama a la función para recuperar la imagen
-    setDbImage(props.documentoPropietario[0].des_link_documento);
-  }
+    setDbImage(props.documentoPropietario.des_link_documento);
+    }
+  
+    
+  
+
 
   if(props.dataPropietario){
     setDatosDocumento({
       id_propietario: props.dataPropietario.id,
       ds_dni: props.dataPropietario.desDni,
       des_codigo_asoc: props.dataPropietario.codigoAsociacion=== undefined&&props.dataPropietario.des_codigo_asociacion,
-      des_tipo_doc: "DocProp"
+                      
+      des_tipo_doc: props.tipoDoc
     })
   }
-  }, []);
+  }, [props.documentoPropietario]);
 
   const onDrop = (acceptedFiles) => {
     // Tomar solo la primera imagen si se cargan múltiples imágenes

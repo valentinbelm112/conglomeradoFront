@@ -1,6 +1,6 @@
 .container-order-a-z-inquilino {
-    display: flex;
-    font-size: 12px;
+  display: flex;
+  font-size: 16px;
   }
   .outer-table-registro-inquilino {
     overflow-y: auto;
@@ -29,6 +29,9 @@
   
   .upload-documents-inquilino {
     padding: 15px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
    
   }
   
@@ -98,16 +101,18 @@
   }
   
   #mostrar-form-documento-inquilino-person-add {
-    display: none;
-   
+     display: none;
+
     +label {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 50px;
       height: 50px;
-      border-radius: 25px; /* Mitad del tamaño del botón */
-      background: linear-gradient(to bottom right, #194b05, #10d677);
+  
+      border-radius: 25px;
+      /* Mitad del tamaño del botón */
+      background: linear-gradient(to bottom, #2ecc71 0, #889b90 100%);
       color: white;
       border: none;
       cursor: pointer;
@@ -116,29 +121,18 @@
       white-space: nowrap;
   
       &:hover {
-       
-        width: 150px; /* Ancho automático */
-        background-color: #0056b3;
-          .button-text {
-          
-            display: inline-block;
-            opacity: 1;
-            transform: translateX(0);
-            
-          }
+        width: 150px;
+        /* Ancho automático */
+        background-color: #2ecc71;
+  
+        .button-text {
+          display: inline-block;
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
     }
   
-    &:checked {
-      &~#modal {
-        top: 64px;
-  
-      }
-  
-      &~#cerrar-modal+label {
-        display: block;
-      }
-    }
   }
   
   #mostrar-form-documento-inquilino-person-add-delete {
@@ -187,46 +181,36 @@
   
   #mostrar-form-documento-inquilino-person-add-export {
     display: none;
-  
-    +label {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 25px; /* Mitad del tamaño del botón */
-      background: linear-gradient(to bottom right, #076024, #00b65f);
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: width 0.3s ease, background-color 0.3s ease;
-      overflow: hidden;
-      white-space: nowrap;
-  
-      &:hover {
-       
-        width: 150px; /* Ancho automático */
-        background-color: #0056b3;
-          .button-text {
-          
-            display: inline-block;
-            opacity: 1;
-            transform: translateX(0);
-            
-          }
+
+  +label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    /* Mitad del tamaño del botón */
+    background: linear-gradient(to bottom, #3498db 0, #2980b9);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      width: 150px;
+      /* Ancho automático */
+      background-color: #3498db;
+
+      .button-text {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
       }
     }
-  
-    &:checked {
-      &~#modal {
-        top: 64px;
-  
-      }
-  
-      &~#cerrar-modal+label {
-        display: block;
-      }
-    }
+  }
+
   }
   
   .button-text {
@@ -239,15 +223,16 @@
   
   #mostrar-form-documento-inquilino-person-add-import {
     display: none;
-  
+
     +label {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 50px;
       height: 50px;
-      border-radius: 25px; /* Mitad del tamaño del botón */
-      background: linear-gradient(to bottom right, #001a09, #41e093);
+      border-radius: 25px;
+      /* Mitad del tamaño del botón */
+      background: linear-gradient(to bottom, #2ecc71 0, #27ae60 100%);
       color: white;
       border: none;
       cursor: pointer;
@@ -256,30 +241,44 @@
       white-space: nowrap;
   
       &:hover {
-       
-        width: 150px; /* Ancho automático */
+        width: 150px;
+        /* Ancho automático */
         background-color: #0056b3;
-          .button-text {
-          
-            display: inline-block;
-            opacity: 1;
-            transform: translateX(0);
-            
-          }
-      }
-    }
   
-    &:checked {
-      &~#modal {
-        top: 64px;
-  
-      }
-  
-      &~#cerrar-modal+label {
-        display: block;
+        .button-text {
+          display: inline-block;
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
     }
   }
+
+  #modal-mostrar-form-documento-inquilino-person-importar-excel {
+    //background:rgba(#000,.9);
+    z-index: 9999;
+    color: #fff;
+    position: fixed;
+    top: -580vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: all 0.5s;
+  
+    p {
+      width: 60%;
+      height: 40%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      font-size: 1.5em;
+      text-align: center;
+    }
+  }
+  
   
   
   .conatiner-registro-padron-inquilino {
@@ -288,7 +287,6 @@
   
   .container-input-search-list-inquilino {
     display: flex;
-  
     ;
     border-radius: 5px;
     align-items: center;
@@ -337,7 +335,6 @@
   @media screen and (max-width: 1025px){
     .container-busqueda-upload-documentos{
       margin-top: 2%;
-      /* width: 92%; */
       display: flex;
       flex-direction: column;
     }
@@ -439,8 +436,6 @@
   
 
   
-  
-  
   @media  screen and (max-width: 1391px){
     .conatiner-registro-padron-inquilino {
       width: 90.5%;
@@ -490,8 +485,6 @@
       margin-left: 4%;
   }
   
-  
-    /* Otros estilos aquí */
   }
   
   

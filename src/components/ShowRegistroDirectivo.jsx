@@ -71,7 +71,7 @@ const ShowRegistroDirectivo = (props) => {
                             open={open}
                             close={() => setOpen(false)}
                             slides={[
-                            { src: "https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1" ,
+                            { src: props?.Detalledocumento.data.des_link_documento_inscrito ,
                             title: "Documento de la inscripcion del consejo directivo"
                             }  ]}
                         />

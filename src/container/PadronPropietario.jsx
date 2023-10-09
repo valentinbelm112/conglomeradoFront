@@ -154,13 +154,14 @@ const PadronPropietario = ({EstadoGlobal}) => {
         parrafo.style.top = '95px'
     };
 
+    
     const handleClickOpenImportForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
         parrafo.style.top = '95px'
     };
 
 
-
+    
     if (isLoading) {
 
         return (
@@ -260,7 +261,7 @@ const PadronPropietario = ({EstadoGlobal}) => {
 
                                         <label for="mostrar-modal-documento-propietario">
                                         {" "}
-                                        <FontAwesomeIcon icon={faFolderOpen} />{" "}
+                                        <FontAwesomeIcon icon={faFolderOpen} />{""}
                                         </label>
 
                                 </div>
@@ -268,9 +269,9 @@ const PadronPropietario = ({EstadoGlobal}) => {
                 
                   </div>
                 </div>
-                        <div class="card-body">
+                        <div class="card-body" style={{ marginTop: `13px` }}>
                             <div class="outer-table-registro-propietario ">
-                                <div className="table-responsive container-list-table-registro-propietarios" style={{ marginTop: `13px` }}>
+                                <div className="table-responsive container-list-table-registro-propietarios" >
                                     <table class="table table-bordered table-condensed table-hover table-striped">
                                         <thead >
                                             <tr >
@@ -289,6 +290,7 @@ const PadronPropietario = ({EstadoGlobal}) => {
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             Apellidos Completos
+                                                
                                                         </div>
                                                         <button className="title-codigo-propietario" onClick={handleSortApellidos}>
                                                             <FontAwesomeIcon icon={faArrowDownAZ} style={{ color: `red` }} />

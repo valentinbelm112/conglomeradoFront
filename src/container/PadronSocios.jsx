@@ -13,7 +13,7 @@ import FormRegistroSocios from "../components/FormRegistroSocios";
 import { serverURL } from "../utils/Configuration";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { useGetPadronPropietarioComponenteRender } from "../hooks/useGetPadronPropietario";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import  Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
 import { UseGetPadronPropietario } from "../hooks/useGetPadronPropietario";
 import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -21,7 +21,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { ToastContainer, toast } from 'react-toastify';
 import FormInportSocios from "../components/FormImportarSocios";
 import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
-const ListProdronSocios = (props) => {
+const ListPadronSocios = (props) => {
 
     const [open, setOpen] = useState(false);
     const [togle, setTogle] = useState(true);
@@ -29,7 +29,8 @@ const ListProdronSocios = (props) => {
     const [refrescar, setRefrescar] = useState([]);
     const [search, setSearch] = useState([]);
     const { isLoading, dataPropietario } = UseGetPadronPropietario(`${serverURL}/Socio/Obtener`, setRefrescar,props.EstadoGlobal)
-    
+
+   
     
     const ExportarPropietario = () => {
 
@@ -37,7 +38,6 @@ const ListProdronSocios = (props) => {
 
 
     }
-
 
     const handleSearch = (e) => {
         const searchText = e.value;
@@ -64,9 +64,10 @@ const ListProdronSocios = (props) => {
     }
     };
 
+
     const DeleteRegisterConsejo=async(id)=>{
-        console.log(id + "identificador")
-        //await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
+       //console.log(id + "identificador")
+       //await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
        // const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
        //setRefrescar(response.data)
       }
@@ -117,11 +118,11 @@ const ListProdronSocios = (props) => {
     };
 
 
-    if (isLoading) {
+    if (isLoading ) {
 
         return (
             <>
-                <Container_Nav_Sidb_Load />
+             <Container_Nav_Sidb_Load/>
             </>
         )
     }
@@ -185,7 +186,6 @@ const ListProdronSocios = (props) => {
                                                 <FormInportSocios RefrescarInformacion={RefrescarInformacion} clickR={clickR} setClickR={setClickR}  EstadoGlobal={props.EstadoGlobal} />
                                         </div>
                                     </div>
-
 
                                 </div>
 
@@ -286,7 +286,7 @@ const ListProdronSocios = (props) => {
                                                         <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.numPuesto}</td>
                                                         <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_direccion}</td>
                                                         <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_giro}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{socio.num_area}</td>
+                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_estado}</td>
                                                         <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
                                                             <div className="table-column-gestion-info-propietario">
 
@@ -331,4 +331,4 @@ const ListProdronSocios = (props) => {
     );
 }
 
-export default ListProdronSocios;
+export default ListPadronSocios;

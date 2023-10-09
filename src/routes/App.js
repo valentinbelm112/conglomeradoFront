@@ -13,9 +13,9 @@ import ListExpedientesSocios from "../pages/ListExpedienteSocios.jsx";
 import useInitialAuth from "../hooks/useInitialAuth.js";
 import AuthContext from "../context/AuthContext.jsx";
 import App2 from "../pages/App.jsx";
-import FormRegistroSocios from "../components/FormRegistroSocios.jsx";
+import ListExpedientesInquilino from "../pages/ListExpedienteInquilino.jsx";
 const App=()=>{
- 
+  
   const useinitialAuth = useInitialAuth();
     return(
       <AuthContext.Provider value={useinitialAuth}>
@@ -32,7 +32,7 @@ const App=()=>{
           <Route path="/expediente-socio/:id/:id2" element={<ListExpedientesSocios/>} />
           <Route path="/cgm/perfil" element={<PerfilSociosConglomerados/>} />
           <Route path="/ventana" element={<App2/>} />
-          <Route path="/form2" element={<FormRegistroSocios/>} />
+          <Route path="/expediente-inquilino/:id/:id2" element={<ListExpedientesInquilino/>} />
           </Routes >
         </BrowserRouter>
         </AuthContext.Provider>

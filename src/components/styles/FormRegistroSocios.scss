@@ -31,14 +31,14 @@
     color: rgb(33, 33, 33);
     text-align: center;
     font-weight: bold;
-     font-size: 18px;
+     font-size: 20px;
     ///font-size: 12px;
     //font-weight: bold;
-    padding: 1%;
-    background: linear-gradient(to left, #0f5694 0, #1e5d88 25%, #3a87b3 50%, #30a3bb 75%, #63f2f5 100%);
+    padding-top: 1%;
+    //background: linear-gradient(to left, #0f5694 0, #1e5d88 25%, #3a87b3 50%, #30a3bb 75%, #63f2f5 100%);
     border-radius: 5px;
     height: 5%;
-    color: white;
+    color: #424040;
 }
 
 
@@ -205,7 +205,7 @@ width: 98%;
 
 .tile-form-register-socio-datos-personales{
     font-family: "Roboto", sans-serif;
-    color: red;
+    color: rgb(173, 38, 38);
     font-weight: bold;
      font-size: 17px;
 }
@@ -213,7 +213,7 @@ width: 98%;
 
 .tile-form-register-socio-datos-inmueble{
     font-family: "Roboto", sans-serif;
-    color: red;
+    color: rgb(173, 38, 38);
     font-weight: bold;
      font-size: 17px;
 }
@@ -221,7 +221,7 @@ width: 98%;
 
 .tile-form-register-socio-datos-contacto{
     font-family: "Roboto", sans-serif;
-    color: red;
+    color: rgb(173, 38, 38);
     font-weight: bold;
      font-size: 17px;
 }

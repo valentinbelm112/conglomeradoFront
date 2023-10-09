@@ -91,7 +91,7 @@ const ModeloProps5={
     // Actualizar los valores del DNI y el ID aquí
   
     // Actualizar la URL
-    navigate(`/expediente/${dni}/${id}`);
+    navigate(`/expediente-socio/${dni}/${id}`);
     window.location.reload();
     //history.push(`/expediente/${dni}/${id}`);
   };
@@ -440,28 +440,28 @@ const ModeloProps5={
                     components={[
                         <ImageUploader info={ModeloProps1}
                         documentoPropietario={
-                          props.padron.data.documentosocioEntities
+                          props.padron.data.documentoInquilinoEntities
                         }
                         dataPropietario={ props.padron.data}
                         api={`${serverURL}/Socio/Upload-info-socio`}/>,
                         <ImageUploader  info={ModeloProps2}
                         documentoPropietario={
-                          props.padron.data.documentosocioEntities
+                          props.padron.data.documentoInquilinoEntities
                         }
                         dataPropietario={ props.padron.data}/>,
                         <ImageUploader info={ModeloProps3} 
                         documentoPropietario={
-                          props.padron.data.documentosocioEntities
+                          props.padron.data.documentoInquilinoEntities
                         }
                         dataPropietario={ props.padron.data}/>,
                         <ImageUploader  info={ModeloProps4}
                         documentoPropietario={
-                          props.padron.data.documentosocioEntities
+                          props.padron.data.documentoInquilinoEntities
                         }
                         dataPropietario={ props.padron.data}/>,
                         <ImageUploader info={ModeloProps5}
                          documentoPropietario={
-                        props.padron.data.documentosocioEntities
+                        props.padron.data.documentoInquilinoEntities
                       }
                       dataPropietario={ props.padron.data} />
                     ]}
