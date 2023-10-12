@@ -412,6 +412,7 @@ const ModeloProps5={
                 ))}
               </table>
 
+
             <div className="title-co-conyugue-socio">Inquilinos del Puesto</div>
             <div className="title-co-conyugue-socio-p">Si</div>
 

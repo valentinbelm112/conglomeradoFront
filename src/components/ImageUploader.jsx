@@ -126,7 +126,7 @@ const ImageUploader = (props) => {
         setUploadedImage(reader.result);
       };
       // Crea un objeto FormData y agrega la imagen a él.
-      console.log(uploadedImage)
+      //console.log(uploadedImage)
       const formData = new FormData();
       formData.append('file_upload_pdf', uploadedImage);
       formData.append('id_propietario',datosDocumento.id_propietario)
@@ -141,8 +141,10 @@ const ImageUploader = (props) => {
       })
         .then((response) => {
           
+          
           fetchImageFromDatabase(datosDocumento.ds_dni,datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
-          // Maneja la respuesta del servidor si es necesario.
+          //Maneja la respuesta del servidor si es necesario.
+
           console.log(response.data);
         })
         .catch((error) => {

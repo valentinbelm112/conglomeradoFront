@@ -14,6 +14,7 @@ import useInitialAuth from "../hooks/useInitialAuth.js";
 import AuthContext from "../context/AuthContext.jsx";
 import App2 from "../pages/App.jsx";
 import ListExpedientesInquilino from "../pages/ListExpedienteInquilino.jsx";
+import FormDarBajaPropietario from "../components/FormDarBajaPropietario.jsx";
 const App=()=>{
   
   const useinitialAuth = useInitialAuth();
@@ -31,7 +32,7 @@ const App=()=>{
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
           <Route path="/expediente-socio/:id/:id2" element={<ListExpedientesSocios/>} />
           <Route path="/cgm/perfil" element={<PerfilSociosConglomerados/>} />
-          <Route path="/ventana" element={<App2/>} />
+          <Route path="/ventana" element={<FormDarBajaPropietario/>} />
           <Route path="/expediente-inquilino/:id/:id2" element={<ListExpedientesInquilino/>} />
           </Routes >
         </BrowserRouter>

@@ -83,6 +83,48 @@
     font-family: "Roboto", sans-serif;
     font-weight: bold; 
 }
+.title-motivo-baja{
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+}
+.title-observaciones-baja{
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+}
+
+.title-fecha-baja{
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+}
+
+
+#mostrar-modal-documento-baja-socio {
+	display: none;
+	+ label {
+        background: linear-gradient(to bottom right, #076024, #00b65f);
+        margin: auto;
+        color: #fff;
+        line-height: 3.7;
+        padding: 0 1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 7%;
+        
+		&:hover {
+			background: darken(steelblue,10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal-show-document {
+        top: 20px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
 
 .title-co-propietarios-list{
     font-family: "Playfair Display", serif;

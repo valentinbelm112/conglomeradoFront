@@ -17,8 +17,8 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
     observaciones: "",
     codigo_asociacion: ""
   });
-  const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
 
+  const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
 
   // onchange states
   const [excelFile, setExcelFile] = useState(null);
