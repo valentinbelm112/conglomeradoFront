@@ -50,6 +50,7 @@ const ExpedientePropietario = (props) => {
       );
       setCoPropietarios(foundCopropietario);
       console.log(foundCopropietario)
+      
     }
 
 
@@ -57,9 +58,19 @@ const ExpedientePropietario = (props) => {
     console.log(props);
   }, []);
 
+
   const ModeloProps1 = {
-    titulo: "Documento de compra-venta",
-  };
+    titulo: "Documento de compra y venta",
+    tipDoc: "ContratoCompraVenta",
+    request: `${serverURL}/Documento/propByDni/tipdoc/codAS`
+  }
+       
+  const ModeloProps2 = {
+    titulo: "Minuta",
+    tipDoc: "Minuta",
+    request: `${serverURL}/Documento/propByDni/tipdoc/codAS`
+  }
+    
 
   const openModalDocBaja = () => {
     setOpen(true);
@@ -408,6 +419,7 @@ const ExpedientePropietario = (props) => {
                 ))}
               </table>
             </div>
+       
             {
               props.padron.data.propietarioBajaDetEntities.length > 0 &&
               <div className="col-5">
@@ -446,9 +458,9 @@ const ExpedientePropietario = (props) => {
                   
 
             <div className="Documentos-asociado-padron-propietario">
-              Documentos del asociado
+              Documentos del Propietario
             </div>
-            <p>Adjuntar documentacion del asociado</p>
+            <p>Adjuntar documentacion del Propietario</p>
             <div className="row">
               <div className="col-md-3">
                 <input
@@ -469,11 +481,25 @@ const ExpedientePropietario = (props) => {
                     <ImageUploader
                       info={ModeloProps1}
                       documentoPropietario={
-                        props.padron.data.documentoPropietarioEntities
+                        props.padron.data.documentoPropietarioEntities.find(item => item.desTipoDoc === 'ContratoCompraVenta')
                       }
                       dataPropietario={props.padron.data}
                       api={`${serverURL}/Propietarios/Upload-info-propietario`}
+                      tipoDoc={ModeloProps1.tipDoc}
+                      request={ModeloProps1.request}
                     />,
+                    <ImageUploader
+                    info={ModeloProps2}
+                    documentoPropietario={
+                      props.padron.data.documentoPropietarioEntities.find(item => item.desTipoDoc === 'Minuta')
+                    }
+                    dataPropietario={props.padron.data}
+                    api={`${serverURL}/Propietarios/Upload-info-propietario`}
+                    tipoDoc={ModeloProps2.tipDoc}
+                    request={ModeloProps2.request}
+                  />
+
+                  
                   ]}
                 />
               </div>

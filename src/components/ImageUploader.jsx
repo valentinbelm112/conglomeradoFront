@@ -26,7 +26,7 @@ const ImageUploader = (props) => {
     des_codigo_asoc: "",
     des_tipo_doc: ""
   });
-  const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
+
   // Supongamos que tienes una función para recuperar la imagen de la base de datos
   const fetchImageFromDatabase = async (desDni,codAs,desTipoDoc) => {
    console.log(desDni)
@@ -51,18 +51,20 @@ const ImageUploader = (props) => {
 
     if (props.documentoPropietario !== undefined) {
     // Llama a la función para recuperar la imagen
+
+    console.log(props.documentoPropietario.des_link_documento)
     setDbImage(props.documentoPropietario.des_link_documento);
     }
   
     
   
-
+   console.log(props);
 
   if(props.dataPropietario){
     setDatosDocumento({
       id_propietario: props.dataPropietario.id,
       ds_dni: props.dataPropietario.desDni,
-      des_codigo_asoc: props.dataPropietario.codigoAsociacion=== undefined&&props.dataPropietario.des_codigo_asociacion,
+      des_codigo_asoc: props.dataPropietario.codigoAsociacion,
                       
       des_tipo_doc: props.tipoDoc
     })
@@ -134,6 +136,8 @@ const ImageUploader = (props) => {
       formData.append('des_codigo_asoc', datosDocumento.des_codigo_asoc)
       formData.append('des_tipo_doc', datosDocumento.des_tipo_doc)
       
+
+      console.log(datosDocumento)
       await axios.post(props.api, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -186,7 +190,7 @@ const ImageUploader = (props) => {
           )}
         </div>
         <div style={buttonStyles}>
-          <button onClick={handleUpload} disabled={!uploadedImage || isUploading} style={{fontSize:`11px`}} type="button" className="btn btn-success">
+          <button onClick={handleUpload} disabled={dbImage==null? !uploadedImage || isUploading:true} style={{fontSize:`11px`}} type="button" className="btn btn-success">
             Enviar <SendIcon style={{height:`15px`}}/>
           </button>
           {isUploading && <p>Subiendo imagen...</p>}

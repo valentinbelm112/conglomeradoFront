@@ -192,8 +192,6 @@ const EditarPropietario =(props)=>{
       
             });
         
-
-  
     }
 
 
@@ -265,7 +263,8 @@ const EditarPropietario =(props)=>{
                         </div>
                         <form action="" className="login-form" onSubmit={enviarDatos}>
                             <div className="tilte-inscripcion-registro-padron-propietarios">
-                                Editar Información del Propietario</div>
+                                Editar Información del Propietario
+                            </div>
                             <div className="container-form-upload-inscripcion-directivos">
 
                                 <div className="row" style={{ width: '100%' }}>
@@ -286,8 +285,6 @@ const EditarPropietario =(props)=>{
                                             onChange={handleInputChange}
                                             disabled
                                         >
-
-
 
                                         </input>
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
@@ -517,24 +514,16 @@ const EditarPropietario =(props)=>{
                                             onChange={handleInputChange}
                                         >
 
-
                                         </input>
-
-
                                     </div>
                                 </div>
-
-
-
                             </div>
 
                             <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
 
 
-                                <button type="submit" class="btn-enviar-carga-masiva-directivos">Inscribir Propietario
+                                <button type="submit" className="btn-enviar-carga-masiva-directivos">Inscribir Propietario
                                 </button>
-
-
 
                             </div>
                         </form>

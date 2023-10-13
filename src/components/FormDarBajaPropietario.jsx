@@ -1,11 +1,11 @@
 import "./styles/DarBajaPropietario.scss"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
-import PostAddIcon from '@mui/icons-material/PostAdd';
 import { serverURL } from "../utils/Configuration";
 import { ToastContainer, toast } from 'react-toastify';
-const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
+const FormDarBajaPropietario = (props) => {
 
+    console.log(props);
     const [datos, setDatos] = useState({
         id_propietario:"",
         des_motivo: "",
@@ -25,16 +25,17 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
         event.preventDefault();
         console.log("Enviando")
         console.log("Enviando  + datos.fecha_documento");
-
+        
  
-        console.log(pdfFile)
-        console.log(datos)
+        //console.log(pdfFile)
+        //console.log(datos)
         const formData = new FormData();
-        console.log(typeof datos.fecha_documento + "Fechaaaaaa tipo datos")
+        //console.log( typeof datos.fec_baja + "Fecha tipo de datos")
         formData.append('file_upload_pdf', pdfFile)
         formData.append('id_propietario', datos.id_propietario)
         formData.append('des_obserbacioes', datos.des_obserbaciones)
         formData.append('des_motivo', datos.des_motivo)
+        formData.append('fec_baja', datos.fec_baja )
 
         fetch( `${serverURL}/Propietarios/Upload-info-baja-propietario`, {
             method: 'POST',
@@ -48,16 +49,18 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
 
                     throw new Error('Error de cliente: solicitud incorrecta.'); // Lanza un error personalizado para el código 400
                 } else if (data.status === 404) {
-                    // toast.error("Recurso no encontrado.");
+                    //toast.error("Recurso no encontrado.");
+
                     throw new Error('Recurso no encontrado.'); // Lanza un error personalizado para el código 404
 
                 } else if (data.status === 500) {
-                    //   toast.error("Error del servidor.");
+                    //toast.error("Error del servidor.");
+
                     throw new Error('Error del servidor.'); // Lanza un error personalizado para otros códigos de estado (500, etc.)
                 }
                 else {
-                    console.log(data); // Maneja la respuesta del servidor aquí
-                    RefrescarInformacion();
+                    //console.log(data); // Maneja la respuesta del servidor aquí
+                   // RefrescarInformacion();
                     toast.success("Estado Modificado satisfactoriamente");
                     const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
                     parrafo.style.top = '-100vh'
@@ -85,12 +88,10 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
           const base64Image = reader.result.split(',')[1];
           setPdfFile(base64Image);
         }
-        
-       
-    
     
       }
 
+    //console.log()
 
     const handleInputChange = (event) => {
         console.log(event.target.value + "input datos")
@@ -123,6 +124,7 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
                                 <div className="title-nuevo-propieatario-registro-formpadron-green  title-nuevo-dar-baja-registro-formpadron-black-div">
                                     Codigo de Propietario
                                 </div>
+
 
                                 <input
 

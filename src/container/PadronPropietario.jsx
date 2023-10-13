@@ -36,9 +36,11 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [togle, setTogle] = useState(true);
     const [clickR, setClickR] = useState(true);
     const [click, setClick] = useState(false)
+    const[clickBajaForm,setClickBajaForm] = useState(false);
 
-    const { isLoading, dataPropietario } = UseGetPadronPropietario(`${serverURL}/Propietarios/Obtener`, setRefrescar, EstadoGlobal)
+    const { isLoading, dataPropietario,codigoPropietario } = UseGetPadronPropietario(`${serverURL}/Propietarios/Obtener`, setRefrescar, EstadoGlobal)
 
+  
     const handleClickOpenEditFrom = (data, datainmueble) => {
         setClick(!click)
         SetExtraerDatosPerso(data);
@@ -211,6 +213,8 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         parrafo.style.top = '95px'
         console.log(clickR)
         setClickR(!clickR)
+        setClickBajaForm()
+        setClickR(!clickR)
     };
 
     const handleClickDarBajaOpenForm = () => {
@@ -224,8 +228,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         parrafo.style.top = '95px'
     };
 
-
-
     if (isLoading) {
 
         return (
@@ -234,7 +236,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
             </>
         )
     }
-
 
     return (
         <>
@@ -427,15 +428,14 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                     </table>
 
                                     {click && <EditarPropietario onClickEstado={setClick} enviarDatos={extraerDatosPerso} enviarDatos2={extraerDatosInmueble} refrescarInformacion={RefrescarInformacionEdit} />}
+                                    {clickBajaForm && <FormDarBajaPropietario RefrescarInformacion={RefrescarInformacion} CodigoPropietario={codigoPropietario}/>}
                                 </div>
                             </div>
                         </div>
+                        <div className="container-order-a-z-propietario">Número de registros :{refrescar.length}</div>
                     </div>
                     <ToastContainer />
                 </div>
-
-
-
             </div>
 
         </>
