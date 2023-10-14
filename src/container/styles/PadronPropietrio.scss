@@ -432,14 +432,14 @@
   /* Otros estilos aquí */
 }
 
-@media screen and (max-width: 1391px) {
+@media screen and (max-width: 1366px) {
   .conatiner-registro-padron-propietarios {
-    width: 85.5%;
+    width: 79.5%;
     margin-left: 2%;
   }
 
   .conatiner-registro-padron-propietarios-select-togle-false {
-    width: 82.5%;
+    width: 89%;
     margin-left: 2%;
     transition: width 2s ease;
     /* Agrega una transición suave a la propiedad left */
