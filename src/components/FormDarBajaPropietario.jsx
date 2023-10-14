@@ -1,20 +1,20 @@
 import "./styles/DarBajaPropietario.scss"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
-import PostAddIcon from '@mui/icons-material/PostAdd';
 import { serverURL } from "../utils/Configuration";
 import { ToastContainer, toast } from 'react-toastify';
-const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
+const FormDarBajaPropietario = (props) => {
 
+    console.log(props);
     const [datos, setDatos] = useState({
-        codigo_propietario: "",
+        id_propietario:"",
         des_motivo: "",
         fec_baja: "",
         des_obserbaciones: "",
         des_link_documento: ""
     });
+    const [pdfFile, setPdfFile] = useState(null);
 
-    
     const handleClickCloseForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
         parrafo.style.top = '-100vh'
@@ -24,22 +24,23 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
 
         event.preventDefault();
         console.log("Enviando")
-        console.log("Enviando  +datos.fecha_documento");
-        setDatos((prevData) => ({
-            ...prevData,
-            ['des_codigo_asociacion']: 'E00241'
-        }))
+        console.log("Enviando  + datos.fecha_documento");
+        
+ 
+        //console.log(pdfFile)
+        //console.log(datos)
+        const formData = new FormData();
+        //console.log( typeof datos.fec_baja + "Fecha tipo de datos")
+        formData.append('file_upload_pdf', pdfFile)
+        formData.append('id_propietario', datos.id_propietario)
+        formData.append('des_obserbacioes', datos.des_obserbaciones)
+        formData.append('des_motivo', datos.des_motivo)
+        formData.append('fec_baja', datos.fec_baja )
 
-        console.log(datos)
-
-
-        fetch(
-       `${serverURL}/Propietarios/update/${datos.codigo_propietario}`,
-       {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        }})
+        fetch( `${serverURL}/Propietarios/Upload-info-baja-propietario`, {
+            method: 'POST',
+            body: formData
+          })
             .then((data) => {
 
 
@@ -48,18 +49,20 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
 
                     throw new Error('Error de cliente: solicitud incorrecta.'); // Lanza un error personalizado para el código 400
                 } else if (data.status === 404) {
-                    // toast.error("Recurso no encontrado.");
+                    //toast.error("Recurso no encontrado.");
+
                     throw new Error('Recurso no encontrado.'); // Lanza un error personalizado para el código 404
 
                 } else if (data.status === 500) {
-                    //   toast.error("Error del servidor.");
+                    //toast.error("Error del servidor.");
+
                     throw new Error('Error del servidor.'); // Lanza un error personalizado para otros códigos de estado (500, etc.)
                 }
                 else {
-                    console.log(data); // Maneja la respuesta del servidor aquí
-                     RefrescarInformacion();
+                    //console.log(data); // Maneja la respuesta del servidor aquí
+                   // RefrescarInformacion();
                     toast.success("Estado Modificado satisfactoriamente");
-                    const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-add-import');
+                    const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
                     parrafo.style.top = '-100vh'
 
                 }
@@ -74,15 +77,31 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
 
     }
 
+  
+    const handleFile = (e) => {
+  
+        let selectedFile = e.target.files[0];
+    
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+        reader.onload = async () => {
+          const base64Image = reader.result.split(',')[1];
+          setPdfFile(base64Image);
+        }
+    
+      }
+
+    //console.log()
 
     const handleInputChange = (event) => {
         console.log(event.target.value + "input datos")
         setDatos({
-          ...datos,
-          [event.target.name]: event.target.value,
+            ...datos,
+            [event.target.name]: event.target.value,
         });
-      };
-    
+    };
+
+
     return (
         <>
             <div id="modal1" >
@@ -105,13 +124,14 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
                                 <div className="title-nuevo-propieatario-registro-formpadron-green  title-nuevo-dar-baja-registro-formpadron-black-div">
                                     Codigo de Propietario
                                 </div>
-                            
+
+
                                 <input
 
-                                        name="codigo_propietario"
-                                        type="text"
-                                        className="form-control upload-inscripcion-directivos"
-                                        onChange={handleInputChange} />
+                                    name="id_propietario"
+                                    type="text"
+                                    className="form-control upload-inscripcion-directivos"
+                                    onChange={handleInputChange} />
 
                                 <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-dar-baja-registro-formpadron-black-div">
                                     Motivo de la baja
@@ -132,7 +152,7 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
                                     Fecha de la baja
                                 </div>
                                 <input
-                                    type="text"
+                                    type="date"
                                     name="fec_baja"
 
                                     className="form-control upload-inscripcion-directivos"
@@ -155,32 +175,27 @@ const FormDarBajaPropietario = ({ RefrescarInformacion }) => {
 
                                 </textarea>
 
-
-
-                            </div>
-                            <div >
-                                Por favor Adjuntar documentacion que sustente la baja del propietario
-                            </div>
-
-   
-                            <div clae="btn-dar-baja-padron-propietarios-info" style={{ width: `100%` }}>
-
-                                <div className="row " >
-                                    <div className="col-md-8">
-                                        <input type="file" />
-                                    </div>
-                                    <div className="col-md-4">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <button type="submit" className="btn-dar-baja-masiva-cancel">Cancelar</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <button type="submit" className="btn-dar-baja-masiva-acep">Aceptar</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                <div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-dar-baja-registro-formpadron-black-div">
+                                    Por favor Adjuntar documentacion que sustente la baja del propietario
                                 </div>
+
+                                <input
+                                    type="file"
+
+
+                                    className="form-control upload-inscripcion-directivos"
+                                    onChange={handleFile}
+                                >
+
+
+                                </input>
+
+                            </div>
+
+                            <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
+
+                                <button type="submit" className="btn-enviar-carga-masiva-directivos">Dar de Baja</button>
+
                             </div>
                         </form>
 

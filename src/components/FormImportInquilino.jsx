@@ -6,13 +6,14 @@ import ExcelDownloadButton from './ExcelDownloadFormatoConsejo';
 import DownloadIcon from '@mui/icons-material/Download';
 import { serverURL } from "../utils/Configuration";
 import { ToastContainer, toast } from 'react-toastify';
-const FormInportPropietario = ({ RefrescarInformacion }) => {
+const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
    // onchange states
    const [excelFile, setExcelFile] = useState(null);
 
+
     const handleClickCloseForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
-        parrafo.style.top = '-580vh'
+        const parrafo = document.querySelector('#modal-mostrar-form-documento-inquilino-person-importar-excel');
+        parrafo.style.top = '-100vh'
     };
 
 
@@ -35,7 +36,7 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
  
         formData.append('file_upload_excel', excelFile)
 
-        fetch(`${serverURL}/Propietarios/Upload-info-directivo`, {
+        fetch(`${serverURL}/Socio/Upload-info-directivo`, {
             method: 'POST',
             body: formData
           })
@@ -58,8 +59,8 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
                     console.log(data); // Maneja la respuesta del servidor aquí
                     RefrescarInformacion();
                      toast.success("Registro exitoso del consejo directivo");
-                    const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-importar-excel');
-                    parrafo.style.top = '-100vh'
+                    const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-importar-excel');
+                    parrafo.style.top = '-540vh'
 
                 }
 
@@ -73,9 +74,10 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
 
     }
 
- return (
+
+    return (
         <>
-            <div id="modal1" >
+            <div id={clickR?'modal1':'modal1-sombra-form-import-Prop'} >
                 <div className="container-dar-baja-padron-propietario">
 
                     <div className="form form-registro-padron-propietario">
@@ -88,7 +90,7 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
                         </div>
                         <form className="form" onSubmit={enviarDatos}>
                             <div className="tilte-inscripcion-registro-padron-propietarios">
-                                Importar nuevos propietarios</div>
+                                Importar nuevos inquilinos</div>
                             <div className="container-form-darbaja-padron-propietarios">
 
                                <div className="row">
@@ -142,4 +144,4 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
 
 }
 
-export default FormInportPropietario;
+export default FormImportInquilino;

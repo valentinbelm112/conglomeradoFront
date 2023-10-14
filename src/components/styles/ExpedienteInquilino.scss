@@ -11,9 +11,16 @@
     color: #076024;
 
 }
-.container-expediente-socio-detalle{
+.container-expediente-inquilino-detalle{
     display: flex;
     justify-content: space-between;
+}
+.title-descargar-expediente-inquilino{
+    font-size: 15px;
+    text-align: start;
+    font-family: "Playfair Display", serif;
+    color: green;
+    font-weight: bold;
 }
 
 #mostrar-modal-documento-socio {

@@ -5,16 +5,23 @@ import "./styles/ExpedientePropietario.scss";
 import ModalImagesConglomerado from "./ModalImagesConglomerado";
 import ImageUploader from "./ImageUploader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
-import { South } from "@mui/icons-material";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
+import { serverURL } from "../utils/Configuration";
+import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Download from "yet-another-react-lightbox/plugins/download";
+import Captions from "yet-another-react-lightbox/plugins/captions";
 const ExpedientePropietario = (props) => {
+  const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [expedienteSelect, setExpedienteSelect] = useState(null);
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
-  const [coPropietarios,setCoPropietarios] = useState(null);
-  const [opcionSeleccionada, setOpcionSeleccionada] = useState('opcion1'); 
+  const [coPropietarios, setCoPropietarios] = useState(null);
+  const [opcionSeleccionada, setOpcionSeleccionada] = useState('opcion1');
 
   const navigate = useNavigate();
 
@@ -39,34 +46,48 @@ const ExpedientePropietario = (props) => {
 
     if (props.propietario.length > 0) {
       const foundCopropietario = props.propietario[0].propietario.filter(
-        (element) =>element.des_nombres !== props.nombreExpedienteProp
+        (element) => element.des_nombres !== props.nombreExpedienteProp
       );
       setCoPropietarios(foundCopropietario);
       console.log(foundCopropietario)
+      
     }
-    
-   
-   
+
+
+
     console.log(props);
   }, []);
 
+
   const ModeloProps1 = {
-    titulo: "Documento de compra-venta",
+    titulo: "Documento de compra y venta",
+    tipDoc: "ContratoCompraVenta",
+    request: `${serverURL}/Documento/propByDni/tipdoc/codAS`
+  }
+       
+  const ModeloProps2 = {
+    titulo: "Minuta",
+    tipDoc: "Minuta",
+    request: `${serverURL}/Documento/propByDni/tipdoc/codAS`
+  }
+    
+
+  const openModalDocBaja = () => {
+    setOpen(true);
   };
 
   const openModal = () => {
     setModalIsOpen(true);
   };
 
-
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
-  const ChangeRouter = (dni,id) => {
+  const ChangeRouter = (dni, id) => {
     console.log(dni + "Clic")
     // Actualizar los valores del DNI y el ID aquí
-  
+
     // Actualizar la URL
     navigate(`/expediente/${dni}/${id}`);
     window.location.reload();
@@ -87,22 +108,22 @@ const ExpedientePropietario = (props) => {
     console.log(inmuebleEncontrado);
     setSelectedValue(event.target.value);
     setInmuebleSelect(inmuebleEncontrado);
-    
+
     const foundCopropietario = props.propietario.filter(
-      (element) =>element.numPartida===event.target.value
+      (element) => element.numPartida === event.target.value
     )
-    
-    if(foundCopropietario.length>0){
+
+    if (foundCopropietario.length > 0) {
       console.log(foundCopropietario[0].propietario)
-      const coPropietarioDatos=foundCopropietario[0].propietario.filter(
-        (element) =>element.des_nombres !== props?.nombreExpedienteProp 
+      const coPropietarioDatos = foundCopropietario[0].propietario.filter(
+        (element) => element.des_nombres !== props?.nombreExpedienteProp
       );
-  
+
       console.log(coPropietarioDatos)
       setCoPropietarios(coPropietarioDatos);
 
     }
-  
+
 
   };
   const changeStado = () => {
@@ -119,10 +140,10 @@ const ExpedientePropietario = (props) => {
           <div className="Partida-registral-propietario-title">
             Partidas Registral del propietario:
           </div>
-          {props.partidasRegistrales.map((item)=>(
-             <div className="Partida-registral-propietario-title-p">
-             {item}
-             </div>
+          {props.partidasRegistrales.map((item) => (
+            <div className="Partida-registral-propietario-title-p">
+              {item}
+            </div>
           ))}
           <div className="container-expediente-radio-button">
             <input
@@ -157,7 +178,7 @@ const ExpedientePropietario = (props) => {
 
           <div className="container--expediente-propietario">
             <img
-              src={expedienteSelect?.des_url_foto}
+              src={"expedienteSelect?.des_url_foto"}
               alt=""
               className="foto-expediente-propietario"
             />
@@ -384,29 +405,62 @@ const ExpedientePropietario = (props) => {
                 </tr>
                 {coPropietarios?.length > 0 && (coPropietarios.map(
                   (elemento, index) =>
-                   
-                      <tr className="nombre-co-propietario">
-                        <td  key={index}>{elemento.des_nombres} </td>
-                       
-                          <td className="dni-co-propietario" onClick={() => ChangeRouter(elemento.desDni,elemento.id)} key={index} >
-                            {elemento.desDni}{" "}
-                          </td>
-                       
-                        <td key={index}>{elemento.des_dni_conyugue} </td>
-                      </tr>
-                   
+
+                    <tr className="nombre-co-propietario">
+                      <td key={index}>{elemento.des_nombres} </td>
+
+                      <td className="dni-co-propietario" onClick={() => ChangeRouter(elemento.desDni, elemento.id)} key={index} style={{cursor:'pointer'}}>
+                        {elemento.desDni}{" "}
+                      </td>
+
+                      <td key={index}>{elemento.des_dni_conyugue} </td>
+                    </tr>
+
                 ))}
               </table>
             </div>
-            <div className="col-5">
-              <div className="title-fecha-baja">Fecha baja</div>
-              <div className="title-fecha-baja">Mótivo de la baja</div>
-              <div className="title-fecha-baja">Observaciones Adicionales</div>
-            </div>
+       
+            {
+              props.padron.data.propietarioBajaDetEntities.length > 0 &&
+              <div className="col-5">
+                <div className="title-fecha-baja">Fecha baja:</div>
+                <div>
+                  {props.padron.data.propietarioBajaDetEntities[0].fec_baja}
+                </div>
+                <div className="title-motivo-baja">Mótivo de la baja: </div>
+                <div>
+                  {props.padron.data.propietarioBajaDetEntities[0].des_motivo}
+                </div>
+                <div className="title-observaciones-baja">Observaciones Adicionales:</div>
+                <div>
+                  {props.padron.data.propietarioBajaDetEntities[0].des_obserbaciones}
+                </div>
+                <div className="title-observaciones-baja">Revisar Documentos</div>
+                <input onClick={openModalDocBaja} id="mostrar-modal-documento-baja-socio" name="modal" type="radio" />
+
+                <label for="mostrar-modal-documento-baja-socio">
+                  {" "}
+                  <FontAwesomeIcon icon={faEye} />{" "}
+                </label>
+
+                <Lightbox
+                       plugins={[Zoom,Download,Captions]}
+                            open={open}
+                            close={() => setOpen(false)}
+                            slides={[
+                            { src: props.padron.data.propietarioBajaDetEntities[0].des_link_documento ,
+                            title: "Documento de la baja de un propietario"
+                            }  ]}
+                        />
+              </div>
+            }
+
+                  
+
             <div className="Documentos-asociado-padron-propietario">
-              Documentos del asociado
+              Documentos del Propietario
             </div>
-            <p>Adjuntar documentacion del asociado</p>
+            <p>Adjuntar documentacion del Propietario</p>
             <div className="row">
               <div className="col-md-3">
                 <input
@@ -427,10 +481,25 @@ const ExpedientePropietario = (props) => {
                     <ImageUploader
                       info={ModeloProps1}
                       documentoPropietario={
-                        props.padron.data.documentoPropietarioEntities
+                        props.padron.data.documentoPropietarioEntities.find(item => item.desTipoDoc === 'ContratoCompraVenta')
                       }
-                      dataPropietario={ props.padron.data}
+                      dataPropietario={props.padron.data}
+                      api={`${serverURL}/Propietarios/Upload-info-propietario`}
+                      tipoDoc={ModeloProps1.tipDoc}
+                      request={ModeloProps1.request}
                     />,
+                    <ImageUploader
+                    info={ModeloProps2}
+                    documentoPropietario={
+                      props.padron.data.documentoPropietarioEntities.find(item => item.desTipoDoc === 'Minuta')
+                    }
+                    dataPropietario={props.padron.data}
+                    api={`${serverURL}/Propietarios/Upload-info-propietario`}
+                    tipoDoc={ModeloProps2.tipDoc}
+                    request={ModeloProps2.request}
+                  />
+
+                  
                   ]}
                 />
               </div>

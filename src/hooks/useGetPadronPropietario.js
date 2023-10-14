@@ -4,13 +4,23 @@ import axios from "axios";
 export const UseGetPadronPropietario=(API,setRefrescar,auth)=>{
   
     const[isLoading,SetLoading]=useState(true);
-    const [dataPropietario,SetDataPropietario]=useState(null)
+    const [dataPropietario,SetDataPropietario]=useState(null);
+    const [codigoPropietario,SetCodigoPropietario]=useState(null)
     console.log(auth)
     const doSomething = async() =>{
         console.log(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`)
         const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
         console.log(API);
         console.log(response)
+
+        const codigoPropietario= response.data.map((e)=>({
+            value:  e.codigoPropietario  ,   label: e.codigoPropietario
+            
+        
+   }));
+
+        //console.log(codigoPropietario);
+        SetCodigoPropietario(codigoPropietario);
         SetDataPropietario(response);
         SetLoading(false);
         setRefrescar(response.data)
@@ -22,7 +32,9 @@ export const UseGetPadronPropietario=(API,setRefrescar,auth)=>{
         doSomething();
       
       }, []);
-      return { dataPropietario, isLoading };
+
+      
+      return { dataPropietario, isLoading, codigoPropietario };
 }
 
 

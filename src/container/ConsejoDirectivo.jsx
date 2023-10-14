@@ -54,9 +54,18 @@ const ConsejoDirectivo = () => {
    console.log(refrescar)
     const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
    setRefrescar(response.data)
-   setClick(!click)
    console.log(refrescar)
   }
+
+  const RefrescarInformacionEdit = async() => {
+    console.log( refrescar.length)
+    console.log(refrescar)
+     const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
+    setRefrescar(response.data)
+    setClick(!click)
+    console.log(refrescar)
+   }
+ 
 
   const HandleDownloadExcel=()=>{
   console.log("EEE")
@@ -65,6 +74,7 @@ const ConsejoDirectivo = () => {
   }
 
   const DeleteRegisterConsejo=async(id)=>{
+    toast.dismiss();
     console.log(id + "identificador")
     await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
     const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
@@ -72,6 +82,50 @@ const ConsejoDirectivo = () => {
   }
 
 
+  
+
+  const handleDeleteDirectivoR = (id) => {
+    toast.info(
+      <div>
+        <p>¿Está seguro de que desea eliminar este registro?</p>
+        <div>
+          <button
+            className="btn btn-success mx-2" // Botón verde con espacio horizontal
+            onClick={ () =>DeleteRegisterConsejo(id)}
+          >
+           
+            Eliminar
+          </button>
+          <button
+            className="btn btn-danger mx-2" // Botón rojo con espacio horizontal
+            onClick={handleCancelDelete}
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>,
+      {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: false, // No se cerrará automáticamente
+        closeButton: false, // Sin botón de cierre
+        draggable: false, // No se puede arrastrar
+        closeOnClick: false, // No se cierra al hacer clic
+      }
+    );
+  };
+
+  const handleConfirmDelete = () => {
+    // Lógica para eliminar el registro
+     // Cierra la notificación de confirmación
+    // Otras acciones después de la confirmación
+  };
+
+  const handleCancelDelete = () => {
+    toast.dismiss(); // Cierra la notificación de confirmación
+    // Otras acciones después de cancelar
+  };
+
+  
   if (isLoading || isLoadingDoc) {
 
     return (
@@ -123,6 +177,8 @@ const ConsejoDirectivo = () => {
                     <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Apellidos</th>
                     <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>DNI</th>
                     <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Cargo</th>
+                    <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Teléfono</th>
+                    <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Dirección</th>
                     <th scope="col" style={{backgroundColor: 'lightblue', padding: '8px',  borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white' ,whiteSpace: 'nowrap'}}>Acción</th>
                   </tr>
                 </thead>
@@ -138,11 +194,12 @@ const ConsejoDirectivo = () => {
                       <td>{directivo.des_apellidos}</td>
                       <td>{directivo.dni}</td>
                       <td>{directivo.des_cargo}</td>
-
+                      <td>{directivo.num_telefono}</td>
+                      <td>{directivo.des_direccion}</td>
                       <td>
                         <div className="table-column-gestion-info-directivo">
                          
-                          <button className="btn-gestion-delete-info-directivo "onClick={() =>DeleteRegisterConsejo(directivo.id)}>
+                          <button className="btn-gestion-delete-info-directivo "onClick={() =>handleDeleteDirectivoR(directivo.id)}>
                             <DeleteForeverIcon style={{ color: `red` }} 
                             />
                           </button>
@@ -164,7 +221,7 @@ const ConsejoDirectivo = () => {
               </table>
                 </div>
                 </div>
-                {click&& <FormEditarDirectivos enviarDatos={extraerDatos} refrescarInformacion={RefrescarInformacion} onClickEstado={setClick} />}
+                {click&& <FormEditarDirectivos enviarDatos={extraerDatos} refrescarInformacion={RefrescarInformacionEdit} onClickEstado={setClick} />}
             </div>
 
             <div className="col-md-4">

@@ -14,14 +14,8 @@ const FormEditarDirectivos = ( props ) => {
 const [datos, setDatos] = useState(props.enviarDatos);
 
 const [formData, setFormData] = useState(props.enviarDatos);
- 
-
-console.log(props.enviarDatos)
-
-console.log(props.enviarDatos.des_nombres)
-
- 
-const handleClickCloseFrom = () => {
+  
+const handleClickCloseForm = () => {
   props.onClickEstado(false)
   };
 
@@ -42,6 +36,7 @@ const handleClickCloseFrom = () => {
     console.log(datos);
     console.log(formData);
      
+    
     // Realizar la solicitud POST con Axios
     //http://localhost:8080/upload/imagenes
     fetch(`${serverURL}/CGM/update/${datos.id}`, {
@@ -69,7 +64,7 @@ const handleClickCloseFrom = () => {
         else {
           console.log(data); // Maneja la respuesta del servidor aquí
           props.refrescarInformacion();
-          toast.success("Registro exitoso del consejo directivo");
+          toast.success("Actualización exitosa del consejo directivo");
           const parrafo = document.querySelector('#modal');
           parrafo.style.top = '-100vh'
 
@@ -93,7 +88,7 @@ const handleClickCloseFrom = () => {
           <div className="close-form-edit-directivo" >
             <input id="cerrar-modal" name="modal" type="radio" />
             <label for="cerrar-modal">
-              <CloseIcon onClick={handleClickCloseFrom} style={{ position: `absolute` }} className="icono-close-edit-directivo" /> </label>
+              <CloseIcon onClick={handleClickCloseForm} style={{ position: `absolute` }} className="icono-close-edit-directivo" /> </label>
           </div>
 
           <form action="" className="login-form" onSubmit={enviarDatos}>

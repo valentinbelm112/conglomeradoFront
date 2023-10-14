@@ -41,11 +41,18 @@
 }
 
 .outer-table-registro-propietario {
+
   overflow-y: auto;
-  height: 50vh;
+  height: 60vh;
+
 }
 
+/* Deshabilitar overflow-x:auto en .table-responsive */
+.table-responsive {
+  overflow-x: initial !important;
+}
 .outer-table-registro-propietario {
+
   width: 100%;
   -layout: fixed;
 }
@@ -418,8 +425,8 @@
 
 @media screen and (min-width: 1391px) {
   .conatiner-registro-padron-propietarios {
-    width: 81%;
-    margin-left: 2%;
+    width: 83.5%;
+    margin-left: 1%;
   }
 
   .conatiner-registro-padron-propietarios-select-togle-false {
@@ -434,8 +441,8 @@
 
 @media screen and (max-width: 1366px) {
   .conatiner-registro-padron-propietarios {
-    width: 79.5%;
-    margin-left: 2%;
+    width: 85.5%;
+    margin-left: 1%;
   }
 
   .conatiner-registro-padron-propietarios-select-togle-false {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -23,52 +23,108 @@ import { Link } from 'react-router-dom';
 import FormInportPropietario from "../components/FormImportarPropietarios";
 import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
-
-const PadronPropietario = ({EstadoGlobal}) => {
-
-    const[open,setOpen]=useState(false);
-    const[openElement,setOpenElement]=useState(false);
+import EditarPropietario from "../components/FormEditarPropietarios";
+import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario";
+const PadronPropietario = ({ EstadoGlobal }) => {
+    const [extraerDatosPerso, SetExtraerDatosPerso] = useState([])
+    const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([])
+    const [open, setOpen] = useState(false);
+    const [openElement, setOpenElement] = useState(false);
     const [refrescar, setRefrescar] = useState([]);
     const [search, setSearch] = useState([]);
     const [sortOrder, setSortOrder] = useState('asc');
     const [togle, setTogle] = useState(true);
     const [clickR, setClickR] = useState(true);
+    const [click, setClick] = useState(false)
+    const[clickBajaForm,setClickBajaForm] = useState(false);
+
+    const { isLoading, dataPropietario,codigoPropietario } = UseGetPadronPropietario(`${serverURL}/Propietarios/Obtener`, setRefrescar, EstadoGlobal)
 
   
-    const { isLoading, dataPropietario } = UseGetPadronPropietario(`${serverURL}/Propietarios/Obtener`, setRefrescar,EstadoGlobal)
-  
+    const handleClickOpenEditFrom = (data, datainmueble) => {
+        setClick(!click)
+        SetExtraerDatosPerso(data);
+        SetExtraerDatosInmueble(datainmueble);
 
-    const DeleteRegisterConsejo=async(id)=>{
-        console.log(id + "identificador")
-        //await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
-       // const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
-       //setRefrescar(response.data)
-      }
-    
+    };
 
-      const Estado=()=>{
-       
+    const DeletePropietarioRegistro = async (id1, id2) => {
+        toast.dismiss();
+
+        await UseDeletePadronPropietario(`${serverURL}/Propietarios/delete/${id1}/${id2}`);
+        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Propietarios/Obtener`, EstadoGlobal)
+        setRefrescar(response.data)
+
+    }
+
+    const handleDeletePropietarioR = (id1, id2) => {
+        toast.info(
+            <div>
+                <p>¿Está seguro de que desea eliminar este registro?</p>
+                <div>
+                    <button
+                        className="btn btn-success mx-2" // Botón verde con espacio horizontal
+                        onClick={() => DeletePropietarioRegistro(id1, id2)}
+                    >
+
+                        Eliminar
+                    </button>
+                    <button
+                        className="btn btn-danger mx-2" // Botón rojo con espacio horizontal
+                        onClick={handleCancelDelete}
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            </div>,
+            {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: false, // No se cerrará automáticamente
+                closeButton: false, // Sin botón de cierre
+                draggable: false, // No se puede arrastrar
+                closeOnClick: false, // No se cierra al hacer clic
+            }
+        );
+    };
+
+    const handleCancelDelete = () => {
+        toast.dismiss(); // Cierra la notificación de confirmación
+        // Otras acciones después de cancelar
+    };
+
+
+    const DeleteRegisterConsejo = async (id1, id2) => {
+
+
+        await UseDeletePadronPropietario(`${serverURL}/Propietarios/delete/${id1}/${id2}`);
+        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Propietarios/Obtener`, EstadoGlobal)
+        setRefrescar(response.data)
+    }
+
+
+    const Estado = () => {
+
         setOpen(!open)
-       }
+    }
 
 
-      useEffect(() => {
+    useEffect(() => {
         // Función para verificar el tamaño de la pantalla y actualizar el estado
         const checkScreenSize = () => {
-            setOpen(window.innerWidth >767); // Cambiar a true si el ancho de la pantalla es menor a 768px
-           setOpenElement(window.innerWidth >767)
-       
+            setOpen(window.innerWidth > 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
+            setOpenElement(window.innerWidth > 767)
+
         };
-    
+
         // Verificar el tamaño de la pantalla al cargar el componente y cada vez que cambie el tamaño de la ventana
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
-    
+
         // Limpiar el event listener al desmontar el componente
         return () => {
-          window.removeEventListener('resize', checkScreenSize);
+            window.removeEventListener('resize', checkScreenSize);
         };
-      }, []);
+    }, []);
 
     const ExportarPropietario = () => {
 
@@ -77,46 +133,56 @@ const PadronPropietario = ({EstadoGlobal}) => {
 
     }
 
+    const RefrescarInformacionEdit = async () => {
+        console.log(refrescar.length)
+        console.log(refrescar)
+        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Propietarios/Obtener`, EstadoGlobal)
+        setRefrescar(response.data)
+        setRefrescar(response.data)
+        setClick(!click)
+        console.log(refrescar)
+    }
+
 
     const handleSearch = (e) => {
         const searchText = e.value;
 
-    if (typeof searchText === 'string') {
-        // Si searchText es una cadena (texto), aplicamos toUpperCase
-        const searchTextUpper = searchText.toUpperCase();
+        if (typeof searchText === 'string') {
+            // Si searchText es una cadena (texto), aplicamos toUpperCase
+            const searchTextUpper = searchText.toUpperCase();
 
-        setSearch(refrescar.filter(item => 
-            item.desDni?.includes(searchText) || 
-            item.des_Apellidos?.toUpperCase().includes(searchTextUpper) || 
-            item.des_nombres?.toUpperCase().includes(searchTextUpper)
-        ));
-    } else if (typeof searchText === 'number') {
-        // Si searchText es un número, no aplicamos toUpperCase
-        setSearch(refrescar.filter(item => 
-            item.desDni?.includes(searchText.toString()) ||
-            item.des_Apellidos?.includes(searchText.toString()) ||
-            item.des_nombres?.includes(searchText.toString())
-        ));
-    } else {
-        // Manejar otros tipos de datos si es necesario
-        console.log('Tipo de búsqueda no admitido');
-    }
+            setSearch(refrescar.filter(item =>
+                item.desDni?.includes(searchText) ||
+                item.des_Apellidos?.toUpperCase().includes(searchTextUpper) ||
+                item.des_nombres?.toUpperCase().includes(searchTextUpper)
+            ));
+        } else if (typeof searchText === 'number') {
+            // Si searchText es un número, no aplicamos toUpperCase
+            setSearch(refrescar.filter(item =>
+                item.desDni?.includes(searchText.toString()) ||
+                item.des_Apellidos?.includes(searchText.toString()) ||
+                item.des_nombres?.includes(searchText.toString())
+            ));
+        } else {
+            // Manejar otros tipos de datos si es necesario
+            console.log('Tipo de búsqueda no admitido');
+        }
     };
 
-    
+
     const handleSort = () => {
         const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
         console.log(refrescar)
         setSortOrder(newOrder);
-    
+
         const sortedPadronPropietario = [...refrescar].sort((a, b) => {
             // Manejar los valores null
             const desDniA = a.desDni || ''; // Si desDni es null, asigna una cadena vacía
             const desDniB = b.desDni || ''; // Si desDni es null, asigna una cadena vacía
-    
+
             return newOrder === 'asc' ? desDniA.localeCompare(desDniB) : desDniB.localeCompare(desDniA);
         });
-    
+
         setRefrescar(sortedPadronPropietario);
     };
 
@@ -135,17 +201,19 @@ const PadronPropietario = ({EstadoGlobal}) => {
 
     const RefrescarInformacion = async () => {
 
-        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Propietarios/Obtener`,EstadoGlobal)
+        const { response } = await useGetPadronPropietarioComponenteRender(`${serverURL}/Propietarios/Obtener`, EstadoGlobal)
         setRefrescar(response.data)
 
     }
 
 
-    
+
     const handleClickOpenForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
         parrafo.style.top = '95px'
         console.log(clickR)
+        setClickR(!clickR)
+        setClickBajaForm()
         setClickR(!clickR)
     };
 
@@ -154,12 +222,11 @@ const PadronPropietario = ({EstadoGlobal}) => {
         parrafo.style.top = '95px'
     };
 
+
     const handleClickOpenImportForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
         parrafo.style.top = '95px'
     };
-
-
 
     if (isLoading) {
 
@@ -170,20 +237,18 @@ const PadronPropietario = ({EstadoGlobal}) => {
         )
     }
 
-
     return (
         <>
             <div className="navbar-sidebar-directivos">
-                <NavbarConglomerado  Estado={Estado}/> 
+                <NavbarConglomerado Estado={Estado} />
                 <div className="container-Sidebar-view-directivo">
-                {
-           <div className={`${openElement ?null   :`sidebar-menu-CGM  ${open ? 'active' : ''}`}`}>
-            <SidebarMenu setTogle={setTogle} />
-            </div>
-           } 
+                    {
+                        <div className={`${openElement ? null : `sidebar-menu-CGM  ${open ? 'active' : ''}`}`}>
+                            <SidebarMenu setTogle={setTogle} />
+                        </div>
+                    }
 
-         
-           <div className={`${togle ?'conatiner-registro-padron-propietarios'   :'conatiner-registro-padron-propietarios-select-togle-false' }`}>
+                    <div className={`${togle ? 'conatiner-registro-padron-propietarios' : 'conatiner-registro-padron-propietarios-select-togle-false'}`}>
                         <div className="title-Inquilinos-registrados">
                             Propietarios Registrados
                         </div>
@@ -200,14 +265,14 @@ const PadronPropietario = ({EstadoGlobal}) => {
                                 </div>
                             </div>
                             <div className="col-md-7 upload-documents-propietarios">
-                                
+
                                 <div className="row">
                                     <div className="col-auto registrar-nuevo-propietarios-add-delete-export-import">
                                         <div>
                                             <input id="mostrar-form-documento-propietarios-person-add" name="modal" type="radio" />
                                             <label for="mostrar-form-documento-propietarios-person-add" onClick={handleClickOpenForm}> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
                                             <div id="modal-mostrar-form-documento-socios-person-add-import">
-                                                <RegistrarNuevoPropietario RefrescarInformacion={RefrescarInformacion} clickR={clickR} setClickR={setClickR} EstadoGlobal={EstadoGlobal}/>
+                                                <RegistrarNuevoPropietario RefrescarInformacion={RefrescarInformacion} clickR={clickR} setClickR={setClickR} EstadoGlobal={EstadoGlobal} />
                                             </div>
                                         </div>
 
@@ -251,30 +316,30 @@ const PadronPropietario = ({EstadoGlobal}) => {
                             </div>
                             <div className=" col-md-2 container-title-show-iamgen-ins">
                                 <div>
-                                <input
-                 
+                                    <input
+
                                         id="mostrar-modal-documento-propietario"
                                         name="modal"
                                         type="radio"
-                                        />
+                                    />
 
-                                        <label for="mostrar-modal-documento-propietario">
+                                    <label for="mostrar-modal-documento-propietario">
                                         {" "}
-                                        <FontAwesomeIcon icon={faFolderOpen} />{" "}
-                                        </label>
+                                        <FontAwesomeIcon icon={faFolderOpen} />{""}
+                                    </label>
 
                                 </div>
-                           
-                
-                  </div>
-                </div>
-                        <div class="card-body">
+
+
+                            </div>
+                        </div>
+                        <div class="card-body" style={{ marginTop: `13px` }}>
                             <div class="outer-table-registro-propietario ">
-                                <div className="table-responsive container-list-table-registro-propietarios" style={{ marginTop: `13px` }}>
+                                <div className="table-responsive container-list-table-registro-propietarios" >
                                     <table class="table table-bordered table-condensed table-hover table-striped">
                                         <thead >
                                             <tr >
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '7px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px' ,color:'#56688a'}}>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '7px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             Codigo Propietario
@@ -285,17 +350,18 @@ const PadronPropietario = ({EstadoGlobal}) => {
                                                     </div>
 
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px',color:'#56688a' }}>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             Apellidos Completos
+
                                                         </div>
                                                         <button className="title-codigo-propietario" onClick={handleSortApellidos}>
                                                             <FontAwesomeIcon icon={faArrowDownAZ} style={{ color: `red` }} />
                                                         </button>
                                                     </div></th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px',color:'#56688a' }}>Nombres Completos</th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px',color:'#56688a' }}>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>Nombres Completos</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>
                                                     <div className="container-order-a-z-propietario">
                                                         <div>
                                                             DNI
@@ -305,54 +371,54 @@ const PadronPropietario = ({EstadoGlobal}) => {
                                                         </button>
                                                     </div>
                                                 </th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Nª Partida</th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Oficina Principal</th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Tipo Dominio</th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Dirección</th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Estado</th>
-                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Acción</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px', color: '#56688a' }}>Nª Partida</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px', color: '#56688a' }}>Oficina Principal</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px', color: '#56688a' }}>Tipo Dominio</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px', color: '#56688a' }}>Dirección</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px', color: '#56688a' }}>Estado</th>
+                                                <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px', color: '#56688a' }}>Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
                                                 (search.length === 0 ? refrescar : search).map((propietario) => (
-                                                    propietario.inmuebleEntities.map((indexInmueble)=>(
+                                                    propietario.inmuebleEntities.map((indexInmueble) => (
                                                         <tr>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.codigoPropietario}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.des_Apellidos}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.des_nombres}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
-                                                            <Link to={`/expediente/${propietario.desDni}/${propietario.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                                                {propietario.desDni}
-                                                            </Link>
-                                                        </td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.numPartida}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_oficina_registral}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_tipo_dominio}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{indexInmueble.des_direccion}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>{propietario.des_estado}</td>
-                                                        <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
-                                                            <div className="table-column-gestion-info-propietario">
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{propietario.codigoPropietario}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{propietario.des_Apellidos}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{propietario.des_nombres}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+                                                                <Link to={`/expediente/${propietario.desDni}/${propietario.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                                    {propietario.desDni}
+                                                                </Link>
+                                                            </td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.numPartida}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.des_oficina_registral}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.des_tipo_dominio}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.des_direccion}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{propietario.des_estado}</td>
+                                                            <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+                                                                <div className="table-column-gestion-info-propietario">
 
-                                                                <button className="btn-gestion-delete-info-propietario " onClick={() =>DeleteRegisterConsejo()}>
-                                                                    <DeleteForeverIcon style={{ color: `red` }}
-                                                                    />
-                                                                </button>
+                                                                    <button className="btn-gestion-delete-info-propietario " onClick={() => handleDeletePropietarioR(propietario.id, indexInmueble.id)}>
+                                                                        <DeleteForeverIcon style={{ color: `red` }}
+                                                                        />
+                                                                    </button>
 
-                                                                <button className="btn-gestion-edit-info-directivo">
-                                                                    <input id="mostrar-modal-editar" name="modal" type="radio" />
+                                                                    <button className="btn-gestion-edit-info-directivo">
+                                                                        <input id="mostrar-modal-editar" name="modal" type="radio" />
 
-                                                                    <label for="mostrar-modal-editar" >  <EditIcon color="primary" /> </label>
-                                                                </button>
+                                                                        <label onClick={(e) => handleClickOpenEditFrom(propietario, indexInmueble)} for="mostrar-modal-editar" >  <EditIcon color="primary" /> </label>
+                                                                    </button>
 
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                     )
 
                                                     )
 
-                                                   
+
 
                                                 ))
                                             }
@@ -361,16 +427,15 @@ const PadronPropietario = ({EstadoGlobal}) => {
                                         </tbody>
                                     </table>
 
-
+                                    {click && <EditarPropietario onClickEstado={setClick} enviarDatos={extraerDatosPerso} enviarDatos2={extraerDatosInmueble} refrescarInformacion={RefrescarInformacionEdit} />}
+                                    {clickBajaForm && <FormDarBajaPropietario RefrescarInformacion={RefrescarInformacion} CodigoPropietario={codigoPropietario}/>}
                                 </div>
                             </div>
                         </div>
+                        <div className="container-order-a-z-propietario">Número de registros :{refrescar.length}</div>
                     </div>
                     <ToastContainer />
-           </div>
-                  
-            
-           
+                </div>
             </div>
 
         </>

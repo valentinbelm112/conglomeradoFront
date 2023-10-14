@@ -26,13 +26,13 @@ const ImageUploader = (props) => {
     des_codigo_asoc: "",
     des_tipo_doc: ""
   });
-  const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
+
   // Supongamos que tienes una función para recuperar la imagen de la base de datos
   const fetchImageFromDatabase = async (desDni,codAs,desTipoDoc) => {
    console.log(desDni)
    console.log(codAs)
    console.log(desTipoDoc)
-   await axios.get(`${serverURL}/Documento/propByDni/tipdoc/codAS?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+   await axios.get(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
       .then(response => {
         // Handle the response data
         console.log(response)
@@ -45,23 +45,31 @@ const ImageUploader = (props) => {
   };
 
   useEffect(() => {
- 
-    console.log(props.dataPropietario)
-    // Verifica si props.documentoPropietario[0].des_link_documento existe
-  if (props.documentoPropietario[0] && props.documentoPropietario[0].des_link_documento) {
+    setUploadedImage(null);
+    setDbImage(null)
+    
+
+    if (props.documentoPropietario !== undefined) {
     // Llama a la función para recuperar la imagen
-    setDbImage(props.documentoPropietario[0].des_link_documento);
-  }
+
+    console.log(props.documentoPropietario.des_link_documento)
+    setDbImage(props.documentoPropietario.des_link_documento);
+    }
+  
+    
+  
+   console.log(props);
 
   if(props.dataPropietario){
     setDatosDocumento({
       id_propietario: props.dataPropietario.id,
       ds_dni: props.dataPropietario.desDni,
-      des_codigo_asoc: props.dataPropietario.codigoAsociacion=== undefined&&props.dataPropietario.des_codigo_asociacion,
-      des_tipo_doc: "DocProp"
+      des_codigo_asoc: props.dataPropietario.codigoAsociacion,
+                      
+      des_tipo_doc: props.tipoDoc
     })
   }
-  }, []);
+  }, [props.documentoPropietario]);
 
   const onDrop = (acceptedFiles) => {
     // Tomar solo la primera imagen si se cargan múltiples imágenes
@@ -120,7 +128,7 @@ const ImageUploader = (props) => {
         setUploadedImage(reader.result);
       };
       // Crea un objeto FormData y agrega la imagen a él.
-      console.log(uploadedImage)
+      //console.log(uploadedImage)
       const formData = new FormData();
       formData.append('file_upload_pdf', uploadedImage);
       formData.append('id_propietario',datosDocumento.id_propietario)
@@ -128,6 +136,8 @@ const ImageUploader = (props) => {
       formData.append('des_codigo_asoc', datosDocumento.des_codigo_asoc)
       formData.append('des_tipo_doc', datosDocumento.des_tipo_doc)
       
+
+      console.log(datosDocumento)
       await axios.post(props.api, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -135,8 +145,10 @@ const ImageUploader = (props) => {
       })
         .then((response) => {
           
+          
           fetchImageFromDatabase(datosDocumento.ds_dni,datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
-          // Maneja la respuesta del servidor si es necesario.
+          //Maneja la respuesta del servidor si es necesario.
+
           console.log(response.data);
         })
         .catch((error) => {
@@ -178,7 +190,7 @@ const ImageUploader = (props) => {
           )}
         </div>
         <div style={buttonStyles}>
-          <button onClick={handleUpload} disabled={!uploadedImage || isUploading} style={{fontSize:`11px`}} type="button" className="btn btn-success">
+          <button onClick={handleUpload} disabled={dbImage==null? !uploadedImage || isUploading:true} style={{fontSize:`11px`}} type="button" className="btn btn-success">
             Enviar <SendIcon style={{height:`15px`}}/>
           </button>
           {isUploading && <p>Subiendo imagen...</p>}

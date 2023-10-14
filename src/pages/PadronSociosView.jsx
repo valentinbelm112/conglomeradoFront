@@ -1,5 +1,5 @@
 import React , { useEffect,  useContext }from "react";
-import ListProdronSocios from "../container/PadronSocios";
+import ListPadronSocios from "../container/PadronSocios";
 import AuthContext from "../context/AuthContext";
 const PadronSociosView=()=>{
     
@@ -15,7 +15,7 @@ const PadronSociosView=()=>{
     return(
         <>
          {
-            auth &&<ListProdronSocios EstadoGlobal={auth} />
+            auth &&<ListPadronSocios EstadoGlobal={auth} />
           } 
         </>
            

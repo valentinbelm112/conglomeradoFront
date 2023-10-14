@@ -1,5 +1,5 @@
 
-.container-registro-padron-propietario{
+.container-registro-padron-inquilino{
     width: 100%;
    // height: 100%;
     display: flex;
@@ -7,8 +7,7 @@
     
 }
 
-
-.container-registro-padron-propietario .form-registro-padron-propietario{
+.container-registro-padron-inquilino .form-registro-padron-inquilino{
     width: 55%;
     border-radius: 2%;
     //border: 1px solid var(--very-light-pink);
@@ -18,8 +17,7 @@
 }
 
 
-
-.title-nuevo-propieatario-registro-formpadron-black-div{
+.title-nuevo-inquilino-registro-formpadron-black-div{
     font-family: "Roboto", sans-serif;
     color: rgb(33, 33, 33);
    
@@ -27,7 +25,8 @@
      font-size: 15px;
 }
 
-.tilte-inscripcion-registro-padron-propietarios{
+
+.tilte-inscripcion-registro-padron-inquilinos{
     font-family: "Playfair Display", serif;
     color: rgb(33, 33, 33);
     text-align: center;
@@ -35,12 +34,13 @@
      font-size: 20px;
     ///font-size: 12px;
     //font-weight: bold;
-    padding: 1%;
+    padding-top: 1%;
     //background: linear-gradient(to left, #0f5694 0, #1e5d88 25%, #3a87b3 50%, #30a3bb 75%, #63f2f5 100%);
     border-radius: 5px;
     height: 5%;
     color: #424040;
 }
+
 
 .tilte-fecha-registro-directivo{
     font-family: "Roboto", sans-serif;
@@ -166,7 +166,7 @@ width: 98%;
 
 
 
-.btn-register-padron-propietarios-info{
+.btn-register-padron-inquilinos-info{
     margin-top: 1.5%;
     display: flex;
     justify-content: center;
@@ -174,7 +174,7 @@ width: 98%;
    
 }
  
-.btn-register-padron-propietarios-info button {
+.btn-register-padron-inquilinos-info button {
     width: 98%;
    background-color: #787474;
    
@@ -198,6 +198,30 @@ width: 98%;
     background-color: rgba(99, 95, 95, 0.75) !important;
 }
 
-#modal1-sombra-form-Prop .container-registro-padron-propietario{
+#modal1-sombra-form-Prop .container-registro-padron-inquilino{
     margin-top: 5%;
+}
+
+
+.tile-form-register-inquilino-datos-personales{
+    font-family: "Roboto", sans-serif;
+    color: rgb(173, 38, 38);
+    font-weight: bold;
+     font-size: 17px;
+}
+
+
+.tile-form-register-inquilino-datos-inmueble{
+    font-family: "Roboto", sans-serif;
+    color: rgb(173, 38, 38);
+    font-weight: bold;
+     font-size: 17px;
+}
+
+
+.tile-form-register-inquilino-datos-contacto{
+    font-family: "Roboto", sans-serif;
+    color: rgb(173, 38, 38);
+    font-weight: bold;
+     font-size: 17px;
 }

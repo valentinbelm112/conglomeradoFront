@@ -10,16 +10,9 @@ import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/plugins/captions.css";
 import CloseIcon from '@mui/icons-material/Close';
 import { format } from 'date-fns';
-const ShowRegistroDirectivo = (props) => {
+const ShowDocumentoBaja = (props) => {
     const [open, setOpen] = useState(false);
-    console.log(props);
-    const images = [
-        "https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1"
-      ]
     const [combo,SetCombo]=useState(1)
-    
- 
-
     const handleChange = (event) => {
         console.log("RRRRRRRRRRRRR")
         console.log(`Seleccionaste ${event.target.value}`);
@@ -27,6 +20,7 @@ const ShowRegistroDirectivo = (props) => {
      
         setTimeout(() => console.clear(), 1000);
     }
+
 
     return (
         <div className="container-showr-documents-directivos">
@@ -85,4 +79,4 @@ const ShowRegistroDirectivo = (props) => {
     );
 }
 
-export default ShowRegistroDirectivo;
+export default ShowDocumentoBaja;
