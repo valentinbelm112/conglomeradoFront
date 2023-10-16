@@ -164,7 +164,7 @@ const handleClickCloseForm = () => {
             <div className="btn-register-directivo-info" style={{ width: `100%` }}>
            
 
-              <button type="submit" class="btn-enviar-carga-masiva-directivos">Editar Directivo
+              <button type="submit" className="btn-enviar-carga-masiva-directivos">Editar Directivo
               </button>
 
 

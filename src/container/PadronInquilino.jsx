@@ -54,6 +54,37 @@ const ListProdronInquilino = (props) => {
 
        }
 
+       const handleSearch = (e) => {
+        const searchText = e.value;
+
+        if (typeof searchText === "string") {
+            // Si searchText es una cadena (texto), aplicamos toUpperCase
+            const searchTextUpper = searchText.toUpperCase();
+
+            setSearch(
+                refrescar.filter(
+                    (item) =>
+                        item.desDni?.includes(searchText) ||
+                        item.des_Apellidos?.toUpperCase().includes(searchTextUpper) ||
+                        item.des_nombres?.toUpperCase().includes(searchTextUpper)
+                )
+            );
+        } else if (typeof searchText === "number") {
+            // Si searchText es un número, no aplicamos toUpperCase
+            setSearch(
+                refrescar.filter(
+                    (item) =>
+                        item.desDni?.includes(searchText.toString()) ||
+                        item.des_Apellidos?.includes(searchText.toString()) ||
+                        item.des_nombres?.includes(searchText.toString())
+                )
+            );
+        } else {
+            // Manejar otros tipos de datos si es necesario
+            console.log("Tipo de búsqueda no admitido");
+        }
+    };
+    
     const handleClickOpenImportForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-inquilino-person-importar-excel');
         parrafo.style.top = '95px'
@@ -120,13 +151,14 @@ const ListProdronInquilino = (props) => {
                     <div className="title-Inquilinos-registrados">
                         Inquilinos Registrados
                     </div>
-                    <div className="row container-busqueda-upload-documentos">
-                        <div className="col-md-3 search-register-inquilino">
-
-                            <div className="container-input-search-list-inquilino">
-                                <SearchBar />
+                    <div className="row container-busqueda-upload-documentos"   style={{ marginTop: `10px` }}>
+                    <div className="col-md-3 search-register-propietarios">
+                                <div className="col-md-4 search-register-socios">
+                                    <div className="container-input-search-list-socios">
+                                        <SearchBar onSearch={handleSearch} />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         <div className="col-md-7 upload-documents-inquilino">
 
                             <div className="row">

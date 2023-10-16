@@ -241,7 +241,7 @@ delete from CRE_SOCIO;
 select*from CRE_SOCIO;
 alter table CRE_SOCIO
 add constraint CRE_SOCIO_PK primary key (id_socio);
-
+drop table CRE_SOCIO;
 
 create table CRE_INMUEBLE_ASOC
 ( 
@@ -253,7 +253,8 @@ create table CRE_INMUEBLE_ASOC
   des_direccion                VARCHAR2(200),
   des_giro                     VARCHAR2(200),
   des_negocio                  VARCHAR2(200),
-  des_codigo_asociacion        VARCHAR2(200)
+  des_codigo_asociacion        VARCHAR2(200),
+  des_estado                   VARCHAR2(200)
  
 )
 

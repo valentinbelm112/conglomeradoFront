@@ -48,6 +48,7 @@ const FormLogin =(props)=>{
             //console.log(data.nomColaborador);
           })
        .catch (error => {
+        saveToLocalStorage(error);
         console.error( 'función enRechazo invocada: ', error );
         saveToLocalStorage(error);
         setIsLoading(false);

@@ -3,6 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import { serverURL } from "../utils/Configuration";
 import { ToastContainer, toast } from 'react-toastify';
+import Select from 'react-select';
 const FormDarBajaPropietario = (props) => {
 
     console.log(props);
@@ -16,8 +17,8 @@ const FormDarBajaPropietario = (props) => {
     const [pdfFile, setPdfFile] = useState(null);
 
     const handleClickCloseForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
-        parrafo.style.top = '-100vh'
+        console.log(props)
+        props.onClickEstado(false)
     };
 
     const enviarDatos = async (event) => {
@@ -60,7 +61,7 @@ const FormDarBajaPropietario = (props) => {
                 }
                 else {
                     //console.log(data); // Maneja la respuesta del servidor aquí
-                   // RefrescarInformacion();
+                   props.RefrescarInformacion();
                     toast.success("Estado Modificado satisfactoriamente");
                     const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
                     parrafo.style.top = '-100vh'
@@ -91,6 +92,15 @@ const FormDarBajaPropietario = (props) => {
     
       }
 
+      const handlePabellon = (event) => {
+        console.log(event)
+        setDatos({
+            ...datos,
+            ['id_propietario']: event.value,
+        });
+       // setPabellonSelect(event.value);
+        
+    }
     //console.log()
 
     const handleInputChange = (event) => {
@@ -101,10 +111,28 @@ const FormDarBajaPropietario = (props) => {
         });
     };
 
+    const customStyles = {
+        
+        control: (provided, state) => ({
+          ...provided,
+          backgroundColor: state.isFocused ? 'lightgray' : 'white',
+        }),
+
+        menu: (provided, state) => ({
+            ...provided,
+            maxHeight: '270px', // Altura máxima del menú
+          }),
+          // Estilo personalizado para la lista de opciones del menú
+          menuList: (provided, state) => ({
+            ...provided,
+            maxHeight: '260px', // Altura máxima de la lista de opciones
+          }),
+        // Otros estilos personalizados que desees agregar
+      };
 
     return (
         <>
-            <div id="modal1" >
+            <div id='modal1-sombra-form-Prop' >
                 <div className="container-dar-baja-padron-propietario">
 
                     <div className="form form-registro-padron-propietario">
@@ -124,14 +152,14 @@ const FormDarBajaPropietario = (props) => {
                                 <div className="title-nuevo-propieatario-registro-formpadron-green  title-nuevo-dar-baja-registro-formpadron-black-div">
                                     Codigo de Propietario
                                 </div>
-
-
-                                <input
-
-                                    name="id_propietario"
-                                    type="text"
-                                    className="form-control upload-inscripcion-directivos"
-                                    onChange={handleInputChange} />
+                                <Select
+                                            name="id_propietario"
+                                            className="upload-inscripcion-directivos"
+                                            value={{ value: datos.id_propietario, label: datos.id_propietario}}
+                                            onChange={handlePabellon}
+                                            options={props.CodigoPropietario}
+                                            styles={customStyles}
+                                            />
 
                                 <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-dar-baja-registro-formpadron-black-div">
                                     Motivo de la baja

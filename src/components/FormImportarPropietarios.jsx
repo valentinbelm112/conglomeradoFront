@@ -6,14 +6,14 @@ import ExcelDownloadButton from './ExcelDownloadFormatoConsejo';
 import DownloadIcon from '@mui/icons-material/Download';
 import { serverURL } from "../utils/Configuration";
 import { ToastContainer, toast } from 'react-toastify';
-const FormInportPropietario = ({ RefrescarInformacion }) => {
+const FormInportPropietario = (props) => {
    // onchange states
    const [excelFile, setExcelFile] = useState(null);
 
-    const handleClickCloseForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
-        parrafo.style.top = '-580vh'
-    };
+   const handleClickCloseForm = () => {
+    console.log(props)
+    props.onClickEstado(false)
+};
 
 
     const handleFile = (e) => {
@@ -56,7 +56,7 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
                 }
                 else {
                     console.log(data); // Maneja la respuesta del servidor aquí
-                    RefrescarInformacion();
+                    props.RefrescarInformacion();
                      toast.success("Registro exitoso del consejo directivo");
                     const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-importar-excel');
                     parrafo.style.top = '-100vh'
@@ -75,14 +75,14 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
 
  return (
         <>
-            <div id="modal1" >
+            <div id="modal1-sombra-form-Prop" >
                 <div className="container-dar-baja-padron-propietario">
 
                     <div className="form form-registro-padron-propietario">
                         <div className="close-form-register-directivo" >
                             <div className="close-form-register-directivo" >
                                 <input id="cerrar-modal" name="modal" type="radio" />
-                                <label for="cerrar-modal">
+                                <label htmlFor="cerrar-modal">
                                     <CloseIcon onClick={handleClickCloseForm} style={{ position: `absolute` }} className="icono-close-register-directivo" /> </label>
                             </div>
                         </div>
@@ -125,7 +125,7 @@ const FormInportPropietario = ({ RefrescarInformacion }) => {
 
                             <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
 
-                                <button type="submit" class="btn-enviar-carga-masiva-directivos">Aceptar
+                                <button type="submit" className="btn-enviar-carga-masiva-directivos">Aceptar
                                 </button>
 
                             </div>

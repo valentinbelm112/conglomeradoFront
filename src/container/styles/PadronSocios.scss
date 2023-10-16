@@ -29,10 +29,6 @@
 }
 
 
-.upload-documents-socios {
-  padding: 15px !important;
- 
-}
 
 .title-socios-registrados{
   padding: 15px;
@@ -66,8 +62,9 @@
 
 .search-register-socios {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  width: 100% !important;
 
 }
 
@@ -115,26 +112,35 @@
   display: none;
 
   +label {
-    display: flex;
+    // display: flex;
     justify-content: center;
     align-items: center;
     width: 50px;
     height: 50px;
-
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #2ecc71 0, #889b90 100%);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    color: #2ecc71;
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #2ecc71;
+      background-color: #fff;
+
 
       .button-text {
         display: inline-block;
@@ -157,19 +163,28 @@
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #e74c3c 0, #c0392b 100%);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: rgb(173, 4, 4);
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
 
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #e74c3c;
+      background-color: #fff;
 
       .button-text {
         display: inline-block;
@@ -200,19 +215,29 @@
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #3498db 0, #2980b9);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    color: #3498db;
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
 
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #3498db;
+      background-color: #fff;
 
       .button-text {
         display: inline-block;
@@ -246,19 +271,28 @@
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #2ecc71 0, #27ae60 100%);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #2ecc71;
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
 
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #0056b3;
+      background-color: #fff;
 
       .button-text {
         display: inline-block;
@@ -308,15 +342,11 @@
   border-radius: 5px;
   align-items: center;
   height: 30px;
+  width: 100%;
  
 }
 
-.container-input-search-list-socios input {
-  border-radius: 5px 0 0 5px;
-  border: 0.5px solid hsl(0, 3%, 56%);
-  height: 30px;
- 
-}
+
 
 .container-input-search-list-socios input:focus {
   outline: none;
@@ -374,6 +404,7 @@
   }
 }
 
+
 @media screen and (max-width: 1025px){
   .container-busqueda-upload-documentos{
     margin-top: 2%;
@@ -430,9 +461,9 @@
   }
 
   .search-register-socios{
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 2%;
+       display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .upload-documents-socios {
     padding: 15px !important;
@@ -491,19 +522,45 @@ body, html {
 
 
 
-@media  screen and (max-width: 1391px){
+@media screen and (min-width: 1391px) {
   .conatiner-registro-padron-socios {
+    width: 83.5%;
+    margin-left: 1%;
+  }
+
+  .conatiner-registro-padron-socios-select-togle-false {
     width: 90.5%;
-    margin-left: 4%;
+    margin-left: 2%;
+    transition: width 2s ease;
+    /* Agrega una transición suave a la propiedad left */
+  }
+
+  /* Otros estilos aquí */
 }
 
-/* Media query para pantallas medianas */
+@media screen and (max-width: 1366px) {
+  .conatiner-registro-padron-socios {
+    width: 85.5%;
+    margin-left: 1%;
+  }
+
+  .conatiner-registro-padron-socios-select-togle-false {
+    width: 89%;
+    margin-left: 2%;
+    transition: width 2s ease;
+    /* Agrega una transición suave a la propiedad left */
+  }
+}
+
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .conatiner-registro-padron-socios {
-    width: 68.5%;
-  
-}
+    width: 81.5%;
+  }
 
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
 
   /* Otros estilos aquí */
 }
@@ -512,40 +569,123 @@ body, html {
 @media screen and (max-width: 768px) {
   .conatiner-registro-padron-socios {
     width: 91.5%;
-    margin-left: 4%;
+    margin-left: 2%;
+  }
+
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
+
+  #mostrar-form-documento-socios-person-add-export+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-delete+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  #mostrar-form-documento-socios-person-add-import+label {
+    font-size: 12px;
+    /* Otros estilos para pantallas pequeñas */
+  }
+
+  .search-register-propietarios {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2%;
+  }
+
+  .upload-documents-propietarios {
+    padding: 15px !important;
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    margin-left: 2%;
+  }
+
+  .container-title-show-iamgen-ins {
+    padding: 15px !important;
+    display: flex !important;
+    align-items: start !important;
+    justify-content: flex-start !important;
+    margin-left: 2% !important;
+  }
+
+  .registrar-nuevo-propietarios-add-delete-export-import {
+    flex: 0 0 3px !important;
+  }
+
+  .container-title-show-iamgen-ins #mostrar-modal-documento-socio+label {
+    margin-left: 0px;
+  }
+
+  .registrar-nuevo-propietarios-add-delete-export-import {
+    width: 53% !important;
+  }
+
+  .container-input-search-list-propietarios {
+    width: 35%;
+  }
+
+  .container-input-search-list-propietarios input {
+    width: 89%;
+  }
+
+  .container-busqueda-upload-documentos {
+    margin-top: 2% !important;
+  }
+
+  .container-Sidebar-view-directivo {
+    position: relative;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 98%;
+  }
+
+  .Appfalse {
+    position: absolute;
+  }
+
+  .App {
+    position: absolute;
+  }
 }
 
-}
 /* Media query para pantallas más pequeñas */
 @media screen and (max-width: 400px) {
   .conatiner-registro-padron-socios {
     margin-top: 5%;
     width: 91.5%;
-    margin-left: 4%;
+    margin-left: 2%;
+  }
+
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
 }
 
-}
 /* Media query para pantallas más pequeñas */
 @media screen and (max-width: 200px) {
   .conatiner-registro-padron-socios {
     width: 80.5%;
-    margin-left: 4%;
-}
+    margin-left: 2%;
+  }
 
-}
-/* Media query para pantallas grandes */
-@media screen and (min-width: 1025px) {
-  .conatiner-registro-padron-socios {
-    width: 73.5%;
-    margin-left: 4%;
-}
-
-
-  /* Otros estilos aquí */
+  .container-busqueda-upload-documentos .upload-documents-propietarios {
+    padding: 17px;
+    justify-content: flex-start;
+  }
 }
 
 
-
-
-}
 

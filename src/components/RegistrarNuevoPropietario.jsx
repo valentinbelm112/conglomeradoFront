@@ -251,7 +251,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
                         <div className="close-form-register-directivo" >
                             <div className="close-form-register-directivo" >
                                 <input id="cerrar-modal" name="modal" type="radio" />
-                                <label for="cerrar-modal">
+                                <label htmlFor="cerrar-modal">
                                     <CloseIcon onClick={handleClickCloseForm} style={{ position: `absolute` }} className="icono-close-register-directivo" /> </label>
                             </div>
                         </div>
@@ -309,7 +309,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
 
                                         </input>
-                                        <div div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
+                                        <div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
                                             Tipo de dominio
                                         </div>
                                         <input
@@ -322,7 +322,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
 
                                         </input>
-                                        <div div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
+                                        <div  className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
                                             Dirección
                                         </div>
                                         <input
@@ -336,7 +336,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
                                         </input>
 
-                                        <div div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
+                                        <div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
                                             Datos de contacto
                                         </div>
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
@@ -517,7 +517,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
                             <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
 
 
-                                <button type="submit" class="btn-enviar-carga-masiva-directivos">Inscribir Propietario
+                                <button type="submit" className="btn-enviar-carga-masiva-directivos">Inscribir Propietario
                                 </button>
 
 

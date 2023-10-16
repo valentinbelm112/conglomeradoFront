@@ -12,7 +12,7 @@
   
   .search-icon {
     cursor: pointer;
-    padding: 5px;
+    //padding: 5px;
   }
   
   .search-bar {
@@ -34,9 +34,13 @@
     padding: 8px;
     font-size: 16px;
     border-radius: 20px;
+    
   }
   
- 
+  .search-input:focus {
+    border-bottom: 2px solid #3498db; /* Cambia el color del borde inferior al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Agrega una sombra al hacer clic */
+  }
   
   .search-icon {
     font-size: 20px;
@@ -49,3 +53,51 @@
   .search-bar.expanded .search-icon {
     color: #333;
   }
+
+  #tablaBusqueda_filter {
+    position: relative;
+  }
+  
+  .search-icon {
+    position: absolute;
+    //top: 50%; /* Centra verticalmente el ícono */
+    right: -10px; /* Ajusta la distancia desde la derecha */
+    transform: translateY(-50%); /* Centra verticalmente el ícono */
+    cursor: pointer;
+  }
+
+.search-icon {
+  position: absolute;
+  top: 50%; /* Centra verticalmente el ícono */
+  //right: 10px; /* Ajusta la distancia desde la derecha */
+  transform: translateY(-50%); /* Centra verticalmente el ícono */
+  cursor: pointer;
+}
+
+.dataTables_filter>label {
+  margin-bottom: 0;
+  position: relative;
+
+}
+.label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.dataTables_filter input {
+  outline: 0;
+  width: 12.5rem;
+  /* padding: 0.5rem 0; */
+ // margin-top: 17%;
+ // margin-left: 5%;
+  padding-right: 1.125rem;
+  font-size: 0.8125rem;
+  line-height: 1.5385;
+  color: #333;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  border-width: 1px 0;
+  border-top-color: transparent;
+  transition: all ease-in-out 0.15s;
+}
+

@@ -9,20 +9,24 @@ const SearchBar = ({ onSearch }) => {
     setIsExpanded(!isExpanded);
   };
 
-  
    const handleInputChange = (event) => {
     
      onSearch(event.target); // Pasar el evento target al componente padre
   };
   return (
 
-    <div className={`search-bar ${isExpanded ? 'expanded' : ''}`}>
+   
+   <div id="tablaBusqueda_filter" className="dataTables_filter">
 
-      <SearchIcon  onClick={handleClick}/>
-      
-        <input type="text" className="search-input" placeholder="Buscar los socios ..."  onChange={handleInputChange}/>
-      
-      {/* Otros elementos relacionados con el buscador */}
+  <input type="search" className="" placeholder="" aria-controls="tablaBusqueda" onFocus={(e) => {
+    e.target.style.borderBottom = '2px solid #3498db'; // Cambia el grosor del borde inferior
+  }} 
+  
+  onBlur={(e) => {
+    e.target.style.borderBottom = '2px solid #ccc'; // Vuelve al borde por defecto cuando pierde el enfoque
+  }}
+  onChange={handleInputChange}/>
+  <SearchIcon  className="search-icon" onClick={handleClick}/>
     </div>
   );
 };

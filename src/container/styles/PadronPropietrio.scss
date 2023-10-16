@@ -3,19 +3,86 @@
   font-size: 16px;
 }
 
+.container-busqueda-upload-documentos {
+
+  width: 100%;
+  margin-left: 0% !important;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+  list-style: none;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom: 1px solid #dedede;
+}
+
+.container-pagination-propietarios {
+  padding: 5px;
+  background-color: #f5f5f5;
+    height: 8%;
+    border-top: 1px solid #dedede;
+  
+
+}
+
+
+
+.custom-pagination-icon {
+  font-size: 18px;
+  /* Tamaño de fuente para reducir la altura */
+  line-height: 1;
+  /* Espaciado entre líneas para controlar la altura */
+}
+
+/* Estilo para la etiqueta "Filas por página" */
+.row-per-page-label {
+  margin-right: 10px;
+
+}
+
+/* Estilos para el selector */
+.row-per-page-select {
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  /* Quita el contorno al hacer clic */
+}
+
+td {
+  font-size: 16px;
+  /* Tamaño de fuente para toda la tabla */
+  color: #344644 !important;
+  /* Color de texto para toda la tabla */
+}
+
 #mostrar-modal-documento-propietario {
   display: none;
 
   +label {
-    background: linear-gradient(to bottom, #f1c40f 0, #f39c12 100%);
-    display: table;
-    margin: auto;
-    color: #fff;
-    line-height: 3.7;
+    //background: linear-gradient(to bottom, #f1c40f 0, #f39c12 100%);
+    // display: table;
+    // margin: auto;
+    // color: #fff;
+    // line-height: 3.7;
     padding: 0 1em;
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 7%;
+    display: inline-block;
+    //border: 2px solid #3498db; /* Color del borde */
+    border-radius: 10px;
+    /* Radio del borde */
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
+
 
     &:hover {
       background: darken(steelblue, 10%);
@@ -51,6 +118,7 @@
 .table-responsive {
   overflow-x: initial !important;
 }
+
 .outer-table-registro-propietario {
 
   width: 100%;
@@ -82,108 +150,48 @@
   align-items: center;
 }
 
-#mostrar-form-documento-propietarios-upload {
-  display: none;
 
-  +label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom right, #807110, #f6e67f);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: width 0.3s ease, background-color 0.3s ease;
-    overflow: hidden;
-    white-space: nowrap;
-
-    &:hover {
-      width: 350px;
-      /* Ancho automático */
-      background-color: #0056b3;
-
-      .button-text {
-        display: inline-block;
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-  }
-
-  &:checked {
-    &~#modal {
-      top: 64px;
-    }
-
-    &~#cerrar-modal+label {
-      display: block;
-    }
-  }
-}
 
 .registrar-nuevo-propietarios-add-delete-export-import {
   padding-top: 5px;
+
 }
 
 
-
-#mostrar-form-documento-propietarios-person-add-export {
-  display: none;
-
-  +label {
-    background: linear-gradient(to bottom right, #668a28, #84b332);
-    text-align: center;
-    display: table;
-    color: #fff;
-    line-height: 2.5;
-    padding: 0 1em;
-    cursor: pointer;
-    border-radius: 7px;
-    width: 100%;
-    &:hover {
-      background: darken(rgb(158, 201, 235), 10%);
-    }
-  }
-
-  &:checked {
-    &~#modal {
-      top: 64px;
-    }
-
-    &~#cerrar-modal+label {
-      display: block;
-    }
-  }
-}
 
 #mostrar-form-documento-propietarios-person-add {
   display: none;
 
   +label {
-    display: flex;
+    // display: flex;
     justify-content: center;
     align-items: center;
     width: 50px;
     height: 50px;
-
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #2ecc71 0, #27ae60 100%);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    color: #2ecc71;
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 
+    /* Efecto de transformación al pasar el mouse */
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #2ecc71;
+      background-color: #fff;
 
       .button-text {
         display: inline-block;
@@ -218,6 +226,7 @@
   height: 100vh;
   width: 100vw;
   transition: all 0.5s;
+
   p {
     width: 60%;
     height: 40%;
@@ -242,19 +251,29 @@
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #3498db 0, #2980b9);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    color: #3498db;
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
 
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #3498db;
+      background-color: #fff;
 
       .button-text {
         display: inline-block;
@@ -274,6 +293,7 @@
     }
   }
 }
+
 .conatiner-registro-padron-propietarios {
   width: 100%;
 }
@@ -288,6 +308,7 @@
   height: 100vh;
   width: 100vw;
   transition: all 0.5s;
+
   p {
     width: 60%;
     height: 40%;
@@ -312,19 +333,28 @@
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #e74c3c 0, #c0392b 100%);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: rgb(173, 4, 4);
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
 
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #e74c3c;
+      background-color: #fff;
 
       .button-text {
         display: inline-block;
@@ -344,6 +374,7 @@
     }
   }
 }
+
 .conatiner-registro-padron-propietarios {
   width: 100%;
 }
@@ -366,6 +397,13 @@
   justify-content: space-between;
 }
 
+.sticky-column-propietario {
+  position: sticky;
+  right: 0;
+  background-color: white;
+  /* Opcional: Cambia el fondo para que parezca fija */
+}
+
 #modal-mostrar-form-documento-propietarios-person-dar-baja {
   //background:rgba(#000,.9);
   z-index: 9999;
@@ -376,6 +414,7 @@
   height: 100vh;
   width: 100vw;
   transition: all 0.5s;
+
   p {
     width: 60%;
     height: 40%;
@@ -400,19 +439,28 @@
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    /* Mitad del tamaño del botón */
-    background: linear-gradient(to bottom, #2ecc71 0, #27ae60 100%);
-    color: white;
     border: none;
     cursor: pointer;
     transition: width 0.3s ease, background-color 0.3s ease;
     overflow: hidden;
     white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #2ecc71;
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
 
     &:hover {
       width: 150px;
       /* Ancho automático */
-      background-color: #0056b3;
+      background-color: #fff;
 
       .button-text {
         display: inline-block;
@@ -422,6 +470,13 @@
     }
   }
 }
+
+.pagination.pagination-right {
+  display: flex;
+  justify-content: end;
+}
+
+
 
 @media screen and (min-width: 1391px) {
   .conatiner-registro-padron-propietarios {
