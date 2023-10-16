@@ -8,7 +8,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 import { serverURL } from "../utils/Configuration";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Download from "yet-another-react-lightbox/plugins/download";
+import Captions from "yet-another-react-lightbox/plugins/captions";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 const ExpedientePropietarioSocio = (props) => {
+  const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [expedienteSelect, setExpedienteSelect] = useState(null);
@@ -84,6 +91,9 @@ const ModeloProps5={
 
  
 
+  const openModalDocBaja = () => {
+    setOpen(true);
+  };
 
 
   const ChangeRouter = (dni,id) => {
@@ -382,13 +392,7 @@ const ModeloProps5={
                   <div className="title-tipo-dominio-p"> {inmuebleSelect?.des_giro}</div>
                 </div>
               </div>
-            </div>
-            <div className="col-5">
-              <div className="title-fecha-baja">Fecha baja</div>
-              <div className="title-fecha-baja">Mótivo de la baja</div>
-              <div className="title-fecha-baja">Observaciones Adicionales</div>
-            </div>
-            <br />
+              <br />
             <br />
             <table className="tabla-co-propietario-datos">
                 <tr>
@@ -411,6 +415,45 @@ const ModeloProps5={
                    
                 ))}
               </table>
+            </div>
+            <div className="col-5">
+            {
+              props.padron.data.socioBajaDetEntities.length > 0 &&
+              <div className="col-5">
+                <div className="title-fecha-baja">Fecha baja:</div>
+                <div>
+                  {props.padron.data.socioBajaDetEntities[0].fec_baja}
+                </div>
+                <div className="title-motivo-baja">Mótivo de la baja: </div>
+                <div>
+                  {props.padron.data.socioBajaDetEntities[0].des_motivo}
+                </div>
+                <div className="title-observaciones-baja">Observaciones Adicionales:</div>
+                <div>
+                  {props.padron.data.socioBajaDetEntities[0].des_obserbaciones}
+                </div>
+                <div className="title-observaciones-baja">Revisar Documentos</div>
+                <input onClick={openModalDocBaja} id="mostrar-modal-documento-baja-socio" name="modal" type="radio" />
+
+                <label for="mostrar-modal-documento-baja-socio">
+                  {" "}
+                  <FontAwesomeIcon icon={faEye} />{" "}
+                </label>
+
+                <Lightbox
+                       plugins={[Zoom,Download,Captions]}
+                            open={open}
+                            close={() => setOpen(false)}
+                            slides={[
+                            { src: props.padron.data.socioBajaDetEntities[0].des_link_documento ,
+                            title: "Documento de la baja de un propietario"
+                            }  ]}
+                        />
+              </div>
+            }
+            </div>
+           
+             
 
 
             <div className="title-co-conyugue-socio">Inquilinos del Puesto</div>

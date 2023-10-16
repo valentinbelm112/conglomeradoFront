@@ -16,7 +16,7 @@ import { serverURL } from "../utils/Configuration";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { useGetPadronPropietarioComponenteRender } from "../hooks/useGetPadronPropietario";
 import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
-import { UseGetPadronPropietario } from "../hooks/useGetPadronPropietario";
+import { UseGetPadronSocio } from "../hooks/useGetPadronPropietario";
 import { Link } from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
@@ -24,13 +24,23 @@ import { ToastContainer, toast } from "react-toastify";
 import FormInportSocios from "../components/FormImportarSocios";
 import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
 import ReactPaginate from "react-paginate";
+import EditarSocio from "../components/FormEditarSocios";
+import { UseDeletePadronSocio } from "../hooks/useDeletePadronPropietario";
+import { useGetSociosComponenteRender } from "../hooks/useGetPadronPropietario";
+import FormDarBajaSocio from "../components/FormDarBajaSocio";
 const ListPadronSocios = (props) => {
   const [open, setOpen] = useState(false);
   const [togle, setTogle] = useState(true);
   const [clickR, setClickR] = useState(true);
   const [refrescar, setRefrescar] = useState([]);
   const [search, setSearch] = useState([]);
-  const { isLoading, dataPropietario } = UseGetPadronPropietario(
+  const [click, setClick] = useState(false);
+  const [clickBajaForm, setClickBajaForm] = useState(false);
+  const [clickImportProp, setClickImportProp] = useState(false);
+  const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
+  const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
+
+  const { isLoading, dataPropietario, codigoPropietario,dataSocioPabPuesto } = UseGetPadronSocio(
     `${serverURL}/Socio/Obtener`,
     setRefrescar,
     props.EstadoGlobal
@@ -52,6 +62,69 @@ const ListPadronSocios = (props) => {
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+  const RefrescarInformacionEdit = async () => {
+    console.log(refrescar.length);
+    console.log(refrescar);
+    const { response } = await useGetPadronPropietarioComponenteRender(
+      `${serverURL}/Socio/Obtener`,
+      props.EstadoGlobal
+    );
+    setRefrescar(response.data);
+    setRefrescar(response.data);
+    setClick(!click);
+    console.log(refrescar);
+  };
+
+  const DeleteSocioRegistro = async (id1, id2) => {
+    toast.dismiss();
+
+    await UseDeletePadronSocio(`${serverURL}/Socio/delete/${id1}/${id2}`);
+    const { response } = await useGetSociosComponenteRender(
+      `${serverURL}/Socio/Obtener`,
+      props.EstadoGlobal
+    );
+    setRefrescar(response.data);
+  };
+
+  const handleDeleteSocioR = (id1, id2) => {
+    toast.info(
+      <div>
+        <p>¿Está seguro de que desea eliminar este registro?</p>
+        <div>
+          <button
+            className="btn btn-success mx-2" // Botón verde con espacio horizontal
+            onClick={() => DeleteSocioRegistro(id1, id2)}
+          >
+            Eliminar
+          </button>
+          <button
+            className="btn btn-danger mx-2" // Botón rojo con espacio horizontal
+            onClick={handleCancelDelete}
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>,
+      {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: false, // No se cerrará automáticamente
+        closeButton: false, // Sin botón de cierre
+        draggable: false, // No se puede arrastrar
+        closeOnClick: false, // No se cierra al hacer clic
+      }
+    );
+  };
+
+  const handleClickDarBajaOpenForm = () => {
+    setClickBajaForm(!clickBajaForm);
+};
+
+
+  const handleCancelDelete = () => {
+    toast.dismiss(); // Cierra la notificación de confirmación
+    // Otras acciones después de cancelar
+  };
 
   //
   const ExportarPropietario = () => {
@@ -89,13 +162,6 @@ const ListPadronSocios = (props) => {
     }
   };
 
-  const DeleteRegisterConsejo = async (id) => {
-    //console.log(id + "identificador")
-    //await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
-    // const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
-    //setRefrescar(response.data)
-  };
-
   const handleClickOpenForm = () => {
     const parrafo = document.querySelector(
       "#modal-mostrar-form-documento-socios-person-add-import"
@@ -103,6 +169,12 @@ const ListPadronSocios = (props) => {
     parrafo.style.top = "95px";
     //console.log(clickR)
     setClickR(!clickR);
+  };
+
+  const handleClickOpenEditFrom = (data, datainmueble) => {
+    setClick(!click);
+    SetExtraerDatosPerso(data);
+    SetExtraerDatosInmueble(datainmueble);
   };
 
   const RefrescarInformacion = async () => {
@@ -135,10 +207,7 @@ const ListPadronSocios = (props) => {
   }, []);
 
   const handleClickOpenImportForm = () => {
-    const parrafo = document.querySelector(
-      "#modal-mostrar-form-documento-socios-person-importar-excel"
-    );
-    parrafo.style.top = "95px";
+    setClickImportProp(!clickImportProp);
   };
 
   if (isLoading) {
@@ -212,7 +281,8 @@ const ListPadronSocios = (props) => {
                       name="modal"
                       type="radio"
                     />
-                    <label for="mostrar-form-documento-socios-person-add-delete">
+                    <label for="mostrar-form-documento-socios-person-add-delete"
+                     onClick={handleClickDarBajaOpenForm}>
                       {" "}
                       <PersonRemoveIcon />{" "}
                       <span className="button-text">Dar de Baja</span>{" "}
@@ -235,14 +305,6 @@ const ListPadronSocios = (props) => {
                       <PublishIcon />{" "}
                       <span className="button-text">Importar</span>{" "}
                     </label>
-                    <div id="modal-mostrar-form-documento-socios-person-importar-excel">
-                      <FormInportSocios
-                        RefrescarInformacion={RefrescarInformacion}
-                        clickR={clickR}
-                        setClickR={setClickR}
-                        EstadoGlobal={props.EstadoGlobal}
-                      />
-                    </div>
                   </div>
                 </div>
 
@@ -449,7 +511,22 @@ const ListPadronSocios = (props) => {
                           color: "#56688a",
                         }}
                       >
-                        Estado
+                        Estado Inmueble
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "#a2c8f2",
+                          padding: "8px",
+                          borderTop: "2px solid white",
+                          borderLeft: "2px solid white",
+                          borderBottom: "2px solid white",
+                          whiteSpace: "nowrap",
+                          fontSize: "16px",
+                          color: "#56688a",
+                        }}
+                      >
+                        Estado Socio
                       </th>
                       <th
                         scope="col"
@@ -571,10 +648,24 @@ const ListPadronSocios = (props) => {
                                 textOverflow: "ellipsis",
                               }}
                             >
+                              {socio.des_estado}
+                            </td>
+                            <td
+                              style={{
+                                overflow: "hidden",
+                                whiteSpace: "nowrap",
+                                textOverflow: "ellipsis",
+                              }}
+                            >
                               <div className="table-column-gestion-info-propietario">
                                 <button
                                   className="btn-gestion-delete-info-propietario "
-                                  onClick={() => DeleteRegisterConsejo()}
+                                  onClick={() =>
+                                    handleDeleteSocioR(
+                                      socio.id,
+                                      indexInmueble.id
+                                    )
+                                  }
                                 >
                                   <DeleteForeverIcon style={{ color: `red` }} />
                                 </button>
@@ -586,7 +677,15 @@ const ListPadronSocios = (props) => {
                                     type="radio"
                                   />
 
-                                  <label for="mostrar-modal-editar">
+                                  <label
+                                    onClick={(e) =>
+                                      handleClickOpenEditFrom(
+                                        socio,
+                                        indexInmueble
+                                      )
+                                    }
+                                    htmlFor="mostrar-modal-editar"
+                                  >
                                     {" "}
                                     <EditIcon color="primary" />{" "}
                                   </label>
@@ -598,6 +697,33 @@ const ListPadronSocios = (props) => {
                       )}
                   </tbody>
                 </table>
+
+                {click && (
+                  <EditarSocio
+                    onClickEstado={setClick}
+                    enviarDatos={extraerDatosPerso}
+                    enviarDatos2={extraerDatosInmueble}
+                    refrescarInformacion={RefrescarInformacionEdit}
+                  />
+                )}
+
+                {clickBajaForm && (
+                  <FormDarBajaSocio
+                    onClickEstado={setClickBajaForm}
+                    RefrescarInformacion={RefrescarInformacion}
+                    CodigoPropietario={codigoPropietario}
+                    dataSocioPabPuesto={dataSocioPabPuesto}
+                  />
+                )}
+
+
+                {clickImportProp && (
+                  <FormInportSocios
+                    onClickEstado={setClickImportProp}
+                    RefrescarInformacion={RefrescarInformacion}
+                    clickR={clickR}
+                  />
+                )}
               </div>
             </div>
           </div>

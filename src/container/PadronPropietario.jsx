@@ -28,6 +28,7 @@ import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import EditarPropietario from "../components/FormEditarPropietarios";
 import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario";
 import ReactPaginate from "react-paginate";
+import EditarSocio from "../components/FormEditarSocios";
 const PadronPropietario = ({ EstadoGlobal }) => {
     const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
     const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);

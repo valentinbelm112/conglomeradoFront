@@ -6,14 +6,14 @@ import ExcelDownloadButton from './ExcelDownloadFormatoConsejo';
 import DownloadIcon from '@mui/icons-material/Download';
 import { serverURL } from "../utils/Configuration";
 import { ToastContainer, toast } from 'react-toastify';
-const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR}) => {
+const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado}) => {
    // onchange states
    const [excelFile, setExcelFile] = useState(null);
 
 
     const handleClickCloseForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-importar-excel');
-        parrafo.style.top = '-100vh'
+    
+       onClickEstado(false)
     };
 
 
@@ -77,7 +77,7 @@ const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR}) => {
 
     return (
         <>
-            <div id={clickR?'modal1':'modal1-sombra-form-import-Prop'} >
+            <div id="modal1-sombra-form-Prop" >
                 <div className="container-dar-baja-padron-propietario">
 
                     <div className="form form-registro-padron-propietario">
