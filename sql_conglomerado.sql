@@ -14,6 +14,7 @@ create table CRE_CONSEJO_DIRECTIVO
 );
 
 
+
 delete from CRE_CONSEJO_DIRECTIVO
 drop table CRE_CONSEJO_DIRECTIVO
 
@@ -58,7 +59,7 @@ create table CRE_USUARIO_CGM
   fec_fecha_nac           Date,
   des_lugar_nac            VARCHAR2(200),
   des_domicilio            VARCHAR2(200),
-  des_teléfono             VARCHAR2(200)
+  des_telï¿½fono             VARCHAR2(200)
  
 )
 
