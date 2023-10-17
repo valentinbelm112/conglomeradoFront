@@ -16,20 +16,25 @@ import FormImportInquilino from "../components/FormImportInquilino";
 import { serverURL } from "../utils/Configuration";
 import { UseGetFindPabellonPuesto } from "../hooks/useGetFindPabellonPuesto";
 import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
-import { UseGetPadronPropietario } from "../hooks/useGetPadronPropietario";
+import { UseGetPadronInquilino } from "../hooks/useGetPadronPropietario";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import EditarInquilino from "../components/FormEditarInquilinos";
 const ListProdronInquilino = (props) => {
     const [pabellon, setPabellon] = useState();
     const [puestos, setPuestos] = useState();
+    const [togle, setTogle] = useState(true);
     const [open, setOpen] = useState(false);
     const [refrescar, setRefrescar] = useState([]);
     const [clickR, setClickR] = useState(true);
     const [clickImport, setClickImport] = useState(true);
-    const [isloadingDataPuesPab, setIsloadingDataPuesPab] = useState(false)
+    const [isloadingDataPuesPab, setIsloadingDataPuesPab] = useState(false);
     const [search, setSearch] = useState([]);
+    const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
+    const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
+    const [click, setClick] = useState(false);
     const handleClickOpenForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
         parrafo.style.top = '95px'
@@ -38,13 +43,29 @@ const ListProdronInquilino = (props) => {
 
     };
 
-    const { isLoading, dataPropietario } = UseGetPadronPropietario(`${serverURL}/Inquilino/Obtener`, setRefrescar, props.EstadoGlobal)
+    const { isLoading, dataPropietario } = UseGetPadronInquilino(`${serverURL}/Inquilino/Obtener`, setRefrescar, props.EstadoGlobal)
     const { dataPuestos, isLoadingPuestos, dataPabellonPuesto } = UseGetFindPabellonPuesto(`${serverURL}/Inquilino/Obtener-pabellon-puesto`)
 
 
+    const RefrescarInformacionEdit = async () => {
+        console.log(refrescar.length);
+        console.log(refrescar);
+        const { response } = await useGetPadronPropietarioComponenteRender(
+          `${serverURL}/Inquilino/Obtener`,
+          props.EstadoGlobal
+        );
+        setRefrescar(response.data);
+        setRefrescar(response.data);
+        setClick(!click);
+        console.log(refrescar);
+      };
 
-
-
+      const handleClickOpenEditFrom = (data, datainmueble) => {
+        setClick(!click);
+        SetExtraerDatosPerso(data);
+        SetExtraerDatosInmueble(datainmueble);
+      };
+      
     const DeleteRegisterConsejo=async(id)=>{
 
         //console.log(id + "identificador")
@@ -139,15 +160,19 @@ const ListProdronInquilino = (props) => {
 
             <div className="container-Sidebar-view-directivo">
 
-                {
-                    open ?
-                        null
-                        : <div className={open === false && "sidebar-transition"}>
-                            <SidebarMenu />
-                        </div>
-                }
+            {open ? null : (
+          <div className={open === false && "sidebar-transition"}>
+            <SidebarMenu setTogle={setTogle} />
+          </div>
+        )}
+        <div
+          className={`${
+            togle
+              ? "conatiner-registro-padron-inquilino"
+              : "conatiner-registro-padron-inquilino-select-togle-false"
+          }`}
+        >
 
-                <div className="conatiner-registro-padron-inquilino">
                     <div className="title-Inquilinos-registrados">
                         Inquilinos Registrados
                     </div>
@@ -297,7 +322,12 @@ const ListProdronInquilino = (props) => {
                                                                 <button className="btn-gestion-edit-info-directivo">
                                                                     <input id="mostrar-modal-editar" name="modal" type="radio" />
 
-                                                                    <label for="mostrar-modal-editar" >  <EditIcon color="primary" /> </label>
+                                                                    <label htmlFor="mostrar-modal-editar"  onClick={(e) =>
+                                      handleClickOpenEditFrom(
+                                        inquilino,
+                                        indexInmueble
+                                      )
+                                    }>  <EditIcon color="primary" /> </label>
                                                                 </button>
 
                                                             </div>
@@ -315,7 +345,14 @@ const ListProdronInquilino = (props) => {
 
                                 </table>
 
-
+                                {click && (
+                  <EditarInquilino
+                    onClickEstado={setClick}
+                    enviarDatos={extraerDatosPerso}
+                    enviarDatos2={extraerDatosInmueble}
+                    refrescarInformacion={RefrescarInformacionEdit}
+                  />
+                )}
                             </div>
                         </div>
                     </div>

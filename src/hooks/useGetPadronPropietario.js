@@ -39,6 +39,33 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
     return { dataPropietario, isLoading, codigoPropietario };
 }
 
+export const UseGetPadronInquilino = (API, setRefrescar, auth) => {
+
+    const [isLoading, SetLoading] = useState(true);
+    const [dataPropietario, SetDataPropietario] = useState(null);
+    console.log(auth)
+    const doSomething = async () => {
+        console.log(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`)
+        const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
+        console.log(API);
+     
+        SetDataPropietario(response);
+        SetLoading(false);
+        setRefrescar(response.data)
+
+    }
+
+    useEffect(() => {
+
+        doSomething();
+
+    }, []);
+
+
+    return { dataPropietario, isLoading };
+}
+
+
 
 export const UseGetPadronSocio= (API, setRefrescar, auth) => {
 
@@ -103,6 +130,14 @@ export const useGetPadronPropietarioComponenteRender = async (API, auth) => {
 
 
 export const useGetSociosComponenteRender = async (API, auth) => {
+    const codigo_asociacion = "E00241";
+    const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
+
+
+    return { response };
+};
+
+export const useGetInqulinoComponenteRender = async (API, auth) => {
     const codigo_asociacion = "E00241";
     const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
 
