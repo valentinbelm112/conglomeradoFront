@@ -32,7 +32,7 @@ const App=()=>{
           <Route path="/register-padron-socios" element={<PadronSociosView/>} />
           <Route path="/expediente-socio/:id/:id2" element={<ListExpedientesSocios/>} />
           <Route path="/cgm/perfil" element={<PerfilSociosConglomerados/>} />
-          <Route path="/ventana" element={<FormDarBajaPropietario/>} />
+          <Route path="/lista/registro/usuarios" element={<FormDarBajaPropietario/>} />
           <Route path="/expediente-inquilino/:id/:id2" element={<ListExpedientesInquilino/>} />
           </Routes >
         </BrowserRouter>

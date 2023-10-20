@@ -6,26 +6,38 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
     const [isLoading, SetLoading] = useState(true);
     const [dataPropietario, SetDataPropietario] = useState(null);
     const [codigoPropietario, SetCodigoPropietario] = useState(null)
+    console.log("hola")
     console.log(auth)
     const doSomething = async () => {
-        console.log(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`)
-        const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
-        console.log(API);
-        console.log(response)
 
-
-        const codigoPropietario = response.data
+        const config = {
+            headers: {
+                Authorization: `Bearer ${auth.accessToken}`,
+            },
+        };
+    
+      
+        console.log(config)
+       await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`,   config) .then(response => {
+            const codigoPropietario = response.data
             .filter((e) => e.des_estado !== "Inactivo")
             .map((e) => ({
                 value: e.codigoPropietario,
                 label: e.codigoPropietario,
             }));
 
-        console.log(codigoPropietario);
-        SetCodigoPropietario(codigoPropietario);
-        SetDataPropietario(response);
-        SetLoading(false);
-        setRefrescar(response.data)
+                console.log(codigoPropietario);
+                SetCodigoPropietario(codigoPropietario);
+                SetDataPropietario(response);
+                SetLoading(false);
+                setRefrescar(response.data)
+          })
+          .catch(error => {
+            console.error('Error en la solicitud:', error);
+          });
+ 
+        
+      
 
     }
 
@@ -43,12 +55,23 @@ export const UseGetPadronInquilino = (API, setRefrescar, auth) => {
 
     const [isLoading, SetLoading] = useState(true);
     const [dataPropietario, SetDataPropietario] = useState(null);
-    console.log(auth)
+    //console.log(auth)
+
     const doSomething = async () => {
-        console.log(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`)
-        const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
-        console.log(API);
-     
+        const config = {
+        
+            headers: {
+                Authorization: `Bearer ${auth.accessToken}`,
+            },
+        };
+    
+       const response = await axios(
+            `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`,                           
+            config
+        );
+ 
+       // console.log(API);
+        console.log(response)
         SetDataPropietario(response);
         SetLoading(false);
         setRefrescar(response.data)
@@ -73,12 +96,36 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
     const [dataPropietario, SetDataPropietario] = useState(null);
     const [dataSocioPabPuesto, SetDataSocioPabPuesto] = useState(null);
     const [codigoPropietario, SetCodigoPropietario] = useState(null)
-    console.log(auth)
+  
+
+
+
+
     const doSomething = async () => {
-        console.log(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`)
-        const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
-        console.log(API);
-        console.log(response)
+
+        console.log(auth)
+       
+        const config = {
+        
+            headers: {
+                'Authorization': `Bearer ${auth.accessToken}`,
+            },
+        };
+
+    
+       const response = null;
+
+        axios({
+            method: "get",
+            url: `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${auth.accessToken}`,
+            },
+          }).then((response) => {
+           
+        
 
         // Array para almacenar los valores extraídos
         const listPabellonPuesto = [];
@@ -106,7 +153,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
         SetDataPropietario(response);
         SetLoading(false);
         setRefrescar(response.data)
-
+    });
     }
 
     useEffect(() => {

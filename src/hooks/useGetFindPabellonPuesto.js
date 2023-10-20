@@ -2,16 +2,25 @@ import { useEffect,useState,useContext } from "react";
 import axios from "axios";
 
 
-export const UseGetFindPabellonPuesto=(API)=>{
+export const UseGetFindPabellonPuesto=(API, auth)=>{
 
     const[isLoadingPuestos,SetLoadingPuestos]=useState(true);
     const [dataPuestos,SetDataPuestos]=useState(null)
     const [dataPabellonPuesto,SetDataPabellonPuesto]=useState(null)
+
+    const config = {
+        
+        headers: {
+            Authorization: `Bearer ${auth.accessToken}`,
+        },
+    };
+
     //console.log(auth)
     const doSomething = async() =>{
        // console.log(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`)
-        const response = await axios(API);
-
+        const response = await axios(API,config);
+ console.log(response);
+        console.log(response);
         const datasetPabellonPuesto = response.data.map((e)=>({
             
                 numPabellon: e.numPabellon,

@@ -84,7 +84,7 @@ const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
                         <div className="close-form-register-directivo" >
                             <div className="close-form-register-directivo" >
                                 <input id="cerrar-modal" name="modal" type="radio" />
-                                <label for="cerrar-modal">
+                                <label htmlFor="cerrar-modal">
                                     <CloseIcon onClick={handleClickCloseForm} style={{ position: `absolute` }} className="icono-close-register-directivo" /> </label>
                             </div>
                         </div>
@@ -127,7 +127,7 @@ const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
 
                             <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
 
-                                <button type="submit" class="btn-enviar-carga-masiva-directivos">Aceptar
+                                <button type="submit" className="btn-enviar-carga-masiva-directivos">Aceptar
                                 </button>
 
                             </div>

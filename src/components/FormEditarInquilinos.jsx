@@ -308,7 +308,7 @@ const EditarInquilino =(props)=>{
                         </div>
                         <form action="" className="login-form" onSubmit={enviarDatos}>
                             <div className="tilte-inscripcion-registro-padron-propietarios">
-                                Editar Información de los Socios
+                                Editar Información de los Inquilinos
                             </div>
                             <div className="container-form-upload-inscripcion-directivos">
 
@@ -318,13 +318,13 @@ const EditarInquilino =(props)=>{
                                     </div>
                                     <div className="col-md-4">
                                     <div className="title-nuevo-socio-registro-formpadron-green  title-nuevo-socio-registro-formpadron-black-div">
-                                            Codigo de socio
+                                            Codigo de Inquilino
                                         </div>
                                         <input
 
                                             type="text"
-                                            name="codSocio"
-                                            value={datos.codSocio}
+                                            name="codInquilino"
+                                            value={datos.codInquilino}
                                             className="form-control upload-inscripcion-directivos"
                                             onChange={handleInputChange}
                                         >
@@ -354,15 +354,15 @@ const EditarInquilino =(props)=>{
                                        
                                             
                                         <div className="title-nuevo-socio-registro-formpadron-orange title-nuevo-socio-registro-formpadron-black-div">
-                                            Puesto  {!puestoValido && (
+                                            Pabellón  {!pabellonValido && (
                                                 <span className="error-message-from-prop ">*No válido</span>
                                             )}
                                         </div>
                                         <input
                                             type="text"
                                             name="numPuesto"
-                                            value={datosInmueble.numPuesto}
-                                            className={!puestoValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
+                                            value={datosInmueble.numPabellon}
+                                            className={!pabellonValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
                                         >
 
@@ -432,7 +432,7 @@ const EditarInquilino =(props)=>{
                                        
                                         <br />
                                         <div className="title-nuevo-socio-registro-formpadron-green title-nuevo-socio-registro-formpadron-black-div">
-                                            Pabellón{!pabellonValido && (
+                                            Puesto{!puestoValido && (
                                                 <span className="error-message-from-prop ">*No válido</span>
                                             )}
                                         </div>
@@ -440,7 +440,7 @@ const EditarInquilino =(props)=>{
                                             type="text"
                                             name="numPabellon"
                                             className={!pabellonValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
-                                            value={datosInmueble.numPabellon}
+                                            value={datosInmueble.numPuesto}
                                             onChange={handleInputChange}
                                         >
 

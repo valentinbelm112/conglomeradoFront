@@ -482,7 +482,7 @@ const EditarPropietario =(props)=>{
                                             value={datos.des_dni_conyugue}
                                             className={!dniCValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
                                             onChange={handleInputChange}
-                                           
+                                            
                                         >
 
                                         </input>

@@ -22,14 +22,14 @@ import SidebarMenu from "../components/SidebarMenu";
 import UseGetDoccumentoConsejoDirectivo from "../hooks/useGetDocumentoConsejoDirectivo";
 import FormEditarDirectivos from "../components/FormEditarDirectivos";
 
-const ConsejoDirectivo = () => {
+const ConsejoDirectivo = ({ EstadoGlobal }) => {
  const [refrescar ,setRefrescar]=useState([])
  const [click,setClick]=useState(false)
  const [showDcoument,SetShowDcoument]=useState(false)
  const [extraerDatos ,SetExtraerDatos]=useState([])
-  const { directivos, isLoading } = useGetConsejoDirectivo(`${serverURL}/CGM/listar`,setRefrescar);
+  const { directivos, isLoading } = useGetConsejoDirectivo(`${serverURL}/CGM/listar`,setRefrescar,EstadoGlobal);
  
-  const {documento,isLoadingDoc} =UseGetDoccumentoConsejoDirectivo(`${serverURL}/CGM/Documento-detalle-directivo`)
+  const {documento,isLoadingDoc} =UseGetDoccumentoConsejoDirectivo(`${serverURL}/CGM/Documento-detalle-directivo`,EstadoGlobal)
   //setRefrescar(directivos.data);
   
 
@@ -52,7 +52,7 @@ const ConsejoDirectivo = () => {
   const RefrescarInformacion = async() => {
    console.log( refrescar.length)
    console.log(refrescar)
-    const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
+    const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`,EstadoGlobal);
    setRefrescar(response.data)
    console.log(refrescar)
   }
@@ -60,7 +60,7 @@ const ConsejoDirectivo = () => {
   const RefrescarInformacionEdit = async() => {
     console.log( refrescar.length)
     console.log(refrescar)
-     const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
+     const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`,EstadoGlobal);
     setRefrescar(response.data)
     setClick(!click)
     console.log(refrescar)
@@ -76,8 +76,8 @@ const ConsejoDirectivo = () => {
   const DeleteRegisterConsejo=async(id)=>{
     toast.dismiss();
     console.log(id + "identificador")
-    await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
-    const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
+    await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`,EstadoGlobal);
+    const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`,EstadoGlobal);
    setRefrescar(response.data)
   }
 
@@ -221,7 +221,7 @@ const ConsejoDirectivo = () => {
               </table>
                 </div>
                 </div>
-                {click&& <FormEditarDirectivos enviarDatos={extraerDatos} refrescarInformacion={RefrescarInformacionEdit} onClickEstado={setClick} />}
+                {click&& <FormEditarDirectivos enviarDatos={extraerDatos} refrescarInformacion={RefrescarInformacionEdit} onClickEstado={setClick}  EstadoGlobal={EstadoGlobal}/>}
             </div>
 
             <div className="col-md-4">

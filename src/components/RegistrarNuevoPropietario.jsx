@@ -114,6 +114,8 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
         console.log(datos);
         console.log(camposLlenos);
 
+        console.log(EstadoGlobal.accessToken);
+        
         if (camposLlenos &&  pAccionesValido && correoValido &&  dniCValido &&  areaValido &&  dniValido) {
             console.log("Enviando")
             console.log("Enviando  + datos.fecha_documento");
@@ -121,7 +123,8 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
             fetch(`${serverURL}/Propietarios/save`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${EstadoGlobal.accessToken}`
                 },
                 body: JSON.stringify(datos)
 
