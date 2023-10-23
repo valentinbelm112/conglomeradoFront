@@ -60,6 +60,10 @@ const ExpedientePropietarioSocio = (props) => {
   }, []);
 
 
+  const tipoView = {
+    opcion: 2,
+  };
+
   const ModeloProps1={
      titulo:"Registro padron socios"
   }
@@ -487,7 +491,8 @@ const ModeloProps5={
                           props.padron.data.documentoInquilinoEntities
                         }
                         dataPropietario={ props.padron.data}
-                        api={`${serverURL}/Socio/Upload-info-socio`}/>,
+                        api={`${serverURL}/Socio/Upload-info-socio`}
+                        tipView={tipoView}/>,
                         <ImageUploader  info={ModeloProps2}
                         documentoPropietario={
                           props.padron.data.documentoInquilinoEntities

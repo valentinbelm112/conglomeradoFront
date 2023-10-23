@@ -24,18 +24,25 @@
   }
 
 .title-consejo-directivo{
-    padding: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(39, 26, 10);
-    font-family: 'Playfair Display', serif;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(39, 26, 10);
+  font-family: "Playfair Display", serif;
+  margin-top: 1%;
+  /* background-color: white; */
+  padding: 8px 15px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #fff;
+  border-radius: 4px;
 }
 
 .title-consejo-directivo-periodo-vigente{
     font-size: 15px;
     text-align: start;
-    font-family: 'Playfair Display', serif;
+    font-family: "Roboto", sans-serif;
     
 }
 .title-consejo-directivo-fecha{

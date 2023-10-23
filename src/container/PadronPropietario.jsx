@@ -58,7 +58,10 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setCurrentPage(selected);
     };
 
-    
+    const tipoView = {
+        opcion: 1,
+      };
+      
     const handleItemsPerPageChange = (e) => {
         const newItemsPerPage = parseInt(e.target.value, 10);
         console.log(e.target.value);

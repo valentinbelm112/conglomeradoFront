@@ -43,6 +43,7 @@ const ListProdronInquilino = (props) => {
 
     };
 
+    
     const { isLoading, dataPropietario } = UseGetPadronInquilino(`${serverURL}/Inquilino/Obtener`, setRefrescar, props.EstadoGlobal)
     const { dataPuestos, isLoadingPuestos, dataPabellonPuesto } = UseGetFindPabellonPuesto(`${serverURL}/Inquilino/Obtener-pabellon-puesto`, props.EstadoGlobal)
 

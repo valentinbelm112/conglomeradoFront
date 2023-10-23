@@ -13,6 +13,8 @@ import "./styles/ImageUploader.scss"
 import axios from 'axios';
 import { format } from 'date-fns';
 import { serverURL } from '../utils/Configuration';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 const ImageUploader = (props) => {
   console.log(props)
   const [open, setOpen] = useState(false);
@@ -21,6 +23,7 @@ const ImageUploader = (props) => {
   const [dbImage, setDbImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
   const [datosDocumento, setDatosDocumento] = useState({
     id_propietario: 0,
     ds_dni: "",
@@ -37,82 +40,94 @@ const ImageUploader = (props) => {
     fecha_documento: ""
   });
 
-  // Supongamos que tienes una función para recuperar la imagen de la base de datos
-  const fetchImageFromDatabase = async (desDni,codAs,desTipoDoc) => {
-   console.log(desDni)
-   console.log(codAs)
-   console.log(desTipoDoc)
 
-   if(props.tipView.opcion===1){
-    await axios.get(`${props.request}?codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
-    .then(response => {
-      // Handle the response data
-      console.log(response)
-      setDbImage(response.data.des_link_documento);
-    })
-    .catch(error => {
-      // Handle any errors
-      console.error(error);
-    });
-   }
-   else{
-    await axios.get(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
-    .then(response => {
-      // Handle the response data
-      console.log(response)
-      setDbImage(response.data.des_link_documento);
-    })
-    .catch(error => {
-      // Handle any errors
-      console.error(error);
-    });
-   }
-   
+  const fetchImageFromDatabase = async (desDni, codAs, desTipoDoc) => {
+
+
+    if (props.tipView.opcion === 1) {
+      await axios.get(`${props.request}?codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+        .then(response => {
+
+          //console.log(response.data.des_link_documento_inscrito)
+          setDbImage(response.data.des_link_documento_inscrito);
+        })
+
+       
+        .catch(error => {
+          // Handle any errors
+          console.error(error);
+        });
+
+
+       await axios.get(
+          `${serverURL}/CGM/Documento-detalle-directivo?Codigo_Asociacion=${codAs}`
+      )
+      .then(response => {
+
+        console.log(response);
+        props.refrescarDocumento(response);
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error);
+      });
+    }
+    else {
+      await axios.get(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+        .then(response => {
+          // Handle the response data
+          console.log(response)
+          setDbImage(response.data.des_link_documento);
+        })
+        .catch(error => {
+          // Handle any errors
+          console.error(error);
+        });
+    }
+
   };
 
   useEffect(() => {
     setUploadedImage(null);
     setDbImage(null)
-    
 
     if (props.documentoPropietario !== undefined) {
-    // Llama a la función para recuperar la imagen
-    if(props.tipView.opcion===1){
-      console.log(props.documentoPropietario.des_link_documento_inscrito)
-    setDbImage(props.documentoPropietario.des_link_documento_inscrito);
-    }
-    else{
-      console.log(props.documentoPropietario.des_link_documento)
-      setDbImage(props.documentoPropietario.des_link_documento);
-    }
-    
-    }
-  
-    
-  
-   console.log(props);
 
-  if(props.dataPropietario){
-    if(props.tipView.opcion===1){
-      const dataFound=props.dataPropietario.data.find(item=>item.destipdoc ==='DocInscripcion')
-      console.log("Vista consejo directivo")
-      setDatosDocumentoConsejo({
-        codigo_asociacion: dataFound?.descodigoasociacion,                  
-        tip_doc: props.tipoDoc,
-        fecha_desde:format(new Date(dataFound?.fec_inicio_vigencia), "dd-MM-yyyy"),
-        fecha_hasta:format(new Date(dataFound?.fec_fin_vigencia), "dd-MM-yyyy"),
-        fecha_documento:format(new Date(dataFound?.fec_documento), "dd-MM-yyyy")
-      })
-    }else{
-      setDatosDocumento({
-        id_propietario: props.dataPropietario.id,
-        ds_dni: props.dataPropietario.desDni,
-        des_codigo_asoc: props.dataPropietario.codigoAsociacion,              
-        des_tipo_doc: props.tipoDoc
-      })
+      // Llama a la función para recuperar la imagen
+      if (props.tipView.opcion === 1) {
+        console.log(props.documentoPropietario.des_link_documento_inscrito)
+        setDbImage(props.documentoPropietario.des_link_documento_inscrito);
+      }
+      else {
+        console.log(props.documentoPropietario.des_link_documento)
+        setDbImage(props.documentoPropietario.des_link_documento);
+      }
+
     }
-   
-  }
+
+    console.log(props);
+
+    if (props.dataPropietario) {
+      if (props.tipView.opcion === 1) {
+        const dataFound = props.dataPropietario.data.find(item => item.destipdoc === 'DocInscripcion')
+        console.log("Vista consejo directivo")
+        setDatosDocumentoConsejo({
+          codigo_asociacion: dataFound?.descodigoasociacion,
+          tip_doc: props.tipoDoc,
+          fecha_desde: format(new Date(dataFound?.fec_inicio_vigencia), "dd-MM-yyyy"),
+          fecha_hasta: format(new Date(dataFound?.fec_fin_vigencia), "dd-MM-yyyy"),
+          fecha_documento: format(new Date(dataFound?.fec_documento), "dd-MM-yyyy")
+        })
+      } else {
+        setDatosDocumento({
+          id_propietario: props.dataPropietario.id,
+          ds_dni: props.dataPropietario.desDni,
+          des_codigo_asoc: props.dataPropietario.codigoAsociacion,
+          des_tipo_doc: props.tipoDoc
+        })
+      }
+
+    }
   }, [props.documentoPropietario]);
 
   const onDrop = (acceptedFiles) => {
@@ -121,10 +136,10 @@ const ImageUploader = (props) => {
     // Manejar la imagen cargada aquí
     console.log(firstImage)
     setUploadedImage(firstImage);
-    
+
   };
 
- 
+
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: 'image/*', // Aceptar solo archivos de imagen
@@ -139,7 +154,7 @@ const ImageUploader = (props) => {
     setIsLightboxOpen(true);
     console.log(isLightboxOpen)
   };
-  
+
   const handleZoomCarga = (event) => {
     setOpenCarga(true)
     console.log(isLightboxOpen)
@@ -150,10 +165,32 @@ const ImageUploader = (props) => {
     console.log(isLightboxOpen)
   };
 
-  const handleDeleteCarga = (event) => {
-    // Limpiar la imagen cargada
+  const handleDeleteCarga = async(event,codAs,desTipoDoc) => {
     event.stopPropagation();
-    setUploadedImage(null);
+    // Limpiar la imagen cargada
+    console.log(codAs,desTipoDoc);
+    if (props.tipView.opcion === 1) {
+      const response = await axios.delete(      
+       `${serverURL}/CGM/delete/documento/directivo?codAs=${codAs}&desTipoDoc=${desTipoDoc}`
+    )
+    .then((response)=>{
+        console.log("Eliminar Propietario")
+        setDbImage(null)
+        toast.success("Registro Eliminado con éxito");
+       
+    })
+    .catch (error => {
+        console.error( 'función en rechazo invocada: ', error );
+        toast.error("Intente Nuevamente .");
+      });
+    }
+    else{
+  
+      setUploadedImage(null);
+    }
+  
+
+   
   };
 
   const handleDelete = (event) => {
@@ -162,8 +199,8 @@ const ImageUploader = (props) => {
     setUploadedImage(null);
   };
 
-  const handleUpload = async() => {
-    if(props.tipView.opcion===1){
+  const handleUpload = async () => {
+    if (props.tipView.opcion === 1) {
 
       console.log("Consejo Directivo");
       if (uploadedImage) {
@@ -172,30 +209,29 @@ const ImageUploader = (props) => {
         reader.onload = () => {
           setUploadedImage(reader.result);
         };
-    
+
         const formData = new FormData();
         formData.append('file_upload_pdf', uploadedImage);
-        formData.append('codigo_asociacion',datosDocumentoConsejo.codigo_asociacion)
+        formData.append('codigo_asociacion', datosDocumentoConsejo.codigo_asociacion)
         formData.append('fecha_desde', datosDocumentoConsejo.fecha_desde)
         formData.append('fecha_hasta', datosDocumentoConsejo.fecha_hasta)
         formData.append('fecha_documento', datosDocumentoConsejo.fecha_documento)
         formData.append('tip_doc', datosDocumentoConsejo.tip_doc)
-       
-        
-  
+
+
+
         console.log(datosDocumentoConsejo)
         await axios.post(props.api, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
-          .then((response) => {
-            
-            
-            fetchImageFromDatabase("datosDocumento.ds_dni",datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
+          .then(async(response) => {
+
+
+            fetchImageFromDatabase("datosDocumento.ds_dni", datosDocumentoConsejo.codigo_asociacion, datosDocumentoConsejo.tip_doc);
             //Maneja la respuesta del servidor si es necesario.
-  
-            console.log(response.data);
+          
           })
           .catch((error) => {
             // Maneja cualquier error que ocurra durante la solicitud.
@@ -205,7 +241,7 @@ const ImageUploader = (props) => {
         alert('Por favor, seleccione una imagen antes de enviar.');
       }
     }
-    else{
+    else {
       if (uploadedImage) {
 
         const reader = new FileReader();
@@ -216,12 +252,12 @@ const ImageUploader = (props) => {
         //console.log(uploadedImage)
         const formData = new FormData();
         formData.append('file_upload_pdf', uploadedImage);
-        formData.append('id_propietario',datosDocumento.id_propietario)
-        formData.append('ds_dni',datosDocumento.ds_dni)
+        formData.append('id_propietario', datosDocumento.id_propietario)
+        formData.append('ds_dni', datosDocumento.ds_dni)
         formData.append('des_codigo_asoc', datosDocumento.des_codigo_asoc)
         formData.append('des_tipo_doc', datosDocumento.des_tipo_doc)
-        
-  
+
+
         console.log(datosDocumento)
         await axios.post(props.api, formData, {
           headers: {
@@ -229,11 +265,11 @@ const ImageUploader = (props) => {
           },
         })
           .then((response) => {
-            
-            
-            fetchImageFromDatabase(datosDocumento.ds_dni,datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
+
+
+            fetchImageFromDatabase(datosDocumento.ds_dni, datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
             //Maneja la respuesta del servidor si es necesario.
-  
+
             console.log(response.data);
           })
           .catch((error) => {
@@ -245,95 +281,97 @@ const ImageUploader = (props) => {
       }
     }
     // Verifica si se ha seleccionado una imagen.
-   
+
   };
 
-  
+
   return (
     <div className='container-image-upload-show-cgm'>
       <div className='title-socio-upload-image-padron'>{props.info.titulo}</div>
       <div style={containerStyles}>
-      {/* Columna de carga con el Dropzone */}
-      <div style={columnStyles}>
-        <div {...getRootProps()} style={{ ...dropzoneStyles, width: '125px' }}>
-          <input 
-          
-          
-          {...getInputProps()}/>
-          {uploadedImage ? (
-            <div style={imageContainerStyles}>
+        {/* Columna de carga con el Dropzone */}
+        <div style={columnStyles}>
+          <div {...getRootProps()} style={{ ...dropzoneStyles, width: '125px' }}>
+            <input
+
+
+              {...getInputProps()} />
+            {uploadedImage ? (
+              <div style={imageContainerStyles}>
+                <img
+                  src={URL.createObjectURL(uploadedImage)}
+                  alt={`Imagen cargada`}
+                  style={imageStyles}
+                />
+                <div style={buttonContainerStyles}>
+                  <div onClick={handleZoom}><ZoomInIcon /></div>
+
+                  <div onClick={handleDelete} style={{ color: `red` }}><DeleteForeverIcon /></div>
+                </div>
+              </div>
+            ) : (
+              <p>Arrastra y suelta una imagen aquí o haz clic para seleccionar.</p>
+            )}
+          </div>
+          <div style={buttonStyles}>
+            <button onClick={handleUpload} disabled={dbImage == null ? !uploadedImage || isUploading : true} style={{ fontSize: `11px` }} type="button" className="btn btn-success">
+              Enviar <SendIcon style={{ height: `15px` }} />
+            </button>
+            {isUploading && <p>Subiendo imagen...</p>}
+          </div>
+        </div>
+
+        {/* Columna de imagen recuperada de la base de datos */}
+        <div style={columnStylesUpload}>
+          {dbImage && (
+            <>
               <img
-                src={URL.createObjectURL(uploadedImage)}
-                alt={`Imagen cargada`}
+                src={dbImage}
+                alt={`Imagen de la base de datos`}
                 style={imageStyles}
               />
               <div style={buttonContainerStyles}>
-                <div onClick={handleZoom}><ZoomInIcon/></div>
-              
-                <div onClick={handleDelete} style={{color:`red`}}><DeleteForeverIcon/></div>
+                <div onClick={handleZoomCarga} style={{cursor:'pointer' }}><ZoomInIcon /></div>
+
+                <div onClick={(e)=>handleDeleteCarga(e,datosDocumentoConsejo.codigo_asociacion,datosDocumentoConsejo.tip_doc)} style={{ color: `red`,cursor:'pointer' }}><DeleteForeverIcon /></div>
               </div>
-            </div>
-          ) : (
-            <p>Arrastra y suelta una imagen aquí o haz clic para seleccionar.</p>
+            </>
+
+
           )}
+
+
         </div>
-        <div style={buttonStyles}>
-          <button onClick={handleUpload} disabled={dbImage==null? !uploadedImage || isUploading:true} style={{fontSize:`11px`}} type="button" className="btn btn-success">
-            Enviar <SendIcon style={{height:`15px`}}/>
-          </button>
-          {isUploading && <p>Subiendo imagen...</p>}
-        </div>
-      </div>
 
-      {/* Columna de imagen recuperada de la base de datos */}
-      <div style={columnStylesUpload}>
-        {dbImage && (
-           <>
-            <img
-              src={dbImage}
-              alt={`Imagen de la base de datos`}
-              style={imageStyles}
-            />
-            <div style={buttonContainerStyles}>
-            <div onClick={handleZoomCarga}><ZoomInIcon/></div>
-          
-            <div onClick={handleDeleteCarga} style={{color:`red`}}><DeleteForeverIcon/></div>
-          </div>
-           </>
-           
-        
-        )}
 
-        
-      </div>
 
-     
-     
         <Lightbox
-        plugins={[Zoom,Download,Captions]}
-        open={open}
-        close={() => setOpen(false)}
-        slides={[
-        { src: uploadedImage ? URL.createObjectURL(uploadedImage) : "",
-        title: "Documento de la inscripcion del consejo directivo"
-        }  ]}
-    
+          plugins={[Zoom, Download, Captions]}
+          open={open}
+          close={() => setOpen(false)}
+          slides={[
+            {
+              src: uploadedImage ? URL.createObjectURL(uploadedImage) : "",
+              title: "Documento de la inscripcion del consejo directivo"
+            }]}
+
         />
 
-      <Lightbox
-        plugins={[Zoom,Download,Captions]}
-        open={openCarga}
-        close={() => setOpenCarga(false)}
-        slides={[
-        { src: dbImage ? dbImage : "",
-        title: "Documento de la inscripcion del consejo directivo"
-        }  ]}
-    
+        <Lightbox
+          plugins={[Zoom, Download, Captions]}
+          open={openCarga}
+          close={() => setOpenCarga(false)}
+          slides={[
+            {
+              src: dbImage ? dbImage : "",
+              title: "Documento de la inscripcion del consejo directivo"
+            }]}
+
         />
-     
+
+      </div>
     </div>
-    </div>
-  
+
   );
 };
 const containerStyles = {
@@ -341,7 +379,7 @@ const containerStyles = {
   flexDirection: 'row',
   alignItems: 'flex-start',
   height: '100%',
-    width: '100%',
+  width: '100%',
 };
 
 const columnStyles = {
@@ -351,10 +389,10 @@ const columnStyles = {
   height: '90%',
 
 
-  
+
 };
 
-const columnStylesUpload= {
+const columnStylesUpload = {
   marginRight: '20px',
   display: 'flex',
   flexDirection: 'column',

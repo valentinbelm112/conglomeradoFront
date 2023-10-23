@@ -9,6 +9,12 @@ nav {
     //border-bottom: 1px solid var(--very-light-pink);
   }
 
+  .perfil-fotot-cgm-nabvar{
+    width: 44px;
+    height: 39px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
   .navbar-conglomerado-pro{
   position: fixed !important;
   width: 100% !important;
@@ -77,11 +83,7 @@ nav {
     border-radius: 8px;
     
   }
-  .navbar-left ul li a:hover,
-  .navbar-right ul li a:hover {
-    border: 1px solid var(--hospital-green);
-    color: var(--hospital-green);
-  }
+  
   .navbar-email {
     color: var(--very-light-pink);
     font-size: var(--sm);
@@ -110,10 +112,10 @@ nav {
   .constainer-options-account ul {
     display: none;
     position: absolute;
-    margin-left: -25px;
-    height: 200px;
-    
+    margin-left: 0px;
+    height: 73px;
     background-color: white;
+    box-shadow: 5px 2px 2px rgb(168, 168, 168);
     
    
   }
@@ -130,6 +132,10 @@ nav {
   .constainer-options-account ul li{
     padding: 6px;
   }
+  .options-account li:hover {
+    background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+    color: #333; /* Color del texto al pasar el mouse */
+  }
  .constainer-options-account:hover ul,.options-account:hover{
    display: block;
    
@@ -145,7 +151,7 @@ nav {
   margin-top: 12px;
   order: -1;
   font-weight: 500;
-  margin-right: 6px;
+  margin-right: -6px;
  }
  
  .icon-menu-nabvar{
