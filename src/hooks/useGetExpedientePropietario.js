@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { serverURL } from "../utils/Configuration";
 
-export const useGetExpedientePropietario = (API, id, id2) => {
+export const useGetExpedientePropietario = (API, id, id2,auth) => {
   const [isLoading, SetLoading] = useState(true);
   const [dataExpediente, SetDataExpediente] = useState(null);
   const [dataDetallePropietario, SetDataDetallePropietario] = useState(null);
@@ -11,9 +11,19 @@ export const useGetExpedientePropietario = (API, id, id2) => {
   const [coPropietario, SetCoPropietario] = useState(null);
   const[partidasRegistrales,setPartidasRegistrales] = useState(null);
 
+
+  const config = {
+        
+    headers: {
+        Authorization: `Bearer ${auth.accessToken}`,
+    },
+};
+
+
   const doSomething = async () => {
     const padronPropietariosDetalle = await axios.get(
-      `${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`
+      `${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`,
+      config
     );
 
     
@@ -53,13 +63,15 @@ export const useGetExpedientePropietario = (API, id, id2) => {
 
     
     const existeCliente = await axios.get(
-      `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.desDni}`
+      `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.desDni}`,
+      config
     );
 
   
     if (existeCliente.data) {
       const responsepostExpediente = await axios.get(
-        `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.desDni}`
+        `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.desDni}`,
+        config
       );
    
       SetDataExpediente(responsepostExpediente);
@@ -104,7 +116,8 @@ export const useGetExpedientePropietario = (API, id, id2) => {
 
           const responsepostExpediente = await axios.post(
             `${serverURL}/Expediente/save`,
-            bodyExpediente.data
+            bodyExpediente.data,
+            config
           );
 
           console.log(responsepostExpediente);
@@ -118,13 +131,15 @@ export const useGetExpedientePropietario = (API, id, id2) => {
 
     if (padronPropietariosDetalle.data.des_dni_conyugue !== "-") {
       const existeClienteConyuge = await axios.get(
-        `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.des_dni_conyugue}`
+        `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.des_dni_conyugue}`,
+        config
       );
 
       //consultar conyugue
       if (existeClienteConyuge.data) {
         const responseExpedienteConyugue = await axios.get(
-          `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.des_dni_conyugue}`
+          `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.des_dni_conyugue}`,
+          config
         );
         SetExpedienteConyugue(responseExpedienteConyugue);
      
@@ -168,7 +183,8 @@ export const useGetExpedientePropietario = (API, id, id2) => {
 
             const responsepostExpediente = await axios.post(
               `${serverURL}/Expediente/save`,
-              bodyExpediente.data
+              bodyExpediente.data,
+              config
             );
 
             console.log(responsepostExpediente);

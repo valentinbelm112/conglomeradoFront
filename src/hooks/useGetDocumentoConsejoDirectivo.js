@@ -6,7 +6,18 @@ export const UseGetDoccumentoConsejoDirectivo=(API,setRefrescarDocument)=>{
     const [isLoadingDoc, SetLoading] = useState(true);
     const [documento, setDirectivos] = useState([]);
     const doSomething = async() =>{
-        const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
+
+        const config = {
+        
+            headers: {
+                Authorization: `Bearer ${estadoGlobal.accessToken}`,
+            },
+        };
+    
+
+
+        const response = await axios(`${API}?Codigo_Asociacion=${estadoGlobal.des_codigo_asociacion}`
+        ,config);
         console.log(API);
         console.log(response)
         setRefrescarDocument(response);

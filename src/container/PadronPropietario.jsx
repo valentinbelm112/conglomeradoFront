@@ -27,8 +27,10 @@ import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import EditarPropietario from "../components/FormEditarPropietarios";
 import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario";
+import { validateToken } from "../utils/TokenValidateExpired";
 import ReactPaginate from "react-paginate";
 import EditarSocio from "../components/FormEditarSocios";
+import { refreshAccessToken } from "../hooks/useGetRefreshToken";
 const PadronPropietario = ({ EstadoGlobal }) => {
     const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
     const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
@@ -45,24 +47,24 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
 
-
-
-
     const { isLoading, dataPropietario, codigoPropietario } =
         UseGetPadronPropietario(
             `${serverURL}/Propietarios/Obtener`,
             setRefrescar,
             EstadoGlobal
         );
+
     const handlePageChange = ({ selected }) => {
         setCurrentPage(selected);
     };
 
+    
     const handleItemsPerPageChange = (e) => {
         const newItemsPerPage = parseInt(e.target.value, 10);
         console.log(e.target.value);
         setItemsPerPage(newItemsPerPage);
     };
+
 
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -85,6 +87,42 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         );
         setRefrescar(response.data);
     };
+
+
+
+
+
+
+    const showNotification = () => {
+        // Lógica para mostrar una notificación cuando el token ha caducado
+        // Debes implementar esta función según tus necesidades
+        console.log('El token ha caducado. Muestra una notificación.');
+
+        //refreshAccessToken( `${serverURL}/Token/Refrescar`);
+    };
+
+
+
+    const checkTokenExpiry = () => {
+
+        if (validateToken()) {
+            // El token ha caducado, muestra una notificación
+            showNotification();
+        }
+
+        // Configura la próxima verificación después de 2 minutos
+        setTimeout(checkTokenExpiry, 4000);
+    };
+
+    useEffect(() => {
+        // Inicia la verificación al cargar el componente
+        checkTokenExpiry();
+
+        return () => {
+            // Limpia el temporizador al desmontar el componente
+            clearTimeout(checkTokenExpiry);
+        };
+    }, []);
 
     const handleDeletePropietarioR = (id1, id2) => {
         toast.info(

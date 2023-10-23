@@ -10,10 +10,11 @@ import { useState } from "react";
 import AuthContext from "../context/AuthContext";
 const ListExpedientesPropietarios=()=>{
       const { login } = useContext(AuthContext);
+      const { auth } =useContext(AuthContext);
     const { id,id2} = useParams();
     const [Estado,SetEstado]=useState(false);
 
-    const {dataExpediente,isLoading,dataDetallePropietario,propietariosPartida,expedienteConyugue,coPropietario,partidasRegistrales}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,id,id2);
+    const {dataExpediente,isLoading,dataDetallePropietario,propietariosPartida,expedienteConyugue,coPropietario,partidasRegistrales}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,id,id2,auth);
    
 
     console.log(dataExpediente)

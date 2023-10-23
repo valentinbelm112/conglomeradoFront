@@ -12,9 +12,11 @@ import { serverURL } from "../utils/Configuration";
 const FormEditarDirectivos = ( props ) => {
   
 const [datos, setDatos] = useState(props.enviarDatos);
-
 const [formData, setFormData] = useState(props.enviarDatos);
   
+
+console.log(props);
+
 const handleClickCloseForm = () => {
   props.onClickEstado(false)
   };
@@ -26,26 +28,26 @@ const handleClickCloseForm = () => {
       ...datos,
       [event.target.name]: event.target.value,
     });
-  };
+};
 
 
   const enviarDatos = async (event) => {
 
-    event.preventDefault();
-    console.log("Enviando")
-    console.log(datos);
-    console.log(formData);
-     
-    
+       event.preventDefault();
+    //console.log("Enviando")   
     // Realizar la solicitud POST con Axios
     //http://localhost:8080/upload/imagenes
     fetch(`${serverURL}/CGM/update/${datos.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json', // Utiliza 'application/json' para enviar JSON
+        'Authorization': `Bearer ${props.EstadoGlobal.accessToken}`
       },
+     
       body:JSON.stringify(datos)
-    })
+
+    }
+    )
       .then((data) => {
 
 

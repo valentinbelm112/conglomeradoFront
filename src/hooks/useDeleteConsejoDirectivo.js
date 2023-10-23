@@ -2,11 +2,21 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const UseDeleteConsejoDirectivo = async (API) => {
+export const UseDeleteConsejoDirectivo = async (API,EstadoGlobal) => {
    
+    
+    const config = {
+        
+        headers: {
+            Authorization: `Bearer ${EstadoGlobal.accessToken}`,
+        },
+    };
+
+
+   console.log(EstadoGlobal)
     const response = await axios.delete(
         
-        API
+        API,config
     ).then((e)=>{
         console.log("Delete consejo")
         toast.success("Registro Eliminado con éxito");

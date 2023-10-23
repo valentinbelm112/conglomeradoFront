@@ -44,7 +44,41 @@ const ListProdronInquilino = (props) => {
     };
 
     const { isLoading, dataPropietario } = UseGetPadronInquilino(`${serverURL}/Inquilino/Obtener`, setRefrescar, props.EstadoGlobal)
-    const { dataPuestos, isLoadingPuestos, dataPabellonPuesto } = UseGetFindPabellonPuesto(`${serverURL}/Inquilino/Obtener-pabellon-puesto`)
+    const { dataPuestos, isLoadingPuestos, dataPabellonPuesto } = UseGetFindPabellonPuesto(`${serverURL}/Inquilino/Obtener-pabellon-puesto`, props.EstadoGlobal)
+
+    const isTokenExpired = () => {
+        // Lógica para verificar si el token ha caducado
+        // Debes implementar esta función según tus necesidades
+      
+    };
+
+
+    const showNotification = () => {
+        // Lógica para mostrar una notificación cuando el token ha caducado
+        // Debes implementar esta función según tus necesidades
+        console.log('El token ha caducado. Muestra una notificación.');
+    };
+
+    const checkTokenExpiry = () => {
+        if (isTokenExpired()) {
+            // El token ha caducado, muestra una notificación
+            showNotification();
+        }
+
+        // Configura la próxima verificación después de 2 minutos
+        setTimeout(checkTokenExpiry, 4000);
+    };
+
+
+    useEffect(() => {
+        // Inicia la verificación al cargar el componente
+        checkTokenExpiry();
+
+        return () => {
+            // Limpia el temporizador al desmontar el componente
+            clearTimeout(checkTokenExpiry);
+        };
+    }, []);
 
 
     const RefrescarInformacionEdit = async () => {
@@ -190,7 +224,7 @@ const ListProdronInquilino = (props) => {
                                 <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
                                     <div>
                                         <input id="mostrar-form-documento-inquilino-person-add" name="modal" type="radio" />
-                                        <label for="mostrar-form-documento-inquilino-person-add" onClick={handleClickOpenForm}> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
+                                        <label htmlFor="mostrar-form-documento-inquilino-person-add" onClick={handleClickOpenForm}> <PersonAddIcon /> <span className="button-text">Registrar</span> </label>
 
                                         <div id="modal-mostrar-form-documento-socios-person-add-import">
                                             <FormRegistroInquilinos RefrescarInformacion={RefrescarInformacion} clickR={clickR} setClickR={setClickR} EstadoGlobal={props.EstadoGlobal} dataPuestos={dataPuestos} dataPabellonPuesto={dataPabellonPuesto} />
@@ -201,14 +235,14 @@ const ListProdronInquilino = (props) => {
                                 <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
                                     <div>
                                         <input id="mostrar-form-documento-inquilino-person-add-delete" name="modal" type="radio" />
-                                        <label for="mostrar-form-documento-inquilino-person-add-delete"> <PersonRemoveIcon /> <span className="button-text">Dar de Baja</span> </label>
+                                        <label htmlFor="mostrar-form-documento-inquilino-person-add-delete"> <PersonRemoveIcon /> <span className="button-text">Dar de Baja</span> </label>
                                     </div>
                                 </div>
 
                                 <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
                                     <div>
                                         <input id="mostrar-form-documento-inquilino-person-add-export" name="modal" type="radio" />
-                                        <label for="mostrar-form-documento-inquilino-person-add-export" onClick={handleClickOpenImportForm}> <PublishIcon /> <span className="button-text">Importar</span>  </label>
+                                        <label htmlFor="mostrar-form-documento-inquilino-person-add-export" onClick={handleClickOpenImportForm}> <PublishIcon /> <span className="button-text">Importar</span>  </label>
                                         <div id="modal-mostrar-form-documento-inquilino-person-importar-excel">
                                             <FormImportInquilino RefrescarInformacion={RefrescarInformacion} clickR={clickImport} setClickR={setClickImport} EstadoGlobal={props.EstadoGlobal} />
                                         </div>
@@ -221,7 +255,7 @@ const ListProdronInquilino = (props) => {
                                 <div className="col-auto registrar-nuevo-inquilino-add-delete-export-import">
                                     <div>
                                         <input id="mostrar-form-documento-inquilino-person-add-import" name="modal" type="radio" />
-                                        <label for="mostrar-form-documento-inquilino-person-add-import"> <FileDownloadIcon /> <span className="button-text">Exportar</span></label>
+                                        <label htmlFor="mostrar-form-documento-inquilino-person-add-import"> <FileDownloadIcon /> <span className="button-text">Exportar</span></label>
                                     </div>
 
 
@@ -239,7 +273,7 @@ const ListProdronInquilino = (props) => {
                                     type="radio"
                                 />
 
-                                <label for="mostrar-modal-documento-propietario">
+                                <label htmlFor="mostrar-modal-documento-propietario">
                                     {" "}
                                     <FontAwesomeIcon icon={faFolderOpen} />{" "}
                                 </label>
@@ -274,7 +308,7 @@ const ListProdronInquilino = (props) => {
                                                     </button>
                                                 </div></th>
                                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>Nombres Completos</th>
-                                            <th th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>
+                                            <th  scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>
                                                 <div className="container-order-a-z-inquilino">
                                                     <div>
                                                         DNI
