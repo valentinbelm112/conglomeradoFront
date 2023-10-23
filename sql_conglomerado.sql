@@ -1,6 +1,6 @@
 create table CRE_CONSEJO_DIRECTIVO
 (
-  id                         NUMBER(10),
+  id_consejo_direct         NUMBER(10),
   des_nombres               VARCHAR2(200),
   des_apellidos             VARCHAR2(200),
   des_dni                   VARCHAR2(200),
@@ -22,14 +22,14 @@ drop table CRE_CONSEJO_DIRECTIVO
 select *from CRE_CONSEJO_DIRECTIVO
 create table CRE_DOCUMENTO_DETALLE
 (
-  id                           NUMBER(10),
+  num_documento_direct         NUMBER(10),
   des_codigo_asociacion        VARCHAR2(200),
   des_version                  VARCHAR2(200),
-  des_fecha_actualizacion      Date,
-  des_fecha_documento          Date,
+  fec_actualizacion            Date,
+  fec_documento                Date,
   des_link_documento_inscrito  VARCHAR2(200),
-  des_fecha_inicio_vigencia    Date,
-  des_fecha_fin_vigencia       Date,
+  fec_inicio_vigencia          Date,
+  fec_fin_vigencia             Date,
   des_observaciones            VARCHAR2(200)
  
 )

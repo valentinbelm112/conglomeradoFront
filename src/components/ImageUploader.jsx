@@ -11,6 +11,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SendIcon from '@mui/icons-material/Send';
 import "./styles/ImageUploader.scss"
 import axios from 'axios';
+import { format } from 'date-fns';
 import { serverURL } from '../utils/Configuration';
 const ImageUploader = (props) => {
   console.log(props)
@@ -27,21 +28,46 @@ const ImageUploader = (props) => {
     des_tipo_doc: ""
   });
 
+
+  const [datosDocumentoConsejo, setDatosDocumentoConsejo] = useState({
+    codigo_asociacion: "",
+    tip_doc: "",
+    fecha_desde: "",
+    fecha_hasta: "",
+    fecha_documento: ""
+  });
+
   // Supongamos que tienes una función para recuperar la imagen de la base de datos
   const fetchImageFromDatabase = async (desDni,codAs,desTipoDoc) => {
    console.log(desDni)
    console.log(codAs)
    console.log(desTipoDoc)
-   await axios.get(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
-      .then(response => {
-        // Handle the response data
-        console.log(response)
-        setDbImage(response.data.des_link_documento);
-      })
-      .catch(error => {
-        // Handle any errors
-        console.error(error);
-      });
+
+   if(props.tipView.opcion===1){
+    await axios.get(`${props.request}?codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+    .then(response => {
+      // Handle the response data
+      console.log(response)
+      setDbImage(response.data.des_link_documento);
+    })
+    .catch(error => {
+      // Handle any errors
+      console.error(error);
+    });
+   }
+   else{
+    await axios.get(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+    .then(response => {
+      // Handle the response data
+      console.log(response)
+      setDbImage(response.data.des_link_documento);
+    })
+    .catch(error => {
+      // Handle any errors
+      console.error(error);
+    });
+   }
+   
   };
 
   useEffect(() => {
@@ -51,9 +77,15 @@ const ImageUploader = (props) => {
 
     if (props.documentoPropietario !== undefined) {
     // Llama a la función para recuperar la imagen
-
-    console.log(props.documentoPropietario.des_link_documento)
-    setDbImage(props.documentoPropietario.des_link_documento);
+    if(props.tipView.opcion===1){
+      console.log(props.documentoPropietario.des_link_documento_inscrito)
+    setDbImage(props.documentoPropietario.des_link_documento_inscrito);
+    }
+    else{
+      console.log(props.documentoPropietario.des_link_documento)
+      setDbImage(props.documentoPropietario.des_link_documento);
+    }
+    
     }
   
     
@@ -61,13 +93,25 @@ const ImageUploader = (props) => {
    console.log(props);
 
   if(props.dataPropietario){
-    setDatosDocumento({
-      id_propietario: props.dataPropietario.id,
-      ds_dni: props.dataPropietario.desDni,
-      des_codigo_asoc: props.dataPropietario.codigoAsociacion,
-                      
-      des_tipo_doc: props.tipoDoc
-    })
+    if(props.tipView.opcion===1){
+      const dataFound=props.dataPropietario.data.find(item=>item.destipdoc ==='DocInscripcion')
+      console.log("Vista consejo directivo")
+      setDatosDocumentoConsejo({
+        codigo_asociacion: dataFound?.descodigoasociacion,                  
+        tip_doc: props.tipoDoc,
+        fecha_desde:format(new Date(dataFound?.fec_inicio_vigencia), "dd-MM-yyyy"),
+        fecha_hasta:format(new Date(dataFound?.fec_fin_vigencia), "dd-MM-yyyy"),
+        fecha_documento:format(new Date(dataFound?.fec_documento), "dd-MM-yyyy")
+      })
+    }else{
+      setDatosDocumento({
+        id_propietario: props.dataPropietario.id,
+        ds_dni: props.dataPropietario.desDni,
+        des_codigo_asoc: props.dataPropietario.codigoAsociacion,              
+        des_tipo_doc: props.tipoDoc
+      })
+    }
+   
   }
   }, [props.documentoPropietario]);
 
@@ -119,45 +163,89 @@ const ImageUploader = (props) => {
   };
 
   const handleUpload = async() => {
+    if(props.tipView.opcion===1){
+
+      console.log("Consejo Directivo");
+      if (uploadedImage) {
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          setUploadedImage(reader.result);
+        };
     
-    // Verifica si se ha seleccionado una imagen.
-    if (uploadedImage) {
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        setUploadedImage(reader.result);
-      };
-      // Crea un objeto FormData y agrega la imagen a él.
-      //console.log(uploadedImage)
-      const formData = new FormData();
-      formData.append('file_upload_pdf', uploadedImage);
-      formData.append('id_propietario',datosDocumento.id_propietario)
-      formData.append('ds_dni',datosDocumento.ds_dni)
-      formData.append('des_codigo_asoc', datosDocumento.des_codigo_asoc)
-      formData.append('des_tipo_doc', datosDocumento.des_tipo_doc)
-      
-
-      console.log(datosDocumento)
-      await axios.post(props.api, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-        .then((response) => {
-          
-          
-          fetchImageFromDatabase(datosDocumento.ds_dni,datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
-          //Maneja la respuesta del servidor si es necesario.
-
-          console.log(response.data);
+        const formData = new FormData();
+        formData.append('file_upload_pdf', uploadedImage);
+        formData.append('codigo_asociacion',datosDocumentoConsejo.codigo_asociacion)
+        formData.append('fecha_desde', datosDocumentoConsejo.fecha_desde)
+        formData.append('fecha_hasta', datosDocumentoConsejo.fecha_hasta)
+        formData.append('fecha_documento', datosDocumentoConsejo.fecha_documento)
+        formData.append('tip_doc', datosDocumentoConsejo.tip_doc)
+       
+        
+  
+        console.log(datosDocumentoConsejo)
+        await axios.post(props.api, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         })
-        .catch((error) => {
-          // Maneja cualquier error que ocurra durante la solicitud.
-          console.error(error);
-        });
-    } else {
-      alert('Por favor, seleccione una imagen antes de enviar.');
+          .then((response) => {
+            
+            
+            fetchImageFromDatabase("datosDocumento.ds_dni",datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
+            //Maneja la respuesta del servidor si es necesario.
+  
+            console.log(response.data);
+          })
+          .catch((error) => {
+            // Maneja cualquier error que ocurra durante la solicitud.
+            console.error(error);
+          });
+      } else {
+        alert('Por favor, seleccione una imagen antes de enviar.');
+      }
     }
+    else{
+      if (uploadedImage) {
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          setUploadedImage(reader.result);
+        };
+        // Crea un objeto FormData y agrega la imagen a él.
+        //console.log(uploadedImage)
+        const formData = new FormData();
+        formData.append('file_upload_pdf', uploadedImage);
+        formData.append('id_propietario',datosDocumento.id_propietario)
+        formData.append('ds_dni',datosDocumento.ds_dni)
+        formData.append('des_codigo_asoc', datosDocumento.des_codigo_asoc)
+        formData.append('des_tipo_doc', datosDocumento.des_tipo_doc)
+        
+  
+        console.log(datosDocumento)
+        await axios.post(props.api, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+          .then((response) => {
+            
+            
+            fetchImageFromDatabase(datosDocumento.ds_dni,datosDocumento.des_codigo_asoc, datosDocumento.des_tipo_doc);
+            //Maneja la respuesta del servidor si es necesario.
+  
+            console.log(response.data);
+          })
+          .catch((error) => {
+            // Maneja cualquier error que ocurra durante la solicitud.
+            console.error(error);
+          });
+      } else {
+        alert('Por favor, seleccione una imagen antes de enviar.');
+      }
+    }
+    // Verifica si se ha seleccionado una imagen.
+   
   };
 
   

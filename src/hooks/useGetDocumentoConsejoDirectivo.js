@@ -1,7 +1,7 @@
 import { useEffect,useState,useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
-export const UseGetDoccumentoConsejoDirectivo=(API)=>{
+export const UseGetDoccumentoConsejoDirectivo=(API,setRefrescarDocument)=>{
     const { auth } = useContext(AuthContext);
     const [isLoadingDoc, SetLoading] = useState(true);
     const [documento, setDirectivos] = useState([]);
@@ -9,6 +9,7 @@ export const UseGetDoccumentoConsejoDirectivo=(API)=>{
         const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
         console.log(API);
         console.log(response)
+        setRefrescarDocument(response);
         setDirectivos(response);
         SetLoading(false);
      

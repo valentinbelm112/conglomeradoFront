@@ -5,3 +5,10 @@
 .page-link{
     font-size: 12px !important;
   }
+
+#modal1-sombra-form-Prop{
+    position: fixed;
+    inset: 0px;
+    background-color: rgba(99, 95, 95, 0.75) !important;
+    z-index: 1025;
+}

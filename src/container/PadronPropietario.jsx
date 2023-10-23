@@ -235,8 +235,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         parrafo.style.top = "95px";
         console.log(clickR);
         setClickR(!clickR);
-
-        setClickR(!clickR);
     };
 
     const handleClickDarBajaOpenForm = () => {

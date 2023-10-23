@@ -4,14 +4,17 @@
     display: flex;
     justify-content: center;
 }
+.container-show-documents-directivos-child-col{
+    border-right: 1px solid #8b8989;
+    margin-top: 5% !important;
+}
 
 .container-showr-documents-directivos-child{
     width: 45%;
     height: 95vh;
     border: 1px solid var(--very-light-pink);
-    background-color: #494747;
+    background-color: white;
     border-radius: 2%;
-    //border: 1px solid var(--very-light-pink);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
@@ -39,10 +42,76 @@
 .icono-close-register-directivo-show-ins{
     margin-left: -1.9%;
     margin-top: 0.1%;
-    height: 5% !important;
-    width: 2.6% !important;
-    border-radius: 20px;
-   background-color: rgb(14, 13, 13);
+    /* height: 5% !important; */
+    width: 4.6% !important;
+    /* border-radius: 20px; */
+    color: black;
+    
+}
+
+.show-document-change-date{
+    font-family: 'Open Sans',sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: .875em;
+    font-weight: 700;
+    color: #344644;
+}
+
+.show-document-date{
+    font-family: 'Open Sans',sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: .875em;
+    font-weight: 700;
+    color: #344644;
+}
+
+
+.show-document-consejo-directivo{
+    font-family: 'Open Sans',sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: .875em;
+    font-weight: 700;
+    color: #344644;
+}
+
+.subtitle-paraf-consejo-direct{
+    font-size: .875em;
+    color: #344644;
+}
+
+.title-consejo-directivo-exportar-formato-excel-show {
+    font-size: .875em;
+    text-align: start;
+    font-family: "Playfair Display", serif;
+    color: green;
+    font-weight: bold;
+}
+
+#cerrar-modal-reg-direct {
+	
+    display: none;
+	+ label {
+		display: table;
+		margin: auto;
+		color: #fff;
+		position: absolute;
+    width: 45%;
+		padding: 0 1em;
+		text-transform: uppercase;
+        margin-right: 0;
+		cursor: pointer;
+		&:hover {
+			//background: darken(steelblue,10%);
+		}
+	}
+	&:checked {
+     & ~ #modal {
+      top: -100vh;
+    }
+    & + label {
+      display: none;
+    }
+  }
 }
 
 

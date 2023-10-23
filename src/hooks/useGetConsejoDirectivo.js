@@ -34,3 +34,13 @@ export const useGetConsejoDirectivoListarRefre = async (API) => {
     return { response};
   };
 
+
+  export const useGetConsejoDirectivoDocument = async (API,auth) => {
+   console.log(auth);
+    const resporesponseDocument = await axios.get(
+        `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`
+    );
+    console.log(resporesponseDocument);
+    return { resporesponseDocument};
+  };
+

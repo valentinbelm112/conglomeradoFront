@@ -7,15 +7,15 @@ import DownloadIcon from '@mui/icons-material/Download';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import ExcelDownloadButton from './ExcelDownloadFormatoConsejo';
-const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
+const FormRegistrosDirectivos = ({ RefrescarInformacion ,EstadoGlobal,onClickEstado}) => {
   const [currentTime, setCurrentTime] = useState(new Date());
-
   const [datos, setDatos] = useState({
     fecha_documento: "",
     fecha_desde: "",
     fecha_hasta: "",
     observaciones: "",
-    codigo_asociacion: ""
+    codigo_asociacion: EstadoGlobal.des_codigo_asociacion,
+    des_tipdoc:"DocInscripcion"
   });
 
   const [fecha_actualizacion, setFecha_Documento] = useState(new Date());
@@ -25,8 +25,8 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
   const [pdfFile, setPdfFile] = useState(null);
 
   const handleClickCloseFrom = () => {
-    const parrafo = document.querySelector('#modal');
-    parrafo.style.top = '-100vh'
+
+    onClickEstado(false);
   };
 
   const handleInputChange = (event) => {
@@ -52,6 +52,7 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
     formData.append('fecha_hasta', datos.fecha_hasta)
     formData.append('obserbaciones', datos.observaciones)
     formData.append('codigo_asociacion', datos.codigo_asociacion)
+    formData.append('tip_doc', datos.des_tipdoc)
 
     console.log(datos.obserbaciones + "Observaciones")
     console.log(pdfFile + "Enviando data de la imagen");
@@ -81,9 +82,8 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
           console.log(data); // Maneja la respuesta del servidor aquí
           RefrescarInformacion();
           toast.success("Registro exitoso del consejo directivo");
-          const parrafo = document.querySelector('#modal');
-          parrafo.style.top = '-100vh'
-
+          
+          onClickEstado(false);
         }
 
       })
@@ -125,7 +125,7 @@ const FormRegistrosDirectivos = ({ RefrescarInformacion }) => {
 
 
   return (
-    <div id="modal" >
+    <div id='modal1-sombra-form-Prop' >
       <div className="container-registro-directivo ">
 
         <div className="form form-registro-directivos">

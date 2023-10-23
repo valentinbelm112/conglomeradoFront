@@ -7,7 +7,6 @@ const EditarInquilino =(props)=>{
 
     console.log(props)
     const [telefonoValido, setTelefonoValido] = useState(true);
-    const [pAccionesValido, setPAccionesValido] = useState(true);
     const [areaValido, setAreaValido] = useState(true);
     const [dniValido, setDniValido] = useState(true);
     const [dniCValido, setDniCValido] = useState(true);
