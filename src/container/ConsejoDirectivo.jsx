@@ -81,15 +81,9 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();
     console.log(id + "identificador")
-<<<<<<< HEAD
     await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
     const { response } = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
     setRefrescar(response.data)
-=======
-    await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`,EstadoGlobal);
-    const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`,EstadoGlobal);
-   setRefrescar(response.data)
->>>>>>> 609d9ef2a8a9ec1d53ff22bdd852758fef310002
   }
 
 
