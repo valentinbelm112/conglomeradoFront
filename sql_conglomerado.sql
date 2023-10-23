@@ -30,7 +30,8 @@ create table CRE_DOCUMENTO_DETALLE
   des_link_documento_inscrito  VARCHAR2(200),
   fec_inicio_vigencia          Date,
   fec_fin_vigencia             Date,
-  des_observaciones            VARCHAR2(200)
+  des_observaciones            VARCHAR2(200),
+  des_tipdoc                   VARCHAR2(200)
  
 )
 delete from CRE_DOCUMENTO_DETALLE
