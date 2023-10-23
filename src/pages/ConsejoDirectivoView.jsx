@@ -3,8 +3,7 @@ import ConsejoDirectivo from "../container/ConsejoDirectivo";
 import AuthContext from "../context/AuthContext";
 
 const ConsejoDirectivoView =()=>{
-    const { auth } =useContext(AuthContext);
-
+ 
     const { login } = useContext(AuthContext);
     const { auth } =useContext(AuthContext);
     useEffect(() => {
