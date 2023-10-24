@@ -1,82 +1,173 @@
-
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-.login-page {
-	
-    width: 104%;
-    height: 46vh;
-
-	
+.clearfix:after,
+.clearfix:before {
+  content: '';
+  display: table;
 }
 
-.login-page .form {
+.clearfix:after {
+  clear: both;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.login-wrap {
+    width: 111%;
+    height: 100%;
 	position: relative;
-	z-index: 1;
-	background: #FFFFFF;
-	max-width: 80%;
-
-	margin: 0 auto 100px;
-	padding: 21px;
-	text-align: center;
-	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
-		rgba(0, 0, 0, 0.24);
+	background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+	display: flex;
+	justify-content: center; /* Centrar horizontalmente */
+	align-items: center; /* Centrar verticalmente */
 }
 
-.login-page .form input {
-	font-family: "Roboto", sans-serif;
-	outline: 0;
-	background: #f2f2f2;
-	width: 100%;
-	border: 0;
-	margin: 0 0 15px;
-	padding: 15px;
-	box-sizing: border-box;
-	font-size: 14px;
+.login-html {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 90px 70px 50px 70px;
+  background: rgba(40, 57, 101, 0.9);
 }
 
-.login-page .form button {
-	text-transform: uppercase;
-	outline: 0;
-	background: #45a348;
-	width: 100%;
-	border: 0;
-	padding: 15px;
-	color: #FFFFFF;
-	font-size: 14px;
-	-webkit-transition: all 0.3 ease;
-	transition: all 0.3 ease;
-	cursor: pointer;
-	font-family: 'Playfair Display', serif;
+.login-html .sign-in-htm {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transform: rotateY(0);
+  backface-visibility: hidden;
+  transition: all 0.4s linear;
 }
 
-/*
-.login-page .form button:hover, .form button:active, .form button:focus {
-	background: #43A047;
-}
-*/
-
-.login-page .form .message {
-	margin: 15px 0 0;
-	color: #b3b3b3;
-	font-size: 12px;
-}
-
-.login-page .form .message a {
-	color: #45a348;
-	text-decoration: none;
-}
-
-.login-page .form .register-form {
-	display: none;
+.login-html .sign-in {
+  display: none;
 }
 
 
-.login-page  .container-login-conglomerado{
-	font-size: 15px;
-	font-weight: bold;
-	text-align: center;
-	font-family: 'Playfair Display', serif;
+
+.login-html .tab {
+  font-size: 22px;
+  margin-right: 15px;
+  padding-bottom: 5px;
+  margin: 0 15px 10px 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+
+.login-html .sign-in:checked + .tab {
+  color: #fff;
+  //border-color: #1161ee;
+  width: 100%;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+}
+
+.login-form {
+  min-height: 345px;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.login-form .group {
+  margin-bottom: 15px;
+}
+
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button {
+  width: 100%;
+  color: #fff;
+  display: block;
+}
+
+.login-form .group .input,
+.login-form .group .button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.login-form .group input[data-type="password"] {
+  text-security: circle;
+  -webkit-text-security: circle;
+}
+
+.login-form .group .label {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.login-form .group .button {
+  background: #1161ee;
+}
+
+.login-form .group label .icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.login-form .group label .icon:before,
+.login-form .group label .icon:after {
+  content: '';
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.login-form .group label .icon:before {
+  left: 3px;
+  width: 5px;
+  bottom: 6px;
+  transform: scale(0) rotate(0);
+}
+
+.login-form .group label .icon:after {
+  top: 6px;
+  right: 0;
+  transform: scale(0) rotate(0);
+}
+
+.login-form .group .check:checked + label {
+  color: #fff;
+}
+
+.login-form .group .check:checked + label .icon {
+  background: #1161ee;
+}
+
+.login-form .group .check:checked + label .icon:before {
+  transform: scale(1) rotate(45deg);
+}
+
+.login-form .group .check:checked + label .icon:after {
+  transform: scale(1) rotate(-45deg);
+}
+
+.login-html .sign-in:checked + .tab + .login-form .sign-in-htm {
+  transform: rotateY(0);
+}
+
+.hr {
+  height: 2px;
+  margin: 60px 0 50px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.foot-lnk {
+  text-align: center;
 }
 
 .spinner {
@@ -109,14 +200,8 @@
 	background: #4ed152 !important; /* Cambia este color al que desees */
   }
 
-//body {
-//	background: #A4CDF2; /* fallback for old browsers */
-//	background: -webkit-linear-gradient(right, #A4CDF2, #8DC26F);
-//	background: -moz-linear-gradient(right, #A4CDF2, #8DC26F);
-//	background: -o-linear-gradient(right, #A4CDF2, #8DC26F);
-//	background: linear-gradient(to left, #A4CDF2, #8DC26F);
-//	font-family: "Roboto", sans-serif;
-//	-webkit-font-smoothing: antialiased;
-//	-moz-osx-font-smoothing: grayscale;
-
-//}
+  @media(max-width:865px){
+	.block_left {
+		display: none;
+	}
+  }

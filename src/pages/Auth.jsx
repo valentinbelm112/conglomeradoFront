@@ -63,10 +63,7 @@ const Auth = () => {
                 </div>
                 <div className="block_right col-md-4">
                     <div className="container-title-login">
-                        <div className="title">
-                            Plataforma de Gestión de Propietarios, Socios e Inquilinos
-                        </div>
-
+                       
                         <FormLogin />
                     </div>
 
