@@ -14,6 +14,7 @@ function App2() {
 
   return (
     <div>
+      
       <button onClick={openModal}>Abrir Ventana Emergente</button>
       <ModalImagesConglomerado
   isOpen={modalIsOpen}

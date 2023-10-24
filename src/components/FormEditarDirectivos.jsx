@@ -83,7 +83,7 @@ const handleClickCloseForm = () => {
   }
 
   return (
-    <div id="modal-edit-directivos" >
+    <div id='modal1-sombra-form-Prop' >
       <div className="container-edit-directivo ">
 
         <div className="form form-edit-directivos">
@@ -93,7 +93,7 @@ const handleClickCloseForm = () => {
               <CloseIcon onClick={handleClickCloseForm} style={{ position: `absolute` }} className="icono-close-edit-directivo" /> </label>
           </div>
 
-          <form action="" className="login-form" onSubmit={enviarDatos}>
+          <form action="" className="form-editar-directivo" onSubmit={enviarDatos}>
           <div className="tilte-edit-registro-directivo">
                                 Editar Registro</div>
             <div className="nombre-edit-directivo">

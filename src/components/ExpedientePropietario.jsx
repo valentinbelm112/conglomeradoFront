@@ -22,19 +22,21 @@ const ExpedientePropietario = (props) => {
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
   const [coPropietarios, setCoPropietarios] = useState(null);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState("opcion1");
-
   const navigate = useNavigate();
+
 
   const handleOptionSelectConyugue = (event) => {
     setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expedienteCony.data);
   };
 
+
   const handleOptionSelectTitular = (event) => {
     setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expediente.data);
   };
 
+  
   useEffect(() => {
     if (props.padron.data.inmuebleEntities.length > 0) {
       setInmuebleSelect(props.padron.data.inmuebleEntities[0]);

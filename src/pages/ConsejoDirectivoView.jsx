@@ -1,9 +1,10 @@
 import React , { useEffect,  useContext }from "react";
 import ConsejoDirectivo from "../container/ConsejoDirectivo";
 import AuthContext from "../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 const ConsejoDirectivoView =()=>{
- 
+    const navigate = useNavigate();
+  console.log("Ingreso consejo")
     const { login } = useContext(AuthContext);
     const { auth } =useContext(AuthContext);
     useEffect(() => {
@@ -13,7 +14,7 @@ const ConsejoDirectivoView =()=>{
 
     return(
         <div className="consejo-directivo-page">{
-            auth &&<ConsejoDirectivo EstadoGlobal={auth}/>
+            auth ?<ConsejoDirectivo EstadoGlobal={auth} />:navigate(`/login`)
         }
            
         </div>

@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { South } from "@mui/icons-material";
 import "./styles/ShowRegistroDirectivo.scss"
-import ReactImageZoom from 'react-image-zoom';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
@@ -16,9 +14,7 @@ const ShowRegistroDirectivo = (props) => {
     const [open, setOpen] = useState(false);
     const[dataDocument,setDataDocument]=useState([]);
     console.log(props);
-    const images = [
-        "https://imgv2-2-f.scribdassets.com/img/document/52029008/original/21021e4237/1684374832?v=1"
-    ]
+
     const [combo, SetCombo] = useState(1)
     
     useEffect(() => {

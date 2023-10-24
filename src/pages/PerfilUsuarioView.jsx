@@ -1,30 +1,27 @@
-
 import React , { useEffect,  useContext }from "react";
-
-import PadronPropietario from "../container/PadronPropietario";
+import PerfilSociosConglomerados from "./PerfilSociosConglomerados";
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const ListPropietarios = () => {
+const PerfilUsuarioView=()=>{
     const navigate = useNavigate();
-
     const { login } = useContext(AuthContext);
     const { auth } =useContext(AuthContext);
-    
+
+   ;
+
     useEffect(() => {
          login();
       }, []);
-
-
     return (
         <>
-          {
-            auth &&<PadronPropietario EstadoGlobal={auth} />
-          } 
+        {
+            auth?<PerfilSociosConglomerados  estadoGlobal={auth}/>:navigate(`/login`)
+        
+        }
+         </>
 
-        </>
-       
     );
 }
 
-export default ListPropietarios;
+export default PerfilUsuarioView;

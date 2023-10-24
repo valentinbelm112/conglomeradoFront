@@ -7,7 +7,7 @@ import { useGetExpedienteInquilino } from "../hooks/useGetExpedienteInquilino";
 import { serverURL } from "../utils/Configuration";
 import AuthContext from "../context/AuthContext";
 import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
-const ListExpedientesInquilino = () => {
+const ListExpedientesInquilino = (props) => {
   const [open, setOpen] = useState(false);
   const { login } = useContext(AuthContext);
   const { id, id2 } = useParams();
@@ -24,8 +24,9 @@ const ListExpedientesInquilino = () => {
     inmueblesinfo,
   } = useGetExpedienteInquilino(
     `${serverURL}/cliente/consultar-reniec`,
-    id,
-    id2
+    props.id1,
+    props.id2,
+    props.estadoGlobal
   );
 
   const Estado1 = () => {

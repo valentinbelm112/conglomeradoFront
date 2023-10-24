@@ -24,7 +24,7 @@ import FormEditarDirectivos from "../components/FormEditarDirectivos";
 import { useGetConsejoDirectivoDocument } from "../hooks/useGetConsejoDirectivo";
 import ModalImagesConglomerado from "../components/ModalImagesConglomerado";
 import ImageUploader from "../components/ImageUploader";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [refrescar, setRefrescar] = useState([]);
@@ -93,7 +93,6 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     useGetExportConsejoDirectivo(`${serverURL}/CGM/export-directivos`);
   };
 
-  
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();
     console.log(id + "identificador");
@@ -103,7 +102,6 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     );
     setRefrescar(response.data);
   };
-
 
   const handleDeleteDirectivoR = (id) => {
     toast.info(
@@ -186,23 +184,23 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
               <div className="row">
                 <div className="col-md-9">
                   <div className="title-consejo-directivo-periodo-vigente">
-                  
-                    {
-                      refrescarDocument?.data.map(
-                        (item) =>(
-                          item.destipdoc === "DocInscripcion"
-                          &&<div className="title-consejo-directivo-periodo-vigente">
-                             <span style={{ fontWeight: 'bold' }}>Periodo vigente :</span>
-                            {
-                             ` ${format(new Date(item?.fec_inicio_vigencia), "dd-MM-yyyy")} hasta ${format(new Date(item?.fec_fin_vigencia), "dd-MM-yyyy")}` 
-                            }
-                             
-                            </div>
-                        
-                        ) 
-                      )
-                    }
-                    
+                    {refrescarDocument?.data.map(
+                      (item) =>
+                        item.destipdoc === "DocInscripcion" && (
+                          <div className="title-consejo-directivo-periodo-vigente">
+                            <span style={{ fontWeight: "bold" }}>
+                              Periodo vigente :
+                            </span>
+                            {` ${format(
+                              new Date(item?.fec_inicio_vigencia),
+                              "dd-MM-yyyy"
+                            )} hasta ${format(
+                              new Date(item?.fec_fin_vigencia),
+                              "dd-MM-yyyy"
+                            )}`}
+                          </div>
+                        )
+                    )}
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -369,12 +367,12 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                   enviarDatos={extraerDatos}
                   refrescarInformacion={RefrescarInformacionEdit}
                   onClickEstado={setClick}
+                  EstadoGlobal={EstadoGlobal}
                 />
               )}
             </div>
-
-            <div className="col-md-3" style={{marginTop:'0.4%'}}>
-              <div className="title-consejo-directivo">
+            <div className="col-md-3" style={{ marginTop: "0.4%" }}>
+              <div className="title-consejo-directivo-documento">
                 Documento de la asociacion
               </div>
               <br />
@@ -430,7 +428,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                     />
                   )}
                 </div>
-                {refrescarDocument?.data.length> 0 && (
+                {refrescarDocument?.data.length > 0 && (
                   <div className="col-md-4 container-title-show-iamgen-ins">
                     <div className="container-title-show-iamgen-ins-label">
                       (+) Documento

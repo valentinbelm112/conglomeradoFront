@@ -7,21 +7,31 @@ import "react-toastify/dist/ReactToastify.css";
 import { serverURL } from "../utils/Configuration";
 import { saveToLocalStorage } from "../hooks/useLocalStorage";
 import AuthContext from "../context/AuthContext";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 const FormLogin = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useContext(AuthContext);
+  const [click,setClick]=useState(false);
   const navigate = useNavigate();
+  
   const [datos, setDatos] = useState({
     email: "",
     password: "",
   });
 
+
+  const changeStateEyes=()=>{
+    console.log("Ingreso al stado")
+  }
   const handleInputChange = (event) => {
     setDatos({
       ...datos,
       [event.target.name]: event.target.value,
     });
   };
+
 
   const enviarDatos = async (event) => {
     setIsLoading(true);
@@ -59,41 +69,62 @@ const FormLogin = (props) => {
   return (
     <div className="login-wrap">
       <div className="login-html">
- <div className="title">
-                            Plataforma de Gestión de Propietarios, Socios e Inquilinos
-                        </div>
-        <input id="tab-1" type="radio" name="tab" className="sign-in" checked />
-        <label htmlFor="tab-1" className="tab">Iniciar Sesión</label>
+        <div className="title">
+          <span className="texto-negrita-cgm">
+            Plataforma de Gestión de Propietarios, Socios e Inquilinos
+          </span>
+          {`con apoyo de Financiera Proempresa`}
+        </div>
+        <input
+          id="tab-1"
+          type="radio"
+          name="tab"
+          className="sign-in-cgm"
+          checked
+        />
+        <label htmlFor="tab-1" className="tab">
+          Iniciar Sesión
+        </label>
         <div className="login-form">
-          <form  className="sign-in-htm" onSubmit={enviarDatos}>
+          <form className="sign-in-htm" onSubmit={enviarDatos}>
             <div className="group">
-              <label htmlFor="user" className="label">Username</label>
-              <input id="user" type="text" className="input" 
+              <label htmlFor="user" className="label">
+                Username
+              </label>
+              <input
+                id="user"
+                type="text"
+                className="input"
                 name="email"
-                 placeholder="Username"
-                 onChange={handleInputChange}
+                placeholder="Username"
+                onChange={handleInputChange}
               />
             </div>
             <div className="group">
-              <label htmlFor="pass" className="label">Password</label>
-              <input id="pass" type="password" className="input" data-type="password" 
-              name="password"
-              placeholder="Password" 
-              onChange={handleInputChange} />
+              <label htmlFor="pass" className="label">
+                Password
+              </label>
+              <input
+                id="pass"
+                type="password"
+                className="input"
+                data-type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleInputChange}
+              />
             </div>
+            <div className="group"></div>
             <div className="group">
-           
+              <input
+                type="submit"
+                value={isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+                className={isLoading ? "button" : "button"}
+                disabled={isLoading}
+              />
+              {isLoading && <div className="spinner"></div>}
             </div>
-            <div className="group">
-              <input type="submit"  value= {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}  className={isLoading ? 'button' : 'button'} disabled={isLoading}/>
-           
-                   
-                   
-                   
-                    {isLoading && <div className="spinner"></div>}
-            </div>
-           
-          </form >
+          </form>
         </div>
       </div>
     </div>

@@ -23,8 +23,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import EditarInquilino from "../components/FormEditarInquilinos";
 const ListProdronInquilino = (props) => {
-    const [pabellon, setPabellon] = useState();
-    const [puestos, setPuestos] = useState();
     const [togle, setTogle] = useState(true);
     const [open, setOpen] = useState(false);
     const [refrescar, setRefrescar] = useState([]);
@@ -38,7 +36,6 @@ const ListProdronInquilino = (props) => {
     const handleClickOpenForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
         parrafo.style.top = '95px'
-        //console.log(clickR)
         setClickR(!clickR)
 
     };
@@ -47,22 +44,20 @@ const ListProdronInquilino = (props) => {
     const { isLoading, dataPropietario } = UseGetPadronInquilino(`${serverURL}/Inquilino/Obtener`, setRefrescar, props.EstadoGlobal)
     const { dataPuestos, isLoadingPuestos, dataPabellonPuesto } = UseGetFindPabellonPuesto(`${serverURL}/Inquilino/Obtener-pabellon-puesto`, props.EstadoGlobal)
 
+
     const isTokenExpired = () => {
-        // Lógica para verificar si el token ha caducado
-        // Debes implementar esta función según tus necesidades
-      
+       
+
     };
 
 
     const showNotification = () => {
-        // Lógica para mostrar una notificación cuando el token ha caducado
-        // Debes implementar esta función según tus necesidades
+  
         console.log('El token ha caducado. Muestra una notificación.');
     };
 
     const checkTokenExpiry = () => {
         if (isTokenExpired()) {
-            // El token ha caducado, muestra una notificación
             showNotification();
         }
 
@@ -103,10 +98,6 @@ const ListProdronInquilino = (props) => {
       
     const DeleteRegisterConsejo=async(id)=>{
 
-        //console.log(id + "identificador")
-        //await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
-        // const { response} = await useGetConsejoDirectivoListarRefre(`${serverURL}/CGM/listar`);
-        //setRefrescar(response.data)
 
        }
 
@@ -265,13 +256,14 @@ const ListProdronInquilino = (props) => {
 
 
                         </div>
-                        <div className=" col-md-2 container-title-show-iamgen-ins">
+                        <div className=" col-md-2 container-title-show-iamgen-ins"   style={{ alignItems: "end" }}>
                             <div>
                                 <input
 
                                     id="mostrar-modal-documento-propietario"
                                     name="modal"
                                     type="radio"
+                                  
                                 />
 
                                 <label htmlFor="mostrar-modal-documento-propietario">

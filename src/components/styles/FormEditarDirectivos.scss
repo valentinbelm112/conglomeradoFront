@@ -3,17 +3,24 @@
     width: 70%;
     display: flex;
     justify-content: center;
+    margin-top: 13%;
+    margin-left: 15%;
 }
 
 .container-edit-directivo .form-edit-directivos{
     width: 55%;
     border-radius: 2%;
-    //border: 1px solid var(--very-light-pink);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    //background-color: #f0f0f0;
     background: linear-gradient(to bottom right, #d4d3d3, #f0f0f0);
 }
 
+.form-editar-directivo{
+    min-height: 334px;
+      position: relative;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+  }
+  
 .icono-close-edit-directivo {
     margin-left: -2%;
     margin-top: 0.3%;
@@ -21,8 +28,6 @@
     width: 1.7% !important;
     border-radius: 20px;
     background-color: #554f4f;
-
-
   }
 
   .close-form-register-directivo{

@@ -8,19 +8,19 @@ import {useGetExpedientePropietario} from "../hooks/useGetExpedientePropietario"
 import { serverURL } from "../utils/Configuration";
 import { useState } from "react";
 import AuthContext from "../context/AuthContext";
-const ListExpedientesPropietarios=()=>{
+const ListExpedientesPropietarios=(props)=>{
       const { login } = useContext(AuthContext);
       const { auth } =useContext(AuthContext);
     const { id,id2} = useParams();
     const [Estado,SetEstado]=useState(false);
 
-    const {dataExpediente,isLoading,dataDetallePropietario,propietariosPartida,expedienteConyugue,coPropietario,partidasRegistrales}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,id,id2,auth);
+    const {dataExpediente,isLoading,dataDetallePropietario,propietariosPartida,expedienteConyugue,coPropietario,partidasRegistrales}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,props.id1,props.id2,props.estadoGlobal);
    
-
     console.log(dataExpediente)
     
     useEffect(() => {
       login();
+      
       console.log("Listen to Action");
     
 }, [Estado]); // The second argument is an optional dependency array
@@ -32,7 +32,7 @@ const ListExpedientesPropietarios=()=>{
     
       };
 
-    if(isLoading ){
+    if(isLoading && auth){
   
         return (
                 <Container_Nav_Sidb_Load/>
@@ -40,6 +40,7 @@ const ListExpedientesPropietarios=()=>{
     }
     
     return (
+      
         <div className="navbar-sidebar-directivos">
         <NavbarConglomerado />
           <div className="container-Sidebar-view-directivo">

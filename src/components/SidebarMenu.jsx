@@ -12,7 +12,11 @@ import {
 import HomeIcon from '@mui/icons-material/Home';
 import FeedIcon from '@mui/icons-material/Feed';
 import HandshakeIcon from '@mui/icons-material/Handshake';
-
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import PersonIcon from '@mui/icons-material/Person';
+import { removeFromLocalStorage } from "../hooks/useLocalStorage";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilePen } from '@fortawesome/free-solid-svg-icons'
 const SidebarMenu = ({setTogle}) => {
     const [open, setOpen] = useState(true);
 
@@ -22,6 +26,8 @@ const SidebarMenu = ({setTogle}) => {
          setTogle(!open)
     };
 
+
+  
     const sideContainerVariants = {
         true: {
             width: "15rem",
@@ -108,10 +114,9 @@ const SidebarMenu = ({setTogle}) => {
                           WebkitBackdropFilter: 'blur(5.5px)',
                           border: '1px solid rgba(200, 200, 200, 0.5)', // Borde blanco con un toque de gris
                           cursor: 'pointer',
-                  
-                          // Agrega las propiedades de estilo para los anillos y el sombreado
                           border: '3px solid white', // Borde de anillos
                           boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', // Sombreado negro claro
+                       
                         }}
                     >
                         
@@ -119,7 +124,7 @@ const SidebarMenu = ({setTogle}) => {
                             src="https://media.licdn.com/dms/image/D4D03AQHf79vVLS5CMw/profile-displayphoto-shrink_800_800/0/1667133462647?e=1700092800&v=beta&t=eLb8D31vTBqIuc5XFvl71dL1pFoTFjg_Ukl6ySQWkh8"
                             alt="profile_img"
                         />
-                            
+                          
                     </motion.div>
                     </Link>
                     {/* groups */}
@@ -133,8 +138,11 @@ const SidebarMenu = ({setTogle}) => {
                             <Link to="/home-conglomerado" className="no-style-link">
                             <Item icon={<HomeIcon />} name="Inicio"  style={{fontSize: '.8125rem'}}/>
                             </Link>
+                            <Link to="/cgm/perfil" className="no-style-link">
+                            <Item icon={<PersonIcon />}  style={{fontSize: '.8125rem'}} name="Mi Perfil" />
+                            </Link>
                             <Link to="/register-directivos" className="no-style-link">
-                                <Item icon={<FeedIcon />} style={{fontSize: '.8125rem'}} name="Información general de la asociacion" />
+                                <Item icon={<FeedIcon />} style={{fontSize: '.8125rem'}} name="Consejo directivo" />
                             </Link>
                             <Link to="/register-padron-propietarios" className="no-style-link">
                                 <Item icon={<FeedIcon />} style={{fontSize: '.8125rem'}} name="Padron propietarios" />
@@ -145,6 +153,9 @@ const SidebarMenu = ({setTogle}) => {
                             <Link to="/register-padron-inquilino" className="no-style-link">
                             <Item icon={<AssignmentTurnedInRounded />}  style={{fontSize: '.8125rem'}} name="Padron Inquilinos" />
                             </Link>
+                            <Link onClick={removeFromLocalStorage} className="no-style-link">
+                            <Item icon={<PowerSettingsNewIcon />}  style={{fontSize: '.8125rem'}} name="Cerrar Sesión" />
+                            </Link>
                         
                         </div>
                     </div>
@@ -153,6 +164,8 @@ const SidebarMenu = ({setTogle}) => {
             </motion.div>
 
             <div className="body_container">
+
+                
                 {/* <hr />i am body
           <hr />i am body
           <hr />i am body

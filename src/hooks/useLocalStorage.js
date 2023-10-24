@@ -1,3 +1,4 @@
+
 export function saveToLocalStorage(state) {
 
 
@@ -23,5 +24,18 @@ export function saveToLocalStorage(state) {
     } catch (error) {
       //console.log(error);
       return undefined;
+    }
+  }
+
+
+  export function removeFromLocalStorage() {
+    
+    try {
+      console.log("Borrando local storage")
+      localStorage.removeItem("stateSerializerCGM");
+      window.location.href ='/login'
+     
+    } catch (error) {
+      console.error("Error al eliminar el elemento del LocalStorage:", error);
     }
   }
