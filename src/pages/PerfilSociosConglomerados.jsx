@@ -30,10 +30,11 @@ const PerfilSociosConglomerados = ({ estadoGlobal }) => {
       <div className="container-Sidebar-view-directivo">
         <SidebarMenu />
         <div className="container" style={{ zIndex: "1" }}>
-          <div className="row" style={{ paddingTop: "10px" ,justifyContent:'center'}}>
-          <div className="title-consejo-directivo">
-                Mi Perfil
-              </div>
+          <div
+            className="row"
+            style={{ paddingTop: "10px", justifyContent: "center" }}
+          >
+            <div className="title-consejo-directivo">Mi Perfil</div>
             {/* Columna 1 */}
             <div className="col-md-5">
               <div className="card">
@@ -42,14 +43,17 @@ const PerfilSociosConglomerados = ({ estadoGlobal }) => {
                   style={{ backgroundColor: "#3498db", height: "150px" }}
                 >
                   <img
-                    src={"dataPerfil?.data?.des_link_perf"}
+                    src={dataPerfil?.data?.des_link_perf}
                     alt="Foto de perfil"
                     className="img-fluid rounded-circle"
                     style={{ height: "100%", width: "30%" }}
                   />
                 </div>
                 <div className="card-body">
-                  <h5 className="card-title-perfil-datos-personales" style={{ color: "#428bca" }}>
+                  <h5
+                    className="card-title-perfil-datos-personales"
+                    style={{ color: "#428bca" }}
+                  >
                     NOMBRES
                   </h5>
                   <p>
@@ -66,44 +70,63 @@ const PerfilSociosConglomerados = ({ estadoGlobal }) => {
             <div className="col-md-6">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title-perfil-datos-personales" style={{ color: "#428bca" }}>
+                  <h5
+                    className="card-title-perfil-datos-personales"
+                    style={{ color: "#428bca" }}
+                  >
                     DATOS PERSONALES
                   </h5>
                   <p>
                     {" "}
-                    <span  className="title-perfil-datos-personales">DNI:</span>
+                    <span className="title-perfil-datos-personales">DNI:</span>
                     {dataPerfil ? dataPerfil.data.desDni : []}{" "}
                   </p>
                   <p>
-                  <span  className="title-perfil-datos-personales">ESTADO CIVIL:{" "}</span>
-                    
+                    <span className="title-perfil-datos-personales">
+                      ESTADO CIVIL:{" "}
+                    </span>
+
                     {dataPerfil ? dataPerfil.data.des_estado_civ : []}
                   </p>
                   <p>
-                  <span  className="title-perfil-datos-personales">SEXO:{" "}</span>
-                   {dataPerfil ? dataPerfil.data.des_sexo : []}</p>
+                    <span className="title-perfil-datos-personales">
+                      SEXO:{" "}
+                    </span>
+                    {dataPerfil ? dataPerfil.data.des_sexo : []}
+                  </p>
                   <p>
-                  <span  className="title-perfil-datos-personales">FECHA DE NACIMIENTO:{" "}</span>
-                    
+                    <span className="title-perfil-datos-personales">
+                      FECHA DE NACIMIENTO:{" "}
+                    </span>
+
                     {format(
                       new Date(dataPerfil?.data?.fec_fecha_nac),
                       "dd-MM-yyyy"
                     )}
                   </p>
                   <p>
-                  <span  className="title-perfil-datos-personales">LUGAR DE NACIMIENTO:{" "}</span>
-                    
-                    {dataPerfil ? dataPerfil.data.des_sexo : []}
+                    <span className="title-perfil-datos-personales">
+                      LUGAR DE NACIMIENTO:{" "}
+                    </span>
+
+                    {dataPerfil ? dataPerfil.data.des_lugar_nac : []}
                   </p>
                   <p>
-                  <span  className="title-perfil-datos-personales">TELÉFONO:{" "}</span>
-                   :{dataPerfil ? dataPerfil.data.des_lugar_nac : []}
+                    <span className="title-perfil-datos-personales">
+                      TELÉFONO:{" "}
+                    </span>
+                    {dataPerfil ? dataPerfil.data.des_num_cel: []}
                   </p>
                   <p>
-                  <span  className="title-perfil-datos-personales">CELULAR:{" "}</span>
-                  {dataPerfil ? dataPerfil.data.des_num_cel : []}</p>
+                    <span className="title-perfil-datos-personales">
+                      CELULAR:{" "}
+                    </span>
+                    {dataPerfil ? dataPerfil.data.des_num_cel : []}
+                  </p>
                   <p>
-                  <span  className="title-perfil-datos-personales">DIRECCIÓN:{" "}</span>
+                    <span className="title-perfil-datos-personales">
+                      DIRECCIÓN:{" "}
+                    </span>
                     {dataPerfil ? dataPerfil.data.des_domicilio : []}
                   </p>
                 </div>

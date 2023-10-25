@@ -84,8 +84,8 @@ insert into CRE_USUARIO (des_usuario,cod_empresa,cod_estado,fec_registro,des_pas
   values ('JDELACRUZR','001',1,sysdate,'','E00241');
 
 
-insert into CRE_USUARIO_CGM (ID_USUARIO, COD_USUARIO, DES_USUARIO, COD_EMPRESA, COD_ESTADO, FEC_REGISTRO, DES_PASSWORD, DES_CODIGO_ASOCIACION, DES_DNI, DES_ESTADO_CIV, FEC_FECHA_NAC, DES_LUGAR_NAC, DES_DOMICILIO, DES_TELEFONO, DES_LINK_PERF,NUM_CELULAR,DES_LUGAR_NAC,DES_SEXO)
-values (1, 'JDELACRUZR', 'JOSE ANTONY DE LA CRUZ ROMANI', '001', 1, to_date('14-09-2023', 'dd-mm-yyyy'), 'contrasenia123', 'E00241', '73848256', 'Soltero', to_date('01-01-1990', 'dd-mm-yyyy'), 'Lima', '123 Calle Principal', '71758723', 'http://localhost:9090/documento/show/imagen25532.png','940472373','Lima','Masculino');
+insert into CRE_USUARIO_CGM (ID_USUARIO, COD_USUARIO, DES_USUARIO, COD_EMPRESA, COD_ESTADO, FEC_REGISTRO, DES_PASSWORD, DES_CODIGO_ASOCIACION, DES_DNI, DES_ESTADO_CIV, FEC_FECHA_NAC, DES_LUGAR_NAC, DES_DOMICILIO, DES_TELEFONO, DES_LINK_PERF,NUM_CELULAR,DES_SEXO)
+values (1, 'JDELACRUZR', 'JOSE ANTONY DE LA CRUZ ROMANI', '001', 1, to_date('14-09-2023', 'dd-mm-yyyy'), 'contrasenia123', 'E00241', '73848256', 'Soltero', to_date('01-01-1990', 'dd-mm-yyyy'), 'Lima', '123 Calle Principal', '71758723', 'http://localhost:9090/documento/show/imagen25532.png','940472373','Masculino');
 
 
 drop table CRE_USUARIO;
