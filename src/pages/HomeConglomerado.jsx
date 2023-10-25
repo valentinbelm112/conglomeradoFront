@@ -8,25 +8,52 @@ import "chart.js/auto";
 import "./styles/HomeConglomerado.scss";
 import { Bar } from 'react-chartjs-2';
 import AuthContext from "../context/AuthContext";
-const HomeConglomerado = () => {
+import { useGetObtenerNumPropietarios } from "../hooks/useObtenerGetEstadistica";
+import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import { serverURL } from "../utils/Configuration";
+const HomeConglomerado = ({EstadoGlobal}) => {
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const successMessage = queryParams.get("successLogin");
-  console.log(auth)
+
+  const { numPropietarios,numSocios,numInquilino, isLoading} =useGetObtenerNumPropietarios(`${serverURL}/Estadistica/buscar/propietarios`,`${serverURL}/Estadistica/buscar/socios`,`${serverURL}/Estadistica/buscar/inquilinos`, EstadoGlobal);
+
+
   //Composicion conglomerado Inicio
+  //Actualiza estos valores con tus estadísticas reales
+
+  //Estado propietario Fin
+
+
+  useEffect(() => {
+    console.log(auth)
+    if (successMessage) {
+      // Mostrar el mensaje de éxito usando un componente de notificación
+      // Por ejemplo, usando la biblioteca "toast-library"
+      toast.success("Inicio de sesión realizado con éxito");
+    }
+  }, [successMessage]);
+
+
+  if(isLoading ){
+  
+    return (
+            <Container_Nav_Sidb_Load/>
+      );
+}else{
+
   const data = {
     labels: ["Propietarios", "Socios", "Inquilinos"],
     datasets: [
       {
         label: 'Porcentaje',
-        data: [15, 10, 25], // Actualiza estos valores con tus estadísticas reales
+        data: [numPropietarios.data, numSocios.data, numInquilino.data], 
         backgroundColor: ["#cae1fd", "#84b6f4", "#fdcae1"],
         hoverBackgroundColor: ["#cae1fd", "#84b6f4", "#fdcae1"],
       },
     ],
   };
-
 
   // Calcula los valores en porcentaje
   const total = data.datasets[0].data.reduce((sum, value) => sum + value, 0);
@@ -63,8 +90,10 @@ const HomeConglomerado = () => {
     },
   };
 
+
   //Composicion conglomerado Fin
   //Estado propietario Inicio
+
   const data2 = {
     labels: ["Activo", "Inactivo"],
     datasets: [
@@ -166,18 +195,6 @@ const HomeConglomerado = () => {
       },
     },
   };
-  //Estado propietario Fin
-
-
-  useEffect(() => {
-    console.log(auth)
-    if (successMessage) {
-      // Mostrar el mensaje de éxito usando un componente de notificación
-      // Por ejemplo, usando la biblioteca "toast-library"
-      toast.success("Inicio de sesión realizado con éxito");
-    }
-  }, [successMessage]);
-
   return (
     <div className="navbar-sidebar-directivos">
       <NavbarConglomerado />
@@ -320,6 +337,11 @@ const HomeConglomerado = () => {
       <ToastContainer />
     </div>
   );
+}
+
+
+
+  
 };
 
 export default HomeConglomerado;

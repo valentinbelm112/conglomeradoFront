@@ -15,6 +15,7 @@ import ExpedientePropietariosView from "../pages/ExpedientePropietariosView.jsx"
 import ExpedienteSociosView from "../pages/ExpedienteSociosView.jsx";
 import ExpedienteInquilinoView from "../pages/ExpedienteInquilinoView.jsx";
 import PerfilUsuarioView from "../pages/PerfilUsuarioView.jsx";
+import Home from "../pages/HomeView.jsx";
 const App=()=>{
   
   const useinitialAuth = useInitialAuth();
@@ -23,7 +24,7 @@ const App=()=>{
         <BrowserRouter>
         <Routes >         
           <Route path="/login" element={<Auth/>} />
-          <Route path="/home-conglomerado" element={<HomeConglomerado/>} />
+          <Route path="/home-conglomerado" element={<Home/>} />
           <Route path="/register-directivos" element={<ConsejoDirectivoView/>} />
           <Route path="/sidebar" element={<SidebarMenu/>} />
           <Route path="/register-padron-propietarios" element={<ListPropietarios/>} />
