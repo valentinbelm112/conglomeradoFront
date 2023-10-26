@@ -37,6 +37,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     setRefrescar,
     EstadoGlobal
   );
+  
   const [clickR, setClickR] = useState(false);
   const { documento, isLoadingDoc } = UseGetDoccumentoConsejoDirectivo(
     `${serverURL}/CGM/Documento-detalle-directivo`,
@@ -92,6 +93,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const HandleDownloadExcel = () => {
     useGetExportConsejoDirectivo(`${serverURL}/CGM/export-directivos`);
   };
+
 
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();

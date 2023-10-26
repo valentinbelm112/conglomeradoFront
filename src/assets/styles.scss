@@ -39,3 +39,13 @@
     background-color: #554f4f;
     z-index: 99;
 }
+
+table.table tbody tr:nth-child(odd) {
+  background-color: rgb(0 0 0 / 20%); /* Establece el color para las filas impares */
+}
+
+
+/* Filas pares */
+table.table tbody tr:nth-child(even) {
+  background-color: rgba(51, 50, 50, 0.1);; /* Reemplaza "color_claro" por el color que desees para las filas pares */
+}

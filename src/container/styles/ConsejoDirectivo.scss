@@ -4,8 +4,8 @@
     display: flex;
     width: 98%;
    
- 
 }
+
 .outer-table-registro-directivo {
     overflow-y: auto;
     height: 60vh;
@@ -16,6 +16,7 @@
     -layout: fixed;
   }
 
+
   .outer-table-registro-directivo th {
     text-align: left;
     top: 0;
@@ -23,11 +24,12 @@
     background-color: white;
   }
 
+
 .title-consejo-directivo{
   padding: 15px;
   font-size: 20px;
   font-weight: bold;
-  color: rgb(39, 26, 10);
+ // color: rgb(39, 26, 10);
   font-family: "Playfair Display", serif;
   margin-top: 1%;
   /* background-color: white; */
@@ -35,15 +37,16 @@
   font-size: 16px;
   margin-bottom: 20px;
   list-style: none;
-  background-color: #fff;
+  //background-color: #fff;
   border-radius: 4px;
 }
+
 
 .title-consejo-directivo-documento{
   padding: 15px;
   font-size: 20px;
   font-weight: bold;
-  color: rgb(39, 26, 10);
+  //color: rgb(39, 26, 10);
   font-family: "Playfair Display", serif;
   margin-top: 1%;
   /* background-color: white; */
@@ -112,15 +115,18 @@
 #mostrar-modal {
 	display: none;
 	+ label {
-        background: linear-gradient(to bottom right, #076024, #00b65f);
-        display: table;
-        margin: auto;
-        color: #fff;
-        line-height: 3.7;
-        padding: 0 1em;
-        text-transform: uppercase;
-        cursor: pointer;
-        border-radius: 7%;
+       
+    display: table;
+    margin: auto;
+    color: #fff;
+    line-height: 3.7;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 7%;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15); /* Cambié la notación del color a rgba para controlar la opacidad */
+    border: 2px solid rgba(255, 255, 255, 0.35); /* Añadí el borde blanco delgado */
         
 		&:hover {
 			background: darken(steelblue,10%);
@@ -184,7 +190,7 @@
 #mostrar-modal-documento {
 	display: none;
 	+ label {
-        background: linear-gradient(to bottom right, #076024, #00b65f);
+       
         display: table;
         margin: auto;
         color: #fff;
@@ -193,7 +199,10 @@
         text-transform: uppercase;
         cursor: pointer;
         border-radius: 7%;
-        
+        color: #fff;
+        background-color: rgb(255 255 255 / 15%);
+        border-color: rgb(255 255 255 / 35%);
+        border: 2px solid rgba(255, 255, 255, 0.35); /* Añadí el borde blanco delgado */
 		&:hover {
 			background: darken(steelblue,10%);
 		}

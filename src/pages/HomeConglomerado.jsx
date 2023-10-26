@@ -17,7 +17,7 @@ const HomeConglomerado = ({EstadoGlobal}) => {
   const queryParams = new URLSearchParams(location.search);
   const successMessage = queryParams.get("successLogin");
 
-  const { numPropietarios,numSocios,numInquilino, isLoading} =useGetObtenerNumPropietarios(`${serverURL}/Estadistica/buscar/propietarios`,`${serverURL}/Estadistica/buscar/socios`,`${serverURL}/Estadistica/buscar/inquilinos`, EstadoGlobal);
+  const { numPropietarios,numSocios,numInquilino,activoProp,inactivoProp, isLoading} =useGetObtenerNumPropietarios(`${serverURL}/Estadistica/buscar/propietarios`,`${serverURL}/Estadistica/buscar/socios`,`${serverURL}/Estadistica/buscar/inquilinos`, EstadoGlobal);
 
 
   //Composicion conglomerado Inicio
@@ -150,7 +150,7 @@ const HomeConglomerado = ({EstadoGlobal}) => {
     labels: ["Activo", "Inactivo"],
     datasets: [
       {
-        data: [25, 15], // Actualiza estos valores con tus estadísticas reales
+        data: [activoProp.data, inactivoProp.data], // Actualiza estos valores con tus estadísticas reales
         backgroundColor: ["#cae1fd", "#84b6f4", "#fdcae1"],
         hoverBackgroundColor: ["#cae1fd", "#84b6f4", "#fdcae1"],
       },
