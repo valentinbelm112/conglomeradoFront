@@ -43,11 +43,13 @@
     flex-direction: column;
     padding: 15px;
     top: 60px;
-    background: #053b6b;
-    
+    z-index: 999;
+
+    background-image: url(https://codervent.com/gum/dashcube/demo/vertical/assets/images/bg-themes/1.png);
+
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(5.5px);
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    
   }
   .lines_icon{
     display: flex;
