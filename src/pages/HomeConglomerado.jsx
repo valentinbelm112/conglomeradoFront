@@ -190,7 +190,7 @@ const HomeConglomerado = () => {
           <br />
           <div className="row align-items-center">
             <div className="col-md-4 d-flex justify-content-center mb-4">
-              <div className="chart-container-home-conglomerado ">
+              <div className="chart-container-home-conglomerado-chart1 ">
 
                 <Bar
                   data={data}
