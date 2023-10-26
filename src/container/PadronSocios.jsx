@@ -133,6 +133,7 @@ const ListPadronSocios = (props) => {
 
   const handleSearch = (e) => {
     const searchText = e.value;
+    console.log(searchText);
 
     if (typeof searchText === "string") {
       // Si searchText es una cadena (texto), aplicamos toUpperCase
@@ -142,7 +143,6 @@ const ListPadronSocios = (props) => {
         refrescar.filter(
           (item) =>
             item.desDni.includes(searchText) ||
-            item.desApellidos.toUpperCase().includes(searchTextUpper) ||
             item.des_nombres.toUpperCase().includes(searchTextUpper)
         )
       );
@@ -152,7 +152,6 @@ const ListPadronSocios = (props) => {
         refrescar.filter(
           (item) =>
             item.desDni.includes(searchText.toString()) ||
-            item.desApellidos.includes(searchText.toString()) ||
             item.des_nombres.includes(searchText.toString())
         )
       );
@@ -182,7 +181,7 @@ const ListPadronSocios = (props) => {
       `${serverURL}/Socio/Obtener`,
       props.EstadoGlobal
     );
-    console.log(response);
+    //console.log(response);
     setRefrescar(response.data);
   };
   const Estado = () => {
@@ -391,7 +390,7 @@ const ListPadronSocios = (props) => {
                         }}
                       >
                         <div className="container-order-a-z-socio">
-                          <div>Apellidos Completos</div>
+                          <div>  Apellidos y Nombres</div>
                           <button className="title-codigo-socio">
                             <FontAwesomeIcon
                               icon={faArrowDownAZ}
@@ -400,21 +399,7 @@ const ListPadronSocios = (props) => {
                           </button>
                         </div>
                       </th>
-                      <th
-                        scope="col"
-                        style={{
-                          backgroundColor: "#a2c8f2",
-                          padding: "8px",
-                          borderTop: "2px solid white",
-                          borderLeft: "2px solid white",
-                          borderBottom: "2px solid white",
-                          whiteSpace: "nowrap",
-                          fontSize: "16px",
-                          color: "#56688a",
-                        }}
-                      >
-                        Nombres Completos
-                      </th>
+                     
                       <th
                         scope="col"
                         style={{
@@ -560,15 +545,6 @@ const ListPadronSocios = (props) => {
                               }}
                             >
                               {socio.codSocio}
-                            </td>
-                            <td
-                              style={{
-                                overflow: "hidden",
-                                whiteSpace: "nowrap",
-                                textOverflow: "ellipsis",
-                              }}
-                            >
-                              {socio.desApellidos}
                             </td>
                             <td
                               style={{

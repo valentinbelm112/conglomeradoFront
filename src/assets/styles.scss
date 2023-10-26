@@ -49,3 +49,8 @@ table.table tbody tr:nth-child(odd) {
 table.table tbody tr:nth-child(even) {
   background-color: rgba(51, 50, 50, 0.1);; /* Reemplaza "color_claro" por el color que desees para las filas pares */
 }
+
+.container-image-stilo-cgm{
+  box-shadow: 0 0 15px rgba(97, 97, 97, 0.3);
+  border-radius: 5px;
+}

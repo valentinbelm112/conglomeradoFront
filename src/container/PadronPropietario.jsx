@@ -29,8 +29,7 @@ import EditarPropietario from "../components/FormEditarPropietarios";
 import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario";
 import { validateToken } from "../utils/TokenValidateExpired";
 import ReactPaginate from "react-paginate";
-import EditarSocio from "../components/FormEditarSocios";
-import { refreshAccessToken } from "../hooks/useGetRefreshToken";
+
 const PadronPropietario = ({ EstadoGlobal }) => {
     const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
     const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);

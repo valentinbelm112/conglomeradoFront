@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react";
 import axios from "axios";
 
-export const useGetObtenerNumPropietarios=(API,API2,API3,auth)=>{
+export const useGetObtenerNumPropietarios=(API,API2,API3,API4,API5,API6,API7,auth)=>{
 
     const [isLoading, SetLoading] = useState(true);
     const [numPropietarios, setNumPropietarios] = useState([]);
@@ -9,6 +9,8 @@ export const useGetObtenerNumPropietarios=(API,API2,API3,auth)=>{
     const [numInquilino, setNumInquilino] = useState([]);
     const [activoProp, setActivoProp] = useState([]);
     const [inactivoProp, setInactivoProp] = useState([]);
+    const[activoPropietarios,setActivoPropietarios] = useState([]); //
+    const[inactivoPropietarios,setInactivoPropietarios] = useState([]);
     //console.log(auth);
     const doSomething = async() =>{
         const config = {
@@ -37,27 +39,37 @@ export const useGetObtenerNumPropietarios=(API,API2,API3,auth)=>{
 
          //console.log(responseSocio);        
          const responseActivo = await axios(
-            `${API3}/${auth.des_codigo_asociacion}`,
+            `${API4}/${auth.des_codigo_asociacion}`,
             config
     );
 
 
      //console.log(responseSocio);        
      const responseInactivo = await axios(
-        `${API3}/${auth.des_codigo_asociacion}`,
+        `${API5}/${auth.des_codigo_asociacion}`,
         config
 );
 
+const responsePropietarioActivo = await axios(
+    `${API6}/${auth.des_codigo_asociacion}`,
+    config
+);
+
+const responsePropietarioInactivo = await axios(
+    `${API7}/${auth.des_codigo_asociacion}`,
+    config
+);
 
   
-        console.log(responsePropietario);
-        console.log(responseSocio);
-        console.log(responseInquilino);
+        console.log(responsePropietarioActivo);
+        console.log(responsePropietarioInactivo);
         setActivoProp(responseActivo);
         setNumPropietarios(responsePropietario);
         setNumSocios(responseSocio);
         setNumInquilino(responseInquilino);
         setInactivoProp(responseInactivo);
+        setActivoPropietarios(responsePropietarioActivo);
+        setInactivoPropietarios(responsePropietarioInactivo);
         SetLoading(false);
         }
       
@@ -66,5 +78,5 @@ export const useGetObtenerNumPropietarios=(API,API2,API3,auth)=>{
         doSomething();
       
       }, []);
-      return { numPropietarios,numSocios,numInquilino,activoProp,inactivoProp, isLoading };
+      return { numPropietarios,numSocios,numInquilino,activoProp,inactivoProp,activoPropietarios,inactivoPropietarios ,isLoading };
 }

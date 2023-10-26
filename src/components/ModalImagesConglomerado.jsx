@@ -53,7 +53,7 @@ const ModalImagesConglomerado = ({ isOpen, onClose, components }) => {
           maxWidth: '700px', // Define el ancho máximo deseado
           margin: 'auto',    // Centra la ventana emergente horizontalmente
           zIndex: '200000',
-          height:'91%'
+          height:'98.5%'
         }
       }}
     >

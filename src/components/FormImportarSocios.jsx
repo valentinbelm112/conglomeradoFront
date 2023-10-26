@@ -58,10 +58,9 @@ const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado
                 else {
                     console.log(data); // Maneja la respuesta del servidor aquí
                     RefrescarInformacion();
-                     toast.success("Registro exitoso del consejo directivo");
-                    const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-importar-excel');
-                    parrafo.style.top = '-540vh'
-
+                     toast.success("Registro exitoso del padron se socios");
+                 
+                    handleClickCloseForm();
                 }
 
             })

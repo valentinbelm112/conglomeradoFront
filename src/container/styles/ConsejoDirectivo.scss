@@ -125,8 +125,9 @@
     cursor: pointer;
     border-radius: 7%;
     color: #fff;
-    background-color: rgba(255, 255, 255, 0.15); /* Cambié la notación del color a rgba para controlar la opacidad */
+    background-color: rgba(73, 122, 98, 0.15); /* Cambié la notación del color a rgba para controlar la opacidad */
     border: 2px solid rgba(255, 255, 255, 0.35); /* Añadí el borde blanco delgado */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         
 		&:hover {
 			background: darken(steelblue,10%);
@@ -200,9 +201,10 @@
         cursor: pointer;
         border-radius: 7%;
         color: #fff;
-        background-color: rgb(255 255 255 / 15%);
+        background-color: rgba(109, 155, 182, 0.15); 
         border-color: rgb(255 255 255 / 35%);
         border: 2px solid rgba(255, 255, 255, 0.35); /* Añadí el borde blanco delgado */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 		&:hover {
 			background: darken(steelblue,10%);
 		}

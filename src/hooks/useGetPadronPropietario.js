@@ -126,7 +126,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
           }).then((response) => {
            
         
-
+        console.log(response)
         // Array para almacenar los valores extraídos
         const listPabellonPuesto = [];
         const codigoPropietario = response.data

@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import "./styles/PerfilConglomerado.scss";
+import { useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { UseGetPerfilUsuario } from "../hooks/useGetPerfil";
 import { serverURL } from "../utils/Configuration";
@@ -10,7 +11,7 @@ import { format } from "date-fns";
 const PerfilSociosConglomerados = ({ estadoGlobal }) => {
   const { login } = useContext(AuthContext);
   const { auth } = useContext(AuthContext);
-
+  const [togle, setTogle] = useState(true);
   const { dataPerfil, isLoading } = UseGetPerfilUsuario(
     `${serverURL}/perfil/CGM/buscar`,
     estadoGlobal.des_codigo_asociacion,
@@ -22,13 +23,15 @@ const PerfilSociosConglomerados = ({ estadoGlobal }) => {
   }, []);
 
   if (isLoading) {
+
     return <Container_Nav_Sidb_Load />;
+
   }
   return (
     <div className="navbar-sidebar-directivos">
       <NavbarConglomerado Estado={auth} />
       <div className="container-Sidebar-view-directivo">
-        <SidebarMenu />
+        <SidebarMenu setTogle={setTogle} />
         <div className="container" style={{ zIndex: "1" }}>
           <div
             className="row"
@@ -54,6 +57,7 @@ const PerfilSociosConglomerados = ({ estadoGlobal }) => {
                     className="card-title-perfil-datos-personales"
                     style={{ color: "#428bca" }}
                   >
+                    
                     NOMBRES
                   </h5>
                   <p>

@@ -32,12 +32,13 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const [click, setClick] = useState(false);
   const [showDcoument, SetShowDcoument] = useState(false);
   const [extraerDatos, SetExtraerDatos] = useState([]);
+  const [togle, setTogle] = useState(true);
   const { directivos, isLoading } = useGetConsejoDirectivo(
     `${serverURL}/CGM/Obtener?Codigo_Asociacion=${EstadoGlobal.des_codigo_asociacion}`,
     setRefrescar,
     EstadoGlobal
   );
-  
+
   const [clickR, setClickR] = useState(false);
   const { documento, isLoadingDoc } = UseGetDoccumentoConsejoDirectivo(
     `${serverURL}/CGM/Documento-detalle-directivo`,
@@ -93,7 +94,6 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const HandleDownloadExcel = () => {
     useGetExportConsejoDirectivo(`${serverURL}/CGM/export-directivos`);
   };
-
 
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();
@@ -177,7 +177,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
       <div className="navbar-sidebar-directivos">
         <NavbarConglomerado />
         <div className="container-Sidebar-view-directivo">
-          <SidebarMenu />
+          <SidebarMenu  setTogle={setTogle}/>
           <div className="row" style={{ width: `100%` }}>
             <div className="col-md-9">
               <div className="title-consejo-directivo">
@@ -189,7 +189,10 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                     {refrescarDocument?.data.map(
                       (item) =>
                         item.destipdoc === "DocInscripcion" && (
-                          <div className="title-consejo-directivo-periodo-vigente">
+                          <div
+                            className="title-consejo-directivo-periodo-vigente"
+                            key={`${item.id}`}
+                          >
                             <span style={{ fontWeight: "bold" }}>
                               Periodo vigente :
                             </span>
@@ -220,9 +223,9 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                 </div>
               </div>
 
-              <div class="card-body">
-                <div class="outer-table-registro-directivo">
-                  <table class="table">
+              <div className="card-body">
+                <div className="outer-table-registro-directivo">
+                  <table className="table">
                     <thead>
                       <tr>
                         <th
@@ -321,7 +324,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
 
                     <tbody>
                       {refrescar.map((directivo) => (
-                        <tr>
+                        <tr key={`${directivo.id}`}>
                           <td>{directivo.des_nombres}</td>
                           <td>{directivo.des_apellidos}</td>
                           <td>{directivo.dni}</td>
@@ -350,7 +353,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                                   onClick={(e) =>
                                     handleClickOpenEditFrom(directivo)
                                   }
-                                  for="mostrar-modal-editar"
+                                  htmlFor="mostrar-modal-editar"
                                 >
                                   {" "}
                                   <EditIcon color="primary" />{" "}
@@ -395,11 +398,11 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                   />
 
                   <label
-                    for="mostrar-modal-documento"
+                    htmlFor="mostrar-modal-documento"
                     onClick={changeStateButon}
                   >
                     {" "}
-                    <PreviewIcon />{" "}
+                    <PreviewIcon style={{ color: "#0077b6" }} />{" "}
                   </label>
                   {showDcoument && (
                     <div id="modal1-sombra-form-Prop">
@@ -417,9 +420,9 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                   </div>
                   <input id="mostrar-modal" name="modal" type="radio" />
 
-                  <label onClick={handleClickOpenFrom} for="mostrar-modal">
+                  <label onClick={handleClickOpenFrom} htmlFor="mostrar-modal">
                     {" "}
-                    <PostAddIcon />{" "}
+                    <PostAddIcon style={{ color: "#4CAF50" }} />{" "}
                   </label>
 
                   {clickR && (
@@ -437,9 +440,11 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                     </div>
                     <input id="mostrar-modal" name="modal" type="radio" />
 
-                    <label for="mostrar-modal" onClick={openModal}>
+                    <label htmlFor="mostrar-modal" onClick={openModal}>
                       {" "}
-                      <ContentPasteSearchIcon />{" "}
+                      <ContentPasteSearchIcon
+                        style={{ color: "#4CAF50" }}
+                      />{" "}
                     </label>
 
                     <ModalImagesConglomerado

@@ -2,7 +2,7 @@ import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect,useState, useContext } from "react";
 import { Doughnut } from "react-chartjs-2";
 import "chart.js/auto";
 import "./styles/HomeConglomerado.scss";
@@ -16,8 +16,8 @@ const HomeConglomerado = ({EstadoGlobal}) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const successMessage = queryParams.get("successLogin");
-
-  const { numPropietarios,numSocios,numInquilino,activoProp,inactivoProp, isLoading} =useGetObtenerNumPropietarios(`${serverURL}/Estadistica/buscar/propietarios`,`${serverURL}/Estadistica/buscar/socios`,`${serverURL}/Estadistica/buscar/inquilinos`, EstadoGlobal);
+  const [togle, setTogle] = useState(true);
+  const { numPropietarios,numSocios,numInquilino,activoProp,inactivoProp,activoPropietarios,inactivoPropietarios , isLoading} =useGetObtenerNumPropietarios(`${serverURL}/Estadistica/buscar/propietarios`,`${serverURL}/Estadistica/buscar/socios`,`${serverURL}/Estadistica/buscar/inquilinos`, `${serverURL}/Estadistica/obtener/estado/propiedades`,`${serverURL}/Estadistica/obtener/estado/prop/inactivo`,`${serverURL}/Estadistica/obtener/estado/propietarios/activo`,`${serverURL}/Estadistica/obtener/estado/propietarios/inactivo`,EstadoGlobal);
 
 
   //Composicion conglomerado Inicio
@@ -98,7 +98,7 @@ const HomeConglomerado = ({EstadoGlobal}) => {
     labels: ["Activo", "Inactivo"],
     datasets: [
       {
-        data: [35, 55], // Actualiza estos valores con tus estadísticas reales
+        data: [activoPropietarios.data, inactivoPropietarios.data], // Actualiza estos valores con tus estadísticas reales
         backgroundColor: ["#cae1fd", "#84b6f4", "#fdcae1"],
         hoverBackgroundColor: ["#cae1fd", "#84b6f4", "#fdcae1"],
       },
@@ -111,7 +111,7 @@ const HomeConglomerado = ({EstadoGlobal}) => {
   // Calcula los valores en porcentaje
   const total2 = data2.datasets[0].data.reduce((sum, value) => sum + value, 0);
 
-  const porcentajes2 = data2.datasets[0].data.map(value => (value / total) * 100);
+  const porcentajes2 = data2.datasets[0].data.map(value => (value / total2) * 100);
   console.log(porcentajes)
 
   const optionsEP = {
@@ -143,11 +143,11 @@ const HomeConglomerado = ({EstadoGlobal}) => {
       },
     },
   };
-  //Estado propietario Fin
+  
 
-  //Estado propietario Inicio
+  
   const data3 = {
-    labels: ["Activo", "Inactivo"],
+    labels: ["Activo", "En Alquiler"],
     datasets: [
       {
         data: [activoProp.data, inactivoProp.data], // Actualiza estos valores con tus estadísticas reales
@@ -163,7 +163,7 @@ const HomeConglomerado = ({EstadoGlobal}) => {
   // Calcula los valores en porcentaje
   const total3 = data3.datasets[0].data.reduce((sum, value) => sum + value, 0);
 
-  const porcentajes3 = data3.datasets[0].data.map(value => (value / total) * 100);
+  const porcentajes3 = data3.datasets[0].data.map(value => (value / total3) * 100);
   console.log(porcentajes)
 
   const optionsEPS = {
@@ -199,7 +199,7 @@ const HomeConglomerado = ({EstadoGlobal}) => {
     <div className="navbar-sidebar-directivos">
       <NavbarConglomerado />
       <div className="container-Sidebar-view-directivo">
-        <SidebarMenu />
+        <SidebarMenu  setTogle={setTogle}/>
         <div className="home-container" style={{ width: `100rem` }}>
           <div className="bienvenida-container">
 
