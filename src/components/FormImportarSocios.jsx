@@ -9,8 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado}) => {
    // onchange states
    const [excelFile, setExcelFile] = useState(null);
-
-
+   const [isLoading, setIsLoading] = useState(false);
     const handleClickCloseForm = () => {
     
        onClickEstado(false)
@@ -28,7 +27,7 @@ const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado
 
 
     const enviarDatos = async (event) => {
-
+        setIsLoading(true);
         event.preventDefault();
         console.log("Enviando")
         console.log("Enviando  +datos.fecha_documento");
@@ -56,6 +55,7 @@ const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado
                     throw new Error('Error del servidor.'); // Lanza un error personalizado para otros códigos de estado (500, etc.)
                 }
                 else {
+                    setIsLoading(false);
                     console.log(data); // Maneja la respuesta del servidor aquí
                     RefrescarInformacion();
                      toast.success("Registro exitoso del padron se socios");
@@ -125,13 +125,17 @@ const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado
 
 
                             <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
-
-                                <button type="submit" class="btn-enviar-carga-masiva-directivos">Aceptar
+             
+                                <button type="submit"
+                                 value={isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+                                 className={isLoading ? "button" : "btn-enviar-carga-masiva-directivos"}
+                                 disabled={isLoading}
+                                 >Aceptars
                                 </button>
-
+                               
                             </div>
                         </form>
-
+                        {isLoading && <div className="spinner"></div>}
                     </div>
                 </div>
             </div>

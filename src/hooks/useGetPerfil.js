@@ -15,15 +15,17 @@ export const UseGetPerfilUsuario = (API, codigoAsociacion, codigoUsuario,auth) =
             },
         };
     
-       const response = await axios(
+       await axios(
             `${API}/${codigoAsociacion}/${codigoUsuario}`,                           
             config
-        );
+        ).then((response)=>{
+            console.log(response)
+            SetDataPerfil(response);
+            SetLoading(false);
+        })
  
 
-        console.log(response)
-        SetDataPerfil(response);
-        SetLoading(false);
+       
     }
 
     useEffect(() => {
