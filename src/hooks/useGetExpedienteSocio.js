@@ -134,6 +134,7 @@ export const useGetExpedienteSocio = (API, id, id2) => {
         );
         SetExpedienteConyugue(responseExpedienteConyugue);
      
+        
       } else {
         console.log("Else");
         console.log(isLoading);
