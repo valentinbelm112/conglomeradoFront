@@ -21,7 +21,7 @@ export const useGetExpedienteSocio = (API, id, id2) => {
    //capturar el nombre del  propeitario
 
     const NombreSocio=padronSociosDetalle.data.des_nombres;
-    console.log(NombreSocio)
+    //console.log(NombreSocio)
 
     const foundnumPabellon = padronSociosDetalle.data.inmuebleSocioEntities.map(
       (element) =>element.numPabellon
@@ -70,6 +70,7 @@ export const useGetExpedienteSocio = (API, id, id2) => {
    
       SetDataExpediente(responsepostExpediente);
     } else {
+      
       console.log("Else");
       console.log(isLoading);
       const objetoRequest = {
@@ -78,33 +79,34 @@ export const useGetExpedienteSocio = (API, id, id2) => {
         dni: padronSociosDetalle.data.desDni,
       };
 
+      console.log(objetoRequest);
       await axios
         .post(API, objetoRequest)
         .then(async (response) => {
           console.log(response.data.data.apellido_materno);
-          console.log(response.data);
+          console.log(response.data.data.urlFoto);
           const bodyExpediente = {
             data: {
               des_apellido_materno: response.data.data.apellido_materno,
               des_apellido_paterno: response.data.data.apellido_paterno,
               des_cargo: response.data.data.grado_instruccion,
-              des_correo_electronico: "cccc@gmail.com",
+              des_correo_electronico: "",
               des_departamento_dom: response.data.data.departamento_domicilio,
               des_departamento_nacimiento:
                 response.data.data.departamento_nacimiento,
               des_direccion_dom: response.data.data.direccion,
               des_distrito_dom: response.data.data.distrito_domicilio,
-              des_edad: "30",
-              des_email: "cccc@gmail.com",
+              des_edad: "",
+              des_email: "",
               des_estado_civil: response.data.data.estado_civil,
               des_genero: response.data.data.sexo,
               des_grado_instruccion: response.data.data.grado_instruccion,
               des_nombres: response.data.data.nombres,
               des_provincia_dom: response.data.data.provincia_domicilio,
-              des_telefono: "3434343434",
+              des_telefono: "",
               des_url_foto: response.data.data.urlFoto,
               dni: response.data.data.dni,
-              fec_Fecha_nacimiento: "2023-08-07T21:47:30.828Z",
+              fec_Fecha_nacimiento: response.data.data.fecha_nacimiento,
             },
           };
 
@@ -135,8 +137,8 @@ export const useGetExpedienteSocio = (API, id, id2) => {
         SetExpedienteConyugue(responseExpedienteConyugue);
      
       } else {
-        console.log("Else");
-        console.log(isLoading);
+        //console.log("Else");
+       // console.log(isLoading);
         const objetoRequest = {
           codempresa: "0001",
           option: "7",
@@ -146,7 +148,7 @@ export const useGetExpedienteSocio = (API, id, id2) => {
           .post(API, objetoRequest)
           .then(async (response) => {
             console.log(response.data.data.apellido_materno);
-            console.log(response.data);
+            console.log(response.data.data.urlFoto);
             const bodyExpediente = {
               data: {
                 des_apellido_materno: response.data.data.apellido_materno,
@@ -177,10 +179,10 @@ export const useGetExpedienteSocio = (API, id, id2) => {
               bodyExpediente.data
             );
 
-            console.log(responsepostExpediente);
-            console.log(response.data.data);
+
             SetExpedienteConyugue(bodyExpediente);
            
+
           })
           .catch((error) => {
             console.error("Error en la solicitud:", error);

@@ -13,7 +13,7 @@ const ModalImagesConglomerado = ({ isOpen, onClose, components }) => {
   const totalSections = components.length;
   const progress = (currentSection + 1) / totalSections * 100; // Calcula el progreso en porcentaje
   const handleNext = () => {
-    console.log("dd" + currentSection)
+   
     if (currentSection < totalSections - 1) {
       setCurrentSection(currentSection + 1);
       if (completedSections.includes(currentSection)) {
@@ -24,15 +24,19 @@ const ModalImagesConglomerado = ({ isOpen, onClose, components }) => {
     }
   };
 
+  
   const handleSectionClick = (sectionIndex) => {
-    // Marca o desmarca la vista como completada al hacer clic en el ícono
+  
     console.log(sectionIndex + "seccion")
    
       setCompletedSections([...completedSections, sectionIndex]);
+
     
   };
+
+
   const handlePrevious = (sectionIndex) => {
-    console.log("DDDD" + currentSection)
+  
     const nuevoContador = currentSection - 1;
     if (currentSection > 0) {
       setCurrentSection(currentSection - 1);
@@ -73,15 +77,7 @@ const ModalImagesConglomerado = ({ isOpen, onClose, components }) => {
         <CloseIcon />
       </button>
       <style>
-        {`
-          /* Estilos personalizados para la barra de progreso */
-          progress {
-            width: 100%;
-            
-          }
-
-       
-        `}
+        y
       </style>
 
       {/* Barra de progreso en la parte superior */}

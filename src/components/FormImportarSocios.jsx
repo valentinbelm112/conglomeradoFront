@@ -121,7 +121,8 @@ const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado
 
 
                             </div>
-
+                            
+                            {isLoading && <div className="spinner"></div>}
 
 
                             <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
@@ -130,12 +131,12 @@ const FormInportSocios = ({ RefrescarInformacion ,clickR,setClickR,onClickEstado
                                  value={isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
                                  className={isLoading ? "button" : "btn-enviar-carga-masiva-directivos"}
                                  disabled={isLoading}
-                                 >Aceptars
+                                 style={{color:'white'}}>{isLoading ? "Subiendo..." : "Importar Socios"}
                                 </button>
                                
                             </div>
                         </form>
-                        {isLoading && <div className="spinner"></div>}
+                       
                     </div>
                 </div>
             </div>
