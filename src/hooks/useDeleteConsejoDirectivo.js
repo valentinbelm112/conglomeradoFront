@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const UseDeleteConsejoDirectivo = async (API,EstadoGlobal) => {
-   
+     console.log(EstadoGlobal);
     
     const config = {
         

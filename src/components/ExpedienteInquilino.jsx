@@ -313,6 +313,11 @@ const ExpedienteInquilino = (props) => {
   const ModeloProps2 = {
     titulo: "Constrato ....",
     tipDoc: "OrtosAlquiler",
+    request: `${serverURL}/Documento/inquilino/propByDni/tipdoc/codAS`,
+  };
+
+  const tipoView = {
+    opcion: 2,
   };
 
   const openModal = () => {
@@ -735,6 +740,8 @@ const ExpedienteInquilino = (props) => {
                       api={`${serverURL}/Inquilino/Upload-info-inquilino`}
                       request={ModeloProps1.request}
                       tipoDoc={ModeloProps1.tipDoc}
+
+                      tipView={tipoView}
                     />,
                     <ImageUploader
                       info={ModeloProps2}
@@ -745,6 +752,7 @@ const ExpedienteInquilino = (props) => {
                       dataPropietario={props.padron.data}
                       tipoDoc={ModeloProps2.tipDoc}
                       request={ModeloProps1.request}
+                      tipView={tipoView}
                     />,
                   ]}
                 />

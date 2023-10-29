@@ -12,7 +12,7 @@ const FormInportPropietario = (props) => {
 
    const handleClickCloseForm = () => {
     console.log(props)
-    props.onClickEstado(false)
+    props.onClickEstado(false);
 };
 
 
@@ -57,9 +57,8 @@ const FormInportPropietario = (props) => {
                 else {
                     console.log(data); // Maneja la respuesta del servidor aquí
                     props.RefrescarInformacion();
-                     toast.success("Registro exitoso del consejo directivo");
-                    const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-importar-excel');
-                    parrafo.style.top = '-100vh'
+                     toast.success("Registro exitoso del padron de propietarios");
+                     props.onClickEstado(false);
 
                 }
 

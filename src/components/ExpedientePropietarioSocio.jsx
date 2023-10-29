@@ -14,6 +14,7 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Download from "yet-another-react-lightbox/plugins/download";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
 const ExpedientePropietarioSocio = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -65,24 +66,35 @@ const ExpedientePropietarioSocio = (props) => {
   };
 
   const ModeloProps1={
-     titulo:"Registro padron socios"
+     titulo:"Registro padron socios",
+     tipDoc: "RegistroSocios",
+     request: `${serverURL}/Documento/socio/propByDni/tipdoc/codAS`,
   }
 
   const ModeloProps2={
-    titulo:"Constancia socio titular posicionario"
+    titulo:"Constancia socio titular posicionario",
+    tipDoc: "ConstanciaSocio",
+     request: `${serverURL}/Documento/socio/propByDni/tipdoc/codAS`,
  }
 
  const ModeloProps3={
-  titulo:"Hoja de liquidacion de arbitrios"
+  titulo:"Hoja de liquidacion de arbitrios",
+  tipDoc: "Liquidacion",
+     request: `${serverURL}/Documento/socio/propByDni/tipdoc/codAS`,
 }
 
 const ModeloProps4={
- titulo:"Titulo registrado de propiedad urbana"
+ titulo:"Titulo registrado de propiedad urbana",
+ tipDoc: "RegistroPropiedadUrbana",
+ request: `${serverURL}/Documento/socio/propByDni/tipdoc/codAS`,
 }
 
 
 const ModeloProps5={
-  titulo:"Contrato de alquiler"
+  titulo:"Contrato de alquiler",
+  titulo:"Titulo registrado de propiedad urbana",
+  tipDoc: "ContratoAlquiler",
+  request: `${serverURL}/Documento/socio/propByDni/tipdoc/codAS`,
 }
 
   const openModal = () => {
@@ -485,6 +497,7 @@ const ModeloProps5={
                 <ModalImagesConglomerado
                     isOpen={modalIsOpen}
                     onClose={closeModal}
+                    
                     components={[
                         <ImageUploader info={ModeloProps1}
                         documentoPropietario={
@@ -492,27 +505,55 @@ const ModeloProps5={
                         }
                         dataPropietario={ props.padron.data}
                         api={`${serverURL}/Socio/Upload-info-socio`}
-                        tipView={tipoView}/>,
+                        tipView={tipoView}
+                        
+                        tipoDoc={ModeloProps1.tipDoc}
+                        request={ModeloProps1.request}
+                    
+                    />,
                         <ImageUploader  info={ModeloProps2}
                         documentoPropietario={
                           props.padron.data.documentoInquilinoEntities
                         }
-                        dataPropietario={ props.padron.data}/>,
+                        dataPropietario={ props.padron.data}
+                        api={`${serverURL}/Socio/Upload-info-socio`}
+                        tipView={tipoView}
+                        
+                        tipoDoc={ModeloProps2.tipDoc}
+                        request={ModeloProps2.request}
+                        />,
                         <ImageUploader info={ModeloProps3} 
                         documentoPropietario={
                           props.padron.data.documentoInquilinoEntities
                         }
-                        dataPropietario={ props.padron.data}/>,
+                        dataPropietario={ props.padron.data}
+                        api={`${serverURL}/Socio/Upload-info-socio`}
+                        tipView={tipoView}
+                        
+                        tipoDoc={ModeloProps3.tipDoc}
+                        request={ModeloProps3.request}
+                        />,
                         <ImageUploader  info={ModeloProps4}
                         documentoPropietario={
                           props.padron.data.documentoInquilinoEntities
                         }
-                        dataPropietario={ props.padron.data}/>,
+                        dataPropietario={ props.padron.data}
+                        api={`${serverURL}/Socio/Upload-info-socio`}
+                        tipView={tipoView}
+                        
+                        tipoDoc={ModeloProps4.tipDoc}
+                        request={ModeloProps4.request}/>,
                         <ImageUploader info={ModeloProps5}
                          documentoPropietario={
                         props.padron.data.documentoInquilinoEntities
                       }
-                      dataPropietario={ props.padron.data} />
+                      dataPropietario={ props.padron.data}
+                      
+                      api={`${serverURL}/Socio/Upload-info-socio`}
+                      tipView={tipoView}
+                      
+                      tipoDoc={ModeloProps5.tipDoc}
+                      request={ModeloProps5.request}/>
                     ]}
                     />
               </div>
@@ -523,6 +564,7 @@ const ModeloProps5={
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

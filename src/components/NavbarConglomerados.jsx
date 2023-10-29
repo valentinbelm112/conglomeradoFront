@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import "./styles/NavbarConglomerados.scss";
 import { Link } from "react-router-dom";
-import logo_proempresa from "./assets/logo_proempresa.svg";
+import logo_proempresa from "./assets/logoJosefej.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import AuthContext from "../context/AuthContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";

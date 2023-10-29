@@ -14,6 +14,7 @@ import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Download from "yet-another-react-lightbox/plugins/download";
 import Captions from "yet-another-react-lightbox/plugins/captions";
+import { ToastContainer, toast } from "react-toastify";
 const ExpedientePropietario = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -306,9 +307,9 @@ const ExpedientePropietario = (props) => {
           <div className="container-info-contacto-expediente-filter">
             <div className="container-info-personal">
               <div className="title-datos-personales-expediente-filter">
-                Numero de telefono
+                Numero de telefono :
               </div>
-              <div>######</div>
+              <div>{props.padron.data.num_telefono}</div>
             </div>
             <div className="container-info-personal">
               <div className="title-datos-personales-expediente-filter">
@@ -535,6 +536,7 @@ const ExpedientePropietario = (props) => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

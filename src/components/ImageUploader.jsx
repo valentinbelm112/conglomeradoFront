@@ -16,7 +16,7 @@ import { serverURL } from "../utils/Configuration";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 const ImageUploader = (props) => {
-  console.log(props);
+  
   const [open, setOpen] = useState(false);
   const [openCarga, setOpenCarga] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -66,13 +66,14 @@ const ImageUploader = (props) => {
           console.error(error);
         });
     } else {
+      console.log(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
       await axios
         .get(
           `${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`
         )
         .then((response) => {
           // Handle the response data
-          console.log(response);
+         
           setDbImage(response.data.des_link_documento);
         })
         .catch((error) => {
@@ -83,19 +84,9 @@ const ImageUploader = (props) => {
   };
 
   useEffect(() => {
-
+  console.log(props.dataPropietario)
     setUploadedImage(null);
     setDbImage(null);
-
-
-    if (props.documentoPropietario !== undefined) {
-      // Llama a la función para recuperar la imagen
-      if (props.tipView.opcion === 1) {
-        setDbImage(props.documentoPropietario.des_link_documento_inscrito);
-      } else {
-        setDbImage(props.documentoPropietario.des_link_documento);
-      }
-    }
 
     if (props.dataPropietario) {
       if (props.tipView.opcion === 1) {
@@ -119,6 +110,7 @@ const ImageUploader = (props) => {
             "dd-MM-yyyy"
           ),
         });
+        fetchImageFromDatabase("EEE",dataFound?.descodigoasociacion,props.tipoDoc);
       } else {
         setDatosDocumento({
           id_propietario: props.dataPropietario.id,
@@ -126,9 +118,10 @@ const ImageUploader = (props) => {
           des_codigo_asoc: props.dataPropietario.codigoAsociacion,
           des_tipo_doc: props.tipoDoc,
         });
+        fetchImageFromDatabase(props.dataPropietario.desDni,props.dataPropietario.codigoAsociacion, props.tipoDoc);
       }
     }
-  }, [props.documentoPropietario]);
+  }, [ props.tipoDoc]);
 
   const onDrop = (acceptedFiles) => {
 
@@ -165,7 +158,7 @@ const ImageUploader = (props) => {
     setIsLightboxOpen(true);
   };
 
-  const handleDeleteCarga = async (event, codAs, desTipoDoc) => {
+  const handleDeleteCarga = async (event) => {
     event.stopPropagation();
     
     // Limpiar la imagen cargada
@@ -173,7 +166,7 @@ const ImageUploader = (props) => {
     if (props.tipView.opcion === 1) {
          await axios
         .delete(
-          `${serverURL}/CGM/delete/documento/directivo?codAs=${codAs}&desTipoDoc=${desTipoDoc}`
+          `${serverURL}/CGM/delete/documento/directivo?codAs=${datosDocumentoConsejo.codigo_asociacion}&desTipoDoc=${datosDocumentoConsejo.tip_doc}`
         )
         
         .then((response) => {
@@ -183,7 +176,24 @@ const ImageUploader = (props) => {
         .catch((error) => {
           toast.error("Intente Nuevamente.");
         });
-    } else {
+    } 
+    if (props.tipView.opcion === 2) {
+      
+      await axios
+     .delete(
+       `${serverURL}/Propietarios/delete/documento/propietario?codAs=${datosDocumento.des_codigo_asoc}&desTipoDoc=${datosDocumento.des_tipo_doc}&desDni=${datosDocumento.ds_dni}`
+     )
+     
+     .then((response) => {
+      console.log("GGG")
+       setDbImage(null);
+       toast.success("Registro Eliminado con éxito.");
+     })
+     .catch((error) => {
+       toast.error("Intente Nuevamente.");
+     });
+ }
+    else {
       setUploadedImage(null);
     }
   };
@@ -241,6 +251,7 @@ const ImageUploader = (props) => {
     } else {
       if (uploadedImage) {
         const reader = new FileReader();
+        console.log("Ingresooo")
         reader.onload = () => {
           setUploadedImage(reader.result);
         };
@@ -259,6 +270,7 @@ const ImageUploader = (props) => {
             },
           })
           .then((response) => {
+            toast.success("Documento Agregado con éxito.");
             fetchImageFromDatabase(
               datosDocumento.ds_dni,
               datosDocumento.des_codigo_asoc,
@@ -342,9 +354,7 @@ const ImageUploader = (props) => {
                 <div
                   onClick={(e) =>
                     handleDeleteCarga(
-                      e,
-                      datosDocumentoConsejo.codigo_asociacion,
-                      datosDocumentoConsejo.tip_doc
+                      e,                   
                     )
                   }
                   style={{ color: `red`, cursor: "pointer" }}

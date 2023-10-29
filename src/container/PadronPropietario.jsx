@@ -106,7 +106,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
 
 
     const checkTokenExpiry = () => {
-
+/*
         if (validateToken()) {
             // El token ha caducado, muestra una notificación
             showNotification();
@@ -114,6 +114,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
 
         // Configura la próxima verificación después de 2 minutos
         setTimeout(checkTokenExpiry, 4000);
+        */
     };
 
     useEffect(() => {

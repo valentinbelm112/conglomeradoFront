@@ -63,8 +63,7 @@ const FormDarBajaPropietario = (props) => {
                     //console.log(data); // Maneja la respuesta del servidor aquí
                    props.RefrescarInformacion();
                     toast.success("Estado Modificado satisfactoriamente");
-                    const parrafo = document.querySelector('#modal-mostrar-form-documento-propietarios-person-dar-baja');
-                    parrafo.style.top = '-100vh'
+                    props.onClickEstado(false)
 
                 }
 

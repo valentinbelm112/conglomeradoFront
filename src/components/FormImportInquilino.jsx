@@ -36,7 +36,7 @@ const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
  
         formData.append('file_upload_excel', excelFile)
 
-        fetch(`${serverURL}/Socio/Upload-info-directivo`, {
+        fetch(`${serverURL}/Inquilino/Upload-info-directivo`, {
             method: 'POST',
             body: formData
           })

@@ -20,6 +20,11 @@ const FormRegistrosDirectivos = ({
     codigo_asociacion: EstadoGlobal.des_codigo_asociacion,
     des_tipdoc: "DocInscripcion",
   });
+
+  //validar si el elemnto esta vacio
+  const isAnyFieldFilled = () => {
+    return Object.values(datos).some(value => value !== "");
+  };
   // onchange states
   const [excelFile, setExcelFile] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
@@ -39,9 +44,9 @@ const FormRegistrosDirectivos = ({
 
   const enviarDatos = async (event) => {
     event.preventDefault();
-    console.log("Enviando");
-    console.log("Enviando  +datos.fecha_documento");
-    const formData = new FormData();
+    console.log(isAnyFieldFilled());
+    if (isAnyFieldFilled()) {
+      const formData = new FormData();
     console.log(typeof datos.fecha_documento + "Fechaaaaaa tipo datos");
     formData.append("file_upload_excel", excelFile);
     formData.append("file_upload_pdf", pdfFile);
@@ -84,6 +89,11 @@ const FormRegistrosDirectivos = ({
       .catch((error) => {
         console.error("Error al cargar el archivo:", error);
       });
+    } else {
+      // Muestra una notificación de que al menos un campo debe estar lleno
+      toast.warning("Debes completar al menos un campo antes de enviar el formulario.");
+    }
+  
   };
 
   const handleFile = (e) => {

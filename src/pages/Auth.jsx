@@ -25,7 +25,7 @@ const Auth = () => {
             className="corousel-container-conglomerado"
             breakPoints={breakPoints}
             autoPlaySpeed={3000}
-            enableAutoPlay={false}
+            enableAutoPlay={true}
             showArrows={false}
             pagination={false}
             ref={carouselRef}

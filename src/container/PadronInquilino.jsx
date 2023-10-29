@@ -22,6 +22,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import EditarInquilino from "../components/FormEditarInquilinos";
+import ReactPaginate from "react-paginate";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const ListProdronInquilino = (props) => {
     const [togle, setTogle] = useState(true);
     const [open, setOpen] = useState(false);
@@ -33,6 +36,8 @@ const ListProdronInquilino = (props) => {
     const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
     const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
     const [click, setClick] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(7);
     const handleClickOpenForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
         parrafo.style.top = '95px'
@@ -65,10 +70,22 @@ const ListProdronInquilino = (props) => {
         setTimeout(checkTokenExpiry, 4000);
     };
 
+    const handleItemsPerPageChange = (e) => {
+        const newItemsPerPage = parseInt(e.target.value, 10);
+        console.log(e.target.value);
+        setItemsPerPage(newItemsPerPage);
+    };
 
+
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
     useEffect(() => {
         // Inicia la verificación al cargar el componente
-        checkTokenExpiry();
+       // checkTokenExpiry();
 
         return () => {
             // Limpia el temporizador al desmontar el componente
@@ -321,8 +338,8 @@ const ListProdronInquilino = (props) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {
-                                            (search.length === 0 ? refrescar : search).map((inquilino) => (
+                                    {(search.length === 0 ? refrescar : search)
+                                                .slice(startIndex, endIndex).map((inquilino) => (
                                                 inquilino.inmuebleEntities.map((indexInmueble) => (
                                                     <tr>
                                                     <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{inquilino.codInquilino}</td>
@@ -383,6 +400,57 @@ const ListProdronInquilino = (props) => {
                             </div>
                         </div>
                     </div>
+                    <div
+                            style={{ display: "flex", justifyContent: "space-between" }}
+                            className="container-pagination-propietarios"
+                        >
+                            <div className="row-per-page-container">
+                                <span className="row-per-page-label">Filas por página:</span>
+                                <select
+                                    className="row-per-page-select"
+                                    value={itemsPerPage}
+                                    onChange={handleItemsPerPageChange}
+                                >
+                                    <option value="5">5</option>
+                                    <option value="7">7</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <ReactPaginate
+                                previousLabel={
+                                    <div className="custom-pagination-icon">
+                                        <ArrowBackIosIcon
+                                            style={{ height: "13px", width: "10px" }}
+                                        />
+                                    </div>
+                                } // Usa FontAwesomeIcon para el icono de "Anterior"
+                                nextLabel={
+                                    <div className="custom-pagination-icon">
+                                        <ArrowForwardIosIcon
+                                            style={{ height: "13px", width: "10px" }}
+                                        />
+                                    </div>
+                                }
+                                breakLabel={<div className="custom-pagination-icon">...</div>}
+                                pageCount={Math.ceil(
+                                    (search.length === 0 ? refrescar : search).length /
+                                    itemsPerPage
+                                )}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={handlePageChange}
+                                containerClassName={"pagination justify-content-center"}
+                                pageClassName={"page-item"}
+                                pageLinkClassName={"page-link"}
+                                previousClassName={"page-item"}
+                                previousLinkClassName={"page-link"}
+                                nextClassName={"page-item"}
+                                nextLinkClassName={"page-link"}
+                                breakClassName={"page-item"}
+                                breakLinkClassName={"page-link"}
+                                activeClassName={"active"}
+                            />
+                        </div>
                 </div>
                 <ToastContainer />
             </div>

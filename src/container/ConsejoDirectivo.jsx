@@ -98,9 +98,10 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();
     console.log(id + "identificador");
-    await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`);
+    await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`,EstadoGlobal);
     const { response } = await useGetConsejoDirectivoListarRefre(
-      `${serverURL}/CGM/listar`
+      `${serverURL}/CGM/listar`,
+      EstadoGlobal
     );
     setRefrescar(response.data);
   };
@@ -136,7 +137,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
 
   //Documentos consejo directivo
   const ModeloProps1 = {
-    titulo: "Documento de #####",
+    titulo: "Estatuto o Reglamento Interno",
     tipDoc: "DocInscripcion2",
     request: `${serverURL}/Documento/consejo/dicrectivo/tipdoc/codAS`,
   };

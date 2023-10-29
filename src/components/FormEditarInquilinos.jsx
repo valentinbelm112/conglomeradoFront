@@ -173,7 +173,7 @@ const EditarInquilino =(props)=>{
         //console.log(camposLlenos);
        // console.log(datos)
 
-        fetch(`${serverURL}/Socio/update/${props.enviarDatos.id}`, {
+        fetch(`${serverURL}/Inquilino/update/${props.enviarDatos.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json', // Utiliza 'application/json' para enviar JSON
@@ -198,6 +198,7 @@ const EditarInquilino =(props)=>{
               else {
                 console.log(data); // Maneja la respuesta del servidor aquí
                 props.refrescarInformacion();
+                props.onClickEstado(false)
                 toast.success("Actualización exitosa del socio");
               
       

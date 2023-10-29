@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { serverURL } from "../utils/Configuration";
 
-export const useGetExpedienteInquilino = (API, id, id2) => {
+export const useGetExpedienteInquilino = (API, id, id2,auth) => {
   const [isLoading, SetLoading] = useState(true);
   const [dataExpediente, SetDataExpediente] = useState(null);
   const [dataDetallePropietario, SetDataDetallePropietario] = useState(null);
@@ -21,7 +21,7 @@ export const useGetExpedienteInquilino = (API, id, id2) => {
 
     const obtenerPuestos = padroninquilinoDetalle.data.inmuebleEntities.map(async(inmueble) => {
         const response = await axios.get(
-            `${serverURL}/Inquilino/Obtener-propietarios-puesto?numPabellon=${inmueble.numPabellon}&numPuesto=${inmueble.numPuesto}`
+            `${serverURL}/Inquilino/Obtener-propietarios-puesto?numPabellon=${inmueble.numPabellon}&numPuesto=${inmueble.numPuesto} &codAsociacion=${auth.des_codigo_asociacion}`
           );
 
           console.log(response.data)
