@@ -127,7 +127,7 @@ const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
 
                             <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
 
-                                <button type="submit" className="btn-enviar-carga-masiva-directivos">Aceptar
+                                <button type="submit" className="btn-enviar-carga-masiva-directivos" >Aceptar
                                 </button>
 
                             </div>

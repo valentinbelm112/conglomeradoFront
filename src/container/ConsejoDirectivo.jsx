@@ -132,8 +132,10 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
         draggable: false, // No se puede arrastrar
         closeOnClick: false, // No se cierra al hacer clic
       }
+
     );
   };
+
 
   //Documentos consejo directivo
   const ModeloProps1 = {
@@ -152,7 +154,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     request: `${serverURL}/Documento/consejo/dicrectivo/tipdoc/codAS`,
   };
   const openModal = () => {
-    console.log("holi");
+    //console.log("holi");
     setModalIsOpen(true);
   };
 
@@ -161,14 +163,16 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   };
 
   const handleCancelDelete = () => {
-    toast.dismiss(); // Cierra la notificación de confirmación
-    // Otras acciones después de cancelar
+    toast.dismiss(); 
   };
+
+  
 
   if (isLoading || isLoadingDoc) {
     return (
       <>
         <Container_Nav_Sidb_Load />
+       
       </>
     );
   }
