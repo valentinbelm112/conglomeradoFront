@@ -13,7 +13,7 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
     const [dniCValido, setDniCValido] = useState(true);
     const [puestoValido,setPuestoValido]=useState(true);
     const [pabellonValido,setPabellonValido]=useState(true);
-
+console.log(EstadoGlobal)
     const [datos, setDatos] = useState({
         codSocio: "",
         desApellidos: "",
@@ -24,12 +24,12 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
         num_telefono: "",
         des_correo:"",
         des_documento_link: "",
-        des_codigo_asociacion: EstadoGlobal.des_codigo_asociacion,
+        codigoAsociacion: EstadoGlobal.des_codigo_asociacion,
         des_estado:"",
         inmuebleSocioEntities: [
             {
 
-                des_codigo_asociacion: EstadoGlobal.des_codigo_asociacion,
+                codAsociacion: EstadoGlobal.des_codigo_asociacion,
                 numPabellon : "",
                 numPuesto: "",
                 des_direccion: "",
@@ -135,7 +135,7 @@ const FormRegistroSocios = ({ RefrescarInformacion, clickR, setClickR,EstadoGlob
                 else {
                    
                     RefrescarInformacion();                 
-                     toast.success("Registro exitoso del consejo directivo");
+                     toast.success("Registro exitoso del socio");
                     const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
                     console.log(parrafo)
                     parrafo.style.top = '-586vh'

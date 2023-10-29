@@ -143,7 +143,10 @@ const ListPadronSocios = (props) => {
         refrescar.filter(
           (item) =>
             item.desDni.includes(searchText) ||
-            item.des_nombres.toUpperCase().includes(searchTextUpper)
+            item.des_nombres.toUpperCase().includes(searchTextUpper) ||
+            item.inmuebleSocioEntities.find(
+              (inmueble) => inmueble.numPuesto === parseInt(searchText)
+            )
         )
       );
     } else if (typeof searchText === "number") {
@@ -152,7 +155,10 @@ const ListPadronSocios = (props) => {
         refrescar.filter(
           (item) =>
             item.desDni.includes(searchText.toString()) ||
-            item.des_nombres.includes(searchText.toString())
+            item.des_nombres.includes(searchText.toString())||
+            item.inmuebleSocioEntities.find(
+              (inmueble) => inmueble.numPuesto === parseInt(searchText)
+            )
         )
       );
     } else {

@@ -44,7 +44,7 @@ const ImageUploader = (props) => {
       await axios
         .get(`${props.request}?codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
         .then((response) => {
-          //console.log(response.data.des_link_documento_inscrito)
+          
           setDbImage(response.data.des_link_documento_inscrito);
         })
 
@@ -73,7 +73,7 @@ const ImageUploader = (props) => {
         )
         .then((response) => {
           // Handle the response data
-         
+            console.log(response)
           setDbImage(response.data.des_link_documento);
         })
         .catch((error) => {
