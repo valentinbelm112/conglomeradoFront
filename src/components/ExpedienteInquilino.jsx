@@ -293,12 +293,13 @@ const ExpedienteInquilino = (props) => {
     }
     setExpedienteSelect(props.expediente.data);
 
+    console.log(props.nombreExpedienteProp)
     if (props.nombreExpedienteProp.length > 0) {
       const foundCopropietario = props.nombreExpedienteProp.filter(
-        (element) => element.des_nombres !== props.nombreExpedienteProp
+        (element) => element.numPabellon == props.propietario[0].numPabellon && element.numPuesto == props.propietario[0].numPuesto
       );
-      setCoPropietarios(props.nombreExpedienteProp);
-      console.log(props.nombreExpedienteProp);
+      setCoPropietarios(foundCopropietario);
+      console.log(foundCopropietario);
     }
 
     console.log(props);
@@ -311,7 +312,7 @@ const ExpedienteInquilino = (props) => {
   };
 
   const ModeloProps2 = {
-    titulo: "Constrato ....",
+    titulo: "Otro Documento ....",
     tipDoc: "OrtosAlquiler",
     request: `${serverURL}/Documento/inquilino/propByDni/tipdoc/codAS`,
   };
@@ -346,8 +347,26 @@ const ExpedienteInquilino = (props) => {
   }
 
   const handleChange = (event) => {
-    console.log("GGG");
     console.log(event.target.value);
+    console.log(props)
+    const selectedValue = event.target.value;
+    const [selectedPabellon, selectedPuesto] = selectedValue.split('-');
+    console.log(props.inmueblesinfo);
+    const inmuebleEncontrado = props.inmueblesinfo.find(
+      (inmueble) => inmueble.numPabellon == selectedPabellon && inmueble.numPuesto == selectedPuesto
+    );
+    console.log(inmuebleEncontrado);
+    setSelectedValue(event.target.value);
+    setInmuebleSelect(inmuebleEncontrado);
+    setSelectedPuesto(selectedPuesto);
+    setSelectedPabellon(selectedPabellon);
+    if (props.nombreExpedienteProp.length > 0) {
+      const foundCopropietario = props.nombreExpedienteProp.filter(
+        (element) => element.numPabellon == selectedPabellon && element.numPuesto ==selectedPuesto
+      );
+      setCoPropietarios(foundCopropietario);
+      console.log(foundCopropietario);
+    }
 
   };
   const changeStado = () => {
@@ -686,7 +705,7 @@ const ExpedienteInquilino = (props) => {
                   <tbody>
                     {coPropietarios?.length > 0 &&
                       coPropietarios.map((elemento) =>
-                        elemento.map((item) => (
+                      elemento.socioEntities.map((item) => (
                           <tr className="nombre-co-propietario" key={item.id}>
                             <td style={{ borderRight: "1px solid #b3aeae" }}>
                               {item.des_nombres}

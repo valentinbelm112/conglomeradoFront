@@ -38,6 +38,7 @@ const ListProdronInquilino = (props) => {
     const [click, setClick] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
+    const [clickImportInqui, setClickImportInqui] = useState(false);
     const handleClickOpenForm = () => {
         const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
         parrafo.style.top = '95px'
@@ -45,19 +46,19 @@ const ListProdronInquilino = (props) => {
 
     };
 
-    
+
     const { isLoading, dataPropietario } = UseGetPadronInquilino(`${serverURL}/Inquilino/Obtener`, setRefrescar, props.EstadoGlobal)
     const { dataPuestos, isLoadingPuestos, dataPabellonPuesto } = UseGetFindPabellonPuesto(`${serverURL}/Inquilino/Obtener-pabellon-puesto`, props.EstadoGlobal)
 
 
     const isTokenExpired = () => {
-       
+
 
     };
 
 
     const showNotification = () => {
-  
+
         console.log('El token ha caducado. Muestra una notificación.');
     };
 
@@ -85,7 +86,7 @@ const ListProdronInquilino = (props) => {
     };
     useEffect(() => {
         // Inicia la verificación al cargar el componente
-       // checkTokenExpiry();
+        // checkTokenExpiry();
 
         return () => {
             // Limpia el temporizador al desmontar el componente
@@ -98,27 +99,27 @@ const ListProdronInquilino = (props) => {
         console.log(refrescar.length);
         console.log(refrescar);
         const { response } = await useGetPadronPropietarioComponenteRender(
-          `${serverURL}/Inquilino/Obtener`,
-          props.EstadoGlobal
+            `${serverURL}/Inquilino/Obtener`,
+            props.EstadoGlobal
         );
         setRefrescar(response.data);
         setRefrescar(response.data);
         setClick(!click);
         console.log(refrescar);
-      };
+    };
 
-      const handleClickOpenEditFrom = (data, datainmueble) => {
+    const handleClickOpenEditFrom = (data, datainmueble) => {
         setClick(!click);
         SetExtraerDatosPerso(data);
         SetExtraerDatosInmueble(datainmueble);
-      };
-      
-    const DeleteRegisterConsejo=async(id)=>{
+    };
+
+    const DeleteRegisterConsejo = async (id) => {
 
 
-       }
+    }
 
-       const handleSearch = (e) => {
+    const handleSearch = (e) => {
         const searchText = e.value;
 
         if (typeof searchText === "string") {
@@ -129,7 +130,7 @@ const ListProdronInquilino = (props) => {
                 refrescar.filter(
                     (item) =>
                         item.desDni?.includes(searchText) ||
-                        item.des_Apellidos?.toUpperCase().includes(searchTextUpper) ||
+                        item.desApellidos?.toUpperCase().includes(searchTextUpper) ||
                         item.des_nombres?.toUpperCase().includes(searchTextUpper)
                 )
             );
@@ -139,7 +140,7 @@ const ListProdronInquilino = (props) => {
                 refrescar.filter(
                     (item) =>
                         item.desDni?.includes(searchText.toString()) ||
-                        item.des_Apellidos?.includes(searchText.toString()) ||
+                        item.desApellidos?.includes(searchText.toString()) ||
                         item.des_nombres?.includes(searchText.toString())
                 )
             );
@@ -148,12 +149,11 @@ const ListProdronInquilino = (props) => {
             console.log("Tipo de búsqueda no admitido");
         }
     };
-    
+
     const handleClickOpenImportForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-inquilino-person-importar-excel');
-        parrafo.style.top = '95px'
-        //console.log(clickImport)
-        setClickImport(!clickImport)
+
+        setClickImportInqui(!clickImportInqui);
+        //setClickImport(!clickImport)
     };
 
 
@@ -203,30 +203,29 @@ const ListProdronInquilino = (props) => {
 
             <div className="container-Sidebar-view-directivo">
 
-            {open ? null : (
-          <div className={open === false && "sidebar-transition"}>
-            <SidebarMenu setTogle={setTogle} />
-          </div>
-        )}
-        <div
-          className={`${
-            togle
-              ? "conatiner-registro-padron-inquilino"
-              : "conatiner-registro-padron-inquilino-select-togle-false"
-          }`}
-        >
+                {open ? null : (
+                    <div className={open === false && "sidebar-transition"}>
+                        <SidebarMenu setTogle={setTogle} />
+                    </div>
+                )}
+                <div
+                    className={`${togle
+                            ? "conatiner-registro-padron-inquilino"
+                            : "conatiner-registro-padron-inquilino-select-togle-false"
+                        }`}
+                >
 
                     <div className="title-Inquilinos-registrados">
                         Inquilinos Registrados
                     </div>
-                    <div className="row container-busqueda-upload-documentos"   style={{ marginTop: `10px` }}>
-                    <div className="col-md-3 search-register-propietarios">
-                                <div className="col-md-4 search-register-socios">
-                                    <div className="container-input-search-list-socios">
-                                        <SearchBar onSearch={handleSearch} />
-                                    </div>
+                    <div className="row container-busqueda-upload-documentos" style={{ marginTop: `10px` }}>
+                        <div className="col-md-3 search-register-propietarios">
+                            <div className="col-md-4 search-register-socios">
+                                <div className="container-input-search-list-socios">
+                                    <SearchBar onSearch={handleSearch} />
                                 </div>
                             </div>
+                        </div>
                         <div className="col-md-7 upload-documents-inquilino">
 
                             <div className="row">
@@ -252,9 +251,7 @@ const ListProdronInquilino = (props) => {
                                     <div>
                                         <input id="mostrar-form-documento-inquilino-person-add-export" name="modal" type="radio" />
                                         <label htmlFor="mostrar-form-documento-inquilino-person-add-export" onClick={handleClickOpenImportForm}> <PublishIcon /> <span className="button-text">Importar</span>  </label>
-                                        <div id="modal-mostrar-form-documento-inquilino-person-importar-excel">
-                                            <FormImportInquilino RefrescarInformacion={RefrescarInformacion} clickR={clickImport} setClickR={setClickImport} EstadoGlobal={props.EstadoGlobal} />
-                                        </div>
+
 
                                     </div>
 
@@ -273,14 +270,14 @@ const ListProdronInquilino = (props) => {
 
 
                         </div>
-                        <div className=" col-md-2 container-title-show-iamgen-ins"   style={{ alignItems: "end" }}>
+                        <div className=" col-md-2 container-title-show-iamgen-ins" style={{ alignItems: "end" }}>
                             <div>
                                 <input
 
                                     id="mostrar-modal-documento-propietario"
                                     name="modal"
                                     type="radio"
-                                  
+
                                 />
 
                                 <label htmlFor="mostrar-modal-documento-propietario">
@@ -318,7 +315,7 @@ const ListProdronInquilino = (props) => {
                                                     </button>
                                                 </div></th>
                                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>Nombres Completos</th>
-                                            <th  scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>
+                                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>
                                                 <div className="container-order-a-z-inquilino">
                                                     <div>
                                                         DNI
@@ -333,32 +330,32 @@ const ListProdronInquilino = (props) => {
                                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }} >Dirección</th>
                                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>Giro</th>
                                             <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '16px', color: '#56688a' }}>Estado</th>
-                                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px',color:'#56688a' }}>Acción</th>
-                                             
+                                            <th scope="col" style={{ backgroundColor: '#a2c8f2', padding: '8px', borderTop: '2px solid white', borderLeft: '2px solid white', borderBottom: '2px solid white', whiteSpace: 'nowrap', fontSize: '12px', fontSize: '16px', color: '#56688a' }}>Acción</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {(search.length === 0 ? refrescar : search)
-                                                .slice(startIndex, endIndex).map((inquilino) => (
+                                        {(search.length === 0 ? refrescar : search)
+                                            .slice(startIndex, endIndex).map((inquilino) => (
                                                 inquilino.inmuebleEntities.map((indexInmueble) => (
                                                     <tr>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{inquilino.codInquilino}</td>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{inquilino.desApellidos}</td>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{inquilino.des_nombres}</td>
-                                                    <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{inquilino.codInquilino}</td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{inquilino.desApellidos}</td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{inquilino.des_nombres}</td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
                                                             <Link to={`/expediente-inquilino/${inquilino.desDni}/${inquilino.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                                                 {inquilino.desDni}
                                                             </Link>
                                                         </td>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.numPabellon}</td>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.numPuesto}</td>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.des_direccion}</td>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.des_giro}</td>
-                                                    <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}></td>
-                                                    <td style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow: 'ellipsis'} }>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.numPabellon}</td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.numPuesto}</td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.des_direccion}</td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{indexInmueble.des_giro}</td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}></td>
+                                                        <td style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
                                                             <div className="table-column-gestion-info-propietario">
 
-                                                                <button className="btn-gestion-delete-info-propietario " onClick={() =>DeleteRegisterConsejo()}>
+                                                                <button className="btn-gestion-delete-info-propietario " onClick={() => DeleteRegisterConsejo()}>
                                                                     <DeleteForeverIcon style={{ color: `red` }}
                                                                     />
                                                                 </button>
@@ -366,12 +363,12 @@ const ListProdronInquilino = (props) => {
                                                                 <button className="btn-gestion-edit-info-directivo">
                                                                     <input id="mostrar-modal-editar" name="modal" type="radio" />
 
-                                                                    <label htmlFor="mostrar-modal-editar"  onClick={(e) =>
-                                      handleClickOpenEditFrom(
-                                        inquilino,
-                                        indexInmueble
-                                      )
-                                    }>  <EditIcon color="primary" /> </label>
+                                                                    <label htmlFor="mostrar-modal-editar" onClick={(e) =>
+                                                                        handleClickOpenEditFrom(
+                                                                            inquilino,
+                                                                            indexInmueble
+                                                                        )
+                                                                    }>  <EditIcon color="primary" /> </label>
                                                                 </button>
 
                                                             </div>
@@ -390,67 +387,75 @@ const ListProdronInquilino = (props) => {
                                 </table>
 
                                 {click && (
-                  <EditarInquilino
-                    onClickEstado={setClick}
-                    enviarDatos={extraerDatosPerso}
-                    enviarDatos2={extraerDatosInmueble}
-                    refrescarInformacion={RefrescarInformacionEdit}
-                  />
-                )}
+                                    <EditarInquilino
+                                        onClickEstado={setClick}
+                                        enviarDatos={extraerDatosPerso}
+                                        enviarDatos2={extraerDatosInmueble}
+                                        refrescarInformacion={RefrescarInformacionEdit}
+                                    />
+                                )}
+                                {
+                                    clickImportInqui && (
+
+
+                                        <FormImportInquilino RefrescarInformacion={RefrescarInformacion} clickR={clickImport} setClickR={setClickImport} EstadoGlobal={props.EstadoGlobal} clickEstado={setClickImportInqui} />
+
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
                     <div
-                            style={{ display: "flex", justifyContent: "space-between" }}
-                            className="container-pagination-propietarios"
-                        >
-                            <div className="row-per-page-container">
-                                <span className="row-per-page-label">Filas por página:</span>
-                                <select
-                                    className="row-per-page-select"
-                                    value={itemsPerPage}
-                                    onChange={handleItemsPerPageChange}
-                                >
-                                    <option value="5">5</option>
-                                    <option value="7">7</option>
-                                    <option value="10">10</option>
-                                </select>
-                            </div>
-                            <ReactPaginate
-                                previousLabel={
-                                    <div className="custom-pagination-icon">
-                                        <ArrowBackIosIcon
-                                            style={{ height: "13px", width: "10px" }}
-                                        />
-                                    </div>
-                                } // Usa FontAwesomeIcon para el icono de "Anterior"
-                                nextLabel={
-                                    <div className="custom-pagination-icon">
-                                        <ArrowForwardIosIcon
-                                            style={{ height: "13px", width: "10px" }}
-                                        />
-                                    </div>
-                                }
-                                breakLabel={<div className="custom-pagination-icon">...</div>}
-                                pageCount={Math.ceil(
-                                    (search.length === 0 ? refrescar : search).length /
-                                    itemsPerPage
-                                )}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={5}
-                                onPageChange={handlePageChange}
-                                containerClassName={"pagination justify-content-center"}
-                                pageClassName={"page-item"}
-                                pageLinkClassName={"page-link"}
-                                previousClassName={"page-item"}
-                                previousLinkClassName={"page-link"}
-                                nextClassName={"page-item"}
-                                nextLinkClassName={"page-link"}
-                                breakClassName={"page-item"}
-                                breakLinkClassName={"page-link"}
-                                activeClassName={"active"}
-                            />
+                        style={{ display: "flex", justifyContent: "space-between" }}
+                        className="container-pagination-propietarios"
+                    >
+                        <div className="row-per-page-container">
+                            <span className="row-per-page-label">Filas por página:</span>
+                            <select
+                                className="row-per-page-select"
+                                value={itemsPerPage}
+                                onChange={handleItemsPerPageChange}
+                            >
+                                <option value="5">5</option>
+                                <option value="7">7</option>
+                                <option value="10">10</option>
+                            </select>
                         </div>
+                        <ReactPaginate
+                            previousLabel={
+                                <div className="custom-pagination-icon">
+                                    <ArrowBackIosIcon
+                                        style={{ height: "13px", width: "10px" }}
+                                    />
+                                </div>
+                            } // Usa FontAwesomeIcon para el icono de "Anterior"
+                            nextLabel={
+                                <div className="custom-pagination-icon">
+                                    <ArrowForwardIosIcon
+                                        style={{ height: "13px", width: "10px" }}
+                                    />
+                                </div>
+                            }
+                            breakLabel={<div className="custom-pagination-icon">...</div>}
+                            pageCount={Math.ceil(
+                                (search.length === 0 ? refrescar : search).length /
+                                itemsPerPage
+                            )}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageChange}
+                            containerClassName={"pagination justify-content-center"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousClassName={"page-item"}
+                            previousLinkClassName={"page-link"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
+                            breakClassName={"page-item"}
+                            breakLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                        />
+                    </div>
                 </div>
                 <ToastContainer />
             </div>

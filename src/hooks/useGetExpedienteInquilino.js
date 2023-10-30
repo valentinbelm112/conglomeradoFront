@@ -37,12 +37,12 @@ export const useGetExpedienteInquilino = (API, id, id2,auth) => {
 
    //capturar el nombre del  propietario
 
-   const propietariosPuesto=resultados.map((item)=>{
-    return item.socioEntities; 
-   });
+   //const propietariosPuesto=resultados.map((item)=>{
+    //return item.socioEntities; 
+   //});
 
 
-   console.log(propietariosPuesto);
+   console.log(resultados);
 
     const NombreSocio=padroninquilinoDetalle.data.des_nombres;
     console.log(NombreSocio)
@@ -80,7 +80,7 @@ export const useGetExpedienteInquilino = (API, id, id2,auth) => {
    //console.log(propietariosConPartida)
    SetSociosPabellon(sociosConPabellonPuesto);
    SetDataDetallePropietario(padroninquilinoDetalle);
-   SetPropietario(propietariosPuesto)
+   SetPropietario(resultados)
    setPabellones(foundnumPabellon)
    setInmueblesinfo(resultados)
     //consultar si existen expedientes

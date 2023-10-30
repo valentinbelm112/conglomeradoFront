@@ -198,6 +198,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setRefrescar(response.data);
         setRefrescar(response.data);
         setClick(!click);
+        setItemsPerPage(7);
         console.log(refrescar);
     };
 

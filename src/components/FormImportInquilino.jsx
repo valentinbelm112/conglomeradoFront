@@ -6,14 +6,13 @@ import ExcelDownloadButton from './ExcelDownloadFormatoConsejo';
 import DownloadIcon from '@mui/icons-material/Download';
 import { serverURL } from "../utils/Configuration";
 import { ToastContainer, toast } from 'react-toastify';
-const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
+const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR,clickEstado}) => {
    // onchange states
    const [excelFile, setExcelFile] = useState(null);
 
 
     const handleClickCloseForm = () => {
-        const parrafo = document.querySelector('#modal-mostrar-form-documento-inquilino-person-importar-excel');
-        parrafo.style.top = '-100vh'
+        clickEstado(false);
     };
 
 
@@ -59,8 +58,7 @@ const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
                     console.log(data); // Maneja la respuesta del servidor aquí
                     RefrescarInformacion();
                      toast.success("Registro exitoso del consejo directivo");
-                    const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-importar-excel');
-                    parrafo.style.top = '-540vh'
+                     clickEstado(false);
 
                 }
 
@@ -77,7 +75,7 @@ const FormImportInquilino = ({ RefrescarInformacion ,clickR,setClickR}) => {
 
     return (
         <>
-            <div id={clickR?'modal1':'modal1-sombra-form-import-Prop'} >
+            <div id="modal1-sombra-form-Prop" >
                 <div className="container-dar-baja-padron-propietario">
 
                     <div className="form form-registro-padron-propietario">
