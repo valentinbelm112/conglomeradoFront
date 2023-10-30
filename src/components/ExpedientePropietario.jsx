@@ -152,7 +152,11 @@ const ExpedientePropietario = (props) => {
             >
               Propietarios
             </label>
-            <input
+           
+           <label>
+
+           </label>
+           <input
               type="radio"
               id="contactChoice2"
               name="contact"
@@ -160,6 +164,7 @@ const ExpedientePropietario = (props) => {
               checked={opcionSeleccionada === "opcion2"}
               onChange={handleOptionSelectConyugue}
             />
+
             <label
               htmlFor="contactChoice2"
               className="container-expediente-contactChoice1-propietario"
@@ -170,7 +175,7 @@ const ExpedientePropietario = (props) => {
 
           <div className="container--expediente-propietario">
             <img
-              src={"expedienteSelect?.des_url_foto"}
+              src={expedienteSelect?.des_url_foto}
               alt=""
               className="foto-expediente-propietario"
             />

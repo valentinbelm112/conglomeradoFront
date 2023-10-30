@@ -16,20 +16,20 @@ export const useGetExpedienteSocio = (API, id, id2) => {
       `${serverURL}/Socio/obtener/socio/id?id_socio=${id2}`
     );
 
-    
-
    //capturar el nombre del  propeitario
-
     const NombreSocio=padronSociosDetalle.data.des_nombres;
     //console.log(NombreSocio)
+
 
     const foundnumPabellon = padronSociosDetalle.data.inmuebleSocioEntities.map(
       (element) =>element.numPabellon
     );
 
+  
     const foundnumPuesto = padronSociosDetalle.data.inmuebleSocioEntities.map(
         (element) =>element.numPuesto
       );
+
 
 
     console.log(foundnumPabellon)
@@ -49,8 +49,8 @@ export const useGetExpedienteSocio = (API, id, id2) => {
       }
     });
 
-
-   //console.log(propietariosConPartida)
+    
+    console.log(padronSociosDetalle)
    SetSociosPabellon(sociosConPabellonPuesto);
     SetDataDetallePropietario(padronSociosDetalle);
     SetCoPropietario(NombreSocio)
@@ -106,7 +106,7 @@ export const useGetExpedienteSocio = (API, id, id2) => {
               des_telefono: "",
               des_url_foto: response.data.data.urlFoto,
               dni: response.data.data.dni,
-              fec_Fecha_nacimiento: response.data.data.fecha_nacimiento,
+              fec_Fecha_nacimiento: "2023-08-07T21:47:30.828Z",
             },
           };
 

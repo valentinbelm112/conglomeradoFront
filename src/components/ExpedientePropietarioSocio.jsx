@@ -113,13 +113,11 @@ const ModeloProps5={
 
 
   const ChangeRouter = (dni,id) => {
-    console.log(dni + "Clic")
-    // Actualizar los valores del DNI y el ID aquí
-  
-    // Actualizar la URL
+
     navigate(`/expediente-socio/${dni}/${id}`);
     window.location.reload();
-    //history.push(`/expediente/${dni}/${id}`);
+    
+   
   };
 
 
@@ -144,7 +142,7 @@ const ModeloProps5={
     setSelectedPuesto(selectedPuesto);
     setInmuebleSelect(inmuebleEncontrado);
     
-    console.log(props.propietario)
+    //console.log(props.propietario)
 
     const foundCopropietario = props.propietario.filter(
       (element) =>element.numPabellon == selectedPabellon && element.numPuesto == selectedPuesto

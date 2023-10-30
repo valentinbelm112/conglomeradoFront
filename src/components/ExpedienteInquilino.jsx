@@ -306,13 +306,13 @@ const ExpedienteInquilino = (props) => {
   }, []);
 
   const ModeloProps1 = {
-    titulo: "Constrato de alquiler",
+    titulo: "Contrato de alquiler",
     tipDoc: "ConatratoAlquiler",
     request: `${serverURL}/Documento/inquilino/propByDni/tipdoc/codAS`,
   };
 
   const ModeloProps2 = {
-    titulo: "Otro Documento ....",
+    titulo: "Cargar otros documentos aquí",
     tipDoc: "OrtosAlquiler",
     request: `${serverURL}/Documento/inquilino/propByDni/tipdoc/codAS`,
   };
@@ -330,16 +330,15 @@ const ExpedienteInquilino = (props) => {
   };
 
   const ChangeRouter = (dni, id) => {
-    console.log(dni + "Click");
-    // Actualizar los valores del DNI y el ID aquí
-    // Actualizar la URL
+
     navigate(`/expediente-socio/${dni}/${id}`);
     window.location.reload();
-    //history.push(`/expediente/${dni}/${id}`);
+   
   };
 
   function capitalizeFirstLetter(str) {
     if (str) {
+      
       return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     } else {
       return ""; // Otra opción es retornar una cadena vacía si str es null o undefined
@@ -369,9 +368,7 @@ const ExpedienteInquilino = (props) => {
     }
 
   };
-  const changeStado = () => {
-    // props.cambiarEstado();
-  };
+
 
   return (
     <div className="container-expediente-socio" id="container-expediente-socio">
@@ -446,7 +443,7 @@ const ExpedienteInquilino = (props) => {
 
           <div className="container--expediente-socio">
             <img
-              src="expedienteSelect?.des_url_foto"
+              src={expedienteSelect?.des_url_foto}
               alt=""
               className="foto-expediente-propietario"
             />
@@ -716,6 +713,10 @@ const ExpedienteInquilino = (props) => {
                                 cursor: "pointer",
                                 borderRight: "1px solid #b3aeae",
                               }}
+
+                              onClick={() =>
+                                ChangeRouter(item.desDni, item.id)
+                              }
                             >
                               <span style={{ color: "#0077b6" }}>
                                 {item.desDni}
