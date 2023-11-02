@@ -19,6 +19,7 @@ const FormRegistroSocios = ({
   const [puestoValido, setPuestoValido] = useState(true);
   const [pabellonValido, setPabellonValido] = useState(true);
   const [showInputConyugue, setShowInputConyugue] = useState(true);
+  const [selectTipDocumento,setSelectTipDocumento]=useState(false);
   console.log(EstadoGlobal);
   const [datos, setDatos] = useState({
     codSocio: "",
@@ -77,6 +78,15 @@ const FormRegistroSocios = ({
     const numeroRegex = /^[0-9]{8}$/;
     return numeroRegex.test(dni);
   };
+
+   //Validar telefono
+   const validateRuc = (dni) => {
+    // Elimina espacios en blanco y guiones si es necesario
+    const numeroRegex = /^[0-9]{11}$/;
+    return numeroRegex.test(dni);
+  };
+
+
 
   const validarPorcentajeAcciones = (valor) => {
     // Expresión regular para verificar números decimales en el rango de 1 a 100
@@ -163,6 +173,10 @@ const FormRegistroSocios = ({
       }),
     // Otros estilos personalizados que desees agregar
 };
+
+const handleTipDocuemnto=(event)=>{
+setSelectTipDocumento(event);
+}
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (
@@ -182,7 +196,7 @@ const FormRegistroSocios = ({
         [name]: value,
       }));
       name === "num_telefono" && setTelefonoValido(validateTelefono(value));
-      name === "desDni" && setDniValido(validateDNI(value));
+      name === "desDni" &&selectTipDocumento==='DNI'? setDniValido(validateDNI(value)):setDniValido(validateRuc(value));
       name === "des_dni_conyugue" && setDniCValido(validateDNI(value));
     } else {
       setDatos((prevData) => ({
@@ -269,14 +283,13 @@ const FormRegistroSocios = ({
                       <div className="container-combo-socio">
                         <select
                           id="myCombobox-socio-register"
-                          value={datos.tipoDocumento}
                           className={
                             !dniValido
                               ? "form-control input-error-form-prop"
                               : "form-control upload-inscripcion-directivos"
                           }
                           style={{ width: "38px" }}
-                          onChange={handleInputChange}
+                          onChange={(e) =>handleTipDocuemnto(e.target.value)}
                         >
                           <option value="DNI">Dni</option>
                           <option value="RUC">Ruc</option>
@@ -383,6 +396,8 @@ const FormRegistroSocios = ({
                       onChange={handleEstadoCivilChange}
                       options={opcionesEstadoCivil}
                       styles={customStyles}
+
+                      isDisabled={selectTipDocumento === 'RUC'&&true }
                     />
                         <br />
 
@@ -448,7 +463,9 @@ const FormRegistroSocios = ({
                               : "form-control upload-inscripcion-directivos"
                           }
                           onChange={handleInputChange}
+                           disabled={selectTipDocumento === 'RUC' || showInputConyugue && true}
                         ></input>
+                        
                         <br />
                         <div className="title-nuevo-socio-registro-formpadron-green title-nuevo-socio-registro-formpadron-black-div">
                           Direccion
@@ -459,6 +476,7 @@ const FormRegistroSocios = ({
                           value={datos.inmuebleSocioEntities[0].des_direccion}
                           className="form-control upload-inscripcion-directivos"
                           onChange={handleInputChange}
+                         
                         ></input>
 
                         <div className="title-nuevo-socio-registro-formpadron-green title-nuevo-socio-registro-formpadron-black-div">
