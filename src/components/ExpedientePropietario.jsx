@@ -23,14 +23,13 @@ const ExpedientePropietario = (props) => {
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
   const [coPropietarios, setCoPropietarios] = useState(null);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState("opcion1");
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   const handleOptionSelectConyugue = (event) => {
     setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expedienteCony.data);
   };
-
 
   const handleOptionSelectTitular = (event) => {
     setOpcionSeleccionada(event.target.value);
@@ -48,6 +47,7 @@ const ExpedientePropietario = (props) => {
       const foundCopropietario = props.propietario[0].propietario.filter(
         (element) => element.des_nombres !== props.nombreExpedienteProp
       );
+      
       setCoPropietarios(foundCopropietario);
       console.log(foundCopropietario);
     }
@@ -80,13 +80,10 @@ const ExpedientePropietario = (props) => {
   };
 
   const ChangeRouter = (dni, id) => {
-    console.log(dni + "Clic");
-    // Actualizar los valores del DNI y el ID aquí
 
-    // Actualizar la URL
     navigate(`/expediente/${dni}/${id}`);
     window.location.reload();
-    //history.push(`/expediente/${dni}/${id}`);
+
   };
 
   const tipoView = {
@@ -102,7 +99,8 @@ const ExpedientePropietario = (props) => {
     const inmuebleEncontrado = props.padron.data.inmuebleEntities.find(
       (inmueble) => inmueble.numPartida === event.target.value
     );
-    console.log(inmuebleEncontrado);
+
+
     setSelectedValue(event.target.value);
     setInmuebleSelect(inmuebleEncontrado);
 
@@ -116,11 +114,12 @@ const ExpedientePropietario = (props) => {
         (element) => element.des_nombres !== props?.nombreExpedienteProp
       );
 
-      console.log(coPropietarioDatos);
       setCoPropietarios(coPropietarioDatos);
     }
   };
+  
   const changeStado = () => {
+   
     props.cambiarEstado();
   };
 

@@ -12,14 +12,13 @@ const FormRegistroSocios = ({
   EstadoGlobal,
 }) => {
   const [telefonoValido, setTelefonoValido] = useState(true);
-  const [pAccionesValido, setPAccionesValido] = useState(true);
   const [areaValido, setAreaValido] = useState(true);
   const [dniValido, setDniValido] = useState(true);
   const [dniCValido, setDniCValido] = useState(true);
   const [puestoValido, setPuestoValido] = useState(true);
   const [pabellonValido, setPabellonValido] = useState(true);
   const [showInputConyugue, setShowInputConyugue] = useState(true);
-  console.log(EstadoGlobal);
+ 
   const [datos, setDatos] = useState({
     codSocio: "",
     des_nombres: "",

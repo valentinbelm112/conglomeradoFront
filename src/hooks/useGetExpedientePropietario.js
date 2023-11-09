@@ -10,6 +10,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
   const [expedienteConyugue, SetExpedienteConyugue] = useState(null);
   const [coPropietario, SetCoPropietario] = useState(null);
   const[partidasRegistrales,setPartidasRegistrales] = useState(null);
+  
 
 
   const config = {
@@ -26,12 +27,20 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
       config
     );
 
-    
 
-   //capturar el nombre del  propeitario
+    const padronDetalleObtener = await axios.get(
+      `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${id2}`,
+      config
+    );
+
+
+  
+
+  
 
     const NombrePropietario=padronPropietariosDetalle.data.des_nombres;
-    console.log(NombrePropietario)
+    
+ 
 
     const found = padronPropietariosDetalle.data.inmuebleEntities.map(
       (element) =>element.numPartida
