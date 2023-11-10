@@ -27,6 +27,7 @@ import ImageUploader from "../components/ImageUploader";
 import { format } from "date-fns";
 const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [refrescar, setRefrescar] = useState([]);
   const [refrescarDocument, setRefrescarDocument] = useState([]);
   const [click, setClick] = useState(false);
@@ -106,6 +107,22 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     setRefrescar(response.data);
   };
 
+  useEffect(() => {
+    // Función para verificar el tamaño de la pantalla y actualizar el estado
+    const checkScreenSize = () => {
+      setOpen(window.innerWidth < 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
+    };
+
+    // Verificar el tamaño de la pantalla al cargar el componente y cada vez que cambie el tamaño de la ventana
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    // Limpiar el event listener al desmontar el componente
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
   const handleDeleteDirectivoR = (id) => {
     toast.info(
       <div>
@@ -176,15 +193,23 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
       </>
     );
   }
+  const Estado = () => {
+    //console.log("HHHH")
+    setOpen(!open);
+  };
 
   return (
     <>
       <div className="navbar-sidebar-directivos">
-        <NavbarConglomerado />
+        <NavbarConglomerado Estado={Estado} />
         <div className="container-Sidebar-view-directivo">
-          <SidebarMenu  setTogle={setTogle}/>
-          <div className="row" style={{ width: `100%` }}>
-            <div className="col-md-9">
+        {open ? null : (
+          <div className={open === false && "sidebar-transition"}>
+            <SidebarMenu setTogle={setTogle} />
+          </div>
+        )}
+          <div className="row container-table-register-list-directivo" style={{ width: `100%` }} >
+            <div className="col-md-9 col-sm-12">
               <div className="title-consejo-directivo">
                 Consejo Directivo Vigente
               </div>
@@ -381,7 +406,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                 />
               )}
             </div>
-            <div className="col-md-3" style={{ marginTop: "0.4%" }}>
+            <div className="col-md-3 col-sm-12" style={{ marginTop: "0.4%" }}>
               <div className="title-consejo-directivo-documento">
                 Documento de la asociacion
               </div>

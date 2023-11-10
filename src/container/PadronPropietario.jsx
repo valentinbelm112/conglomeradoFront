@@ -202,6 +202,21 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         console.log(refrescar);
     };
 
+    useEffect(() => {
+        // Función para verificar el tamaño de la pantalla y actualizar el estado
+        const checkScreenSize = () => {
+          setOpen(window.innerWidth < 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
+        };
+    
+        // Verificar el tamaño de la pantalla al cargar el componente y cada vez que cambie el tamaño de la ventana
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+    
+        // Limpiar el event listener al desmontar el componente
+        return () => {
+          window.removeEventListener("resize", checkScreenSize);
+        };
+      }, []);
     const handleSearch = (e) => {
         const searchText = e.value;
 
@@ -307,14 +322,11 @@ const PadronPropietario = ({ EstadoGlobal }) => {
             <div className="navbar-sidebar-directivos">
                 <NavbarConglomerado Estado={Estado} />
                 <div className="container-Sidebar-view-directivo">
-                    {
-                        <div
-                            className={`${openElement ? null : `sidebar-menu-CGM  ${open ? "active" : ""}`
-                                }`}
-                        >
-                            <SidebarMenu setTogle={setTogle} />
-                        </div>
-                    }
+                {open ? null : (
+          <div className={open === false && "sidebar-transition"}>
+            <SidebarMenu setTogle={setTogle} />
+          </div>
+        )}
 
                     <div
                         className={`${togle

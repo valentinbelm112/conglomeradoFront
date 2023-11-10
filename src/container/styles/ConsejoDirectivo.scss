@@ -103,7 +103,7 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
-		margin: auto;
+		margin: 0;
 		font-size: 1.5em;
 		text-align: center;
 	} 
@@ -117,7 +117,7 @@
 	+ label {
        
     display: table;
-    margin: auto;
+    margin: 0;
     color: #fff;
     line-height: 3.7;
     padding: 0 1em;
@@ -165,7 +165,7 @@
     display: none;
 	+ label {
 		display: table;
-		margin: auto;
+		margin: 0;
 		color: #fff;
 		
 		padding: 0 1em;
@@ -193,7 +193,7 @@
 	+ label {
        
         display: table;
-        margin: auto;
+        margin: 0;
         color: #fff;
         line-height: 3.7;
         padding: 0 1em;
@@ -238,7 +238,7 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
-		margin: auto;
+		margin: 0;
 		font-size: 1.5em;
 		text-align: center;
 	} 
@@ -282,5 +282,11 @@
 
 .container-title-show-iamgen-ins-label{
   text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+ .container-table-register-list-directivo{
+  margin-left: 1% !important;
+ }
 }
 
