@@ -686,7 +686,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                                 }}
                                                             >
                                                                 <Link
-                                                                    to={`/expediente/${propietario.desDni}/${propietario.id}`}
+                                                                    to={`/expediente/${indexInmueble.des_asiento}/${propietario.id}`}
                                                                     style={{
                                                                         textDecoration: "none",
                                                                         color: "inherit",

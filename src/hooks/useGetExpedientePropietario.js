@@ -27,16 +27,13 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
       config
     );
 
+    console.log(id);
 
     const padronDetalleObtener = await axios.get(
-      `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${id2}`,
+      `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${id}`,
       config
     );
 
-
-  
-
-  
 
     const NombrePropietario=padronPropietariosDetalle.data.des_nombres;
     
@@ -48,6 +45,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
 
     console.log(found)
     const propietariosConPartida = [];
+    /*
 
     padronPropietariosDetalle.data.inmuebleEntities.forEach((inmueble) => {
       if (found.includes(inmueble.numPartida)) {
@@ -61,10 +59,10 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
         propietariosConPartida.push(PropietariosWihtPartidaR);
       }
     });
-
+*/
 
    //console.log(propietariosConPartida)
-    SetPropietariosPartida(propietariosConPartida);
+    SetPropietariosPartida(padronDetalleObtener);
     SetDataDetallePropietario(padronPropietariosDetalle);
     SetCoPropietario(NombrePropietario)
     setPartidasRegistrales(found)

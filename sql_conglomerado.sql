@@ -120,7 +120,8 @@ delete from CLI_ASIENTO_PROPIETARIO;
     des_documento_link           VARCHAR2(200),
     des_codigo_asociacion        VARCHAR2(200),
     des_estado                   VARCHAR2(100),
-    des_situacion                VARCHAR2(100)
+    des_situacion                VARCHAR2(100),
+    des_asiento                  VARCHAR2(100)
 )
 
 
@@ -161,7 +162,7 @@ create table CRE_INMUEBLE_PROP
   num_area                     float,
   des_provincia                VARCHAR2(200),
   des_codigo_asociacion        VARCHAR2(200),
-  des_asiento                  VARCHAR2(200)
+  fec_registro_sunarp          VARCHAR2(200)
  
 )
 

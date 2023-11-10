@@ -24,6 +24,7 @@ const ExpedientePropietario = (props) => {
   const [coPropietarios, setCoPropietarios] = useState(null);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState("opcion1");
 
+  console.log(props);
   const navigate = useNavigate();
 
   const handleOptionSelectConyugue = (event) => {
@@ -36,18 +37,19 @@ const ExpedientePropietario = (props) => {
     setExpedienteSelect(props.expediente.data);
   };
 
-  
   useEffect(() => {
     if (props.padron.data.inmuebleEntities.length > 0) {
       setInmuebleSelect(props.padron.data.inmuebleEntities[0]);
     }
     setExpedienteSelect(props.expediente.data);
 
-    if (props.propietario.length > 0) {
-      const foundCopropietario = props.propietario[0].propietario.filter(
-        (element) => element.des_nombres !== props.nombreExpedienteProp
+    if (props.propietario.data.length > 0) {
+      console.log("Found co propietario");
+      const foundCopropietario = props.propietario.data.filter(
+        (element) => element.desNombreCompleto !== props.nombreExpedienteProp
       );
-      
+
+      console.log(foundCopropietario);
       setCoPropietarios(foundCopropietario);
       console.log(foundCopropietario);
     }
@@ -80,10 +82,8 @@ const ExpedientePropietario = (props) => {
   };
 
   const ChangeRouter = (dni, id) => {
-
     navigate(`/expediente/${dni}/${id}`);
     window.location.reload();
-
   };
 
   const tipoView = {
@@ -99,7 +99,6 @@ const ExpedientePropietario = (props) => {
     const inmuebleEncontrado = props.padron.data.inmuebleEntities.find(
       (inmueble) => inmueble.numPartida === event.target.value
     );
-
 
     setSelectedValue(event.target.value);
     setInmuebleSelect(inmuebleEncontrado);
@@ -117,9 +116,8 @@ const ExpedientePropietario = (props) => {
       setCoPropietarios(coPropietarioDatos);
     }
   };
-  
+
   const changeStado = () => {
-   
     props.cambiarEstado();
   };
 
@@ -151,11 +149,9 @@ const ExpedientePropietario = (props) => {
             >
               Propietarios
             </label>
-           
-           <label>
 
-           </label>
-           <input
+            <label></label>
+            <input
               type="radio"
               id="contactChoice2"
               name="contact"
@@ -174,7 +170,7 @@ const ExpedientePropietario = (props) => {
 
           <div className="container--expediente-propietario">
             <img
-              src={expedienteSelect?.des_url_foto}
+              src={expedienteSelect?.des_url_foto1}
               alt=""
               className="foto-expediente-propietario"
             />
@@ -392,50 +388,83 @@ const ExpedientePropietario = (props) => {
               <div className="title-direccion-propietarios-p">
                 {inmuebleSelect?.des_direccion}
               </div>
-              <table className="tabla-co-propietario-datos">
-                <tr>
-                  <th className="title-co-propietarios-list"  style={{
-                          borderBottom: "1px solid #b3aeae",
-                          borderRight: "1px solid #b3aeae",
-                        }}>Co-Propietario</th>
-                  <th className="title-co-propietarios-dni" 
-                   style={{
-                    borderBottom: "1px solid #b3aeae",
-                    borderRight: "1px solid #b3aeae",
-                  }}
-                  >DNI</th>
-                  <th className="title-co-propietarios-dni-conyugue"
-                  style={{ borderBottom: "1px solid #b3aeae" }}
-                  >
-                    Cónyuge del propietario
-                  </th>
-                </tr>
-                {coPropietarios?.length > 0 &&
-                  coPropietarios.map((elemento) => (
-                    <tr key={elemento.id} className="nombre-co-propietario">
-                      <td style={{ borderRight: "1px solid #b3aeae" }} >{elemento.des_nombres} </td>
+              <div className="outer-table-registro-directivo">
+                <table className="tabla-co-propietario-datos">
+                  <tr>
+                    <th
+                      className="title-co-propietarios-list"
+                      style={{
+                        backgroundColor: "#a2c8f2",
+                        padding: "7px",
+                        borderTop: "2px solid white",
+                        borderLeft: "2px solid white",
+                        borderBottom: "2px solid white",
+                        whiteSpace: "nowrap",
+                        fontSize: "16px",
+                        color: "#56688a",
+                    }}
+                    >
+                      Co-Propietario
+                    </th>
+                    <th
+                      className="title-co-propietarios-dni"
+                      style={{
+                        backgroundColor: "#a2c8f2",
+                        padding: "7px",
+                        borderTop: "2px solid white",
+                        borderLeft: "2px solid white",
+                        borderBottom: "2px solid white",
+                        whiteSpace: "nowrap",
+                        fontSize: "16px",
+                        color: "#56688a",
+                    }}
+                    >
+                      DNI
+                    </th>
+                    <th
+                      className="title-co-propietarios-dni-conyugue"
+                      style={{
+                        backgroundColor: "#a2c8f2",
+                        padding: "7px",
+                        borderTop: "2px solid white",
+                        borderLeft: "2px solid white",
+                        borderBottom: "2px solid white",
+                        whiteSpace: "nowrap",
+                        fontSize: "16px",
+                        color: "#56688a",
+                    }}
+                    >
+                      Cónyuge del propietario
+                    </th>
+                  </tr>
+                  {coPropietarios?.length > 0 &&
+                    coPropietarios.map((elemento) => (
+                      <tr key={elemento.id} className="nombre-co-propietario">
+                        <td style={{ borderRight: "1px solid #b3aeae" }}>
+                          {elemento.desNombreCompleto}{" "}
+                        </td>
 
-                      <td
-                        className="dni-co-propietario"
-                        style={{
-                          cursor: "pointer",
-                          borderRight: "1px solid #b3aeae",
-                        }}
-                        onClick={() =>
-                          ChangeRouter(elemento.desDni, elemento.id)
-                        }
-                       
-                       
-                      >
-                        <span style={{ color: "#0077b6" }}>
-                                {elemento.desDni}
-                              </span>
-                      </td>
+                        <td
+                          className="dni-co-propietario"
+                          style={{
+                            cursor: "pointer",
+                            borderRight: "1px solid #b3aeae",
+                          }}
+                          onClick={() =>
+                            ChangeRouter(elemento.desDni, elemento.id)
+                          }
+                        >
+                          <span style={{ color: "#0077b6" }}>
+                            {elemento.des_dni}
+                          </span>
+                        </td>
 
-                      <td >{elemento.des_dni_conyugue} </td>
-                    </tr>
-                  ))}
-              </table>
+                        <td
+                        >{elemento.des_dni_conyugue} </td>
+                      </tr>
+                    ))}
+                </table>
+              </div>
             </div>
 
             {props.padron.data.propietarioBajaDetEntities.length > 0 && (
