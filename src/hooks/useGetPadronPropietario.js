@@ -15,10 +15,10 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
                 Authorization: `Bearer ${auth.accessToken}`,
             },
         };
-    
-      
-        console.log(config)
-       await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`,   config) .then(response => {
+        
+
+       console.log(config)
+       await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`, config).then(response => {
             const codigoPropietario = response.data
             .filter((e) => e.des_estado !== "Inactivo")
             .map((e) => ({

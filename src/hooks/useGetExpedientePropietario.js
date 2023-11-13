@@ -10,8 +10,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
   const [expedienteConyugue, SetExpedienteConyugue] = useState(null);
   const [coPropietario, SetCoPropietario] = useState(null);
   const[partidasRegistrales,setPartidasRegistrales] = useState(null);
-  
-
+  const[situacionAsiento,setSituacionAsiento]=useState(null);
 
   const config = {
         
@@ -26,14 +25,34 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
       `${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`,
       config
     );
-
     console.log(id);
 
     const padronDetalleObtener = await axios.get(
       `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${id}`,
       config
     );
+    console.log(padronPropietariosDetalle); 
+    const obtenerDetalleInmueble = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
+      console.log(inmueble,padronPropietariosDetalle.data.id)
+      const response = await axios.get(
+          `${serverURL}/Propietarios/obtener/detalle/inmueble/id?id_inmueble=${inmueble.id}&id_propietario=${padronPropietariosDetalle.data.id}`
+        );
 
+        console.log(response)
+        return {
+            asiento:inmueble.numAsiento,
+            situacion:response.data.desSituacion
+        }; 
+      
+    });
+
+   //capturar el nombre del  propeitario
+   const resultados = await Promise.all(obtenerDetalleInmueble);
+
+  
+  setSituacionAsiento(resultados);
+    //obtener los resultados
+    console.log(resultados);  
 
     const NombrePropietario=padronPropietariosDetalle.data.des_nombres;
     
@@ -68,13 +87,13 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     setPartidasRegistrales(found)
     //consultar si existen expedientes
 
-    
+    console.log(padronPropietariosDetalle.data.desDni)
     const existeCliente = await axios.get(
       `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.desDni}`,
       config
     );
 
-  
+  console.log(existeCliente)
     if (existeCliente.data) {
       const responsepostExpediente = await axios.get(
         `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.desDni}`,
@@ -136,7 +155,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
         });
     }
 
-    if (padronPropietariosDetalle.data.des_dni_conyugue !== "-") {
+    if (padronPropietariosDetalle.data.des_dni_conyugue !== "-" && padronPropietariosDetalle.data.des_dni_conyugue !==null) {
       const existeClienteConyuge = await axios.get(
         `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.des_dni_conyugue}`,
         config
@@ -217,6 +236,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     propietariosPartida,
     expedienteConyugue,
     coPropietario,
-    partidasRegistrales
+    partidasRegistrales,
+    situacionAsiento
   };
 };

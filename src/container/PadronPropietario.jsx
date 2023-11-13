@@ -90,7 +90,21 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setRefrescar(response.data);
     };
 
-
+    useEffect(() => {
+        // Función para verificar el tamaño de la pantalla y actualizar el estado
+        const checkScreenSize = () => {
+          setOpen(window.innerWidth < 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
+        };
+    
+        // Verificar el tamaño de la pantalla al cargar el componente y cada vez que cambie el tamaño de la ventana
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+    
+        // Limpiar el event listener al desmontar el componente
+        return () => {
+          window.removeEventListener("resize", checkScreenSize);
+        };
+      }, []);
 
 
 
@@ -430,7 +444,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                         name="modal"
                                         type="radio"
                                     />
-
                                     <label htmlFor="mostrar-modal-documento-propietario">
                                         {" "}
                                         <FontAwesomeIcon icon={faFolderOpen} />
@@ -468,6 +481,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         </button>
                                                     </div>
                                                 </th>
+
                                                 <th
                                                     scope="col"
                                                     style={{
