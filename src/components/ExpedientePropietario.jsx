@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "./styles/ExpedientePropietario.scss";
 import ModalImagesConglomerado from "./ModalImagesConglomerado";
 import ImageUploader from "./ImageUploader";
@@ -14,7 +13,8 @@ import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Download from "yet-another-react-lightbox/plugins/download";
 import Captions from "yet-another-react-lightbox/plugins/captions";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+
 const ExpedientePropietario = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -23,15 +23,14 @@ const ExpedientePropietario = (props) => {
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
   const [coPropietarios, setCoPropietarios] = useState(null);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState("opcion1");
-<<<<<<< HEAD
-=======
   const[situacionAsiento ,setSituacionAsiento]=useState("##")
-  const navigate = useNavigate();
->>>>>>> 29de99e6e7223f66da99f34700becc9f30f56f63
-
-  console.log(props);
+  const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
+  const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
 
+ 
+
+  //console.log(situacionAsiento);
   const handleOptionSelectConyugue = (event) => {
     setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expedienteCony.data);
@@ -48,12 +47,12 @@ const ExpedientePropietario = (props) => {
     }
     setExpedienteSelect(props.expediente.data);
 
-    if (props.propietario.data.length > 0) {
+    if (props.propietario.length > 0) {
       console.log("Found co propietario");
-      const foundCopropietario = props.propietario.data.filter(
+      const foundCopropietario = props.propietario[0].situacion.filter(
         (element) => element.desNombreCompleto !== props.nombreExpedienteProp
       );
-
+      
       console.log(foundCopropietario);
       setCoPropietarios(foundCopropietario);
       console.log(foundCopropietario);
@@ -107,49 +106,34 @@ const ExpedientePropietario = (props) => {
 
     setSelectedValue(event.target.value);
     setInmuebleSelect(inmuebleEncontrado);
+    setSelectAsientoDisabled(false);
 
   };
 
   const handleChangeAsiento = (event) => {
+
     console.log(event.target.value);
-
-    const inmuebleEncontrado = props.padron.data.inmuebleEntities.find(
-      (inmueble) => inmueble.numPartida === selectedValue  
+    const inmuebleEncontrado = props.propietario.find(
+      (inmueble) => inmueble.partida=== selectedValue  && inmueble.asiento ===event.target.value
     );
+
+    console.log(selectedValue);
     console.log(inmuebleEncontrado);
-    setSelectedValue(event.target.value);
+    setCoPropietarios(inmuebleEncontrado.situacion);
   
-
-    const foundCopropietario = props.propietario.filter(
-      (element) => element.numPartida === event.target.value
-    );
-
-    if (foundCopropietario.length > 0) {
-      console.log(foundCopropietario[0].propietario);
-      const coPropietarioDatos = foundCopropietario[0].propietario.filter(
-        (element) => element.des_nombres !== props?.nombreExpedienteProp
-      );
-
-      setCoPropietarios(coPropietarioDatos);
-    }
-    
-    //filtrar situacion de la propiedad
-
+    setSelectedValueAsiento(event.target.value);
     const situacionAsiento = props.situacionAsiento.filter(
       (element) => element.asiento === event.target.value
     );
 
-    console.log(situacionAsiento)
+
     if(situacionAsiento.length>0){
       setSituacionAsiento(situacionAsiento[0].situacion);
     }
     
   };
 
-  const changeStado = () => {
-    props.cambiarEstado();
-  };
-
+  
   return (
     <div className="container-expediente-propietario">
     <div className="title-container-expediente-propietario">
@@ -206,11 +190,14 @@ const ExpedientePropietario = (props) => {
         </div>
 
         <div className="container--expediente-propietario">
-          <img
-            src="https://vivolabs.es/wp-content/uploads/2022/03/perfil-mujer-vivo.png"
+          {
+            expedienteSelect?
+            <img
+            src={"expedienteSelect?.des_url_foto"}
             alt=""
             className="foto-expediente-propietario"
-          />
+          />:<div>No cuenta con foto de perfil</div>
+          } 
         </div>
         </div>
         
@@ -340,6 +327,7 @@ const ExpedientePropietario = (props) => {
           </div>
           <div className="container-info-personal"></div>
         </div>
+        <div className="container-info-contacto">
         <div className="title-info-personal-expediente">
           Información del contacto
         </div>
@@ -357,6 +345,8 @@ const ExpedientePropietario = (props) => {
             <div>{props.padron.data.des_correo}</div>
           </div>
         </div>
+        </div>
+        
       </div>
       <div className="col-md-7 container-right-info-inmebles-doc">
       <div className="container-info-inmueble-detail">
@@ -382,12 +372,13 @@ const ExpedientePropietario = (props) => {
 
             <select
               id="myCombobox-socio"
-              value={selectedValue}
+              value={selectedValueAsiento}
               onChange={handleChangeAsiento}
+              disabled={selectAsientoDisabled}
             >
               {props.padron.data.inmuebleEntities.map((inmueble) => (
                 <option key={inmueble.id} value={inmueble.numAsiento}>
-                 {inmuebleSelect?.numPartida === inmueble.numPartida && ` - Asiento: ${inmueble.numAsiento}`}
+                 {inmuebleSelect?.numPartida === selectedValue && ` - Asiento: ${inmueble.numAsiento}`}
                 </option>
               ))}
             </select>
@@ -417,7 +408,7 @@ const ExpedientePropietario = (props) => {
               </div>
               <div className="col-md-3 container-title-estado">
                 <div className="title-estado">Estado</div>
-                <div className="title-estado-p">Estado</div>
+                <div className="title-estado-p">{props.padron.data.des_estado}</div>
               </div>
             </div>
             <div className="row">
@@ -444,6 +435,9 @@ const ExpedientePropietario = (props) => {
                 <div className="title-acciones-drechos-p">
                   {situacionAsiento}
                 </div>
+
+
+
               </div>
             </div>
             <div className="title-acciones-drechos">Direccion</div>
@@ -451,21 +445,49 @@ const ExpedientePropietario = (props) => {
               {inmuebleSelect?.des_direccion}
             </div>
       </div>
+      <div className="outer-table-registro-directivo">
        
             <table className="tabla-co-propietario-datos">
               <tr>
-                <th className="title-co-propietarios-list"  style={{
-                        borderBottom: "1px solid #b3aeae",
-                        borderRight: "1px solid #b3aeae",
-                      }}>Co-Propietario</th>
+                <th className="title-co-propietarios-list"  scope="col"
+                                                    style={{
+                                                        backgroundColor: "#a2c8f2",
+                                                        padding: "8px",
+                                                        borderTop: "2px solid white",
+                                                        borderLeft: "2px solid white",
+                                                        borderBottom: "2px solid white",
+                                                        whiteSpace: "nowrap",
+                                                        fontSize: "12px",
+                                                        fontSize: "16px",
+                                                        color: "#56688a",
+                                                    }}>Co-Propietario</th>
                 <th className="title-co-propietarios-dni" 
-                 style={{
-                  borderBottom: "1px solid #b3aeae",
-                  borderRight: "1px solid #b3aeae",
+                scope="col"
+                style={{
+                    backgroundColor: "#a2c8f2",
+                    padding: "8px",
+                    borderTop: "2px solid white",
+                    borderLeft: "2px solid white",
+                    borderBottom: "2px solid white",
+                    whiteSpace: "nowrap",
+                    fontSize: "12px",
+                    fontSize: "16px",
+                    color: "#56688a",
                 }}
                 >DNI</th>
                 <th className="title-co-propietarios-dni-conyugue"
-                style={{ borderBottom: "1px solid #b3aeae" }}
+               scope="col"
+               style={{
+                   backgroundColor: "#a2c8f2",
+                   padding: "8px",
+                   borderTop: "2px solid white",
+                   borderLeft: "2px solid white",
+                   borderBottom: "2px solid white",
+                   whiteSpace: "nowrap",
+                   fontSize: "12px",
+                   fontSize: "16px",
+                   color: "#56688a",
+               }}
                 >
                   Cónyuge del propietario
                 </th>
@@ -473,7 +495,7 @@ const ExpedientePropietario = (props) => {
               {coPropietarios?.length > 0 &&
                 coPropietarios.map((elemento) => (
                   <tr key={elemento.id} className="nombre-co-propietario">
-                    <td style={{ borderRight: "1px solid #b3aeae" }} >{elemento.des_nombres} </td>
+                    <td style={{ borderRight: "1px solid #b3aeae" }} >{elemento.desNombreCompleto} </td>
 
                     <td
                       className="dni-co-propietario"
@@ -482,13 +504,13 @@ const ExpedientePropietario = (props) => {
                         borderRight: "1px solid #b3aeae",
                       }}
                       onClick={() =>
-                        ChangeRouter(elemento.desDni, elemento.id)
+                        ChangeRouter(elemento.des_dni , elemento.id)
                       }
                      
                      
                     >
                       <span style={{ color: "#0077b6" }}>
-                              {elemento.desDni}
+                              {elemento.des_dni}
                             </span>
                     </td>
 
@@ -496,6 +518,7 @@ const ExpedientePropietario = (props) => {
                   </tr>
                 ))}
             </table>
+            </div>
           </div>
 
           {props.padron.data.propietarioBajaDetEntities.length > 0 && (

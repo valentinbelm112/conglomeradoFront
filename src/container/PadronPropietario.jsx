@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -27,7 +27,6 @@ import UseGetExportPropietario from "../hooks/useGetExportExcelPropietario";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import EditarPropietario from "../components/FormEditarPropietarios";
 import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario";
-import { validateToken } from "../utils/TokenValidateExpired";
 import ReactPaginate from "react-paginate";
 
 const PadronPropietario = ({ EstadoGlobal }) => {
@@ -46,7 +45,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
 
-    const { isLoading, dataPropietario, codigoPropietario } =
+    const { isLoading, codigoPropietario } =
         UseGetPadronPropietario(
             `${serverURL}/Propietarios/Obtener`,
             setRefrescar,
@@ -57,10 +56,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setCurrentPage(selected);
     };
 
-    const tipoView = {
-        opcion: 1,
-      };
-      
+   
     const handleItemsPerPageChange = (e) => {
         const newItemsPerPage = parseInt(e.target.value, 10);
         console.log(e.target.value);
@@ -301,12 +297,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setClickImportProp(!clickImportProp);
     };
 
-    const handleClickOpenImportForm = () => {
-        const parrafo = document.querySelector(
-            "#modal-mostrar-form-documento-propietarios-person-dar-baja"
-        );
-        parrafo.style.top = "95px";
-    };
+   
 
     if (isLoading) {
         return (
@@ -700,7 +691,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                                 }}
                                                             >
                                                                 <Link
-                                                                    to={`/expediente/${indexInmueble.des_asiento}/${propietario.id}`}
+                                                                    to={`/expediente/${indexInmueble.numAsiento}/${propietario.codigoPropietario}`}
                                                                     style={{
                                                                         textDecoration: "none",
                                                                         color: "inherit",
@@ -762,7 +753,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                                     textOverflow: "ellipsis",
                                                                 }}
                                                             >
-                                                                {indexInmueble.des_asiento}
+                                                                {indexInmueble.numAsiento}
                                                             </td>
                                                             <td
                                                                 style={{

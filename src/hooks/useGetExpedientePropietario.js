@@ -11,7 +11,6 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
   const [coPropietario, SetCoPropietario] = useState(null);
   const[partidasRegistrales,setPartidasRegistrales] = useState(null);
   const[situacionAsiento,setSituacionAsiento]=useState(null);
-
   const config = {
         
     headers: {
@@ -27,11 +26,25 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     );
     console.log(id);
 
-    const padronDetalleObtener = await axios.get(
-      `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${id}`,
-      config
-    );
-    console.log(padronPropietariosDetalle); 
+
+    const padronDetalleObtener = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
+     
+      const response = await axios.get(
+        `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${inmueble.numAsiento}`,
+        config
+        );
+
+        return {
+            asiento:inmueble.numAsiento,
+            partida:inmueble.numPartida,
+            situacion:response.data
+
+        }; 
+      
+    });
+
+
+   
     const obtenerDetalleInmueble = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
       console.log(inmueble,padronPropietariosDetalle.data.id)
       const response = await axios.get(
@@ -49,7 +62,10 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
    //capturar el nombre del  propeitario
    const resultados = await Promise.all(obtenerDetalleInmueble);
 
-  
+   //capturar el nombre del  propeitario
+   const resultadosCopropietarios = await Promise.all(padronDetalleObtener);
+
+  console.log("hola");
   setSituacionAsiento(resultados);
     //obtener los resultados
     console.log(resultados);  
@@ -81,7 +97,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
 */
 
    //console.log(propietariosConPartida)
-    SetPropietariosPartida(padronDetalleObtener);
+    SetPropietariosPartida(resultadosCopropietarios);
     SetDataDetallePropietario(padronPropietariosDetalle);
     SetCoPropietario(NombrePropietario)
     setPartidasRegistrales(found)

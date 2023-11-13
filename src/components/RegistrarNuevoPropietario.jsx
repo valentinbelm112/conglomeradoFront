@@ -36,7 +36,9 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
                 num_acciones_derechos: "",
                 num_area: "",
                 numPartida: "",
-
+                des_situacion: "",
+                numAsiento: "",
+                fec_registro_sunarp:""
 
             }
 
@@ -71,7 +73,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
     const validarPorcentajeAcciones = (valor) => {
         // Expresión regular para verificar números decimales en el rango de 1 a 100
-        const numeroRegex = /^(100(\.0{1,2})?|[1-9]?\d(\.\d{1,2})?)$/;
+        const numeroRegex = /^(100(\.0{1,2})?|[1-9]?\d(\.\d{1,4})?)$/;
         return numeroRegex.test(valor);
     };
 
@@ -338,6 +340,19 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
 
                                         </input>
+                                        <div  className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Situación
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="des_situacion"
+                                            value={datos.inmuebleEntities[0].des_situacion}
+                                            className="form-control upload-inscripcion-directivos"
+                                            onChange={handleInputChange}
+                                        >
+
+
+                                        </input>
 
                                         <div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
                                             Datos de contacto
@@ -429,6 +444,20 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
 
                                         </input>
+
+                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Fecha registro Sunarp
+                                        </div>
+                                        <input
+                                            type="date"
+                                            name="fec_registro_sunarp"
+                                            value={datos.inmuebleEntities[0].fec_registro_sunarp}
+                                            className="form-control upload-inscripcion-directivos"
+                                            onChange={handleInputChange}
+                                        >
+
+
+                                        </input>
                                         <br />
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
                                             Correo Electrónico
@@ -502,6 +531,20 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
                                             type="text"
                                             name="des_provincia"
                                             value={datos.inmuebleEntities[0].des_provincia}
+                                            className="form-control upload-inscripcion-directivos"
+                                            onChange={handleInputChange}
+                                        >
+
+
+                                        </input>
+
+                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Asiento
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="numAsiento"
+                                            value={datos.inmuebleEntities[0].numAsiento}
                                             className="form-control upload-inscripcion-directivos"
                                             onChange={handleInputChange}
                                         >
