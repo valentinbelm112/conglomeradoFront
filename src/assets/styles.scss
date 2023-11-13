@@ -16,7 +16,7 @@
     font-family: 'Oswald', sans-serif;
     font-weight: bold;
     font-size: 30px;
-    color: #ea1f1f;
+    color: #428bca;
     
 }
 
@@ -70,4 +70,25 @@ table.table tbody tr:nth-child(even) {
   color:white;
   background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
 	
+  }
+
+  .container-info-personal-expediente-filter{
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+  
+    margin-top: 10px;
+  }
+
+  .container-partidas-info-foto{
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+   
+  }
+
+  .container-info-inmueble-detail{
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
   }

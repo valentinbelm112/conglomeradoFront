@@ -494,7 +494,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                     }}
                                                 >
                                                     <div className="container-order-a-z-propietario">
-                                                        <div>Apellidos Completos</div>
+                                                        <div>Nombres Completos</div>
                                                         <button
                                                             className="title-codigo-propietario"
                                                             onClick={handleSortApellidos}
@@ -506,21 +506,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         </button>
                                                     </div>
                                                 </th>
-                                                <th
-                                                    scope="col"
-                                                    style={{
-                                                        backgroundColor: "#a2c8f2",
-                                                        padding: "8px",
-                                                        borderTop: "2px solid white",
-                                                        borderLeft: "2px solid white",
-                                                        borderBottom: "2px solid white",
-                                                        whiteSpace: "nowrap",
-                                                        fontSize: "16px",
-                                                        color: "#56688a",
-                                                    }}
-                                                >
-                                                    Nombres Completos
-                                                </th>
+                                               
                                                 <th
                                                     scope="col"
                                                     style={{
@@ -625,6 +611,38 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         color: "#56688a",
                                                     }}
                                                 >
+                                                    Nª Asiento
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    style={{
+                                                        backgroundColor: "#a2c8f2",
+                                                        padding: "8px",
+                                                        borderTop: "2px solid white",
+                                                        borderLeft: "2px solid white",
+                                                        borderBottom: "2px solid white",
+                                                        whiteSpace: "nowrap",
+                                                        fontSize: "12px",
+                                                        fontSize: "16px",
+                                                        color: "#56688a",
+                                                    }}
+                                                >
+                                                    Situación
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    style={{
+                                                        backgroundColor: "#a2c8f2",
+                                                        padding: "8px",
+                                                        borderTop: "2px solid white",
+                                                        borderLeft: "2px solid white",
+                                                        borderBottom: "2px solid white",
+                                                        whiteSpace: "nowrap",
+                                                        fontSize: "12px",
+                                                        fontSize: "16px",
+                                                        color: "#56688a",
+                                                    }}
+                                                >
                                                     Estado
                                                 </th>
                                                 <th
@@ -649,7 +667,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                         </thead>
                                         <tbody>
                                             {(search.length === 0 ? refrescar : search)
-                                                .slice(startIndex, endIndex)
+                                                
                                                 .map((propietario) =>
                                                     propietario.inmuebleEntities.map((indexInmueble) => (
                                                         <tr key={`${propietario.id}-${indexInmueble.id}`}>
@@ -662,15 +680,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                             >
                                                                 {propietario.codigoPropietario}
                                                             </td>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {propietario.des_Apellidos}
-                                                            </td>
+                                                           
                                                             <td
                                                                 style={{
                                                                     overflow: "hidden",
@@ -688,7 +698,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                                 }}
                                                             >
                                                                 <Link
-                                                                    to={`/expediente/${propietario.desDni}/${propietario.id}`}
+                                                                    to={`/expediente/${propietario.desDni}/${propietario.codigoPropietario}`}
                                                                     style={{
                                                                         textDecoration: "none",
                                                                         color: "inherit",
@@ -732,6 +742,24 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                                 }}
                                                             >
                                                                 {indexInmueble.des_direccion}
+                                                            </td>
+                                                            <td
+                                                                style={{
+                                                                    overflow: "hidden",
+                                                                    whiteSpace: "nowrap",
+                                                                    textOverflow: "ellipsis",
+                                                                }}
+                                                            >
+                                                                {indexInmueble.numAsiento}
+                                                            </td>
+                                                            <td
+                                                                style={{
+                                                                    overflow: "hidden",
+                                                                    whiteSpace: "nowrap",
+                                                                    textOverflow: "ellipsis",
+                                                                }}
+                                                            >
+                                                                {indexInmueble.des_situacion}
                                                             </td>
                                                             <td
                                                                 style={{

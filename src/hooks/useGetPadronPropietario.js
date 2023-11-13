@@ -19,7 +19,9 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
       
         console.log(config)
        await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`,   config) .then(response => {
-            const codigoPropietario = response.data
+        
+        console.log(response);
+        const codigoPropietario = response.data
             .filter((e) => e.des_estado !== "Inactivo")
             .map((e) => ({
                 value: e.codigoPropietario,
@@ -31,6 +33,7 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
                 SetDataPropietario(response);
                 SetLoading(false);
                 setRefrescar(response.data)
+                console.log(response)
           })
           .catch(error => {
             console.error('Error en la solicitud:', error);

@@ -14,7 +14,7 @@ const ListExpedientesPropietarios=(props)=>{
     const { id,id2} = useParams();
     const [Estado,SetEstado]=useState(false);
 
-    const {dataExpediente,isLoading,dataDetallePropietario,propietariosPartida,expedienteConyugue,coPropietario,partidasRegistrales}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,props.id1,props.id2,props.estadoGlobal);
+    const {dataExpediente,isLoading,dataDetallePropietario,propietariosPartida,expedienteConyugue,coPropietario,partidasRegistrales,situacionAsiento}=useGetExpedientePropietario(`${serverURL}/cliente/consultar-reniec`,props.id1,props.id2,props.estadoGlobal);
    
     console.log(dataExpediente)
     
@@ -45,7 +45,7 @@ const ListExpedientesPropietarios=(props)=>{
         <NavbarConglomerado />
           <div className="container-Sidebar-view-directivo">
                 <SidebarMenu />
-                <ExpedientePropietario expediente={dataExpediente} expedienteCony={expedienteConyugue} padron={dataDetallePropietario} propietario={propietariosPartida} cambiarEstado={cambiarEstadoPadre}  nombreExpedienteProp={coPropietario} partidasRegistrales={partidasRegistrales}/>
+                <ExpedientePropietario expediente={dataExpediente} expedienteCony={expedienteConyugue} padron={dataDetallePropietario} propietario={propietariosPartida} cambiarEstado={cambiarEstadoPadre}  nombreExpedienteProp={coPropietario} partidasRegistrales={partidasRegistrales} situacionAsiento={situacionAsiento}/>
           </div>
           
           

@@ -23,6 +23,7 @@ const ExpedientePropietario = (props) => {
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
   const [coPropietarios, setCoPropietarios] = useState(null);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState("opcion1");
+  const[situacionAsiento ,setSituacionAsiento]=useState("##")
   const navigate = useNavigate();
 
 
@@ -106,6 +107,18 @@ const ExpedientePropietario = (props) => {
     setSelectedValue(event.target.value);
     setInmuebleSelect(inmuebleEncontrado);
 
+  };
+
+  const handleChangeAsiento = (event) => {
+    console.log(event.target.value);
+
+    const inmuebleEncontrado = props.padron.data.inmuebleEntities.find(
+      (inmueble) => inmueble.numPartida === selectedValue  
+    );
+    console.log(inmuebleEncontrado);
+    setSelectedValue(event.target.value);
+  
+
     const foundCopropietario = props.propietario.filter(
       (element) => element.numPartida === event.target.value
     );
@@ -119,6 +132,18 @@ const ExpedientePropietario = (props) => {
       console.log(coPropietarioDatos);
       setCoPropietarios(coPropietarioDatos);
     }
+    
+    //filtrar situacion de la propiedad
+
+    const situacionAsiento = props.situacionAsiento.filter(
+      (element) => element.asiento === event.target.value
+    );
+
+    console.log(situacionAsiento)
+    if(situacionAsiento.length>0){
+      setSituacionAsiento(situacionAsiento[0].situacion);
+    }
+    
   };
   const changeStado = () => {
     props.cambiarEstado();
@@ -130,7 +155,8 @@ const ExpedientePropietario = (props) => {
         Expediente del Propietario
       </div>
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-5">
+          <div className="container-partidas-info-foto">
           <div className="Partida-registral-propietario-title">
             Partidas Registral del propietario:
           </div>
@@ -150,12 +176,14 @@ const ExpedientePropietario = (props) => {
               htmlFor="contactChoice1"
               className="container-expediente-contactChoice1-propietario"
             >
-              Propietarios
+              Titular
             </label>
            
            <label>
 
            </label>
+           {
+           props.expedienteConyugue&&<>
            <input
               type="radio"
               id="contactChoice2"
@@ -171,15 +199,20 @@ const ExpedientePropietario = (props) => {
             >
               Conyugue
             </label>
+           </>
+           }
+           
           </div>
 
           <div className="container--expediente-propietario">
             <img
-              src={expedienteSelect?.des_url_foto}
+              src="https://vivolabs.es/wp-content/uploads/2022/03/perfil-mujer-vivo.png"
               alt=""
               className="foto-expediente-propietario"
             />
           </div>
+          </div>
+          
           <div className="container-info-personal-expediente-filter">
             <div className="title-info-personal-expediente">
               Información Personal
@@ -324,7 +357,9 @@ const ExpedientePropietario = (props) => {
             </div>
           </div>
         </div>
-        <div className="col-md-8 container-right-info-inmebles-doc">
+        <div className="col-md-7 container-right-info-inmebles-doc">
+        <div className="container-info-inmueble-detail">
+        <div className="row container-infor-personal-inmuebles">
           <div className="title-info-personal-expediente">
             Información del inmueble
           </div>
@@ -335,6 +370,7 @@ const ExpedientePropietario = (props) => {
                 id="myCombobox-socio"
                 value={selectedValue}
                 onChange={handleChange}
+                style={{marginRight:'15px'}}
               >
                 {props.padron.data.inmuebleEntities.map((inmueble) => (
                   <option key={inmueble.id} value={inmueble.numPartida}>
@@ -342,10 +378,21 @@ const ExpedientePropietario = (props) => {
                   </option>
                 ))}
               </select>
+
+              <select
+                id="myCombobox-socio"
+                value={selectedValue}
+                onChange={handleChangeAsiento}
+              >
+                {props.padron.data.inmuebleEntities.map((inmueble) => (
+                  <option key={inmueble.id} value={inmueble.numAsiento}>
+                   {inmuebleSelect?.numPartida === inmueble.numPartida && ` - Asiento: ${inmueble.numAsiento}`}
+                  </option>
+                ))}
+              </select>
             </div>
             <p>Seleccionaste: {selectedValue}</p>
           </div>
-          <div className="row container-infor-personal-inmuebles">
             <div className="col-7">
               <div className="row">
                 <div className="col-md-3 container-title-numero-partida">
@@ -388,11 +435,22 @@ const ExpedientePropietario = (props) => {
                     {inmuebleSelect?.num_acciones_derechos}
                   </div>
                 </div>
+                <div className="col-md-4">
+                  <div className="title-acciones-drechos">
+                    Situación Propiedad
+                  </div>
+
+                  <div className="title-acciones-drechos-p">
+                    {situacionAsiento}
+                  </div>
+                </div>
               </div>
               <div className="title-acciones-drechos">Direccion</div>
               <div className="title-direccion-propietarios-p">
                 {inmuebleSelect?.des_direccion}
               </div>
+        </div>
+         
               <table className="tabla-co-propietario-datos">
                 <tr>
                   <th className="title-co-propietarios-list"  style={{
@@ -488,7 +546,9 @@ const ExpedientePropietario = (props) => {
               </div>
             )}
 
-            <div className="Documentos-asociado-padron-propietario">
+            
+          </div>
+          <div className="Documentos-asociado-padron-propietario">
               Documentos del Propietario
             </div>
             <p>Adjuntar documentacion del Propietario</p>
@@ -538,7 +598,6 @@ const ExpedientePropietario = (props) => {
               <div className="col-md-3"></div>
               <div className="col-md-3"></div>
             </div>
-          </div>
         </div>
       </div>
       <ToastContainer />
