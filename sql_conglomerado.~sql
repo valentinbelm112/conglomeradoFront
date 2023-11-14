@@ -140,13 +140,9 @@ delete from CLI_ASIENTO_PROPIETARIO;
     des_documento_link           VARCHAR2(200),
     des_codigo_asociacion        VARCHAR2(200),
     des_estado                   VARCHAR2(100),
-<<<<<<< HEAD
     des_situacion                VARCHAR2(100),
     des_asiento                  VARCHAR2(100)
-=======
-    des_asiento                   VARCHAR2(100)
-    
->>>>>>> 29de99e6e7223f66da99f34700becc9f30f56f63
+
 )
 
 

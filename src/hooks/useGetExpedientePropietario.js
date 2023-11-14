@@ -79,6 +79,16 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     );
 
     console.log(found)
+    const PartidasUnicos = [];
+    for(var i = 0; i < found.length; i++) {
+ 
+      const elemento = found[i];
+     
+      if (!PartidasUnicos.includes(found[i])) {
+        PartidasUnicos.push(elemento);
+      }
+    }
+
     const propietariosConPartida = [];
     /*
 
@@ -100,7 +110,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     SetPropietariosPartida(resultadosCopropietarios);
     SetDataDetallePropietario(padronPropietariosDetalle);
     SetCoPropietario(NombrePropietario)
-    setPartidasRegistrales(found)
+    setPartidasRegistrales(PartidasUnicos)
     //consultar si existen expedientes
 
     console.log(padronPropietariosDetalle.data.desDni)

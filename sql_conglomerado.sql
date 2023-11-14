@@ -219,8 +219,10 @@ INNER JOIN CRE_INMUEBLE_PROP b ON b.id_inmueble = c.id_inmueble where b.des_codi
 
 
 CREATE TABLE CRE_PROPIETARIOS_INMUEBLE (
-    des_acciones_derechos    VARCHAR2(200),
+    num_acciones_derechos    NUMBER(10, 6),
+    des_comentario VARCHAR2(200),         
     des_situacion  VARCHAR2(200),
+    fec_registro_sunarp Date,
     id_propietario NUMBER REFERENCES CRE_PROPIETARIOS(id_propietario),
     id_inmueble NUMBER REFERENCES CRE_INMUEBLE_PROP(id_inmueble),
     PRIMARY KEY (id_propietario, id_inmueble)

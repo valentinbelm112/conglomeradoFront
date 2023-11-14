@@ -131,6 +131,14 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
                 body: JSON.stringify(datos)
 
             })
+            .then(response => {
+                // Verifica si la respuesta tiene un cuerpo JSON
+                if (!response.ok) {
+                    // Si la respuesta no es exitosa, lanza un error
+                    throw new Error('Error en la solicitud.');
+                }
+                return response.json();
+            })
                 .then((data) => {
  
                     
@@ -149,8 +157,8 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
                     }
                     else {
                         console.log(data); // Maneja la respuesta del servidor aquí
-                        RefrescarInformacion();
-                        toast.success("Registro exitoso del consejo directivo");
+                      
+                        toast.success(data.mensaje);
                         const parrafo = document.querySelector('#modal-mostrar-form-documento-socios-person-add-import');
                         parrafo.style.top = '-586vh'
                         setClickR(!clickR)

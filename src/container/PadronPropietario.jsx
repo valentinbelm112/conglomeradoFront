@@ -103,18 +103,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
       }, []);
 
 
-
-
-    const showNotification = () => {
-        // Lógica para mostrar una notificación cuando el token ha caducado
-        // Debes implementar esta función según tus necesidades
-        console.log('El token ha caducado. Muestra una notificación.');
-
-        //refreshAccessToken( `${serverURL}/Token/Refrescar`);
-    };
-
-
-
     const checkTokenExpiry = () => {
 /*
         if (validateToken()) {
@@ -606,22 +594,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                 >
                                                     Nª de Asiento
                                                 </th>
-                                                <th
-                                                    scope="col"
-                                                    style={{
-                                                        backgroundColor: "#a2c8f2",
-                                                        padding: "8px",
-                                                        borderTop: "2px solid white",
-                                                        borderLeft: "2px solid white",
-                                                        borderBottom: "2px solid white",
-                                                        whiteSpace: "nowrap",
-                                                        fontSize: "12px",
-                                                        fontSize: "16px",
-                                                        color: "#56688a",
-                                                    }}
-                                                >
-                                                    Situación
-                                                </th>
+                                               
                                                 <th
                                                     scope="col"
                                                     style={{
@@ -736,16 +709,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                             >
                                                                 {indexInmueble.des_direccion}
                                                             </td>
-                                                            
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {propietario.des_situacion}
-                                                            </td>
                                                             <td
                                                                 style={{
                                                                     overflow: "hidden",
@@ -755,6 +718,8 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                             >
                                                                 {indexInmueble.numAsiento}
                                                             </td>
+                                                           
+                                                          
                                                             <td
                                                                 style={{
                                                                     overflow: "hidden",
