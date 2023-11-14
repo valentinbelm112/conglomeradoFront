@@ -180,6 +180,7 @@ create table CRE_INMUEBLE_PROP
   des_oficina_registral        VARCHAR2(200),
   num_acciones_derechos        float,
   des_departamento             VARCHAR2(200),
+  des_distrito                 VARCHAR2(200),
   num_area                     float,
   des_provincia                VARCHAR2(200),
   des_codigo_asociacion        VARCHAR2(200),
