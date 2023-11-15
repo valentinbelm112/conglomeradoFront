@@ -23,7 +23,7 @@ const ExpedientePropietario = (props) => {
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
   const [coPropietarios, setCoPropietarios] = useState(null);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState("opcion1");
-  const[situacionAsiento ,setSituacionAsiento]=useState("##")
+  const[situacionAsiento ,setSituacionAsiento]=useState([])
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
@@ -121,14 +121,16 @@ const ExpedientePropietario = (props) => {
     console.log(inmuebleEncontrado);
     setCoPropietarios(inmuebleEncontrado.situacion);
   
+    
+    console.log(props)
     setSelectedValueAsiento(event.target.value);
     const situacionAsiento = props.situacionAsiento.filter(
       (element) => element.asiento === event.target.value
     );
 
-
+console.log(situacionAsiento)
     if(situacionAsiento.length>0){
-      setSituacionAsiento(situacionAsiento[0].situacion);
+      setSituacionAsiento(situacionAsiento);
     }
     
   };
@@ -433,17 +435,32 @@ const ExpedientePropietario = (props) => {
                 </div>
 
                 <div className="title-acciones-drechos-p">
-                  {situacionAsiento}
+                  {situacionAsiento.length>0 &&situacionAsiento[0].situacion
+}
                 </div>
 
 
 
               </div>
             </div>
-            <div className="title-acciones-drechos">Direccion</div>
+        
+         
+              <div className="title-acciones-drechos">Direccion</div>
             <div className="title-direccion-propietarios-p">
               {inmuebleSelect?.des_direccion}
             </div>
+            
+        
+            <div className="title-acciones-drechos">Detalle</div>
+            <div className="title-direccion-propietarios-p">
+            {situacionAsiento.length>0 &&situacionAsiento[0].comentario
+}
+           
+            
+             
+           
+            </div>
+           
       </div>
       <div className="outer-table-registro-directivo">
        

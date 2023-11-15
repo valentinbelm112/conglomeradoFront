@@ -47,6 +47,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
    
     const obtenerDetalleInmueble = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
       console.log(inmueble,padronPropietariosDetalle.data.id)
+      console.log("AQeUII")
       const response = await axios.get(
           `${serverURL}/Propietarios/obtener/detalle/inmueble/id?id_inmueble=${inmueble.id}&id_propietario=${padronPropietariosDetalle.data.id}`
         );
@@ -54,10 +55,15 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
         console.log(response)
         return {
             asiento:inmueble.numAsiento,
-            situacion:response.data.desSituacion
+            situacion:response.data.des_situacion ,
+            comentario:response.data.des_comentario,
+            fechar:response.data.fec_registro_sunarp,
+            acciones:response.data.num_acciones_derechos
         }; 
       
     });
+
+    
 
    //capturar el nombre del  propeitario
    const resultados = await Promise.all(obtenerDetalleInmueble);
