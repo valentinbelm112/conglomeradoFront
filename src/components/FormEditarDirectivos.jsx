@@ -23,7 +23,6 @@ const handleClickCloseForm = () => {
 
   const handleInputChange = (event) => {
     console.log(datos);
-    console.log(event.target.value + "input datos")
     setDatos({
       ...datos,
       [event.target.name]: event.target.value,
@@ -114,14 +113,14 @@ const handleClickCloseForm = () => {
 
             <div className="apellido-edit-directivo">
               <div className="tilte-datos-edit-directivo">
-                Apellidos:
+                Nombre de la Asociación:
               </div>
               <div className="fecha-document-container-input">
                 <input
                   type="text"
                   name="des_apellidos"
-                  value={datos.des_apellidos}
-                  placeholder={props.enviarDatos.des_apellidos}
+                  value={datos.des_nombre_asociacion}
+                  placeholder={props.enviarDatos.des_nombre_asociacion}
                   className="form-control input-edit-directivo"
 
                   onChange={handleInputChange} />
@@ -155,6 +154,38 @@ const handleClickCloseForm = () => {
                   name="des_cargo"
                   value={datos.des_cargo}
                   placeholder={props.enviarDatos.des_cargo}
+                  className="form-control input-edit-directivo"
+
+                  onChange={handleInputChange} />
+              </div>
+
+            </div>
+            <div className="apellido-edit-directivo">
+              <div className="tilte-datos-edit-directivo">
+                Partida:
+              </div>
+              <div className="fecha-document-container-input">
+                <input
+                  type="text"
+                  name="des_partida"
+                  value={datos.des_partida}
+                  placeholder={props.enviarDatos.des_partida}
+                  className="form-control input-edit-directivo"
+
+                  onChange={handleInputChange} />
+              </div>
+
+            </div>
+            <div className="apellido-edit-directivo">
+              <div className="tilte-datos-edit-directivo">
+                Asiento:
+              </div>
+              <div className="fecha-document-container-input">
+                <input
+                  type="text"
+                  name="des_Asiento"
+                  value={datos.des_Asiento}
+                  placeholder={props.enviarDatos.des_Asiento}
                   className="form-control input-edit-directivo"
 
                   onChange={handleInputChange} />

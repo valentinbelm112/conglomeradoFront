@@ -12,6 +12,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../components/ButtonConglomerado";
+import ModalUploadPdfAsiento from "../components/ModalUploadPdfAsiento";
 import "./styles/PadronPropietrio.scss";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
@@ -36,6 +37,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [openElement, setOpenElement] = useState(false);
     const [refrescar, setRefrescar] = useState([]);
     const [search, setSearch] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [sortOrder, setSortOrder] = useState("asc");
     const [togle, setTogle] = useState(true);
     const [clickR, setClickR] = useState(true);
@@ -56,7 +58,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setCurrentPage(selected);
     };
 
-   
+
     const handleItemsPerPageChange = (e) => {
         const newItemsPerPage = parseInt(e.target.value, 10);
         console.log(e.target.value);
@@ -72,6 +74,11 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         SetExtraerDatosPerso(data);
         SetExtraerDatosInmueble(datainmueble);
     };
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
 
     const DeletePropietarioRegistro = async (id1, id2) => {
         toast.dismiss();
@@ -89,31 +96,35 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     useEffect(() => {
         // Función para verificar el tamaño de la pantalla y actualizar el estado
         const checkScreenSize = () => {
-          setOpen(window.innerWidth < 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
+            setOpen(window.innerWidth < 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
         };
-    
+
         // Verificar el tamaño de la pantalla al cargar el componente y cada vez que cambie el tamaño de la ventana
         checkScreenSize();
         window.addEventListener("resize", checkScreenSize);
-    
+
         // Limpiar el event listener al desmontar el componente
         return () => {
-          window.removeEventListener("resize", checkScreenSize);
+            window.removeEventListener("resize", checkScreenSize);
         };
-      }, []);
+    }, []);
 
 
     const checkTokenExpiry = () => {
-/*
-        if (validateToken()) {
-            // El token ha caducado, muestra una notificación
-            showNotification();
-        }
-
-        // Configura la próxima verificación después de 2 minutos
-        setTimeout(checkTokenExpiry, 4000);
-        */
+        /*
+                if (validateToken()) {
+                    // El token ha caducado, muestra una notificación
+                    showNotification();
+                }
+        
+                // Configura la próxima verificación después de 2 minutos
+                setTimeout(checkTokenExpiry, 4000);
+                */
     };
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
 
     useEffect(() => {
         // Inicia la verificación al cargar el componente
@@ -285,7 +296,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setClickImportProp(!clickImportProp);
     };
 
-   
+
 
     if (isLoading) {
         return (
@@ -383,12 +394,12 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                 type="radio"
                                             />
                                             <label htmlFor="mostrar-form-documento-propietarios-person-add-export"
-                                             onClick={handleClickImportarPropietario}>
+                                                onClick={handleClickImportarPropietario}>
                                                 {" "}
                                                 <PublishIcon />{" "}
                                                 <span className="button-text">Importar</span>{" "}
                                             </label>
-                                          
+
                                         </div>
                                     </div>
 
@@ -420,6 +431,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                 <div>
                                     <input
                                         id="mostrar-modal-documento-propietario"
+                                        onClick={openModal}
                                         name="modal"
                                         type="radio"
                                     />
@@ -428,6 +440,11 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                         <FontAwesomeIcon icon={faFolderOpen} />
                                         {""}
                                     </label>
+                                    <ModalUploadPdfAsiento
+                                        isOpen={modalIsOpen}
+                                        onClose={closeModal}
+
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -487,7 +504,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         </button>
                                                     </div>
                                                 </th>
-                                              
+
                                                 <th
                                                     scope="col"
                                                     style={{
@@ -594,7 +611,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                 >
                                                     Nª de Asiento
                                                 </th>
-                                               
+
                                                 <th
                                                     scope="col"
                                                     style={{
@@ -632,151 +649,158 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {(search.length === 0 ? refrescar : search)
-                                                .slice(startIndex, endIndex)
-                                                .map((propietario) =>
-                                                    propietario.inmuebleEntities.map((indexInmueble) => (
-                                                        <tr key={`${propietario.id}-${indexInmueble.id}`}>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {propietario.codigoPropietario}
-                                                            </td>
-                                                          
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {propietario.des_nombres}
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                <Link
-                                                                    to={`/expediente/${indexInmueble.numAsiento}/${propietario.codigoPropietario}`}
+                                            {refrescar.length === 0 ? (
+                                                <tr>
+                                                    <td colSpan="8" style={{ textAlign: "center" }}>
+                                                        No hay datos disponibles
+                                                    </td>
+                                                </tr>
+                                            ) : (
+                                                (search.length === 0 ? refrescar : search)
+                                                    .slice(startIndex, endIndex)
+                                                    .map((propietario) =>
+                                                        propietario.inmuebleEntities.map((indexInmueble) => (
+                                                            <tr key={`${propietario.id}-${indexInmueble.id}`}>
+                                                                <td
                                                                     style={{
-                                                                        textDecoration: "none",
-                                                                        color: "inherit",
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
                                                                     }}
                                                                 >
-                                                                    {propietario.desDni}
-                                                                </Link>
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {indexInmueble.numPartida}
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {indexInmueble.des_oficina_registral}
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {indexInmueble.des_tipo_dominio}
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {indexInmueble.des_direccion}
-                                                            </td>
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {indexInmueble.numAsiento}
-                                                            </td>
-                                                           
-                                                          
-                                                            <td
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                {propietario.des_estado}
-                                                            </td>
-                                                            <td
-                                                                className="sticky-column-propietario"
-                                                                style={{
-                                                                    overflow: "hidden",
-                                                                    whiteSpace: "nowrap",
-                                                                    textOverflow: "ellipsis",
-                                                                }}
-                                                            >
-                                                                <div className="table-column-gestion-info-propietario">
-                                                                    <button
-                                                                        className="btn-gestion-delete-info-propietario "
-                                                                        onClick={() =>
-                                                                            handleDeletePropietarioR(
-                                                                                propietario.id,
-                                                                                indexInmueble.id
-                                                                            )
-                                                                        }
+                                                                    {propietario.codigoPropietario}
+                                                                </td>
+
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    {propietario.des_nombres}
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    <Link
+                                                                        to={`/expediente/${indexInmueble.numAsiento}/${propietario.codigoPropietario}`}
+                                                                        style={{
+                                                                            textDecoration: "none",
+                                                                            color: "inherit",
+                                                                        }}
                                                                     >
-                                                                        <DeleteForeverIcon
-                                                                            style={{ color: `red` }}
-                                                                        />
-                                                                    </button>
+                                                                        {propietario.desDni}
+                                                                    </Link>
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    {indexInmueble.numPartida}
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    {indexInmueble.des_oficina_registral}
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    {indexInmueble.des_tipo_dominio}
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    {indexInmueble.des_direccion}
+                                                                </td>
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    {indexInmueble.numAsiento}
+                                                                </td>
 
-                                                                    <button className="btn-gestion-edit-info-directivo">
-                                                                        <input
-                                                                            id="mostrar-modal-editar"
-                                                                            name="modal"
-                                                                            type="radio"
-                                                                        />
 
-                                                                        <label
-                                                                            onClick={(e) =>
-                                                                                handleClickOpenEditFrom(
-                                                                                    propietario,
-                                                                                    indexInmueble
+                                                                <td
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    {propietario.des_estado}
+                                                                </td>
+                                                                <td
+                                                                    className="sticky-column-propietario"
+                                                                    style={{
+                                                                        overflow: "hidden",
+                                                                        whiteSpace: "nowrap",
+                                                                        textOverflow: "ellipsis",
+                                                                    }}
+                                                                >
+                                                                    <div className="table-column-gestion-info-propietario">
+                                                                        <button
+                                                                            className="btn-gestion-delete-info-propietario "
+                                                                            onClick={() =>
+                                                                                handleDeletePropietarioR(
+                                                                                    propietario.id,
+                                                                                    indexInmueble.id
                                                                                 )
                                                                             }
-                                                                            htmlFor="mostrar-modal-editar"
                                                                         >
-                                                                            {" "}
-                                                                            <EditIcon color="primary" />{" "}
-                                                                        </label>
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ))
-                                                )}
+                                                                            <DeleteForeverIcon
+                                                                                style={{ color: `red` }}
+                                                                            />
+                                                                        </button>
+
+                                                                        <button className="btn-gestion-edit-info-directivo">
+                                                                            <input
+                                                                                id="mostrar-modal-editar"
+                                                                                name="modal"
+                                                                                type="radio"
+                                                                            />
+
+                                                                            <label
+                                                                                onClick={(e) =>
+                                                                                    handleClickOpenEditFrom(
+                                                                                        propietario,
+                                                                                        indexInmueble
+                                                                                    )
+                                                                                }
+                                                                                htmlFor="mostrar-modal-editar"
+                                                                            >
+                                                                                {" "}
+                                                                                <EditIcon color="primary" />{" "}
+                                                                            </label>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        ))
+                                                    ))}
                                         </tbody>
                                     </table>
 
@@ -798,9 +822,9 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                     {clickImportProp
                                         && (
                                             <FormInportPropietario
-                                            onClickEstado={setClickImportProp}
-                                            RefrescarInformacion={RefrescarInformacion}
-                                        />)
+                                                onClickEstado={setClickImportProp}
+                                                RefrescarInformacion={RefrescarInformacion}
+                                            />)
                                     }
                                 </div>
                             </div>
@@ -857,7 +881,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                             />
                         </div>
 
-                      
+
                     </div>
 
                     <ToastContainer />

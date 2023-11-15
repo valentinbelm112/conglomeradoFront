@@ -31,13 +31,13 @@
 }
 
 .icono-close-edit-directivo {
-    margin-left: -2%;
-    margin-top: 0.3%;
-    height: 3.9% !important;
-    width: 1.7% !important;
-    border-radius: 20px;
-    background-color: #554f4f;
-    z-index: 99;
+  margin-left: 34.7%;
+  margin-top: 0.3%;
+  height: 3.9% !important;
+  width: 1.7% !important;
+  border-radius: 20px;
+  background-color: #554f4f;
+  z-index: 99;
 }
 
 table.table tbody tr:nth-child(odd) {
@@ -99,3 +99,13 @@ table.table tbody tr:nth-child(even) {
     margin-top: 10px;
     padding: 20px;
   }
+
+  
+  #myCombobox-socio{
+    border: none; /* Quita el borde */
+    padding: 5px; /* Agrega un espacio interno para un aspecto mejorado */
+    border-radius: 5px; /* Agrega esquinas redondeadas para un aspecto suave */
+    background-color: rgb(96, 139, 189);
+    color: rgb(252, 252, 252);
+    font-weight: bold;
+}

@@ -47,7 +47,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
    
     const obtenerDetalleInmueble = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
       console.log(inmueble,padronPropietariosDetalle.data.id)
-      console.log("AQeUII")
+console.log("AQeUII")
       const response = await axios.get(
           `${serverURL}/Propietarios/obtener/detalle/inmueble/id?id_inmueble=${inmueble.id}&id_propietario=${padronPropietariosDetalle.data.id}`
         );
@@ -63,7 +63,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
       
     });
 
-    
+
 
    //capturar el nombre del  propeitario
    const resultados = await Promise.all(obtenerDetalleInmueble);
@@ -95,7 +95,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
       }
     }
 
-    const propietariosConPartida = [];
+ const propietariosConPartida = [];
     /*
 
     padronPropietariosDetalle.data.inmuebleEntities.forEach((inmueble) => {
@@ -117,7 +117,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     SetDataDetallePropietario(padronPropietariosDetalle);
     SetCoPropietario(NombrePropietario)
     setPartidasRegistrales(PartidasUnicos)
-    //consultar si existen expedientes
+//consultar si existen expedientes
 
     console.log(padronPropietariosDetalle.data.desDni)
     const existeCliente = await axios.get(

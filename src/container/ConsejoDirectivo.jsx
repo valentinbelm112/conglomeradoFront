@@ -99,7 +99,10 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();
     console.log(id + "identificador");
-    await UseDeleteConsejoDirectivo(`${serverURL}/CGM/delete/${id}`,EstadoGlobal);
+    await UseDeleteConsejoDirectivo(
+      `${serverURL}/CGM/delete/${id}`,
+      EstadoGlobal
+    );
     const { response } = await useGetConsejoDirectivoListarRefre(
       `${serverURL}/CGM/listar`,
       EstadoGlobal
@@ -149,10 +152,8 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
         draggable: false, // No se puede arrastrar
         closeOnClick: false, // No se cierra al hacer clic
       }
-
     );
   };
-
 
   //Documentos consejo directivo
   const ModeloProps1 = {
@@ -180,16 +181,13 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   };
 
   const handleCancelDelete = () => {
-    toast.dismiss(); 
+    toast.dismiss();
   };
-
-  
 
   if (isLoading || isLoadingDoc) {
     return (
       <>
         <Container_Nav_Sidb_Load />
-       
       </>
     );
   }
@@ -203,12 +201,15 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
       <div className="navbar-sidebar-directivos">
         <NavbarConglomerado Estado={Estado} />
         <div className="container-Sidebar-view-directivo">
-        {open ? null : (
-          <div className={open === false && "sidebar-transition"}>
-            <SidebarMenu setTogle={setTogle} />
-          </div>
-        )}
-          <div className="row container-table-register-list-directivo" style={{ width: `100%` }} >
+          {open ? null : (
+            <div className={open === false && "sidebar-transition"}>
+              <SidebarMenu setTogle={setTogle} />
+            </div>
+          )}
+          <div
+            className="row container-table-register-list-directivo"
+            style={{ width: `100%` }}
+          >
             <div className="col-md-9 col-sm-12">
               <div className="title-consejo-directivo">
                 Consejo Directivo Vigente
@@ -254,147 +255,175 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
               </div>
 
               <div className="card-body">
-                <div className="outer-table-registro-directivo">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th
-                          scope="col"
-                          style={{
-                            backgroundColor: "lightblue",
-                            padding: "8px",
-                            borderTop: "2px solid white",
-                            borderLeft: "2px solid white",
-                            borderBottom: "2px solid white",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Nombres{" "}
-                        </th>
-                        <th
-                          scope="col"
-                          style={{
-                            backgroundColor: "lightblue",
-                            padding: "8px",
-                            borderTop: "2px solid white",
-                            borderLeft: "2px solid white",
-                            borderBottom: "2px solid white",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Apellidos
-                        </th>
-                        <th
-                          scope="col"
-                          style={{
-                            backgroundColor: "lightblue",
-                            padding: "8px",
-                            borderTop: "2px solid white",
-                            borderLeft: "2px solid white",
-                            borderBottom: "2px solid white",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          DNI
-                        </th>
-                        <th
-                          scope="col"
-                          style={{
-                            backgroundColor: "lightblue",
-                            padding: "8px",
-                            borderTop: "2px solid white",
-                            borderLeft: "2px solid white",
-                            borderBottom: "2px solid white",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Cargo
-                        </th>
-                        <th
-                          scope="col"
-                          style={{
-                            backgroundColor: "lightblue",
-                            padding: "8px",
-                            borderTop: "2px solid white",
-                            borderLeft: "2px solid white",
-                            borderBottom: "2px solid white",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Teléfono
-                        </th>
-                        <th
-                          scope="col"
-                          style={{
-                            backgroundColor: "lightblue",
-                            padding: "8px",
-                            borderTop: "2px solid white",
-                            borderLeft: "2px solid white",
-                            borderBottom: "2px solid white",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Dirección
-                        </th>
-                        <th
-                          scope="col"
-                          style={{
-                            backgroundColor: "lightblue",
-                            padding: "8px",
-                            borderTop: "2px solid white",
-                            borderLeft: "2px solid white",
-                            borderBottom: "2px solid white",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Acción
-                        </th>
-                      </tr>
-                    </thead>
+                <div className="outer-table-registro-propietario">
+                  <div
+                    className="table-responsive container-list-table-registro-propietarios"
+                    style={{ overflowX: "auto" }}
+                  >
+                    <table className="table table-bordered table-condensed table-hover table-striped">
+                      <thead>
+                        <tr>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgb(141 176 216)",
+                              padding: "8px",
+                              borderTop: "2px solid white",
+                              borderLeft: "2px solid white",
+                              borderBottom: "2px solid white",
+                              whiteSpace: "nowrap",
+                              color: "rgb(86, 104, 138)",
+                            }}
+                          >
+                            Nombres{" "}
+                          </th>
 
-                    <tbody>
-                      {refrescar.map((directivo) => (
-                        <tr key={`${directivo.id}`}>
-                          <td>{directivo.des_nombres}</td>
-                          <td>{directivo.des_apellidos}</td>
-                          <td>{directivo.dni}</td>
-                          <td>{directivo.des_cargo}</td>
-                          <td>{directivo.num_telefono}</td>
-                          <td>{directivo.des_direccion}</td>
-                          <td>
-                            <div className="table-column-gestion-info-directivo">
-                              <button
-                                className="btn-gestion-delete-info-directivo "
-                                onClick={() =>
-                                  handleDeleteDirectivoR(directivo.id)
-                                }
-                              >
-                                <DeleteForeverIcon style={{ color: `red` }} />
-                              </button>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgb(141 176 216)",
+                              padding: "8px",
+                              borderTop: "2px solid white",
+                              borderLeft: "2px solid white",
+                              borderBottom: "2px solid white",
+                              whiteSpace: "nowrap",
+                              color: "rgb(86, 104, 138)",
+                            }}
+                          >
+                            DNI
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgb(141 176 216)",
+                              padding: "8px",
+                              borderTop: "2px solid white",
+                              borderLeft: "2px solid white",
+                              borderBottom: "2px solid white",
+                              whiteSpace: "nowrap",
+                              color: "rgb(86, 104, 138)",
+                            }}
+                          >
+                            Cargo
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgb(141 176 216)",
+                              padding: "8px",
+                              borderTop: "2px solid white",
+                              borderLeft: "2px solid white",
+                              borderBottom: "2px solid white",
+                              whiteSpace: "nowrap",
+                              color: "rgb(86, 104, 138)",
+                            }}
+                          >
+                            Nombre Asociación
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgb(141 176 216)",
+                              padding: "8px",
+                              borderTop: "2px solid white",
+                              borderLeft: "2px solid white",
+                              borderBottom: "2px solid white",
+                              whiteSpace: "nowrap",
+                              color: "rgb(86, 104, 138)",
+                            }}
+                          >
+                            Partida
+                          </th>
 
-                              <button className="btn-gestion-edit-info-directivo">
-                                <input
-                                  id="mostrar-modal-editar"
-                                  name="modal"
-                                  type="radio"
-                                />
-
-                                <label
-                                  onClick={(e) =>
-                                    handleClickOpenEditFrom(directivo)
-                                  }
-                                  htmlFor="mostrar-modal-editar"
-                                >
-                                  {" "}
-                                  <EditIcon color="primary" />{" "}
-                                </label>
-                              </button>
-                            </div>
-                          </td>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgb(141 176 216)",
+                              padding: "8px",
+                              borderTop: "2px solid white",
+                              borderLeft: "2px solid white",
+                              borderBottom: "2px solid white",
+                              whiteSpace: "nowrap",
+                              color: "rgb(86, 104, 138)",
+                            }}
+                          >
+                            Asiento
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgb(141 176 216)",
+                              padding: "8px",
+                              borderTop: "2px solid white",
+                              borderLeft: "2px solid white",
+                              borderBottom: "2px solid white",
+                              whiteSpace: "nowrap",
+                              color: "rgb(86, 104, 138)",
+                            }}
+                          >
+                            Acción
+                          </th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+
+                      <tbody>
+                        {refrescar.length === 0 ? (
+                          <tr>
+                            <td colSpan="8" style={{ textAlign: "center" }}>
+                              No hay datos disponibles
+                            </td>
+                          </tr>
+                        ) : (
+                          refrescar.map((directivo) => (
+                            <tr key={`${directivo.id}`}>
+                              <td style={{ whiteSpace: "nowrap" }}>
+                                {directivo.des_nombres}
+                              </td>
+                              <td>{directivo.dni}</td>
+                              <td >{directivo.des_cargo}</td>
+                              <td style={{ whiteSpace: "nowrap" }}>
+                                {directivo.des_nombre_asociacion}
+                              </td>
+                              <td>{directivo.des_partida}</td>
+                              <td>{directivo.desAsiento}</td>
+                              <td>
+                                <div className="table-column-gestion-info-directivo">
+                                  <button
+                                    className="btn-gestion-delete-info-directivo "
+                                    onClick={() =>
+                                      handleDeleteDirectivoR(directivo.id)
+                                    }
+                                  >
+                                    <DeleteForeverIcon
+                                      style={{ color: `red` }}
+                                    />
+                                  </button>
+
+                                  <button className="btn-gestion-edit-info-directivo">
+                                    <input
+                                      id="mostrar-modal-editar"
+                                      name="modal"
+                                      type="radio"
+                                    />
+
+                                    <label
+                                      onClick={(e) =>
+                                        handleClickOpenEditFrom(directivo)
+                                      }
+                                      htmlFor="mostrar-modal-editar"
+                                    >
+                                      {" "}
+                                      <EditIcon color="primary" />{" "}
+                                    </label>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
               {click && (
