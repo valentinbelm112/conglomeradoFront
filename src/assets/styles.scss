@@ -55,8 +55,6 @@ table.table tbody tr:nth-child(even) {
   border-radius: 5px;
 }
 
-
-
 .spinner {
 	position: absolute;
 	border: 4px solid rgba(0, 0, 0, 0.1);
@@ -72,6 +70,7 @@ table.table tbody tr:nth-child(even) {
 	
   }
 
+
   .container-info-personal-expediente-filter{
     background: #fff;
     border-radius: 8px;
@@ -85,6 +84,12 @@ table.table tbody tr:nth-child(even) {
     border-radius: 8px;
     padding: 20px;
    
+  }
+  .container-partidas-upload-foto{
+     background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
   }
 
   .container-info-inmueble-detail{

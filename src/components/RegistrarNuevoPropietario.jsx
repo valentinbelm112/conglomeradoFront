@@ -34,9 +34,9 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
                 des_provincia: "",
                 des_tipo_dominio: "",
                 num_acciones_derechos: "",
-                num_area: "",
                 numPartida: "",
                 des_situacion: "",
+                des_comentario:"",
                 numAsiento: "",
                 fec_registro_sunarp:""
 
@@ -516,21 +516,7 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
                                         </input>
                                         <br />
-                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            Área(m2) {!areaValido && (
-                                                <span className="error-message-from-prop ">*No válido</span>
-                                            )}
-                                        </div>
-                                        <input
-                                            type="text"
-                                            name="num_area"
-                                            value={datos.inmuebleEntities[0].num_area}
-                                            className={!areaValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
-                                            onChange={handleInputChange}
-                                        >
-
-
-                                        </input>
+                                      
 
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
                                             Provincia
@@ -559,7 +545,19 @@ const RegistrarNuevoPropietario = ({ RefrescarInformacion, clickR, setClickR, Es
 
 
                                         </input>
+                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Detalle Inmueble 
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="des_comentario"
+                                            value={datos.inmuebleEntities[0].des_comentario}
+                                            className={ "form-control upload-inscripcion-directivos"}
+                                            onChange={handleInputChange}
+                                        >
 
+
+                                        </input>
 
                                     </div>
                                 </div>

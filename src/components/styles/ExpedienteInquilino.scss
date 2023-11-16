@@ -11,6 +11,7 @@
     color: #076024;
 
 }
+
 .container-expediente-inquilino-detalle{
     display: flex;
     justify-content: space-between;
@@ -26,7 +27,7 @@
 #mostrar-modal-documento-socio {
 	display: none;
 	+ label {
-        background: linear-gradient(to bottom right, #076024, #00b65f);
+        background: linear-gradient(to bottom right, #50589b, #68b8cf);
         display: table;
         margin: auto;
         color: #fff;

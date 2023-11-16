@@ -1,14 +1,14 @@
-
 @import 'vars';
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-.title-container-expediente-propietario{
+
+.title-container-expediente-propietario {
     font-family: "Playfair Display", serif;
     font-weight: bold;
     color: rgb(39, 26, 10);
     margin-top: 1%;
     /* background-color: white; */
-    padding:5px;
+    padding: 5px;
     font-size: 20px;
     margin-bottom: 20px;
     list-style: none;
@@ -17,46 +17,64 @@
 
 }
 
-.container-expediente-propietario .Partida-registral-propietario-title{
+.container-expediente-propietario .Partida-registral-propietario-title {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
     color: #428bca;
 }
 
-.title-numero-partida-p{
-    font-weight: bold; color: #6558d3;
-}
-.title-oficina-registral-p{
-    font-weight: bold; color: #6558d3;
-}
-.title-area-p{
-    font-weight: bold; color: #6558d3;
+.title-numero-partida-p {
+    font-weight: bold;
+    color: #6558d3;
 }
 
-.title-estado-p{
-    font-weight: bold; color: #6558d3;
-}
-.title-tipo-dominio-p{
-    font-weight: bold; color: #6558d3;
+.outer-table-registro-directivo-copropietario {
+    overflow-y: auto;
+    height: 20vh;
 }
 
-.title-acciones-drechos-p{
-    font-weight: bold; color: #6558d3;
+
+.title-oficina-registral-p {
+    font-weight: bold;
+    color: #6558d3;
 }
 
-.title-acciones-drechos-p{
-    font-weight: bold; color: #6558d3;
+.title-area-p {
+    font-weight: bold;
+    color: #6558d3;
 }
 
-.title-direccion-propietarios-p{
-    font-weight: bold; color: #6558d3;
+.title-estado-p {
+    font-weight: bold;
+    color: #6558d3;
 }
 
-.Partida-registral-propietario-title-p{
+.title-tipo-dominio-p {
+    font-weight: bold;
+    color: #6558d3;
+}
+
+.title-acciones-drechos-p {
+    font-weight: bold;
+    color: #6558d3;
+}
+
+.title-acciones-drechos-p {
+    font-weight: bold;
+    color: #6558d3;
+}
+
+.title-direccion-propietarios-p {
+    font-weight: bold;
+    color: #6558d3;
+}
+
+.Partida-registral-propietario-title-p {
     font-family: "Roboto", sans-serif;
 }
 
-.container-expediente-contactChoice1-propietario{
+
+.container-expediente-contactChoice1-propietario {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
     font-size: 15px;
@@ -64,80 +82,76 @@
 
 }
 
-.container--expediente-propietario{
+
+.container--expediente-propietario {
     display: flex;
     justify-content: center;
 }
-.foto-expediente-propietario{
+
+.foto-expediente-propietario {
     width: 70%;
     height: 50%;
 }
 
-.title-info-personal-expediente{
-    font-family: 'Oswald', sans-serif;
-    font-weight: bold;
-    font-size: 30px;
-    color: #ea1f1f;
-}
-.container-info-personal{
+
+.container-info-personal {
     display: flex;
-   
+
 }
-.title-datos-personales-expediente-filter{
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-}
-.container-partida-filter-expediente{
+
+
+
+.title-numero-partida {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
 }
 
-.title-numero-partida{
+.title-oficina-registral {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
 }
 
-.title-oficina-registral{
+.title-area {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
 }
 
-.title-area{
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-}
-.title-estado{
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-}
-.title-tipo-dominio{
+.title-estado {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
 }
 
-.title-acciones-drechos{
+.title-tipo-dominio {
     font-family: "Roboto", sans-serif;
-    font-weight: bold; 
-}
-.title-motivo-baja{
-    font-family: "Playfair Display", serif;
     font-weight: bold;
 }
-.title-observaciones-baja{
+
+.title-acciones-drechos {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.title-motivo-baja {
     font-family: "Playfair Display", serif;
     font-weight: bold;
 }
 
-.title-fecha-baja{
+.title-observaciones-baja {
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+}
+
+.title-fecha-baja {
     font-family: "Playfair Display", serif;
     font-weight: bold;
 }
 
 
 #mostrar-modal-documento-baja-socio {
-	display: none;
-	+ label {
-        background: linear-gradient(to bottom right, #076024, #00b65f);
+    display: none;
+
+    +label {
+        background: linear-gradient(to bottom right, #50589b, #68b8cf);
         margin: auto;
         color: #fff;
         line-height: 3.7;
@@ -145,63 +159,66 @@
         text-transform: uppercase;
         cursor: pointer;
         border-radius: 7%;
-        
-		&:hover {
-			background: darken(steelblue,10%);
-		}
-	}
-  &:checked { 
-    & ~ #modal-show-document {
-        top: 20px;
-    
-	  }
-    & ~ #cerrar-modal + label {
-      display: block;
+
+        &:hover {
+            background: darken(steelblue, 10%);
+        }
     }
-  }
+
+    &:checked {
+        &~#modal-show-document {
+            top: 20px;
+
+        }
+
+        &~#cerrar-modal+label {
+            display: block;
+        }
+    }
 }
 
 
-.title-co-propietarios-list{
+.title-co-propietarios-list {
     font-family: "Playfair Display", serif;
     font-weight: bold;
 }
-.title-co-propietarios-dni{
+
+.title-co-propietarios-dni {
     font-family: "Playfair Display", serif;
     font-weight: bold;
 }
 
-.title-co-propietarios-dni-conyugue{
+.title-co-propietarios-dni-conyugue {
     font-family: "Playfair Display", serif;
     font-weight: bold;
 }
 
-.title-direccion-propietarios{
+.title-direccion-propietarios {
     font-family: "Roboto", sans-serif;
-    font-weight: bold; 
+    font-weight: bold;
 }
 
-.title-direccion-propietarios{
+.title-direccion-propietarios {
     font-family: "Roboto", sans-serif;
-    font-weight: bold; 
-}
-.title-co-conyugue-propietario{
-    font-family: "Roboto", sans-serif;
-    font-weight: bold; 
+    font-weight: bold;
 }
 
-.informacion-inmueble-propietario{
+.title-co-conyugue-propietario {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+}
+
+.informacion-inmueble-propietario {
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-around;
     width: 50%;
 }
 
-.Documentos-asociado-padron-propietario{
-    color: green;
-    font-weight: bold;   
-    font-family: 'Oswald', sans-serif;
+.Documentos-asociado-padron-propietario {
+    font-family: "Oswald", sans-serif;
     font-weight: bold;
-    font-size: 30px;  
+    font-size: 30px;
+    color: #428bca;
 }
 
 
@@ -210,7 +227,8 @@
     border-collapse: collapse;
 }
 
-.tabla-co-propietario-datos th, .tabla-co-propietario-datos td {
+.tabla-co-propietario-datos th,
+.tabla-co-propietario-datos td {
     text-align: left;
     padding: 2px;
     border-bottom: 1px solid #ddd;
@@ -229,6 +247,3 @@
 .conyuge-co-propietario {
     width: 50%;
 }
-
-
-

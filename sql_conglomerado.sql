@@ -157,7 +157,7 @@ SET des_estado = 'Activo'
 WHERE des_estado != 'Inactivo';
 
 select *from CRE_PROPIETARIOS WHERE des_estado = '';
-
+select *from CRE_PROPIETARIOS WHERE des_codigo_dni = '74931915';
 
 alter table CRE_PROPIETARIOS
   add constraint CRE_PROPIETARIOS_PK primary key (id_propietario);
@@ -186,10 +186,10 @@ create table CRE_INMUEBLE_PROP
   num_acciones_derechos        float,
   des_departamento             VARCHAR2(200),
   des_distrito                 VARCHAR2(200),
-  num_area                     float,
   des_provincia                VARCHAR2(200),
   des_codigo_asociacion        VARCHAR2(200),
   fec_registro_sunarp          Date,
+  des_comentario              VARCHAR2(200), 
  des_asiento                  VARCHAR2(200),
  des_situacion                  VARCHAR2(200)
 )
@@ -223,6 +223,9 @@ FROM CRE_PROPIETARIOS a
 INNER JOIN CRE_PROPIETARIOS_INMUEBLE c ON a.id_propietario = c.id_propietario
 INNER JOIN CRE_INMUEBLE_PROP b ON b.id_inmueble = c.id_inmueble where b.des_codigo_asociacion='E00241';
 
+drop table CRE_INMUEBLE_PROP;
+drop table CRE_PROPIETARIOS;
+drop table CRE_PROPIETARIOS_INMUEBLE;
 
 CREATE TABLE CRE_PROPIETARIOS_INMUEBLE (
     num_acciones_derechos    NUMBER(10, 6),
@@ -260,7 +263,7 @@ delete from CRE_PROPIETARIOS_INMUEBLE;
 select*from  CRE_PROPIETARIOS_INMUEBLE;
 drop table CRE_PROPIETARIOS_INMUEBLE
 
-select*from  CRE_PROPIETARIOS_INMUEBLE;
+select*from  CRE_PROPIETARIOS_INMUEBLE where id_propietario='20813';
 
 select*from  CRE_PROPIETARIO_BAJA_DET;
 

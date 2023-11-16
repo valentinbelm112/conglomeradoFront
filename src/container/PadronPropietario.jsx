@@ -673,7 +673,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                         <tbody>
                                             {refrescar.length === 0 ? (
                                                 <tr>
-                                                    <td colSpan="8" style={{ textAlign: "center" }}>
+                                                    <td colSpan="10" style={{ textAlign: "center" }}>
                                                         No hay datos disponibles
                                                     </td>
                                                 </tr>
@@ -683,6 +683,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                     .map((propietario) =>
                                                         propietario.inmuebleEntities.map((indexInmueble) => (
                                                             <tr key={`${propietario.id}-${indexInmueble.id}`}>
+                                                                {console.log(propietario.id)}
                                                                 <td
                                                                     style={{
                                                                         overflow: "hidden",

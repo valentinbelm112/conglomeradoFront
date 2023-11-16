@@ -183,9 +183,9 @@ const handleClickCloseForm = () => {
               <div className="fecha-document-container-input">
                 <input
                   type="text"
-                  name="des_Asiento"
-                  value={datos.des_Asiento}
-                  placeholder={props.enviarDatos.des_Asiento}
+                  name="desAsiento"
+                  value={datos.desAsiento}
+                  placeholder={props.enviarDatos.desAsiento}
                   className="form-control input-edit-directivo"
 
                   onChange={handleInputChange} />
