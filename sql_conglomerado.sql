@@ -203,7 +203,7 @@ drop table CRE_INMUEBLE_PROP
 select * from CRE_INMUEBLE_PROP
 delete from CRE_INMUEBLE_PROP
 
-select * from CRE_PROPIETARIOS
+select * from CRE_PROPIETARIOS where des_codigo_dni='71858727'
 
 
 select *from  CRE_PROPIETARIOS_INMUEBLE
@@ -215,7 +215,7 @@ delete from CRE_INMUEBLE_PROP
 delete from CRE_PROPIETARIOS_INMUEBLE;
 select*from  CRE_PROPIETARIOS where des_nombres='AGUILERA GUTIERREZ TRINIDAD'
 select*from  CRE_INMUEBLE_PROP
-select*from  CRE_PROPIETARIOS_INMUEBLE where id_propietario='99230'
+select*from  CRE_PROPIETARIOS_INMUEBLE where id_propietario='22941'
 select*from  CRE_PROPIETARIOS_INMUEBLE where id_propietario='102900'
 select*from  CRE_PROPIETARIOS_INMUEBLE where id_propietario='128686' and id_inmueble='110241'
 SELECT *
