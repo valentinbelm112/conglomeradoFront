@@ -27,7 +27,7 @@ const ExpedientePropietario = (props) => {
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
-
+console.log(props)
  
 
   //console.log(situacionAsiento);
@@ -49,7 +49,7 @@ const ExpedientePropietario = (props) => {
 
     if (props.propietario.length > 0) {
       console.log("Found co propietario");
-      const foundCopropietario = props.propietario[0].situacion.filter(
+      const foundCopropietario = props.propietario.filter(
         (element) => element.desNombreCompleto !== props.nombreExpedienteProp
       );
       

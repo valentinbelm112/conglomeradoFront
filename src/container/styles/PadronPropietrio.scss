@@ -240,6 +240,59 @@ td {
     text-align: center;
   }
 }
+#mostrar-form-documento-co-propietarios-person-add-export {
+  display: none;
+
+  +label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    color: #3498db;
+    padding: 10px;
+    /* Espacio alrededor del icono */
+    background-color: #fff;
+    /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* Sombra para un aspecto tridimensional */
+    transition: width 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    /* Efecto de transformación al pasar el mouse */
+
+    &:hover {
+      width: 260px;
+      /* Ancho automático */
+      background-color: #fff;
+
+      .button-text {
+        display: inline-block;
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &:checked {
+    &~#modal-mostrar-form-documento-propietarios-person-importar-excel {
+      top: 170px;
+    }
+
+    &~#cerrar-modal+label {
+      display: block;
+    }
+  }
+}
+
 
 #mostrar-form-documento-propietarios-person-add-export {
   display: none;

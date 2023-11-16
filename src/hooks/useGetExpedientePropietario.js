@@ -26,7 +26,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     );
     console.log(id);
 
-
+/*
     const padronDetalleObtener = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
      
       const response = await axios.get(
@@ -43,6 +43,14 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
       
     });
 
+*/
+const response = await axios.get(
+  `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${padronPropietariosDetalle.data.desDni}`,
+  config
+  );
+
+ 
+console.log(response);
 
    
     const obtenerDetalleInmueble = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
@@ -63,13 +71,15 @@ console.log("AQeUII")
       
     });
 
+    
+
 
 
    //capturar el nombre del  propeitario
    const resultados = await Promise.all(obtenerDetalleInmueble);
 
    //capturar el nombre del  propeitario
-   const resultadosCopropietarios = await Promise.all(padronDetalleObtener);
+  // const resultadosCopropietarios = await Promise.all(padronDetalleObtener);
 
   console.log("hola");
   setSituacionAsiento(resultados);
@@ -113,7 +123,7 @@ console.log("AQeUII")
 */
 
    //console.log(propietariosConPartida)
-    SetPropietariosPartida(resultadosCopropietarios);
+    SetPropietariosPartida(response.data);
     SetDataDetallePropietario(padronPropietariosDetalle);
     SetCoPropietario(NombrePropietario)
     setPartidasRegistrales(PartidasUnicos)

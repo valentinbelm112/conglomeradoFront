@@ -13,6 +13,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../components/ButtonConglomerado";
 import ModalUploadPdfAsiento from "../components/ModalUploadPdfAsiento";
+import FormInportCoPropietario from "../components/FormInportarCopropietario";
 import "./styles/PadronPropietrio.scss";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
@@ -44,6 +45,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [click, setClick] = useState(false);
     const [clickBajaForm, setClickBajaForm] = useState(false);
     const [clickImportProp, setClickImportProp] = useState(false);
+    const [clickImportCoProp, setClickImportCoProp] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
 
@@ -296,6 +298,10 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setClickImportProp(!clickImportProp);
     };
 
+    const handleClickImportarCoPropietario = () => {
+        setClickImportCoProp(!clickImportCoProp);
+    };
+
 
 
     if (isLoading) {
@@ -398,6 +404,22 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                 {" "}
                                                 <PublishIcon />{" "}
                                                 <span className="button-text">Importar</span>{" "}
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <div className="col-auto registrar-nuevo-propietarios-add-delete-export-import">
+                                        <div>
+                                            <input
+                                                id="mostrar-form-documento-co-propietarios-person-add-export"
+                                                name="modal"
+                                                type="radio"
+                                            />
+                                            <label htmlFor="mostrar-form-documento-co-propietarios-person-add-export"
+                                                onClick={handleClickImportarCoPropietario}>
+                                                {" "}
+                                                <PublishIcon />{" "}
+                                                <span className="button-text">Importar Copropietarios</span>{" "}
                                             </label>
 
                                         </div>
@@ -823,6 +845,14 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                         && (
                                             <FormInportPropietario
                                                 onClickEstado={setClickImportProp}
+                                                RefrescarInformacion={RefrescarInformacion}
+                                            />)
+                                    }
+
+                      {clickImportCoProp
+                                        && (
+                                            <FormInportCoPropietario
+                                                onClickEstado={setClickImportCoProp}
                                                 RefrescarInformacion={RefrescarInformacion}
                                             />)
                                     }

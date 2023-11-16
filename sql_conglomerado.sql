@@ -27,12 +27,13 @@ create table CLI_ASIENTO_PROPIETARIO
   des_dni                     VARCHAR2(200),
   des_estado_civil            NUMBER(10),
   des_dni_conyugue            VARCHAR2(200),
-  des_acciones               VARCHAR2(200)
+  des_acciones               VARCHAR2(200),
+  des_dni_prop                VARCHAR2(200)
 
 );
-delete from CLI_ASIENTO_PROPIETARIO
+delete from CLI_ASIENTO_PROPIETARIO;
 
-
+drop table CLI_ASIENTO_PROPIETARIO
 
 select *from CLI_ASIENTO_PROPIETARIO;
 delete from CRE_CONSEJO_DIRECTIVO
