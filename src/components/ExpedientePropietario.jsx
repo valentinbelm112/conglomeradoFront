@@ -27,7 +27,7 @@ const ExpedientePropietario = (props) => {
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
-  console.log(props);
+ // console.log(props);
 
   //console.log(situacionAsiento);
   const handleOptionSelectConyugue = (event) => {

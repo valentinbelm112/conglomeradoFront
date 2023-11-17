@@ -16,14 +16,16 @@ export const useGetConsejoDirectivo=(API,setRefrescar,auth)=>{
             },
         };
     
-
-        const response = await axios(API,
+        await axios(API,
             config
-            );
-        console.log(response)
-        setDirectivos(response);
-        SetLoading(false);
-        setRefrescar(response.data)
+            )
+            .then((response)=>{
+                console.log(response)
+                setDirectivos(response);
+                SetLoading(false);
+                setRefrescar(response.data)
+            })
+             
         }
         
     useEffect( () => {

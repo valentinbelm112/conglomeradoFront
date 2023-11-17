@@ -1,11 +1,14 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { serverURL } from "../utils/Configuration";
 
 export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
 
     const [isLoading, SetLoading] = useState(true);
     const [dataPropietario, SetDataPropietario] = useState(null);
-    const [codigoPropietario, SetCodigoPropietario] = useState(null)
+    const [codigoPropietario, SetCodigoPropietario] = useState(null);
+    const [estadoActivoP,setEstadoActivoP]=useState(null);
+  const [estadoInactivoP,setEstadoInactivoP]=useState(null);
     console.log("hola")
     console.log(auth)
     const doSomething = async () => {
@@ -16,6 +19,19 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
             },
         };
         
+        const estadoActivoP = await axios.get(
+            `${serverURL}/Estadistica/obtener/estado/propietarios/activo/${auth.des_codigo_asociacion}`,
+            config
+          );
+          
+         
+          
+          const estadoInactivoP = await axios.get(
+            `${serverURL}/Estadistica/obtener/estado/propietarios/inactivo/${auth.des_codigo_asociacion}`,
+            config
+          );
+         
+      
 
        console.log(config)
        await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`, config).then(response => {
@@ -25,6 +41,8 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
                 value: e.codigoPropietario,
                 label: e.codigoPropietario,
             }));
+               setEstadoActivoP(estadoActivoP.data);
+               setEstadoInactivoP(estadoInactivoP.data);
 
                 console.log(codigoPropietario);
                 SetCodigoPropietario(codigoPropietario);
@@ -48,7 +66,7 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
     }, []);
 
 
-    return { dataPropietario, isLoading, codigoPropietario };
+    return { dataPropietario, isLoading, codigoPropietario,estadoActivoP ,estadoInactivoP};
 }
 
 export const UseGetPadronInquilino = (API, setRefrescar, auth) => {

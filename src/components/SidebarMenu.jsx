@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useContext, useEffect ,useState} from "react";
 import "./styles/SidebarMenu.scss"
 import { motion } from "framer-motion";
 import Item from "./ItemSidebar";
@@ -15,19 +15,16 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import PersonIcon from '@mui/icons-material/Person';
 import { removeFromLocalStorage } from "../hooks/useLocalStorage";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilePen } from '@fortawesome/free-solid-svg-icons'
+import AuthContext from "../context/AuthContext";
 const SidebarMenu = ({setTogle}) => {
     const [open, setOpen] = useState(true);
-
+    const { auth } = useContext(AuthContext);
     // for collpsing sidebar
     const handleToggle = () => {
         setOpen(!open);
          setTogle(!open)
     };
 
-
-  
     const sideContainerVariants = {
         true: {
             width: "15rem",
@@ -60,6 +57,7 @@ const SidebarMenu = ({setTogle}) => {
             width: "3rem",
         },
     };
+
     return (
         <div className={open ? "App" : "Appfalse"}>
             
@@ -121,7 +119,7 @@ const SidebarMenu = ({setTogle}) => {
                     >
                         
                         <img
-                            src="https://media.licdn.com/dms/image/D4D03AQHf79vVLS5CMw/profile-displayphoto-shrink_800_800/0/1667133462647?e=1700092800&v=beta&t=eLb8D31vTBqIuc5XFvl71dL1pFoTFjg_Ukl6ySQWkh8"
+                             src={auth.des_link_perf}
                             alt="profile_img"
                         />
                           

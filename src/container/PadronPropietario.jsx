@@ -49,7 +49,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
 
-    const { isLoading, codigoPropietario } =
+    const { isLoading, codigoPropietario ,estadoActivoP,estadoInactivoP} =
         UseGetPadronPropietario(
             `${serverURL}/Propietarios/Obtener`,
             setRefrescar,
@@ -246,8 +246,9 @@ const PadronPropietario = ({ EstadoGlobal }) => {
 
     const handleSort = () => {
         const newOrder = sortOrder === "asc" ? "desc" : "asc";
-        console.log(refrescar);
+        //console.log(refrescar);
         setSortOrder(newOrder);
+
 
         const sortedPadronPropietario = [...refrescar].sort((a, b) => {
             // Manejar los valores null
@@ -262,13 +263,31 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setRefrescar(sortedPadronPropietario);
     };
 
+    const handleSortCodigoPropietario = () => {
+        const newOrder = sortOrder === "asc" ? "desc" : "asc";
+        //console.log(refrescar);
+        setSortOrder(newOrder);
+
+        const sortedPadronPropietario = [...refrescar].sort((a, b) => {
+            // Manejar los valores null
+            const desCodigoA = a.codigoPropietario || ""; // Si desDni es null, asigna una cadena vacía
+            const desCodigoB = b.codigoPropietario || ""; // Si desDni es null, asigna una cadena vacía
+
+            return newOrder === "asc"
+                ? desCodigoA.localeCompare(desCodigoB)
+                : desCodigoB.localeCompare(desCodigoA);
+        });
+
+        setRefrescar(sortedPadronPropietario);
+    };
+
     const handleSortApellidos = () => {
         const newOrder = sortOrder === "asc" ? "desc" : "asc";
         setSortOrder(newOrder);
         const sortedPadronPropietario = [...refrescar].sort((a, b) =>
             newOrder === "asc"
-                ? a.des_Apellidos.localeCompare(b.des_Apellidos)
-                : b.des_Apellidos.localeCompare(a.des_Apellidos)
+                ? a.des_nombres.localeCompare(b.des_nombres)
+                : b.des_nombres.localeCompare(a.des_nombres)
         );
         setRefrescar(sortedPadronPropietario);
     };
@@ -491,7 +510,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                 >
                                                     <div className="container-order-a-z-propietario">
                                                         <div>Codigo Propietario</div>
-                                                        <button className="title-codigo-propietario">
+                                                        <button className="title-codigo-propietario" onClick={handleSortCodigoPropietario}>
                                                             <FontAwesomeIcon
                                                                 icon={faArrowDownAZ}
                                                                 style={{ color: `red` }}
@@ -562,7 +581,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         borderLeft: "2px solid white",
                                                         borderBottom: "2px solid white",
                                                         whiteSpace: "nowrap",
-                                                        fontSize: "12px",
                                                         fontSize: "16px",
                                                         color: "#56688a",
                                                     }}
@@ -578,7 +596,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         borderLeft: "2px solid white",
                                                         borderBottom: "2px solid white",
                                                         whiteSpace: "nowrap",
-                                                        fontSize: "12px",
                                                         fontSize: "16px",
                                                         color: "#56688a",
                                                     }}
@@ -594,7 +611,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         borderLeft: "2px solid white",
                                                         borderBottom: "2px solid white",
                                                         whiteSpace: "nowrap",
-                                                        fontSize: "12px",
                                                         fontSize: "16px",
                                                         color: "#56688a",
                                                     }}
@@ -610,7 +626,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         borderLeft: "2px solid white",
                                                         borderBottom: "2px solid white",
                                                         whiteSpace: "nowrap",
-                                                        fontSize: "12px",
                                                         fontSize: "16px",
                                                         color: "#56688a",
                                                     }}
@@ -626,7 +641,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         borderLeft: "2px solid white",
                                                         borderBottom: "2px solid white",
                                                         whiteSpace: "nowrap",
-                                                        fontSize: "12px",
                                                         fontSize: "16px",
                                                         color: "#56688a",
                                                     }}
@@ -643,7 +657,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         borderLeft: "2px solid white",
                                                         borderBottom: "2px solid white",
                                                         whiteSpace: "nowrap",
-                                                        fontSize: "12px",
                                                         fontSize: "16px",
                                                         color: "#56688a",
                                                     }}
@@ -660,7 +673,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                         borderLeft: "2px solid white",
                                                         borderBottom: "2px solid white",
                                                         whiteSpace: "nowrap",
-                                                        fontSize: "12px",
                                                         fontSize: "16px",
                                                         color: "#56688a",
                                                         zIndex: "3",
@@ -875,6 +887,13 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                     <option value="7">7</option>
                                     <option value="10">10</option>
                                 </select>
+                            </div>
+                            <div>
+                                Nº propietarios Activos: {estadoActivoP}
+                            </div>
+
+                            <div>
+                                Nº propietarios Inactivos: {estadoInactivoP}
                             </div>
                             <ReactPaginate
                                 previousLabel={

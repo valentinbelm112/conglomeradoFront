@@ -30,8 +30,8 @@ const ListExpedientesPropietarios=(props)=>{
 useEffect(() => {
       // Función para verificar el tamaño de la pantalla y actualizar el estado
       const checkScreenSize = () => {
-          setOpen(window.innerWidth > 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
-          setOpenElement(window.innerWidth > 767);
+          setOpen(window.innerWidth < 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
+          setOpenElement(window.innerWidth <  767);
       };
 
       // Verificar el tamaño de la pantalla al cargar el componente y cada vez que cambie el tamaño de la ventana

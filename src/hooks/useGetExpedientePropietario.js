@@ -11,6 +11,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
   const [coPropietario, SetCoPropietario] = useState(null);
   const[partidasRegistrales,setPartidasRegistrales] = useState(null);
   const[situacionAsiento,setSituacionAsiento]=useState(null);
+  
   const config = {
         
     headers: {
@@ -24,7 +25,8 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
       `${serverURL}/Propietarios/obtener/propietario/id?id_propietario=${id2}`,
       config
     );
-    console.log(id);
+  
+
 
 /*
     const padronDetalleObtener = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
@@ -44,6 +46,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
     });
 
 */
+
 const response = await axios.get(
   `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${padronPropietariosDetalle.data.desDni}`,
   config
@@ -280,5 +283,6 @@ console.log("AQeUII")
     coPropietario,
     partidasRegistrales,
     situacionAsiento
+
   };
 };

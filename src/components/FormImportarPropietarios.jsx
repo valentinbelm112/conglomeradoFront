@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const FormInportPropietario = (props) => {
    // onchange states
    const [excelFile, setExcelFile] = useState(null);
-
+   const [isLoading, setIsLoading] = useState(false);
    const handleClickCloseForm = () => {
     console.log(props)
     props.onClickEstado(false);
@@ -27,7 +27,7 @@ const FormInportPropietario = (props) => {
 
 
     const enviarDatos = async (event) => {
-
+        setIsLoading(true);
         event.preventDefault();
         console.log("Enviando")
         console.log("Enviando  +datos.fecha_documento");
@@ -55,7 +55,7 @@ const FormInportPropietario = (props) => {
                     throw new Error('Error del servidor.'); // Lanza un error personalizado para otros códigos de estado (500, etc.)
                 }
                 else {
-                    console.log(data); // Maneja la respuesta del servidor aquí
+                    setIsLoading(false);
                     props.RefrescarInformacion();
                      toast.success("Registro exitoso del padron de propietarios");
                      props.onClickEstado(false);
@@ -122,12 +122,19 @@ const FormInportPropietario = (props) => {
 
 
 
-                            <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
+                            {isLoading && <div className="spinner"></div>}
 
-                                <button type="submit" className="btn-enviar-carga-masiva-directivos">Aceptar
-                                </button>
 
-                            </div>
+                                <div className="btn-register-padron-propietarios-info" style={{ width: `100%` }}>
+
+                                    <button type="submit"
+                                    value={isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+                                    className={isLoading ? "button" : "btn-enviar-carga-masiva-directivos"}
+                                    disabled={isLoading}
+                                    style={{color:'white'}}>{isLoading ? "Subiendo..." : "Importar Propietarios"}
+                                    </button>
+                                
+                                </div>
                         </form>
 
                     </div>
