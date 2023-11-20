@@ -10,3 +10,26 @@
 .container-image-upload-show-cgm{
     height: 100%;
 }
+
+/* Estilos para la tabla */
+.pdf-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Ajusta según tu diseño */
+  }
+  
+  /* Estilos para las celdas de la tabla */
+  .pdf-list-table th,
+  .pdf-list-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+
+
+  
+  /* Estilos adicionales para el botón "Abrir PDF" al pasar el mouse */
+  button:hover {
+    background-color: #005a8d;
+  }

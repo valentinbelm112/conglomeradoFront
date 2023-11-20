@@ -54,7 +54,7 @@ const ModalUploadPdfAsiento = ({ isOpen, onClose, components }) => {
         contentLabel="Ventana emergente"
         style={{
           content: {
-            maxWidth: '700px', // Define el ancho máximo deseado
+            maxWidth: '800px', // Define el ancho máximo deseado
             margin: 'auto',    // Centra la ventana emergente horizontalmente
             zIndex: '200000',
             height:'98.5%'
@@ -100,9 +100,9 @@ const ModalUploadPdfAsiento = ({ isOpen, onClose, components }) => {
         </div>
         <progress value={progress} max="100"></progress>
       </div>
-        <div style={{height:'87%'}}>
-          
-        </div>
+      <div style={{height:'87%'}}>
+        {components[currentSection]}
+      </div>
   
         {/* Botones de siguiente y anterior en la parte inferior derecha */}
         <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>

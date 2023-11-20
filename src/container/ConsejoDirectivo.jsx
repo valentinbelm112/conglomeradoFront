@@ -25,8 +25,12 @@ import { useGetConsejoDirectivoDocument } from "../hooks/useGetConsejoDirectivo"
 import ModalImagesConglomerado from "../components/ModalImagesConglomerado";
 import ImageUploader from "../components/ImageUploader";
 import { format } from "date-fns";
+import ModalUploadPdfAsiento from "../components/ModalUploadPdfAsiento";
+import PdfUploader from "../components/PdfUploader";
+import SearchBar from "../components/ButtonConglomerado";
 const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpenPdf, setModalIsOpenPdf] = useState(false);
   const [open, setOpen] = useState(false);
   const [refrescar, setRefrescar] = useState([]);
   const [refrescarDocument, setRefrescarDocument] = useState([]);
@@ -34,6 +38,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const [showDcoument, SetShowDcoument] = useState(false);
   const [extraerDatos, SetExtraerDatos] = useState([]);
   const [togle, setTogle] = useState(true);
+  const [search, setSearch] = useState([]);
   const { directivos, isLoading } = useGetConsejoDirectivo(
     `${serverURL}/CGM/Obtener?Codigo_Asociacion=${EstadoGlobal.des_codigo_asociacion}`,
     setRefrescar,
@@ -47,6 +52,36 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     EstadoGlobal
   );
 
+  const handleSearch = (e) => {
+    const searchText = e.value;
+
+    if (typeof searchText === "string") {
+        // Si searchText es una cadena (texto), aplicamos toUpperCase
+        const searchTextUpper = searchText.toUpperCase();
+
+        setSearch(
+            refrescar.filter(
+                (item) =>
+                    item.desDni?.includes(searchText) ||
+                    item.desApellidos?.toUpperCase().includes(searchTextUpper) ||
+                    item.des_nombres?.toUpperCase().includes(searchTextUpper)
+            )
+        );
+    } else if (typeof searchText === "number") {
+        // Si searchText es un número, no aplicamos toUpperCase
+        setSearch(
+            refrescar.filter(
+                (item) =>
+                    item.desDni?.includes(searchText.toString()) ||
+                    item.desApellidos?.includes(searchText.toString()) ||
+                    item.des_nombres?.includes(searchText.toString())
+            )
+        );
+    } else {
+        // Manejar otros tipos de datos si es necesario
+        console.log("Tipo de búsqueda no admitido");
+    }
+};
   console.log(EstadoGlobal);
   const handleClickOpenFrom = () => {
     setClickR(!clickR);
@@ -92,6 +127,12 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     console.log(refrescar);
   };
 
+  const closeModal = () => {
+    setModalIsOpen(false);
+};
+const closeModalPdf = () => {
+  setModalIsOpenPdf(false);
+};
   const HandleDownloadExcel = () => {
     useGetExportConsejoDirectivo(`${serverURL}/CGM/export-directivos`);
   };
@@ -162,6 +203,11 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     request: `${serverURL}/Documento/consejo/dicrectivo/tipdoc/codAS`,
   };
 
+  const ModeloPropsPdf = {
+    titulo: "Documentos del consejo por asientos",
+    
+  };
+
   const tipoView = {
     opcion: 1,
   };
@@ -176,9 +222,13 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     setModalIsOpen(true);
   };
 
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const openModalPdf = () => {
+    //console.log("holi");
+    setModalIsOpenPdf(true);
   };
+
+
+ 
 
   const handleCancelDelete = () => {
     toast.dismiss();
@@ -206,16 +256,149 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
               <SidebarMenu setTogle={setTogle} />
             </div>
           )}
+          
           <div
-            className="row container-table-register-list-directivo"
+            className="container-table-register-list-directivo"
             style={{ width: `100%` }}
           >
-            <div className="col-md-9 col-sm-12">
-              <div className="title-consejo-directivo">
+             <div className="title-consejo-directivo">
                 Consejo Directivo Vigente
               </div>
-              <div className="row">
-                <div className="col-md-9">
+              <div className="col-md-12 col-sm-12">
+              <div className=" container-table-register-list-directivo-direct-upload" >
+              <div className="col-md-3 search-register-propietarios">
+                            <div className="col-md-4 search-register-socios">
+                                <div className="container-input-search-list-socios">
+                                    <SearchBar onSearch={handleSearch} />
+                                </div>
+                            </div>
+                        </div>
+             
+              <div className="container-options-documento-consejo-add-register-upload-documento">
+                <div className="container-title-show-iamgen-ins ">
+                  {
+                    //<button type="button" className="btn btn-outline-success">
+                    //Inscripcion de asociaciones
+                    //</button>
+                  }
+                 
+                  <input
+                    id="mostrar-modal-documento"
+                    name="modal"
+                    type="radio"
+                  />
+
+                  <label
+                    htmlFor="mostrar-modal-documento"
+                    onClick={changeStateButon}
+                  >
+                    {" "}
+                    <PreviewIcon style={{ color: "#0077b6" }} />{" "}
+                    <span>Ver documento</span>
+                  </label>
+                  {showDcoument && (
+                    <div id="modal1-sombra-form-Prop">
+                      <ShowRegistroDirectivo
+                        Detalledocumento={refrescarDocument}
+                        onClickEstado={SetShowDcoument}
+                        HandleDownloadExcel={HandleDownloadExcel}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className=" container-title-show-iamgen-ins">
+                
+                  <input id="mostrar-modal" name="modal" type="radio" />
+
+                  <label onClick={handleClickOpenFrom} htmlFor="mostrar-modal">
+                    {" "}
+                    <PostAddIcon style={{ color: "#4CAF50" }} />{" "}
+                    <span>Registrar</span>
+                  </label>
+
+                  {clickR && (
+                    <FormRegistrosDirectivos
+                      RefrescarInformacion={RefrescarInformacion}
+                      EstadoGlobal={EstadoGlobal}
+                      onClickEstado={setClickR}
+                    />
+                  )}
+                </div>
+                {refrescarDocument?.data.length > 0 && (
+                  <div className=" container-title-show-iamgen-ins">
+                  
+                    <input id="mostrar-modal" name="modal" type="radio" />
+
+                    <label htmlFor="mostrar-modal" onClick={openModal}>
+                      {" "}
+                      <ContentPasteSearchIcon
+                        style={{ color: "#4CAF50" }}
+                      /><span>Subir imagenes </span>
+                    </label>
+
+                    <ModalImagesConglomerado
+                      isOpen={modalIsOpen}
+                      onClose={closeModal}
+                      components={[
+                        <ImageUploader
+                          info={ModeloProps1}
+                          documentoPropietario={refrescarDocument.data.find(
+                            (item) => item.destipdoc === "DocInscripcion2"
+                          )}
+                          dataPropietario={refrescarDocument}
+                          api={`${serverURL}/CGM/Upload-info-consejo-doc`}
+                          request={ModeloProps1.request}
+                          tipoDoc={ModeloProps1.tipDoc}
+                          tipView={tipoView}
+                          refrescarDocumento={setRefrescarDocument}
+                        />,
+                        <ImageUploader
+                          info={ModeloProps2}
+                          documentoPropietario={refrescarDocument.data.find(
+                            (item) => item.destipdoc === "OthersDoc"
+                          )}
+                          api={`${serverURL}/CGM/Upload-info-consejo-doc`}
+                          dataPropietario={refrescarDocument}
+                          tipoDoc={ModeloProps2.tipDoc}
+                          request={ModeloProps1.request}
+                          tipView={tipoView}
+                          refrescarDocumento={setRefrescarDocument}
+                        />,
+                      ]}
+                    />
+                  </div>
+                )}
+
+{refrescarDocument?.data.length > 0 && (
+                  <div className=" container-title-show-iamgen-ins">
+                   
+                    <input id="mostrar-modal" name="modal" type="radio"  />
+
+                    <label htmlFor="mostrar-modal" onClick={openModalPdf}>
+                      {" "}
+                      <ContentPasteSearchIcon
+                        style={{ color: "#4CAF50" }}
+                      />{" "}
+                      <span>Subir  pdf </span>
+                    </label>
+
+                    <ModalUploadPdfAsiento
+                                        isOpen={modalIsOpenPdf}
+                                        onClose={closeModalPdf}
+                                        components={[
+                                          <PdfUploader 
+                                          info={ModeloPropsPdf}
+                                       />
+                                      ]}
+                                    />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className=" container-table-register-list-directivo-table-direct">
+             
+              <div className="row ">
+                <div className="col-md-9 ">
                   <div className="title-consejo-directivo-periodo-vigente">
                     {refrescarDocument?.data.map(
                       (item) =>
@@ -435,111 +618,8 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                 />
               )}
             </div>
-            <div className="col-md-3 col-sm-12" style={{ marginTop: "0.4%" }}>
-              <div className="title-consejo-directivo-documento">
-                Documento de la asociacion
-              </div>
-              <br />
-              <div className="row">
-                <div className="col-md-4 container-title-show-iamgen-ins">
-                  {
-                    //<button type="button" className="btn btn-outline-success">
-                    //Inscripcion de asociaciones
-                    //</button>
-                  }
-                  <div className="container-title-show-iamgen-ins-label">
-                    Ver Documento
-                  </div>
-                  <input
-                    id="mostrar-modal-documento"
-                    name="modal"
-                    type="radio"
-                  />
-
-                  <label
-                    htmlFor="mostrar-modal-documento"
-                    onClick={changeStateButon}
-                  >
-                    {" "}
-                    <PreviewIcon style={{ color: "#0077b6" }} />{" "}
-                  </label>
-                  {showDcoument && (
-                    <div id="modal1-sombra-form-Prop">
-                      <ShowRegistroDirectivo
-                        Detalledocumento={refrescarDocument}
-                        onClickEstado={SetShowDcoument}
-                        HandleDownloadExcel={HandleDownloadExcel}
-                      />
-                    </div>
-                  )}
-                </div>
-                <div className="col-md-4 container-title-show-iamgen-ins">
-                  <div className="container-title-show-iamgen-ins-label">
-                    Añadir Registro
-                  </div>
-                  <input id="mostrar-modal" name="modal" type="radio" />
-
-                  <label onClick={handleClickOpenFrom} htmlFor="mostrar-modal">
-                    {" "}
-                    <PostAddIcon style={{ color: "#4CAF50" }} />{" "}
-                  </label>
-
-                  {clickR && (
-                    <FormRegistrosDirectivos
-                      RefrescarInformacion={RefrescarInformacion}
-                      EstadoGlobal={EstadoGlobal}
-                      onClickEstado={setClickR}
-                    />
-                  )}
-                </div>
-                {refrescarDocument?.data.length > 0 && (
-                  <div className="col-md-4 container-title-show-iamgen-ins">
-                    <div className="container-title-show-iamgen-ins-label">
-                      (+) Documento
-                    </div>
-                    <input id="mostrar-modal" name="modal" type="radio" />
-
-                    <label htmlFor="mostrar-modal" onClick={openModal}>
-                      {" "}
-                      <ContentPasteSearchIcon
-                        style={{ color: "#4CAF50" }}
-                      />{" "}
-                    </label>
-
-                    <ModalImagesConglomerado
-                      isOpen={modalIsOpen}
-                      onClose={closeModal}
-                      components={[
-                        <ImageUploader
-                          info={ModeloProps1}
-                          documentoPropietario={refrescarDocument.data.find(
-                            (item) => item.destipdoc === "DocInscripcion2"
-                          )}
-                          dataPropietario={refrescarDocument}
-                          api={`${serverURL}/CGM/Upload-info-consejo-doc`}
-                          request={ModeloProps1.request}
-                          tipoDoc={ModeloProps1.tipDoc}
-                          tipView={tipoView}
-                          refrescarDocumento={setRefrescarDocument}
-                        />,
-                        <ImageUploader
-                          info={ModeloProps2}
-                          documentoPropietario={refrescarDocument.data.find(
-                            (item) => item.destipdoc === "OthersDoc"
-                          )}
-                          api={`${serverURL}/CGM/Upload-info-consejo-doc`}
-                          dataPropietario={refrescarDocument}
-                          tipoDoc={ModeloProps2.tipDoc}
-                          request={ModeloProps1.request}
-                          tipView={tipoView}
-                          refrescarDocumento={setRefrescarDocument}
-                        />,
-                      ]}
-                    />
-                  </div>
-                )}
-              </div>
             </div>
+           
           </div>
         </div>
         <ToastContainer />
