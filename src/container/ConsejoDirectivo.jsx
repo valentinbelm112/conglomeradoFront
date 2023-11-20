@@ -54,20 +54,26 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
 
   const handleSearch = (e) => {
     const searchText = e.value;
+    
 
     if (typeof searchText === "string") {
         // Si searchText es una cadena (texto), aplicamos toUpperCase
         const searchTextUpper = searchText.toUpperCase();
-
+    
         setSearch(
             refrescar.filter(
                 (item) =>
-                    item.desDni?.includes(searchText) ||
-                    item.desApellidos?.toUpperCase().includes(searchTextUpper) ||
-                    item.des_nombres?.toUpperCase().includes(searchTextUpper)
+                    item.dni?.includes(searchText) ||
+                    item.des_cargo?.toUpperCase().includes(searchTextUpper) ||
+                    item.des_nombres?.toUpperCase().includes(searchTextUpper) ||
+                    item.des_cargo?.toUpperCase().includes(searchTextUpper) ||
+                    item.desAsiento?.toUpperCase().includes(searchTextUpper)||
+                    item.des_partida?.toUpperCase().includes(searchTextUpper)||
+                    item.des_nombre_asociacion?.toUpperCase().includes(searchTextUpper)
             )
         );
     } else if (typeof searchText === "number") {
+    
         // Si searchText es un número, no aplicamos toUpperCase
         setSearch(
             refrescar.filter(
@@ -82,7 +88,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
         console.log("Tipo de búsqueda no admitido");
     }
 };
-  console.log(EstadoGlobal);
+ 
   const handleClickOpenFrom = () => {
     setClickR(!clickR);
   };
@@ -205,6 +211,7 @@ const closeModalPdf = () => {
 
   const ModeloPropsPdf = {
     titulo: "Documentos del consejo por asientos",
+    tipo_usuario:"Directivo"
     
   };
 
@@ -388,6 +395,7 @@ const closeModalPdf = () => {
                                         components={[
                                           <PdfUploader 
                                           info={ModeloPropsPdf}
+                                          codigo={EstadoGlobal.des_codigo_asociacion}
                                        />
                                       ]}
                                     />
@@ -422,7 +430,7 @@ const closeModalPdf = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3" style={{display:'flex',justifyContent:'flex-end'}}>
                   <div
                     onClick={HandleDownloadExcel}
                     className="container-consejo-directivo-title-and-icon"
@@ -557,7 +565,7 @@ const closeModalPdf = () => {
                             </td>
                           </tr>
                         ) : (
-                          refrescar.map((directivo) => (
+                          (search.length === 0 ? refrescar : search).map((directivo) => (
                             <tr key={`${directivo.id}`}>
                               <td style={{ whiteSpace: "nowrap" }}>
                                 {directivo.des_nombres}

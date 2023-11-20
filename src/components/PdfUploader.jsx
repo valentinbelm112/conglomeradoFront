@@ -22,7 +22,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Tooltip } from 'react-tooltip';
+import { Tooltip } from "react-tooltip";
 import Loader from "./Loader/Loader";
 const PdfUploader = (props) => {
   const [open, setOpen] = useState(false);
@@ -33,50 +33,28 @@ const PdfUploader = (props) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [pdfContent, setPdfContent] = useState(null);
   const [pdfs, setPdfs] = useState([]);
-  const[isLoading,setIsLoading]=useState(true);
-  const handleDownloadPdf = async () => {
-    try {
-      const response = await fetch("http://tu-servidor/download/pdf/1"); // Reemplaza con tu URL y fileId
-      const blob = await response.blob();
-      setPdfContent(URL.createObjectURL(blob));
-    } catch (error) {
-      console.error("Error downloading PDF", error);
-    }
-  };
+  const [isLoading, setIsLoading] = useState(true);
   const [uploadedFile, setUploadedFile] = useState(null);
 
-  const [datosDocumento, setDatosDocumento] = useState({
-    id_propietario: 0,
-    ds_dni: "",
-    des_codigo_asoc: "",
-    des_tipo_doc: "",
-  });
-
-  const [datosDocumentoConsejo, setDatosDocumentoConsejo] = useState({
-    codigo_asociacion: "",
-    tip_doc: "",
-    fecha_desde: "",
-    fecha_hasta: "",
-    fecha_documento: "",
-  });
+ 
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:9090/CGM/download/all-pdfs"
+        `${serverURL}/CGM/download/all-pdfs/${props.codigo}/${props.info.tipo_usuario}`
       );
-      const data = await response.json().then((response)=>{
-        setIsLoading(false)
+
+    
+      const data = await response.json().then((response) => {
+        console.log(response);
+        setIsLoading(false);
         setPdfs(response);
-      })
+      });
       console.log(data);
-     
     } catch (error) {
       console.error("Error fetching PDFs", error);
     }
   };
   useEffect(() => {
-   
-
     fetchData();
   }, []);
 
@@ -89,6 +67,7 @@ const PdfUploader = (props) => {
     setUploadedImage(firstImage);
   };
 
+
   const handleZoom = (event) => {
     setOpen(true);
 
@@ -98,6 +77,7 @@ const PdfUploader = (props) => {
 
     setIsLightboxOpen(true);
   };
+
 
   const handleZoomCarga = (event) => {
     setOpenCarga(true);
@@ -109,7 +89,7 @@ const PdfUploader = (props) => {
     setIsLightboxOpen(true);
   };
 
-  const handleDeleteCarga = async (event) => {};
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: "application/pdf",
     onDrop: async (acceptedFiles) => {
@@ -122,41 +102,57 @@ const PdfUploader = (props) => {
     setIsUploading(true);
     const formData = new FormData();
     formData.append("file", uploadedFile);
+    formData.append("des_codigo_Asociacion",props.codigo);
+    formData.append("des_tipo_usuario",props.info.tipo_usuario);
 
     try {
-      const response = await axios.post(
-        "http://localhost:9090/CGM/upload/pdf",
-        formData,
-        {
+      await axios
+        .post(`${serverURL}/CGM/upload/pdf`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
-      ).then((response)=>{
-      
-        fetchData()
-        console.log("File uploaded successfully:", response.data);
-      })
-  
-     
+        })
+        .then((response) => {
+          fetchData();
+          toast.success("Documento pdf agregado con éxito.");
+        });
     } catch (error) {
       console.error("Error uploading file:", error);
+      toast.error("Intente Nuevamente.");
     } finally {
       setIsUploading(false);
     }
   };
 
+
+  const EliminarRegistro = async (identificador)=>{
+    const formData = new FormData();
+    formData.append("id_documento", identificador);
+    
+    try {
+       await axios.delete(
+        `${serverURL}/CGM/delete/doc/pdf/directivo/${identificador}`
+      
+      ).then((response) => {
+        fetchData();
+        console.log("Registro eliminado con éxito");
+        toast.success("El documento se eliminó con éxito ");
+      })
+      
+    } catch (error) {
+      
+    }
+
+  }
   const loadPdf = async (pdfId) => {
     try {
       const response = await axios(
-        `http://localhost:9090/CGM/get/pdf/${pdfId}`,
+        `${serverURL}/CGM/get/pdf/${pdfId}`,
         {
-          responseType: "arraybuffer", // Solicitar el tipo de respuesta como arraybuffer
+          responseType: "arraybuffer", 
         }
       );
-      console.log(response);
-      //const blob = await response.blob();
-
+    
       const file = new Blob([response.data], { type: "application/pdf" });
 
       // IE
@@ -168,13 +164,59 @@ const PdfUploader = (props) => {
       const fileUrl = URL.createObjectURL(file);
       const newWindow = window.open(fileUrl, "_blank");
       newWindow && newWindow.focus();
+ 
+    } catch (error) {
+      console.error("Error loading PDF", error);
+    }
+
+  };
+
+
+  const loadPdfDowload = async (pdfId ,nombre_archivo) => {
+    try {
+      const response = await axios(
+        `${serverURL}/CGM/get/pdf/${pdfId}`,
+        {
+          responseType: "arraybuffer", // Solicitar el tipo de respuesta como arraybuffer
+        }
+      );
+      console.log(response);
+     
+
+      const file = new Blob([response.data], { type: "application/pdf" });
+
+      // IE
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(file, "SamplePDF.pdf");
+        return;
+      }
+
+  
+    
+      // Crear un enlace
+        const link = document.createElement("a");
+
+        // Establecer la URL del enlace como la URL del Blob
+        link.href = URL.createObjectURL(file);
+
+        // Establecer el nombre del archivo que se mostrará durante la descarga
+        link.download = nombre_archivo;
+
+        // Añadir el enlace al DOM
+        document.body.appendChild(link);
+
+        // Simular un clic en el enlace para iniciar la descarga
+        link.click();
       //console.log(blob)
     } catch (error) {
       console.error("Error loading PDF", error);
     }
   };
-
- 
+  const handleDelete = (event) => {
+    // Limpiar la imagen cargada
+    event.stopPropagation();
+    setUploadedFile(null);
+  };
   return (
     <div className="container-image-upload-show-cgm">
       <div className="title-socio-upload-image-padron">{props.info.titulo}</div>
@@ -183,7 +225,7 @@ const PdfUploader = (props) => {
         <div style={columnStyles}>
           <div
             {...getRootProps()}
-            style={{ ...dropzoneStyles, width: "125px" }}
+            style={{ ...dropzoneStyles, width: "169px" }}
           >
             <input {...getInputProps()} />
             {uploadedFile ? (
@@ -193,7 +235,7 @@ const PdfUploader = (props) => {
                 >
                   <Viewer
                     fileUrl={URL.createObjectURL(uploadedFile)}
-                    defaultScale={0.12}
+                    defaultScale={0.3}
                   />
                 </Worker>
                 <div style={buttonContainerStyles}>
@@ -202,7 +244,7 @@ const PdfUploader = (props) => {
                   </div>
 
                   <div style={{ color: `red` }}>
-                    <DeleteForeverIcon />
+                    <DeleteForeverIcon onClick={handleDelete} />
                   </div>
                 </div>
               </div>
@@ -223,71 +265,79 @@ const PdfUploader = (props) => {
             {isUploading && <p>Subiendo PDF...</p>}
           </div>
         </div>
-        {isLoading?<Loader/>:(
-        <div>
-          <table className="pdf-list-table">
-            <thead>
-              <tr>
-                <th>Nombre del PDF</th>
-                <th>Fecha de Actualización</th>
-                <th>Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pdfs.map((pdf) => (
-                <tr>
-                  <td>{pdf.des_nombre_documento}</td>
-                  <td>{pdf.fec_actualizacion}</td>
-                  <td>
-                    <div className="table-column-gestion-info-directivo">
-                      <button
-                        style={{ marginRight: "2px" }}
-                        data-tip="Ver PDF"
-                        data-for="tooltip-eye"
-                        className="btn-gestion-delete-info-directivo "
-                        onClick={() => loadPdf(pdf.id)}
-                      >
-                        <FontAwesomeIcon
-                          icon={faEye}
-                          style={{ color: "#2e247b" }}
-                        />
-                      </button>
-                      <button
-                        style={{ marginRight: "2px" }}
-                        className="btn-gestion-delete-info-directivo "
-                        onClick={() => loadPdf(pdf.id)}
-                      >
-                        {" "}
-                        <FontAwesomeIcon
-                          icon={faDownload}
-                          style={{ color: "#65c5d2" }}
-                        />
-                      </button>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <div className="outer-table-registro-propietario-upload-pdf">
+              <div
+                className="table-responsive container-list-table-registro-propietarios"
+                style={{ overflowX: "auto" }}
+              >
+                <table className="pdf-list-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre del PDF</th>
+                      <th>Fecha de Actualización</th>
+                      <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pdfs.map((pdf) => (
+                      <tr>
+                        <td>{pdf.des_nombre_documento}</td>
+                        <td>{pdf.fec_actualizacion}</td>
+                        <td>
+                          <div className="table-column-gestion-info-directivo">
+                            <button
+                              style={{ marginRight: "2px" }}
+                              data-tip="Ver PDF"
+                              data-for="tooltip-eye"
+                              className="btn-gestion-delete-info-directivo "
+                              onClick={() => loadPdf(pdf.id)}
+                            >
+                              <FontAwesomeIcon
+                                icon={faEye}
+                                style={{ color: "#2e247b" }}
+                              />
+                            </button>
+                            <button
+                              style={{ marginRight: "2px" }}
+                              className="btn-gestion-delete-info-directivo "
+                              onClick={() => loadPdfDowload(pdf.id,pdf.des_nombre_documento)}
+                            >
+                              {" "}
+                              <FontAwesomeIcon
+                                icon={faDownload}
+                                style={{ color: "#65c5d2" }}
+                              />
+                            </button>
 
-                      <button
-                        style={{ marginRight: "2px" }}
-                        className="btn-gestion-delete-info-directivo "
-                        onClick={() => loadPdf(pdf.id)}
-                      >
-                        {" "}
-                        <FontAwesomeIcon
-                          className="btn-gestion-delete-info-directivo "
-                          icon={faTrash}
-                          style={{ color: "#ec7f36" }}
-                        />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <Tooltip id="tooltip-eye">Ver PDF</Tooltip>
-  <Tooltip id="tooltip-download">Descargar PDF</Tooltip>
-  <Tooltip id="tooltip-trash">Eliminar PDF</Tooltip>
-        </div>)}
-       
-       
+                            <button
+                              style={{ marginRight: "2px" }}
+                              className="btn-gestion-delete-info-directivo "
+                              onClick={() => EliminarRegistro(pdf.id)}
+                            >
+                              {" "}
+                              <FontAwesomeIcon
+                                className="btn-gestion-delete-info-directivo "
+                                icon={faTrash}
+                                style={{ color: "#ec7f36" }}
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <Tooltip id="tooltip-eye">Ver PDF</Tooltip>
+            <Tooltip id="tooltip-download">Descargar PDF</Tooltip>
+            <Tooltip id="tooltip-trash">Eliminar PDF</Tooltip>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -305,6 +355,7 @@ const columnStyles = {
   display: "flex",
   flexDirection: "column",
   height: "90%",
+  marginTop: "4%",
 };
 
 const columnStylesUpload = {
@@ -321,8 +372,8 @@ const dropzoneStyles = {
   textAlign: "center",
   padding: "20px",
   cursor: "pointer",
-  width: "211px", // Reducir el ancho del Dropzone
-  height: "200px",
+  width: "209px", // Reducir el ancho del Dropzone
+  height: "277px",
 };
 
 const imageContainerStyles = {

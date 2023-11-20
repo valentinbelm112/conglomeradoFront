@@ -27,9 +27,7 @@ const ExpedientePropietario = (props) => {
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
- // console.log(props);
 
-  //console.log(situacionAsiento);
   const handleOptionSelectConyugue = (event) => {
     setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expedienteCony.data);
@@ -43,6 +41,14 @@ const ExpedientePropietario = (props) => {
   useEffect(() => {
     if (props.padron.data.inmuebleEntities.length > 0) {
       setSelectedValue(props.padron.data.inmuebleEntities[0].numPartida);
+      const situacionAsiento = props.situacionAsiento.filter(
+        (element) => element.asiento === props.padron.data.inmuebleEntities[0].numAsiento
+      );
+  
+  
+      if (situacionAsiento.length > 0) {
+        setSituacionAsiento(situacionAsiento);
+      }
     }
 
     if (props.padron.data.inmuebleEntities.length > 0) {
@@ -113,24 +119,14 @@ const ExpedientePropietario = (props) => {
   };
 
   const handleChangeAsiento = (event) => {
-    /*
-    console.log(event.target.value);
-    const inmuebleEncontrado = props.propietario.find(
-      (inmueble) => inmueble.partida=== selectedValue  && inmueble.asiento ===event.target.value
-    );
-
-    console.log(selectedValue);
-    console.log(inmuebleEncontrado);
-    setCoPropietarios(inmuebleEncontrado.situacion);
-  */
-
-    console.log(props);
+  
+    
     setSelectedValueAsiento(event.target.value);
     const situacionAsiento = props.situacionAsiento.filter(
       (element) => element.asiento === event.target.value
     );
 
-    console.log(situacionAsiento);
+
     if (situacionAsiento.length > 0) {
       setSituacionAsiento(situacionAsiento);
     }
@@ -356,7 +352,7 @@ const ExpedientePropietario = (props) => {
                 Información del inmueble
               </div>
               <div className="container-partida-filter-expediente">
-                <div>Selecionar Partida a Revisar</div>
+                <div>Seleccionar Partida a Revisar</div>
                 <div className="container-combo-socio">
                   <select
                     id="myCombobox-socio"
@@ -406,7 +402,7 @@ const ExpedientePropietario = (props) => {
                   </div>
 
                   <div className="col-md-4 container-title-estado">
-                    <div className="title-estado">Estado Propeitario</div>
+                    <div className="title-estado">Estado Propietario</div>
                     <div className="title-estado-p">
                       {props.padron.data.des_estado}
                     </div>
@@ -415,7 +411,7 @@ const ExpedientePropietario = (props) => {
                 
                 <div className="row" style={{marginTop:'10px'}}>
                   <div className="col-md-4">
-                    <div className="title-tipo-dominio">Tipo de dominio</div>
+                    <div className="title-tipo-dominio">Tipo de Dominio</div>
                     <div className="title-tipo-dominio-p">
                       {inmuebleSelect?.des_tipo_dominio}
                     </div>

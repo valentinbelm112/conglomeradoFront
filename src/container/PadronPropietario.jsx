@@ -30,12 +30,13 @@ import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import EditarPropietario from "../components/FormEditarPropietarios";
 import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario";
 import ReactPaginate from "react-paginate";
-
+import PdfUploader from "../components/PdfUploader";
 const PadronPropietario = ({ EstadoGlobal }) => {
     const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
     const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
     const [open, setOpen] = useState(false);
     const [openElement, setOpenElement] = useState(false);
+    const [modalIsOpenPdf, setModalIsOpenPdf] = useState(false);
     const [refrescar, setRefrescar] = useState([]);
     const [search, setSearch] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -81,6 +82,15 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setModalIsOpen(true);
     };
 
+    const ModeloPropsPdf = {
+        titulo: "Documentos de Inscripción de Registro de Predios",
+        tipo_usuario:"Propietario"
+        
+      };
+
+    const closeModalPdf = () => {
+        setModalIsOpenPdf(false);
+      };
 
     const DeletePropietarioRegistro = async (id1, id2) => {
         toast.dismiss();
@@ -321,7 +331,10 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setClickImportCoProp(!clickImportCoProp);
     };
 
-
+    const openModalPdf = () => {
+        //console.log("holi");
+        setModalIsOpenPdf(true);
+      };
 
     if (isLoading) {
         return (
@@ -476,16 +489,22 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                         name="modal"
                                         type="radio"
                                     />
-                                    <label htmlFor="mostrar-modal-documento-propietario">
+                                    <label htmlFor="mostrar-modal-documento-propietario" onClick={openModalPdf}>
                                         {" "}
                                         <FontAwesomeIcon icon={faFolderOpen} />
                                         {""}
                                     </label>
                                     <ModalUploadPdfAsiento
-                                        isOpen={modalIsOpen}
-                                        onClose={closeModal}
-
+                                        isOpen={modalIsOpenPdf}
+                                        onClose={closeModalPdf}
+                                        components={[
+                                          <PdfUploader 
+                                          info={ModeloPropsPdf}
+                                          codigo={EstadoGlobal.des_codigo_asociacion}
+                                       />
+                                      ]}
                                     />
+                                   
                                 </div>
                             </div>
                         </div>
