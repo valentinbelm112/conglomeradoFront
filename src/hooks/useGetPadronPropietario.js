@@ -9,6 +9,8 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
     const [codigoPropietario, SetCodigoPropietario] = useState(null);
     const [estadoActivoP,setEstadoActivoP]=useState(null);
   const [estadoInactivoP,setEstadoInactivoP]=useState(null);
+  const [currentPage, setCurrentPage] = useState(1); // Página inicial
+  const pageSize = 10; // Tamaño de la página
     console.log("hola")
     console.log(auth)
     const doSomething = async () => {
@@ -34,7 +36,7 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
       
 
        console.log(config)
-       await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`, config).then(response => {
+       await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&page=${currentPage}&size=${pageSize}`).then(response => {
             const codigoPropietario = response.data
      
             .filter((e) => e.des_estado !== "Inactivo")
