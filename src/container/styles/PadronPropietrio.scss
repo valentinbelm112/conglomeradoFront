@@ -118,6 +118,13 @@ td {
 
 }
 
+.outer-table-registro-propietario-upload-pdf {
+
+  overflow-y: auto;
+  height: 75vh;
+
+}
+
 /* Deshabilitar overflow-x:auto en .table-responsive */
 .table-responsive {
   overflow-x: initial !important;

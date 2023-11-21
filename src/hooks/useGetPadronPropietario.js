@@ -38,12 +38,12 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
        console.log(config)
        await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&page=${currentPage}&size=${pageSize}`).then(response => {
             const codigoPropietario = response.data
-     
-            .filter((e) => e.des_estado !== "Inactivo")
             .map((e) => ({
                 value: e.codigoPropietario,
                 label: e.codigoPropietario,
             }));
+
+            console.log("success")
                setEstadoActivoP(estadoActivoP.data);
                setEstadoInactivoP(estadoInactivoP.data);
 
