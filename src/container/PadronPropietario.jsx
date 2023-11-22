@@ -31,6 +31,7 @@ import EditarPropietario from "../components/FormEditarPropietarios";
 import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario";
 import ReactPaginate from "react-paginate";
 import PdfUploader from "../components/PdfUploader";
+import Loader from "../components/Loader/Loader";
 const PadronPropietario = ({ EstadoGlobal }) => {
     const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
     const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
@@ -49,25 +50,29 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [clickImportCoProp, setClickImportCoProp] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
-
-    const { isLoading, codigoPropietario ,estadoActivoP,estadoInactivoP,numPage} =
+    const [isLoadingTable, SetIsLoadingTable] = useState(false);
+    const { isLoading, codigoPropietario, estadoActivoP, estadoInactivoP, numPage } =
         UseGetPadronPropietario(
             `${serverURL}/Propietarios/Obtener`,
             setRefrescar,
             EstadoGlobal,
             currentPage * itemsPerPage,
-            currentPage * itemsPerPage+ itemsPerPage
+            currentPage * itemsPerPage + itemsPerPage
         );
 
-    const HandlePageChange =async ({ selected }) => {
+    const HandlePageChange = async ({ selected }) => {
         setCurrentPage(selected);
+      
+        SetIsLoadingTable(true);
         const { response } = await useGetPadronPropietarioComponenteRender(
             `${serverURL}/Propietarios/Obtener`,
             EstadoGlobal,
-             currentPage * itemsPerPage,
-            currentPage * itemsPerPage+ itemsPerPage
+            selected,
+            itemsPerPage
         );
-        console.log(response)
+        console.log(selected);
+        SetIsLoadingTable(false);
+
         setRefrescar(response.data.content);
     };
 
@@ -94,13 +99,13 @@ const PadronPropietario = ({ EstadoGlobal }) => {
 
     const ModeloPropsPdf = {
         titulo: "Documentos de Inscripción de Registro de Predios",
-        tipo_usuario:"Propietario"
-        
-      };
+        tipo_usuario: "Propietario"
+
+    };
 
     const closeModalPdf = () => {
         setModalIsOpenPdf(false);
-      };
+    };
 
     const DeletePropietarioRegistro = async (id1, id2) => {
         toast.dismiss();
@@ -111,8 +116,8 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         const { response } = await useGetPadronPropietarioComponenteRender(
             `${serverURL}/Propietarios/Obtener`,
             EstadoGlobal,
-             currentPage * itemsPerPage,
-            currentPage * itemsPerPage+ itemsPerPage
+            currentPage * itemsPerPage,
+            currentPage * itemsPerPage + itemsPerPage
         );
         setRefrescar(response.data);
     };
@@ -346,7 +351,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const openModalPdf = () => {
         //console.log("holi");
         setModalIsOpenPdf(true);
-      };
+    };
 
     if (isLoading) {
         return (
@@ -510,13 +515,13 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                         isOpen={modalIsOpenPdf}
                                         onClose={closeModalPdf}
                                         components={[
-                                          <PdfUploader 
-                                          info={ModeloPropsPdf}
-                                          codigo={EstadoGlobal.des_codigo_asociacion}
-                                       />
-                                      ]}
+                                            <PdfUploader
+                                                info={ModeloPropsPdf}
+                                                codigo={EstadoGlobal.des_codigo_asociacion}
+                                            />
+                                        ]}
                                     />
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -714,7 +719,11 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {refrescar.length === 0 ? (
+                                            {isLoadingTable ? <tr>
+                                                <td colSpan="12" style={{ textAlign: 'center' }}>
+                                                    <Loader />
+                                                </td>
+                                            </tr> : refrescar.length === 0 ? (
                                                 <tr>
                                                     <td colSpan="10" style={{ textAlign: "center" }}>
                                                         No hay datos disponibles
@@ -722,7 +731,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                 </tr>
                                             ) : (
                                                 (search.length === 0 ? refrescar : search)
-                                                    .slice(startIndex, endIndex)
+
                                                     .map((propietario) =>
                                                         propietario.inmuebleEntities.map((indexInmueble) => (
                                                             <tr key={`${propietario.id}-${indexInmueble.id}`}>
@@ -893,7 +902,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                             />)
                                     }
 
-                      {clickImportCoProp
+                                    {clickImportCoProp
                                         && (
                                             <FormInportCoPropietario
                                                 onClickEstado={setClickImportCoProp}
