@@ -27,8 +27,7 @@ create table CLI_ASIENTO_PROPIETARIO
   des_dni                     VARCHAR2(200),
   des_estado_civil            NUMBER(10),
   des_dni_conyugue            VARCHAR2(200),
-  des_acciones               VARCHAR2(200),
-  des_dni_prop                VARCHAR2(200)
+  des_acciones               VARCHAR2(200)
 
 );
 delete from CLI_ASIENTO_PROPIETARIO;
@@ -44,6 +43,7 @@ select *from CRE_CONSEJO_DIRECTIVO
 select *from  cre_consejo_directivo where des_dni='19889663'
 create table CRE_DOCUMENTO_DETALLE
 (
+
   num_documento_direct         NUMBER(10),
   des_codigo_asociacion        VARCHAR2(200),
   des_version                  VARCHAR2(200),

@@ -42,7 +42,7 @@ const ExpedientePropietario = (props) => {
     if (props.padron.data.inmuebleEntities.length > 0) {
       setSelectedValue(props.padron.data.inmuebleEntities[0].numPartida);
       const situacionAsiento = props.situacionAsiento.filter(
-        (element) => element.asiento === props.padron.data.inmuebleEntities[0].numAsiento
+        (element) => element.asiento === props.padron.data.inmuebleEntities[0].numAsientos
       );
   
   
@@ -57,14 +57,15 @@ const ExpedientePropietario = (props) => {
     setExpedienteSelect(props.expediente.data);
 
     if (props.propietario.length > 0) {
+      
       console.log("Found co propietario");
       const foundCopropietario = props.propietario.filter(
         (element) => element.desNombreCompleto !== props.nombreExpedienteProp
       );
 
-      console.log(foundCopropietario);
+      
       setCoPropietarios(foundCopropietario);
-      console.log(foundCopropietario);
+ 
     }
 
     console.log(props);

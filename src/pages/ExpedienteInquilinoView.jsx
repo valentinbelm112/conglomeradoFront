@@ -17,6 +17,7 @@ const ExpedienteInquilinoView=()=>{
         <>
         {
             auth?<ListExpedientesInquilino id1={id}  id2={id2} estadoGlobal={auth}/>:navigate(`/login`)
+            
         
         }
          </>
