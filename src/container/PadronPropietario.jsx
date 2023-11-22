@@ -50,15 +50,25 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
 
-    const { isLoading, codigoPropietario ,estadoActivoP,estadoInactivoP} =
+    const { isLoading, codigoPropietario ,estadoActivoP,estadoInactivoP,numPage} =
         UseGetPadronPropietario(
             `${serverURL}/Propietarios/Obtener`,
             setRefrescar,
-            EstadoGlobal
+            EstadoGlobal,
+            currentPage * itemsPerPage,
+            currentPage * itemsPerPage+ itemsPerPage
         );
 
-    const handlePageChange = ({ selected }) => {
+    const HandlePageChange =async ({ selected }) => {
         setCurrentPage(selected);
+        const { response } = await useGetPadronPropietarioComponenteRender(
+            `${serverURL}/Propietarios/Obtener`,
+            EstadoGlobal,
+             currentPage * itemsPerPage,
+            currentPage * itemsPerPage+ itemsPerPage
+        );
+        console.log(response)
+        setRefrescar(response.data.content);
     };
 
 
@@ -100,7 +110,9 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         );
         const { response } = await useGetPadronPropietarioComponenteRender(
             `${serverURL}/Propietarios/Obtener`,
-            EstadoGlobal
+            EstadoGlobal,
+             currentPage * itemsPerPage,
+            currentPage * itemsPerPage+ itemsPerPage
         );
         setRefrescar(response.data);
     };
@@ -916,7 +928,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                             </div>
                             <ReactPaginate
                                 previousLabel={
-                                    <div className="custom-pagination-icon">
+                                    <div className="custom-pagination-icon"  >
                                         <ArrowBackIosIcon
                                             style={{ height: "13px", width: "10px" }}
                                         />
@@ -930,13 +942,10 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                     </div>
                                 }
                                 breakLabel={<div className="custom-pagination-icon">...</div>}
-                                pageCount={Math.ceil(
-                                    (search.length === 0 ? refrescar : search).length /
-                                    itemsPerPage
-                                )}
+                                pageCount={numPage}
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={5}
-                                onPageChange={handlePageChange}
+                                onPageChange={HandlePageChange}
                                 containerClassName={"pagination justify-content-center"}
                                 pageClassName={"page-item"}
                                 pageLinkClassName={"page-link"}

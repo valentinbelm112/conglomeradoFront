@@ -2,15 +2,14 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { serverURL } from "../utils/Configuration";
 
-export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
+export const UseGetPadronPropietario = (API, setRefrescar, auth,startIndex,endIndex) => {
 
     const [isLoading, SetLoading] = useState(true);
     const [dataPropietario, SetDataPropietario] = useState(null);
     const [codigoPropietario, SetCodigoPropietario] = useState(null);
     const [estadoActivoP,setEstadoActivoP]=useState(null);
-  const [estadoInactivoP,setEstadoInactivoP]=useState(null);
-  const [currentPage, setCurrentPage] = useState(1); // Página inicial
-  const pageSize = 10; // Tamaño de la página
+     const [estadoInactivoP,setEstadoInactivoP]=useState(null);
+     const [numPage,setNumPage]=useState(null);
     console.log("hola")
     console.log(auth)
     const doSomething = async () => {
@@ -36,14 +35,17 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
       
 
        console.log(config)
-       await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&page=${currentPage}&size=${pageSize}`).then(response => {
-            const codigoPropietario = response.data
+       await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&startIndex=${startIndex}&endIndex=${endIndex}`, config).then(response => {
+            const codigoPropietario = response.data.content
+          
+            .filter((e) => e.des_estado !== "Inactivo")
             .map((e) => ({
                 value: e.codigoPropietario,
                 label: e.codigoPropietario,
             }));
-
-            console.log("success")
+              console.log(response.data)
+              setNumPage(response.data.totalPages
+                );
                setEstadoActivoP(estadoActivoP.data);
                setEstadoInactivoP(estadoInactivoP.data);
 
@@ -51,7 +53,7 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
                 SetCodigoPropietario(codigoPropietario);
                 SetDataPropietario(response);
                 SetLoading(false);
-                setRefrescar(response.data)
+                setRefrescar(response.data.content)
           })
           .catch(error => {
             console.error('Error en la solicitud:', error);
@@ -69,7 +71,7 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth) => {
     }, []);
 
 
-    return { dataPropietario, isLoading, codigoPropietario,estadoActivoP ,estadoInactivoP};
+    return { dataPropietario, isLoading, codigoPropietario,estadoActivoP ,estadoInactivoP,numPage};
 }
 
 export const UseGetPadronInquilino = (API, setRefrescar, auth) => {
@@ -188,9 +190,11 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
 }
 
 
-export const useGetPadronPropietarioComponenteRender = async (API, auth) => {
+export const useGetPadronPropietarioComponenteRender = async (API, auth,startIndex,endIndex) => {
     const codigo_asociacion = "E00241";
-    const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`);
+    console.log(startIndex)
+    console.log(endIndex)
+    const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&startIndex=${startIndex}&endIndex=${endIndex}`);
 
 
     return { response };
