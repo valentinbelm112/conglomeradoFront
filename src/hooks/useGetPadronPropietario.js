@@ -37,8 +37,6 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth,startIndex,endIn
        console.log(config)
        await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&startIndex=${startIndex}&endIndex=${endIndex}`, config).then(response => {
             const codigoPropietario = response.data.content
-          
-            .filter((e) => e.des_estado !== "Inactivo")
             .map((e) => ({
                 value: e.codigoPropietario,
                 label: e.codigoPropietario,
@@ -191,11 +189,11 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
 
 
 export const useGetPadronPropietarioComponenteRender = async (API, auth,startIndex,endIndex) => {
-    const codigo_asociacion = "E00241";
-    console.log(startIndex)
-    console.log(endIndex)
+   
+  
     const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&startIndex=${startIndex}&endIndex=${endIndex}`);
 
+    console.log(response)
 
     return { response };
 };

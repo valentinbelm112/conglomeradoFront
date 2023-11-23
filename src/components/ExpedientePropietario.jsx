@@ -41,8 +41,10 @@ const ExpedientePropietario = (props) => {
   useEffect(() => {
     if (props.padron.data.inmuebleEntities.length > 0) {
       setSelectedValue(props.padron.data.inmuebleEntities[0].numPartida);
+ 
+      
       const situacionAsiento = props.situacionAsiento.filter(
-        (element) => element.asiento === props.padron.data.inmuebleEntities[0].numAsientos
+        (element) => element.asiento === props.padron.data.inmuebleEntities[0].numAsiento
       );
   
   
@@ -190,7 +192,7 @@ const ExpedientePropietario = (props) => {
             <div className="container--expediente-propietario">
               {expedienteSelect ? (
                 <img
-                  src={"expedienteSelect?.des_url_foto"}
+                  src={expedienteSelect?.des_url_foto}
                   alt=""
                   className="foto-expediente-propietario"
                 />
@@ -428,7 +430,7 @@ const ExpedientePropietario = (props) => {
                   </div>
                   <div className="col-md-4">
                     <div className="title-acciones-drechos">
-                      Situación Propiedad
+                      Asiento
                     </div>
 
                     <div className="title-acciones-drechos-p">

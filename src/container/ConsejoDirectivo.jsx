@@ -13,6 +13,7 @@ import { serverURL } from "../utils/Configuration";
 import { useGetConsejoDirectivo } from "../hooks/useGetConsejoDirectivo";
 import { useGetConsejoDirectivoListarRefre } from "../hooks/useGetConsejoDirectivo";
 import "react-toastify/dist/ReactToastify.css";
+import ReactPaginate from "react-paginate";
 import { ToastContainer, toast } from "react-toastify";
 import useGetExportConsejoDirectivo from "../hooks/useGetExportExcelConsejoDirectivo";
 import { UseDeleteConsejoDirectivo } from "../hooks/useDeleteConsejoDirectivo";
@@ -28,6 +29,8 @@ import { format } from "date-fns";
 import ModalUploadPdfAsiento from "../components/ModalUploadPdfAsiento";
 import PdfUploader from "../components/PdfUploader";
 import SearchBar from "../components/ButtonConglomerado";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalIsOpenPdf, setModalIsOpenPdf] = useState(false);
@@ -39,6 +42,11 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   const [extraerDatos, SetExtraerDatos] = useState([]);
   const [togle, setTogle] = useState(true);
   const [search, setSearch] = useState([]);
+    //estado react pagination
+
+  //estado react pagination
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(7);
   const { directivos, isLoading } = useGetConsejoDirectivo(
     `${serverURL}/CGM/Obtener?Codigo_Asociacion=${EstadoGlobal.des_codigo_asociacion}`,
     setRefrescar,
@@ -51,6 +59,13 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     setRefrescarDocument,
     EstadoGlobal
   );
+
+   //function react pagination
+   const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
   const handleSearch = (e) => {
     const searchText = e.value;
@@ -141,6 +156,11 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     useGetExportConsejoDirectivo(`${serverURL}/CGM/export-directivos`);
   };
 
+  const handleItemsPerPageChange = (e) => {
+    const newItemsPerPage = parseInt(e.target.value, 10);
+    console.log(e.target.value);
+    setItemsPerPage(newItemsPerPage);
+  };
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();
     console.log(id + "identificador");
@@ -247,6 +267,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     setOpen(!open);
   };
 
+ 
   return (
     <>
       <div className="navbar-sidebar-directivos">
@@ -265,6 +286,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
             <div className="title-consejo-directivo">
               Consejo Directivo Vigente
             </div>
+          
             <div className="col-md-12 col-sm-12">
               <div className=" container-table-register-list-directivo-direct-upload">
                 <div className="col-md-3 search-register-propietarios">
@@ -440,9 +462,9 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                     </div>
                   </div>
                 </div>
-
+              
                 <div className="card-body">
-                  <div className="outer-table-registro-propietario">
+                  <div className="outer-table-registro-propietario-direct">
                     <div
                       className="table-responsive container-list-table-registro-propietarios"
                       style={{ overflowX: "auto" }}
@@ -561,7 +583,9 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                               </td>
                             </tr>
                           ) : (
-                            (search.length === 0 ? refrescar : search).map(
+                            (search.length === 0 ? refrescar : search)
+                            .slice(startIndex, endIndex)
+                            .map(
                               (directivo) => (
                                 <tr key={`${directivo.id}`}>
                                   <td style={{ whiteSpace: "nowrap" }}>
@@ -615,6 +639,54 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                     </div>
                   </div>
                 </div>
+                <div
+            style={{ display: "flex", justifyContent: "space-between" }}
+            className="container-pagination-propietarios"
+          >
+            <div className="row-per-page-container">
+              <span className="row-per-page-label">Filas por página:</span>
+              <select
+                className="row-per-page-select"
+                value={itemsPerPage}
+                onChange={handleItemsPerPageChange}
+              >
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <ReactPaginate
+              previousLabel={
+                <div className="custom-pagination-icon">
+                  <ArrowBackIosIcon style={{ height: "13px", width: "10px" }} />
+                </div>
+              } // Usa FontAwesomeIcon para el icono de "Anterior"
+              nextLabel={
+                <div className="custom-pagination-icon">
+                  <ArrowForwardIosIcon
+                    style={{ height: "13px", width: "10px" }}
+                  />
+                </div>
+              }
+              breakLabel={<div className="custom-pagination-icon">...</div>}
+              pageCount={Math.ceil(
+                (search.length === 0 ? refrescar : search).length / itemsPerPage
+              )}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageChange}
+              containerClassName={"pagination justify-content-center"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page-link"}
+              activeClassName={"active"}
+            />
+          </div>
                 {click && (
                   <FormEditarDirectivos
                     enviarDatos={extraerDatos}
@@ -626,6 +698,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
               </div>
             </div>
           </div>
+      
         </div>
         <ToastContainer />
       </div>
