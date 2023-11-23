@@ -373,7 +373,7 @@ const ExpedienteInquilino = (props) => {
   return (
     <div className="container-expediente-socio" id="container-expediente-socio">
       <div className="container-expediente-inquilino-detalle">
-        <div className="title-container-expediente-socio">
+        <div className="title-container-expediente-propietario">
           Expediente del Inquilino
         </div>
         <div>

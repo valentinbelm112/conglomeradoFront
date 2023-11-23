@@ -14,6 +14,12 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Download from "yet-another-react-lightbox/plugins/download";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import { ToastContainer } from "react-toastify";
+import DownloadIcon from "@mui/icons-material/Download";
+import "jspdf-autotable";
+import jsPDF from "jspdf";
+import oswaldBold from "../styles/Oswald-Bold.ttf";
+import oswaldRegular from "../styles/Oswald-Regular.ttf";
+import { format } from "date-fns";
 
 const ExpedientePropietario = (props) => {
   const [open, setOpen] = useState(false);
@@ -28,6 +34,40 @@ const ExpedientePropietario = (props) => {
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
 
+
+  const handleDescargarClick = () => {
+    const pdf = new jsPDF("p", "mm", "a4");
+    // Define la función para el encabezado
+    pdf.addFileToVFS("Oswald-Regular.ttf", oswaldRegular);
+    pdf.addFileToVFS("Oswald-Bold.ttf", oswaldBold);
+    pdf.addFont("Oswald-Regular.ttf", "Oswald", "normal");
+    pdf.addFont("Oswald-Bold.ttf", "Oswald", "bold");
+    const header = () => {
+      // Agrega el encabezado aquí, por ejemplo:
+      pdf.setFontSize(10);
+      pdf.setTextColor(100);
+      pdf.text(
+        "Encabezado Personalizado",
+        pdf.internal.pageSize.getWidth() / 2,
+        10,
+        { align: "center" }
+      );
+    };
+     // Establece el encabezado y pie de página
+     pdf.autoTable({
+      head: [{}],
+      body: [],
+      didDrawPage: function (data) {
+        // Llama a la función del encabezado y pie de página en cada página
+        header();
+      
+      },
+    });
+
+    pdf.save("expediente-inquilino.pdf");
+  }
+
+
   const handleOptionSelectConyugue = (event) => {
     setOpcionSeleccionada(event.target.value);
     setExpedienteSelect(props.expedienteCony.data);
@@ -41,13 +81,12 @@ const ExpedientePropietario = (props) => {
   useEffect(() => {
     if (props.padron.data.inmuebleEntities.length > 0) {
       setSelectedValue(props.padron.data.inmuebleEntities[0].numPartida);
- 
-      
+
       const situacionAsiento = props.situacionAsiento.filter(
-        (element) => element.asiento === props.padron.data.inmuebleEntities[0].numAsiento
+        (element) =>
+          element.asiento === props.padron.data.inmuebleEntities[0].numAsiento
       );
-  
-  
+      
       if (situacionAsiento.length > 0) {
         setSituacionAsiento(situacionAsiento);
       }
@@ -59,15 +98,12 @@ const ExpedientePropietario = (props) => {
     setExpedienteSelect(props.expediente.data);
 
     if (props.propietario.length > 0) {
-      
       console.log("Found co propietario");
       const foundCopropietario = props.propietario.filter(
         (element) => element.desNombreCompleto !== props.nombreExpedienteProp
       );
 
-      
       setCoPropietarios(foundCopropietario);
- 
     }
 
     console.log(props);
@@ -122,13 +158,10 @@ const ExpedientePropietario = (props) => {
   };
 
   const handleChangeAsiento = (event) => {
-  
-    
     setSelectedValueAsiento(event.target.value);
     const situacionAsiento = props.situacionAsiento.filter(
       (element) => element.asiento === event.target.value
     );
-
 
     if (situacionAsiento.length > 0) {
       setSituacionAsiento(situacionAsiento);
@@ -136,13 +169,18 @@ const ExpedientePropietario = (props) => {
   };
 
   return (
-    <div className="container-expediente-propietario" style={{marginLeft:'2%'}}>
+    <div
+      className="container-expediente-propietario"
+      style={{ marginLeft: "2%" }}
+    >
       <div className="title-container-expediente-propietario">
         Expediente del Propietario
       </div>
       <div className="row">
         <div className="col-md-5">
           <div className="container-partidas-info-foto">
+            <div>
+            <div>
             <div className="Partida-registral-propietario-title">
               Partidas Registral del propietario:
             </div>
@@ -151,6 +189,25 @@ const ExpedientePropietario = (props) => {
                 {item}
               </div>
             ))}
+            </div>
+            
+            <label
+                htmlFor="contactChoice1"
+                className="container-expediente-contactChoice1-propietario"
+              >
+                Descargar Expediente
+               <DownloadIcon
+               onClick={handleDescargarClick}
+                style={{
+                  color: `rgb(96, 139, 189)`,
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                }}
+              />
+              </label>
+            </div>
+            
             <div className="container-expediente-radio-button">
               <input
                 type="radio"
@@ -160,6 +217,8 @@ const ExpedientePropietario = (props) => {
                 checked={opcionSeleccionada === "opcion1"}
                 onChange={handleOptionSelectTitular}
               />
+               
+
               <label
                 htmlFor="contactChoice1"
                 className="container-expediente-contactChoice1-propietario"
@@ -238,7 +297,15 @@ const ExpedientePropietario = (props) => {
               <div className="title-datos-personales-expediente-filter">
                 Fecha de expedicion :
               </div>
-              <div>2023-08-07</div>
+              <div>
+                {expedienteSelect?.fec_expedicion &&
+                expedienteSelect?.fec_expedicion
+                  ? format(
+                      new Date(expedienteSelect?.fec_expedicion),
+                      "dd/MM/yyyy"
+                    )
+                  : "Fecha no disponible"}
+              </div>
             </div>
 
             <div className="container-info-personal">
@@ -251,11 +318,19 @@ const ExpedientePropietario = (props) => {
               <div className="title-datos-personales-expediente-filter">
                 Fecha de Nacimiento :
               </div>
-              <div>2023-08-07</div>
+              <div>
+                {expedienteSelect?.fec_nacimiento &&
+                expedienteSelect?.fec_nacimiento
+                  ? format(
+                      new Date(expedienteSelect?.fec_nacimiento),
+                      "dd/MM/yyyy"
+                    )
+                  : "Fecha no disponible"}
+              </div>
             </div>
             <div className="container-info-personal">
               <div className="title-datos-personales-expediente-filter">
-                Deparatamento de nacimiento :
+                Departamento de nacimiento :
               </div>
               <div>
                 {capitalizeFirstLetter(
@@ -411,8 +486,8 @@ const ExpedientePropietario = (props) => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="row" style={{marginTop:'10px'}}>
+
+                <div className="row" style={{ marginTop: "10px" }}>
                   <div className="col-md-4">
                     <div className="title-tipo-dominio">Tipo de Dominio</div>
                     <div className="title-tipo-dominio-p">
@@ -429,9 +504,7 @@ const ExpedientePropietario = (props) => {
                     </div>
                   </div>
                   <div className="col-md-4">
-                    <div className="title-acciones-drechos">
-                      Asiento
-                    </div>
+                    <div className="title-acciones-drechos">Asiento</div>
 
                     <div className="title-acciones-drechos-p">
                       {situacionAsiento.length > 0 &&
@@ -439,16 +512,41 @@ const ExpedientePropietario = (props) => {
                     </div>
                   </div>
                 </div>
+                <div className="row" style={{ marginTop: "10px" }}>
+                  <div className="col-md-12">
+                    <div className="title-tipo-dominio">
+                      Fecha de Registro de Acciones en Sunarp
+                    </div>
+                    <div className="title-tipo-dominio-p">
+                    {situacionAsiento.length > 0 ?
+                        situacionAsiento[0].fechar
+                        : "Fecha no disponible"}
+                    </div>
+                  </div>
+                </div>
 
-                <div className="title-acciones-drechos">Direccion</div>
+                <div
+                  className="title-acciones-drechos"
+                  tyle={{ marginTop: "10px" }}
+                >
+                  Direccion
+                </div>
                 <div className="title-direccion-propietarios-p">
                   {inmuebleSelect?.des_direccion}
                 </div>
 
-                <div className="title-acciones-drechos">Detalle</div>
+                <div
+                  className="title-acciones-drechos"
+                  tyle={{ marginTop: "10px" }}
+                >
+                  Detalle
+                </div>
                 <div className="title-direccion-propietarios-p">
-                 
-                  {situacionAsiento.length > 0?(situacionAsiento[0].comentario !=null?situacionAsiento[0].comentario:"Fundador del Inmueble"):"Fundador del Inmueble"}
+                  {situacionAsiento.length > 0
+                    ? situacionAsiento[0].comentario != null
+                      ? situacionAsiento[0].comentario
+                      : "Fundador del Inmueble"
+                    : "Fundador del Inmueble"}
                 </div>
               </div>
               {props.padron.data.propietarioBajaDetEntities.length > 0 && (
@@ -469,7 +567,8 @@ const ExpedientePropietario = (props) => {
                   </div>
                   <div>
                     {
-                      props.padron.data.propietarioBajaDetEntities[0].des_obserbaciones
+                      props.padron.data.propietarioBajaDetEntities[0]
+                        .des_obserbaciones
                     }
                   </div>
                   <div className="title-observaciones-baja">
@@ -501,7 +600,10 @@ const ExpedientePropietario = (props) => {
                   />
                 </div>
               )}
-              <div className="outer-table-registro-directivo-copropietario" style={{marginTop:'3px'}}>
+              <div
+                className="outer-table-registro-directivo-copropietario"
+                style={{ marginTop: "3px" }}
+              >
                 <table className="tabla-co-propietario-datos">
                   <tr>
                     <th

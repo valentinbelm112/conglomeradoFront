@@ -181,10 +181,12 @@ console.log("AQeUII")
               des_telefono: "3434343434",
               des_url_foto: response.data.data.urlFoto,
               dni: response.data.data.dni,
-              fec_Fecha_nacimiento: "2023-08-07T21:47:30.828Z",
+              fec_fecha_nacimiento:response.data.data.fecha_nacimiento,
+              fec_fecha_expedicion:response.data.data.fecha_expedicion
             },
           };
 
+  
           const responsepostExpediente = await axios.post(
             `${serverURL}/Expediente/save`,
             bodyExpediente.data,
@@ -248,7 +250,8 @@ console.log("AQeUII")
                 des_telefono: "3434343434",
                 des_url_foto: response.data.data.urlFoto,
                 dni: response.data.data.dni,
-                fec_Fecha_nacimiento: "2023-08-07T21:47:30.828Z",
+                fec_fecha_nacimiento:response.data.data.fecha_nacimiento,
+                fec_fecha_expedicion:response.data.data.fecha_expedicion
               },
             };
 
