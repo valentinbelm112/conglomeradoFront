@@ -20,7 +20,7 @@ import jsPDF from "jspdf";
 import oswaldBold from "../styles/Oswald-Bold.ttf";
 import oswaldRegular from "../styles/Oswald-Regular.ttf";
 import { format } from "date-fns";
-
+import tuContenidoDelArchivoTTF from "../assets/styles/PlayfairDisplay-Regular.ttf";
 const ExpedientePropietario = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -35,7 +35,11 @@ const ExpedientePropietario = (props) => {
   const navigate = useNavigate();
 
 
-  const handleDescargarClick = () => {
+  const handleDescargarClick = async() => {
+    // Configura las dimensiones del PDF
+    const tuContenidoDelArchivoTTF = await import('../assets/styles/PlayfairDisplay-Regular.ttf');
+  console.log(tuContenidoDelArchivoTTF);
+
     const pdf = new jsPDF("p", "mm", "a4");
     // Define la función para el encabezado
     pdf.addFileToVFS("Oswald-Regular.ttf", oswaldRegular);
@@ -53,16 +57,202 @@ const ExpedientePropietario = (props) => {
         { align: "center" }
       );
     };
-     // Establece el encabezado y pie de página
-     pdf.autoTable({
+
+    const oswaldFont = {
+      fontFamily: "Oswald",
+      fontStyle: "normal",
+    };
+    // Define la función para el pie de página
+    const footer = () => {
+      // Agrega el pie de página aquí, por ejemplo:
+      pdf.setFontSize(10);
+      pdf.setTextColor(100);
+      pdf.text(
+        "Pie de Página Personalizado",
+        pdf.internal.pageSize.getWidth() / 2,
+        pdf.internal.pageSize.getHeight() - 10,
+        { align: "center" }
+      );
+    };
+
+    // Establece el encabezado y pie de página
+    pdf.autoTable({
       head: [{}],
       body: [],
       didDrawPage: function (data) {
         // Llama a la función del encabezado y pie de página en cada página
         header();
-      
+        footer();
       },
     });
+
+    // Función para calcular la posición vertical de las líneas de texto
+    function calculateYPosition(lineNumber) {
+      return startY + lineNumber * lineHeight;
+    }
+
+    // Agrega un icono en la esquina superior izquierda (por ejemplo, un emoji)
+    // pdf.addImage(logo_proempresa, 'PNG', 5, 5, 10, 10); // Ajusta la posición y el tamaño del icono
+
+
+    // Establece las coordenadas y márgenes para el contenido en el PDF
+    const startX = 20;
+    const startY = 20;
+    const lineHeight = 10;
+    const pageWidth = pdf.internal.pageSize.getWidth() - 2 * startX;
+
+    pdf.addFileToVFS("PlayfairDisplay-Regular.ttf", tuContenidoDelArchivoTTF);
+
+  // Cargar la fuente "Playfair Display"
+  pdf.addFont("PlayfairDisplay-Regular.ttf", "Playfair Display", "normal");
+
+    // Aplicar el estilo al título
+    pdf.setFontSize(20); // Tamaño de fuente
+    pdf.setFont("Playfair Display", "bold"); // Utilizar la negrita
+    pdf.setTextColor("rgb(39, 26, 10)"); // Color de texto
+    pdf.text("Expediente del Inquilino", startX, startY);
+
+    // Agrega la sección de información personal
+    pdf.setFontSize(17); // Tamaño de fuente
+    pdf.setFont("bold"); // Establece la fuente en negrita
+    pdf.setTextColor("#428bca"); // Color de texto
+    pdf.text("Información Personal:", startX, startY + lineHeight);
+    pdf.setFontSize(12);
+    pdf.setFont("bold");
+    pdf.setTextColor("#000000"); // Color negro
+    // Aplicar el estilo al título en negrita
+    pdf.setFontSize(12); // Tamaño de fuente
+    pdf.setFont("Playfair Display", "bold");
+    pdf.setTextColor("rgb(39, 26, 10)"); // Color de texto
+    let textoTemporal = "Nombres:";
+// Obtener el ancho del texto temporal
+    let anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Nombres:", startX, calculateYPosition(2));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(capitalizeFirstLetter(expedienteSelect?.des_nombres?.trim()), startX + anchoTextoTemporal, calculateYPosition(2));
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Apellidos:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Apellidos:", startX, calculateYPosition(3));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(`${capitalizeFirstLetter(
+      expedienteSelect?.des_apellido_paterno?.trim()
+    )} ${capitalizeFirstLetter(
+      expedienteSelect?.des_apellido_materno?.trim()
+    )}`, startX + anchoTextoTemporal, calculateYPosition(3));
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Dni:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Dni:", startX, calculateYPosition(4));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.dni.trim(), startX + anchoTextoTemporal, calculateYPosition(4));
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Sexo:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Sexo:", startX, calculateYPosition(5));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.des_genero?.trim(), startX + anchoTextoTemporal, calculateYPosition(5));
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Fecha de Nacimiento:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Fecha de Nacimiento:", startX, calculateYPosition(6));
+    pdf.setFont("Playfair Display", "normal");
+    
+    pdf.text(format(
+      new Date(expedienteSelect?.fec_nacimiento),
+      "dd/MM/yyyy"
+    ), startX + anchoTextoTemporal, calculateYPosition(6));
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Departamento de nacimiento:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Departamento de nacimiento:", startX, calculateYPosition(7));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.des_departamento_nacimiento?.trim(), startX + anchoTextoTemporal, calculateYPosition(7));
+
+   
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Grado de Instruccion:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Grado de Instruccion:", startX, calculateYPosition(8));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.des_grado_instruccion?.trim(), startX + anchoTextoTemporal, calculateYPosition(8));
+
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Estado Civil:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Estado Civil:", startX, calculateYPosition(9));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.des_estado_civil?.trim(), startX + anchoTextoTemporal, calculateYPosition(9));
+
+  
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Departamento de Domicilio:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Departamento de Domicilio:", startX, calculateYPosition(10));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.des_departamento_dom?.trim(), startX + anchoTextoTemporal, calculateYPosition(10));
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Provincia de Domicilio:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Provincia de Domicilio:", startX, calculateYPosition(11));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.des_provincia_dom?.trim(), startX + anchoTextoTemporal, calculateYPosition(11));
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Distrito de Domicilio:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Distrito de Domicilio:", startX, calculateYPosition(12));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text(expedienteSelect?.des_distrito_dom?.trim(), startX + anchoTextoTemporal, calculateYPosition(12));
+
+    pdf.setFont("Playfair Display", "bold");
+    textoTemporal = "Dirección de Domicilio:";
+// Obtener el ancho del texto temporal
+    anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
+    pdf.text("Dirección de Domicilio:", startX, calculateYPosition(13));
+    pdf.setFont("Playfair Display", "normal");
+    pdf.text( expedienteSelect?.des_direccion_dom?.trim(), startX + anchoTextoTemporal, calculateYPosition(13));
+
+    // Calcula la posición vertical de la foto centrada
+    const photoY = calculateYPosition(2); // Puedes ajustar la línea de la foto para alinearla verticalmente
+    const photoWidth = 70; // Ancho de la foto
+    const photoHeight = 90; // Alto de la foto
+    const photoX = startX + pageWidth - photoWidth; // Posición X de la foto
+
+    // Agrega la foto
+    pdf.addImage(
+      "https://img.freepik.com/foto-gratis/emotivo-retrato-cabeza-mujer-joven-alegre_1163-5176.jpg?size=626&ext=jpg&ga=GA1.1.509541744.1699222898&semt=ais",
+      "JPEG",
+      photoX,
+      photoY,
+      photoWidth,
+      photoHeight
+    );
+
+    // Dibuja un marco alrededor de la foto
+    pdf.setDrawColor("#076024"); // Color del borde del marco
+    pdf.setLineWidth(1); // Ancho del borde del marco
+    pdf.rect(photoX, photoY, photoWidth, photoHeight); // Dibuja el rectángulo alrededor de la foto
+    // Agrega más información personal aquí...e
+
+   
+   
 
     pdf.save("expediente-inquilino.pdf");
   }
@@ -179,7 +369,7 @@ const ExpedientePropietario = (props) => {
       <div className="row">
         <div className="col-md-5">
           <div className="container-partidas-info-foto">
-            <div>
+            <div style={{display:'flex',justifyContent:'space-between'}}>
             <div>
             <div className="Partida-registral-propietario-title">
               Partidas Registral del propietario:
