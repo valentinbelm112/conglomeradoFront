@@ -118,7 +118,7 @@ const handleClickCloseForm = () => {
               <div className="fecha-document-container-input">
                 <input
                   type="text"
-                  name="des_apellidos"
+                  name="des_nombre_asociacion"
                   value={datos.des_nombre_asociacion}
                   placeholder={props.enviarDatos.des_nombre_asociacion}
                   className="form-control input-edit-directivo"

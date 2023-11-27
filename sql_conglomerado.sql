@@ -34,7 +34,7 @@ delete from CLI_ASIENTO_PROPIETARIO;
 
 drop table CLI_ASIENTO_PROPIETARIO
 
-select *from CLI_ASIENTO_PROPIETARIO;
+select *from CRE_DOCUMENTO_DETALLE;
 delete from CRE_CONSEJO_DIRECTIVO
 drop table CRE_CONSEJO_DIRECTIVO
 
@@ -296,6 +296,7 @@ JOIN CRE_PROPIETARIOS_INMUEBLE i ON p.id_propietario = i.id_propietario
 WHERE i.des_codigo_asociacion = 'E00241';
 
 DROP TABLE  CRE_EXPEDIENTE_PROPIETARIO;
+select *from CLI_EXPEDIENTE_PROPIETARIO
 -- Create table
 create table CLI_EXPEDIENTE_PROPIETARIO
 (
@@ -309,7 +310,7 @@ create table CLI_EXPEDIENTE_PROPIETARIO
   des_genero                      VARCHAR2(200),
   fec_fecha_nacimiento            DATE,
   fec_fecha_expedicion            DATE,
-  des_departamento_nacimiento     VARCHAR2(200),
+  des_departamento_nac            VARCHAR2(200),
   des_grado_instruccion           VARCHAR2(200),
   des_estado_civil                VARCHAR2(200),
   des_departamento_dom            VARCHAR2(200),

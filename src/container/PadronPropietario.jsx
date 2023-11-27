@@ -231,10 +231,12 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         console.log(refrescar);
         const { response } = await useGetPadronPropietarioComponenteRender(
             `${serverURL}/Propietarios/Obtener`,
-            EstadoGlobal
+            EstadoGlobal,
+            currentPage * itemsPerPage,
+            currentPage * itemsPerPage + itemsPerPage
         );
-        setRefrescar(response.data);
-        setRefrescar(response.data);
+       
+        setRefrescar(response.data.content);
         setClick(!click);
         setItemsPerPage(7);
         console.log(refrescar);
@@ -322,9 +324,11 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const RefrescarInformacion = async () => {
         const { response } = await useGetPadronPropietarioComponenteRender(
             `${serverURL}/Propietarios/Obtener`,
-            EstadoGlobal
+            EstadoGlobal,
+            currentPage * itemsPerPage,
+            currentPage * itemsPerPage + itemsPerPage
         );
-        setRefrescar(response.data);
+        setRefrescar(response.data.content);
     };
 
     const handleClickOpenForm = () => {

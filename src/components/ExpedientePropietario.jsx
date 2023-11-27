@@ -20,7 +20,7 @@ import jsPDF from "jspdf";
 import oswaldBold from "../styles/Oswald-Bold.ttf";
 import oswaldRegular from "../styles/Oswald-Regular.ttf";
 import { format } from "date-fns";
-import tuContenidoDelArchivoTTF from "../assets/styles/PlayfairDisplay-Regular.ttf";
+import logo_proempresa from "./assets/logoJosefej.png";
 const ExpedientePropietario = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -48,17 +48,29 @@ const ExpedientePropietario = (props) => {
     pdf.addFileToVFS("Oswald-Bold.ttf", oswaldBold);
     pdf.addFont("Oswald-Regular.ttf", "Oswald", "normal");
     pdf.addFont("Oswald-Bold.ttf", "Oswald", "bold");
+
     const header = () => {
       // Agrega el encabezado aquí, por ejemplo:
       pdf.setFontSize(10);
       pdf.setTextColor(100);
       pdf.text(
-        "Encabezado Personalizado",
+        "Plaza Josfel",
         pdf.internal.pageSize.getWidth() / 2,
         10,
         { align: "center" }
+       
+
       );
+       // Agrega una línea separadora en la parte inferior del encabezado
+  const headerBottomY = 13; // Ajusta la posición Y según sea necesario
+  pdf.setLineWidth(0.05); // Ajusta el grosor de la línea según sea necesario
+  pdf.line(20, headerBottomY, pdf.internal.pageSize.getWidth() - 20, headerBottomY);
     };
+    // Agrega una imagen en la izquierda del encabezado
+  const imagePath = require('./assets/logoJosefej.png'); // Reemplaza con la ruta de tu imagen
+  const imageWidth = 30; // Ancho de la imagen
+  const imageHeight = 10; // Altura de la imagen
+  pdf.addImage(imagePath, 'PNG', 20, 2, imageWidth, imageHeight);
 
   
     // Define la función para el pie de página
@@ -131,7 +143,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     let anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Nombres:", startX, calculateYPosition(2));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       capitalizeFirstLetter(expedienteSelect?.des_nombres?.trim()),
       startX + anchoTextoTemporal,
@@ -142,7 +154,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Apellidos:", startX, calculateYPosition(3));
-    pdf.setFont("Playfair Display", "normal");
+    pdf.setFont("Playfair Display", "regular");
     pdf.text(
       `${capitalizeFirstLetter(
         expedienteSelect?.des_apellido_paterno?.trim()
@@ -150,7 +162,9 @@ const ExpedientePropietario = (props) => {
         expedienteSelect?.des_apellido_materno?.trim()
       )}`,
       startX + anchoTextoTemporal,
-      calculateYPosition(3)
+      calculateYPosition(3),
+      
+  { encoding: 'UTF-8' }  // Puedes ajustar la codificación según sea necesario
     );
 
     pdf.setFont("Playfair Display", "bold");
@@ -158,7 +172,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Dni:", startX, calculateYPosition(4));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.dni.trim(),
       startX + anchoTextoTemporal,
@@ -170,7 +184,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Sexo:", startX, calculateYPosition(5));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_genero?.trim(),
       startX + anchoTextoTemporal,
@@ -182,7 +196,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Fecha de Nacimiento:", startX, calculateYPosition(6));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
 
     pdf.text(
       format(new Date(expedienteSelect?.fec_nacimiento), "dd/MM/yyyy"),
@@ -195,7 +209,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Departamento de nacimiento:", startX, calculateYPosition(7));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_departamento_nacimiento?.trim(),
       startX + anchoTextoTemporal,
@@ -207,7 +221,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Grado de Instruccion:", startX, calculateYPosition(8));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_grado_instruccion?.trim(),
       startX + anchoTextoTemporal,
@@ -219,7 +233,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Estado Civil:", startX, calculateYPosition(9));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_estado_civil?.trim(),
       startX + anchoTextoTemporal,
@@ -231,7 +245,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Departamento de Domicilio:", startX, calculateYPosition(10));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_departamento_dom?.trim(),
       startX + anchoTextoTemporal,
@@ -243,7 +257,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Provincia de Domicilio:", startX, calculateYPosition(11));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_provincia_dom?.trim(),
       startX + anchoTextoTemporal,
@@ -255,7 +269,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Distrito de Domicilio:", startX, calculateYPosition(12));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_distrito_dom?.trim(),
       startX + anchoTextoTemporal,
@@ -267,7 +281,7 @@ const ExpedientePropietario = (props) => {
     // Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Dirección de Domicilio:", startX, calculateYPosition(13));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       expedienteSelect?.des_direccion_dom?.trim(),
       startX + anchoTextoTemporal,
@@ -314,7 +328,7 @@ const ExpedientePropietario = (props) => {
     //Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Número de Teléfono:", startX, calculateYPosition(15));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       props.padron.data.num_telefono
         ? props.padron.data.num_telefono
@@ -328,7 +342,7 @@ const ExpedientePropietario = (props) => {
     //Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Correo Electrónico:", startX, calculateYPosition(16));
-    pdf.setFont("Playfair Display", "normal");
+   pdf.setFont("Playfair Display", "regular");
     pdf.text(
       props.padron.data.num_telefono
         ? props.padron.data.num_telefono
@@ -343,32 +357,38 @@ const ExpedientePropietario = (props) => {
       pdf.setTextColor("#428bca"); // Color de texto
       pdf.text("Información Comercial:", startX, calculateYPosition(17));
 
-      pdf.setFontSize(12);
-      pdf.setTextColor("#000000"); // Color negro
-      pdf.setFont("Playfair Display", "bold");
-      textoTemporal = "Partida a Revisar: ";
-      anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
-      pdf.text("Partida a Revisar:", startX, calculateYPosition(18));
-      pdf.setFont("Playfair Display", "normal");
-      pdf.text(
-        selectedValue,
-        startX + anchoTextoTemporal,
-        calculateYPosition(18)
+    
+      const tableData = [];
+      props.padron.data.inmuebleEntities.map((inmueble) => 
+        tableData.push([inmueble.numPartida,inmueble.numAsiento, inmueble.des_oficina_registral, props.padron.data.des_estado,inmueble.des_tipo_dominio,inmueble.num_acciones_derechos, inmueble.des_direccion])
+     
+       
       );
-
-
-      pdf.setFontSize(12);
-      pdf.setTextColor("#000000"); // Color negro
-      pdf.setFont("Playfair Display", "bold");
-      textoTemporal = "Oficina Registral: ";
-      anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
-      pdf.text("Oficina Registral: ", startX, calculateYPosition(19));
-      pdf.setFont("Playfair Display", "normal");
-      pdf.text(
-        selectedValueAsiento,
-        startX + anchoTextoTemporal,
-        calculateYPosition(19)
-      );
+      const tableData1 = [];
+      props.situacionAsiento.forEach((element) => {
+        props.padron.data.inmuebleEntities.forEach((inmueble) => {
+          if (inmueble.numAsiento === element.asiento) {
+            tableData1.push([
+              element.situacion,
+              element.fechar,
+              extraerTextoDespuesParentesis(element.comentario)
+            ]);
+          }
+        });
+      });
+      pdf.autoTable({
+        startY: calculateYPosition(18), // Establece la posición vertical de inicio de la tabla
+        margin: { left: startX },
+        head: [["Partida","Asiento", "Oficina Registral", "Estado Propietario","Tipo de dominio", "%Acciones y Derechos","Dirección"]],
+       body: tableData,
+      });
+    
+      pdf.autoTable({
+        startY: pdf.autoTable.previous.finalY + 10, // Comienza después del final de la primera tabla con un espacio de 10 unidades
+        margin: { left: startX },
+        head: [["Detalle Asiento","Fecha registro Sunarp", "Detalle"]],
+       body: tableData1,
+      });
 
       pdf.text(
         `Nombre del Negocio: ${inmuebleSelect?.des_negocio}s`,
@@ -483,6 +503,18 @@ const ExpedientePropietario = (props) => {
       setSituacionAsiento(situacionAsiento);
     }
   };
+
+  const extraerTextoDespuesParentesis = (texto) => {
+    const inicioParentesis = texto.indexOf('(');
+    const finParentesis = texto.indexOf(')');
+
+  if (inicioParentesis !== -1 && finParentesis !== -1 && finParentesis < texto.length - 1) {
+    return texto.substring(finParentesis + 1).trim();
+  } else {
+    return texto; // O manejar el caso en el que no se encuentren paréntesis o no haya texto después del paréntesis
+  }
+  };
+
 
   return (
     <div
@@ -859,7 +891,7 @@ const ExpedientePropietario = (props) => {
                 <div className="title-direccion-propietarios-p">
                   {situacionAsiento.length > 0
                     ? situacionAsiento[0].comentario != null
-                      ? situacionAsiento[0].comentario
+                      ? extraerTextoDespuesParentesis(situacionAsiento[0].comentario)
                       : "Fundador del Inmueble"
                     : "Fundador del Inmueble"}
                 </div>
