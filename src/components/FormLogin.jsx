@@ -55,8 +55,7 @@ const FormLogin = (props) => {
         login();
         const successMessage = true;
         navigate(`/home-conglomerado?successLogin=${successMessage}`);
-        //console.log(data.nomColaborador);
-        toast.info("Sesión exitosa  .");
+        
       })
       .catch((error) => {
         console.error("función enRechazo invocada: ", error);

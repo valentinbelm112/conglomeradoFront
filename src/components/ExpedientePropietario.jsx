@@ -33,14 +33,14 @@ const ExpedientePropietario = (props) => {
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
-
+  console.log(props);
   const handleDescargarClick = async () => {
     // Configura las dimensiones del PDF
     const tuContenidoDelArchivoTTF = await import(
       "../assets/styles/PlayfairDisplay-Regular.ttf"
     );
 
-    console.log(tuContenidoDelArchivoTTF);
+    
 
     const pdf = new jsPDF("p", "mm", "a4");
     // Define la función para el encabezado
@@ -79,7 +79,7 @@ const ExpedientePropietario = (props) => {
       pdf.setFontSize(10);
       pdf.setTextColor(100);
       pdf.text(
-        "Pie de Página Personalizado",
+        "Plaza Josfel",
         pdf.internal.pageSize.getWidth() / 2,
         pdf.internal.pageSize.getHeight() - 10,
         { align: "center" }
@@ -128,7 +128,7 @@ const ExpedientePropietario = (props) => {
     pdf.text("Expediente del Inquilino", startX, startY);
 
     // Agrega la sección de información personal
-    pdf.setFontSize(17); // Tamaño de fuente
+    pdf.setFontSize(15); // Tamaño de fuente
     pdf.setFont("Playfair Display", "bold"); // Utilizar la negrita
     pdf.setTextColor("#428bca"); // Color de texto
     pdf.text("Información Personal:", startX, startY + lineHeight);
@@ -306,8 +306,8 @@ const ExpedientePropietario = (props) => {
     );
 
     // Dibuja un marco alrededor de la foto
-    pdf.setDrawColor("#428bca"); // Color del borde del marco
-    pdf.setLineWidth(1); // Ancho del borde del marco
+    //pdf.setDrawColor("#428bca"); // Color del borde del marco
+    //pdf.setLineWidth(1); // Ancho del borde del marco
     pdf.rect(photoX, photoY, photoWidth, photoHeight); // Dibuja el rectángulo alrededor de la foto
     // Agrega más información personal aquí...e
 
@@ -316,7 +316,7 @@ const ExpedientePropietario = (props) => {
 
     // Cargar la fuente "Playfair Display"
     pdf.addFont("PlayfairDisplay-Regular.ttf", "Playfair Display", "normal");
-    pdf.setFontSize(17); // Tamaño de fuente
+    pdf.setFontSize(15); // Tamaño de fuente
     pdf.setFont("Playfair Display", "bold"); // Utilizar la negrita
     pdf.setTextColor("#428bca"); // Color de texto
     pdf.text("Información de Contacto:", startX, calculateYPosition(14));
@@ -352,10 +352,10 @@ const ExpedientePropietario = (props) => {
     );
 
       // Agrega la sección de información personal
-      pdf.setFontSize(17); // Tamaño de fuente
+      pdf.setFontSize(15); // Tamaño de fuente
       pdf.setFont("Playfair Display", "bold"); // Utilizar la negrita
       pdf.setTextColor("#428bca"); // Color de texto
-      pdf.text("Información Comercial:", startX, calculateYPosition(17));
+      pdf.text("Información del Inmueble:", startX, calculateYPosition(17));
 
     
       const tableData = [];
@@ -369,6 +369,7 @@ const ExpedientePropietario = (props) => {
         props.padron.data.inmuebleEntities.forEach((inmueble) => {
           if (inmueble.numAsiento === element.asiento) {
             tableData1.push([
+              element.asiento,
               element.situacion,
               element.fechar,
               extraerTextoDespuesParentesis(element.comentario)
@@ -376,6 +377,7 @@ const ExpedientePropietario = (props) => {
           }
         });
       });
+
       pdf.autoTable({
         startY: calculateYPosition(18), // Establece la posición vertical de inicio de la tabla
         margin: { left: startX },
@@ -384,21 +386,32 @@ const ExpedientePropietario = (props) => {
       });
     
       pdf.autoTable({
-        startY: pdf.autoTable.previous.finalY + 10, // Comienza después del final de la primera tabla con un espacio de 10 unidades
+        startY: pdf.autoTable.previous.finalY + 5, // Comienza después del final de la primera tabla con un espacio de 10 unidades
         margin: { left: startX },
-        head: [["Detalle Asiento","Fecha registro Sunarp", "Detalle"]],
+        head: [["Asiento","Detalle Asiento","Fecha registro Sunarp", "Detalle"]],
        body: tableData1,
       });
 
-      pdf.text(
-        `Nombre del Negocio: ${inmuebleSelect?.des_negocio}s`,
-        startX,
-        calculateYPosition(19)
-      );
+      const tableDataCo = [];
+      coPropietarios?.length > 0 &&
+                    coPropietarios.map((elemento) => 
+                      tableDataCo.push([elemento.desNombreCompleto, elemento.des_dni, elemento.des_dni_conyugue])
+              
+                  
+                  );
 
+      // Agrega la sección de información personal
+      pdf.setFontSize(15); // Tamaño de fuente
+      pdf.setFont("Playfair Display", "bold"); // Utilizar la negrita
+      pdf.setTextColor("#428bca"); // Color de texto
+      pdf.text("CoPropietarios del titular:", startX, pdf.autoTable.previous.finalY + 10);
 
-      console.log()
-    
+      pdf.autoTable({
+        startY:  pdf.autoTable.previous.finalY + 15, // Establece la posición vertical de inicio de la tabla
+        margin: { left: startX },
+        head: [["Co-Propietario","Dni", "Cónyuge del propietario"]],
+       body: tableDataCo,
+      });
       
     
     pdf.save("expediente-inquilino.pdf");
@@ -574,7 +587,7 @@ const ExpedientePropietario = (props) => {
               </label>
 
               <label></label>
-              {props.expedienteConyugue && (
+              {props.expedienteCony && (
                 <>
                   <input
                     type="radio"
@@ -801,7 +814,7 @@ const ExpedientePropietario = (props) => {
                     {props.padron.data.inmuebleEntities.map((inmueble) => (
                       <option key={inmueble.id} value={inmueble.numAsiento}>
                         {inmuebleSelect?.numPartida === selectedValue &&
-                          ` - Asiento: ${inmueble.numAsiento}`}
+                          `- Asiento: ${inmueble.numAsiento}`}
                       </option>
                     ))}
                   </select>

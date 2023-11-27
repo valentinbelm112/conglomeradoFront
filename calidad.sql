@@ -3,7 +3,7 @@ CREATE SEQUENCE CACTUS_SAFI.SEC_CLI_WEB_EXTERNO
   MAXVALUE 9999999999
   START WITH 1
   INCREMENT BY 1
-  CYCLE; -- Esta opciï¿½n reinicia la secuencia cuando alcanza el valor mï¿½ximo
+  CYCLE; -- Esta opción reinicia la secuencia cuando alcanza el valor máximo
 
 SELECT * FROM ALL_SEQUENCES WHERE SEQUENCE_NAME='SEC_CLI_WEB_EXTERNO';
 
@@ -38,25 +38,25 @@ create table CACTUS_SAFI.CLI_CONSEJO_DIRECT
 comment on table CACTUS_SAFI.CLI_CONSEJO_DIRECT
   is 'tabla  que contiene informacion de la junta directiva del conglomerado.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.num_consejo_direct
-  is 'COLUMNA num_consejo_direct Especifica el identificador ï¿½nico de cada registro en la tabla.';
+  is 'COLUMNA num_consejo_direct Especifica el identificador único de cada registro en la tabla.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_nombres
   is 'COLUMNA des_nombres Especifica los nombres completos y apellidos completos del miembro de la junta directiva.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_dni
-  is 'COLUMNA des_dni Especifica el nï¿½mero de documento de identidad (DNI) del miembro de la junta directiva.';
+  is 'COLUMNA des_dni Especifica el número de documento de identidad (DNI) del miembro de la junta directiva.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_cargo
- is 'COLUMNA des_cargo Especifica el cargo o profesiï¿½n del miembro de la junta directiva.';
+ is 'COLUMNA des_cargo Especifica el cargo o profesión del miembro de la junta directiva.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.num_edad
    is 'COLUMNA num_edad Almacena la edad del miembro de la junta directiva.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_email
-  is 'COLUMNA des_email Contiene la direcciï¿½n de correo electrï¿½nico del miembro de la junta.';
+  is 'COLUMNA des_email Contiene la dirección de correo electrónico del miembro de la junta.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.num_telefono
-  is 'COLUMNA num_telefono Almacena el numero de telï¿½fono del miembro de la junta directiva.';
+  is 'COLUMNA num_telefono Almacena el numero de teléfono del miembro de la junta directiva.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_direccion
-  is 'COLUMNA des_direccion Especifica la direcciï¿½n de domicilio del miembro de la junta directiva.';
+  is 'COLUMNA des_direccion Especifica la dirección de domicilio del miembro de la junta directiva.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_codigo_asociacion
   is 'COLUMNA des_codigo_asociacion Especifica el codigo de asociacion de la junta directiva.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_partida
-  is 'COLUMNA des_partida Especifica la partida registral de la asociaciï¿½n.';
+  is 'COLUMNA des_partida Especifica la partida registral de la asociación.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_nombre_asociacion
   is 'COLUMNA des_nombre_asociacion contiene el nombre de la asociacion de un conglomerado.';
 comment on column CACTUS_SAFI.CLI_CONSEJO_DIRECT.des_Asiento
@@ -75,9 +75,8 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_CONSEJO_DIRECT TO webuser;
 
 -- Fin  Create table CLI_CONSEJO_DIRECT
 
-drop table CLI_ASIENTO_PROPIETARIO;
 
-select *from CLI_DOCUMENTO_PDF;
+
 -- Create table CLI_ASIENTO_PROPIETARIO
 create table CACTUS_SAFI.CLI_ASIENTO_PROPIETARIO
 (
@@ -95,12 +94,24 @@ create table CACTUS_SAFI.CLI_ASIENTO_PROPIETARIO
   fec_registro                    DATE
 
 )
+tablespace CACTUS_SAFI
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
 
 --DESCRIPCION DE LA TABLA
 comment on table CACTUS_SAFI.CLI_ASIENTO_PROPIETARIO
   is 'tabla  que contiene informacion de los co-propietarios con su titular.';
 comment on column CACTUS_SAFI.CLI_ASIENTO_PROPIETARIO.num_asiento_prop
-  is 'COLUMNA num_asiento_prop Especifica el identificador ï¿½nico de cada registro en la tabla.';
+  is 'COLUMNA num_asiento_prop Especifica el identificador único de cada registro en la tabla.';
 comment on column CACTUS_SAFI.CLI_ASIENTO_PROPIETARIO.des_codigo_prop
   is 'COLUMNA des_codigo_prop Especifica el codigo del propietario.';
 comment on column CACTUS_SAFI.CLI_ASIENTO_PROPIETARIO.des_codigo_asociacion
@@ -130,13 +141,7 @@ CREATE OR REPLACE PUBLIC SYNONYM CLI_ASIENTO_PROPIETARIO FOR CACTUS_SAFI.CLI_ASI
 
 GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_ASIENTO_PROPIETARIO TO webuser; 
 
-<<<<<<< HEAD
-SELECT *FROM CLI_DOCUMENTO_DIRECT;
-drop table CLI_DOCUMENTO_DIRECT;
-
-=======
 select*from CLI_DOCUMENTO_DIRECT;
->>>>>>> 6049567f9185af220ad9e65ee6e503d1c153a546
 -- Create table CLI_DOCUMENTO_CONSEJO ----
 create table CACTUS_SAFI.CLI_DOCUMENTO_DIRECT
 (
@@ -153,16 +158,13 @@ create table CACTUS_SAFI.CLI_DOCUMENTO_DIRECT
                      
 
 )
-<<<<<<< HEAD
-=======
 
->>>>>>> 6049567f9185af220ad9e65ee6e503d1c153a546
 
 --DESCRIPCION DE LA TABLA
 comment on table CACTUS_SAFI.CLI_DOCUMENTO_DIRECT
   is 'tabla  que contiene informacion de los documentos legales del consejo directivo.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTO_DIRECT.num_documento_direct
-  is 'COLUMNA num_documento_direct Especifica el identificador ï¿½nico de cada registro en la tabla.';
+  is 'COLUMNA num_documento_direct Especifica el identificador único de cada registro en la tabla.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTO_DIRECT.des_codigo_asociacion
   is 'COLUMNA des_codigo_asociacion Especifica el codigo de asociacion al que pertenece el documento.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTO_DIRECT.des_version
@@ -211,11 +213,11 @@ create table CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT
 comment on table CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT
   is 'tabla  que contiene informacion de los documentos en formato pdf de los directivos  y propietarios.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT.num_documento_pdf
-  is 'COLUMNA num_documento_pdf Especifica el identificador ï¿½nico de cada registro en la tabla.';
+  is 'COLUMNA num_documento_pdf Especifica el identificador único de cada registro en la tabla.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT.des_codigo_asociacion
   is 'COLUMNA des_codigo_asociacion Especifica el codigo de asociacion al que pertenece el documento.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT.fec_actualizacion
-  is 'COLUMNA fec_actualizacion Describe la fecha en que se realizï¿½ el registro del documento.';
+  is 'COLUMNA fec_actualizacion Describe la fecha en que se realizó el registro del documento.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT.des_nombre_documento
  is 'COLUMNA des_nombre_documento Especifica el nombre del documento pdf.';
 comment on column CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT.des_contenido
@@ -233,7 +235,6 @@ CREATE OR REPLACE PUBLIC SYNONYM CLI_DOCUMENTOPDF_DIRECT FOR CACTUS_SAFI.CLI_DOC
 GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_DOCUMENTOPDF_DIRECT TO webuser; 
 
 
-SELECT *FROM CLI_USUARIO_CGM;
 --Create table CLI_USUARIO_CGM ----
 create table CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO
 (
@@ -261,7 +262,7 @@ create table CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO
 comment on table CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO
   is 'tabla  que contiene informacion los usuarios que van acceder a la pag web conglomerados';
 comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.num_usuario
-  is 'COLUMNA num_documento_pdf Especifica el identificador ï¿½nico de cada registro en la tabla.';
+  is 'COLUMNA num_documento_pdf Especifica el identificador único de cada registro en la tabla.';
 comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.cod_usuario
   is 'COLUMNA cod_usuario Especifica el codigo drl usuario.';
 comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.des_usuario
@@ -273,7 +274,7 @@ comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.num_estado
 comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.fec_registro
  is 'COLUMNA fec_registro Describe la fecha del registro del usuario .';
  comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.des_password
- is 'COLUMNA des_password Describe la contraseï¿½a del usuario .';
+ is 'COLUMNA des_password Describe la contraseña del usuario .';
  comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.des_codigo_asociacion
  is 'COLUMNA des_codigo_asociacion Especifica el codigo de asociacion al que pertenece el usuario.';
   comment on column CACTUS_SAFI.CLI_USUARIO_CONGLOMERADO.des_dni
@@ -330,9 +331,9 @@ create table CACTUS_SAFI.CLI_CONGLOMERADO_PROP
 comment on table CACTUS_SAFI.CLI_CONGLOMERADO_PROP
   is 'tabla  que contiene informacion de los propietarios';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.num_propietario
-  is 'COLUMNA num_propietario Especifica el identificador ï¿½nico de cada registro en la tabla.';
+  is 'COLUMNA num_propietario Especifica el identificador único de cada registro en la tabla.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_codigo_propietario
-  is 'COLUMNA des_codigo_propietario Especifica el cï¿½digo del propietario.';
+  is 'COLUMNA des_codigo_propietario Especifica el código del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_codigo_dni
   is 'COLUMNA des_codigo_dni Especifica el DNI del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_estado_civil
@@ -340,17 +341,15 @@ comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_estado_civil
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_nombres
  is 'COLUMNA des_nombres Especifica los nombres del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_dni_conyugue
- is 'COLUMNA des_dni_conyugue Especifica el DNI del cï¿½nyuge del propietario.';
+ is 'COLUMNA des_dni_conyugue Especifica el DNI del cónyuge del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.num_telefono
- is 'COLUMNA num_telefono Especifica el nï¿½mero de telï¿½fono del propietario.';
-comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.num_acciones_derechos
- is 'COLUMNA num_acciones_derechos Especifica el nï¿½mero de acciones o derechos del propietario.';
+ is 'COLUMNA num_telefono Especifica el número de teléfono del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_correo
- is 'COLUMNA des_correo Especifica la direcciï¿½n de correo electrï¿½nico del propietario.';
+ is 'COLUMNA des_correo Especifica la dirección de correo electrónico del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_documento_link
  is 'COLUMNA des_documento_link Especifica el enlace al documento del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_codigo_asociacion
- is 'COLUMNA des_codigo_asociacion Especifica el cï¿½digo de la asociaciï¿½n a la que pertenece el propietario.';
+ is 'COLUMNA des_codigo_asociacion Especifica el código de la asociación a la que pertenece el propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_estado
  is 'COLUMNA des_estado Especifica el estado del propietario.';
 comment on column CACTUS_SAFI.CLI_CONGLOMERADO_PROP.des_asiento
@@ -365,8 +364,10 @@ ALTER TABLE CACTUS_SAFI.CLI_CONGLOMERADO_PROP ADD CONSTRAINT CLI_CONGLOMERADO_PR
 --PERMISOS SYNONYM Y GRANT 
 CREATE OR REPLACE PUBLIC SYNONYM CLI_CONGLOMERADO_PROP FOR CACTUS_SAFI.CLI_CONGLOMERADO_PROP;
 
-GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_CONGLOMERADO_PROP TO webuser; 
+GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_CONGLOMERADO_PROP TO CACTUS_SAFI; 
 
+
+drop table CLI_INMUEBLE_PROP;
 
 --Create table CLI_USUARIO_CGM ----
 create table CACTUS_SAFI.CLI_INMUEBLE_PROP
@@ -386,29 +387,29 @@ create table CACTUS_SAFI.CLI_INMUEBLE_PROP
   des_asiento                        VARCHAR2(30) ,
    des_situacion                      VARCHAR2(400) ,
    fec_registro                        DATE                  
-)
+);
 
 --DESCRIPCION DE LA TABLA
 comment on table CACTUS_SAFI.CLI_INMUEBLE_PROP
-  is 'Tabla que contiene informaciï¿½n sobre los inmuebles de los propietarios.';
+  is 'Tabla que contiene información sobre los inmuebles de los propietarios.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.num_inmueble_prop
-  is 'COLUMNA num_inmueble Nï¿½mero de identificaciï¿½n ï¿½nico asignado automï¿½ticamente a cada inmueble. Este es el identificador principal de la tabla.';
+  is 'COLUMNA num_inmueble Número de identificación único asignado automáticamente a cada inmueble. Este es el identificador principal de la tabla.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_partida_registral
-  is 'COLUMNA des_partida_registral Nï¿½mero de partida registral del inmueble.';
+  is 'COLUMNA des_partida_registral Número de partida registral del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_tipo_dominio
-  is 'COLUMNA des_tipo_dominio Tipo de dominio del inmueble, como propiedad, posesiï¿½n, etc.';
+  is 'COLUMNA des_tipo_dominio Tipo de dominio del inmueble, como propiedad, posesión, etc.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_direccion
- is 'COLUMNA des_direccion Direcciï¿½n fï¿½sica del inmueble.';
+ is 'COLUMNA des_direccion Dirección física del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_oficina_registral
  is 'COLUMNA des_oficina_registral Oficina registral del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.num_acciones_derechos
- is 'COLUMNA num_acciones_derechos Nï¿½mero de acciones o derechos asociados al inmueble.';
+ is 'COLUMNA num_acciones_derechos Número de acciones o derechos asociados al inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_departamento
  is 'COLUMNA des_departamento Departamento donde se ubica el inmueble.';
@@ -420,19 +421,19 @@ comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_provincia
  is 'COLUMNA des_provincia Provincia donde se ubica el inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_codigo_asociacion
- is 'COLUMNA des_codigo_asociacion Cï¿½digo de asociaciï¿½n al que estï¿½ vinculado el inmueble.';
+ is 'COLUMNA des_codigo_asociacion Código de asociación al que está vinculado el inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.fec_registro_sunarp
  is 'COLUMNA fec_registro_sunarp Fecha de registro en SUNARP del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_comentario
- is 'COLUMNA des_comentario Comentario o descripciï¿½n adicional del inmueble.';
+ is 'COLUMNA des_comentario Comentario o descripción adicional del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_asiento
- is 'COLUMNA des_asiento Cï¿½digo de asiento del inmueble.';
+ is 'COLUMNA des_asiento Código de asiento del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.des_situacion
- is 'COLUMNA des_situacion Situaciï¿½n de posesion del inmueble.';
+ is 'COLUMNA des_situacion Situación de posesion del inmueble.';
 comment on column CACTUS_SAFI.CLI_INMUEBLE_PROP.fec_registro
  is 'COLUMNA fec_registro Fecha de registro del inmueble en la base de datos.';
 
@@ -443,7 +444,7 @@ ALTER TABLE CACTUS_SAFI.CLI_INMUEBLE_PROP ADD CONSTRAINT CLI_INMUEBLE_PROP_PK PR
 --PERMISOS SYNONYM Y GRANT 
 CREATE OR REPLACE PUBLIC SYNONYM CLI_INMUEBLE_PROP FOR CACTUS_SAFI.CLI_INMUEBLE_PROP;
 
-GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_INMUEBLE_PROP TO webuser;
+GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_INMUEBLE_PROP TO CACTUS_SAFI;
 
 select *from CLI_PROPIETARIO_INMUEBLE;
 
@@ -457,47 +458,46 @@ create table CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE
   des_situacion                       VARCHAR2(50),
   fec_registro_sunarp                 DATE,
   num_propietario NUMBER REFERENCES CLI_CONGLOMERADO_PROP(num_propietario),
-    num_inmueble_prop NUMBER REFERENCES CLI_INMUEBLE_PROP(num_inmueble_prop),
-    PRIMARY KEY (num_propietario, num_inmueble_prop)
+    num_inmueble_prop NUMBER REFERENCES CLI_INMUEBLE_PROP(num_inmueble_prop)
                     
 );
 
 
 --DESCRIPCION DE LA TABLA
 comment on table CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE
-  is 'Tabla que contiene informaciï¿½n sobre el detalle del inmuebles de los propietarios.';
+  is 'Tabla que contiene información sobre el detalle del inmuebles de los propietarios.';
   
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.num_propietario_inmueble
-  is 'COLUMNA num_inmueble Nï¿½mero de identificaciï¿½n ï¿½nico asignado automï¿½ticamente a cada inmueble. Este es el identificador principal de la tabla.';
+  is 'COLUMNA num_inmueble Número de identificación único asignado automáticamente a cada inmueble. Este es el identificador principal de la tabla.';
 
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.des_partida_registral
-  is 'COLUMNA des_partida_registral Nï¿½mero de partida registral del inmueble.';
+  is 'COLUMNA des_partida_registral Número de partida registral del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.num_acciones_derechos
- is 'COLUMNA num_acciones_derechos Nï¿½mero de acciones o derechos asociados al inmueble.';
+ is 'COLUMNA num_acciones_derechos Número de acciones o derechos asociados al inmueble.';
 
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.des_comentario
- is 'COLUMNA des_comentario Comentario o descripciï¿½n adicional del inmueble.';
+ is 'COLUMNA des_comentario Comentario o descripción adicional del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.des_situacion
- is 'COLUMNA des_situacion Situaciï¿½n actual del inmueble.';
+ is 'COLUMNA des_situacion Situación actual del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.fec_registro_sunarp
  is 'COLUMNA fec_registro_sunarp Fecha de registro en SUNARP del inmueble.';
 
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.num_propietario
- is 'COLUMNA num_propietario Nï¿½mero de identificaciï¿½n del propietario asociado a la relaciï¿½n. Esta columna hace referencia al campo num_propietario de la tabla CRE_PROPIETARIOS.';
+ is 'COLUMNA num_propietario Número de identificación del propietario asociado a la relación. Esta columna hace referencia al campo num_propietario de la tabla CRE_PROPIETARIOS.';
 
 comment on column CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE.num_inmueble_prop
- is 'COLUMNA num_inmueble_prop Nï¿½mero de identificaciï¿½n del inmueble asociado a la relaciï¿½n. Esta columna hace referencia al campo num_inmueble_prop de la tabla CRE_INMUEBLE_PROP.';
+ is 'COLUMNA num_inmueble_prop Número de identificación del inmueble asociado a la relación. Esta columna hace referencia al campo num_inmueble_prop de la tabla CRE_INMUEBLE_PROP.';
 
 --CREACION DE PRIMARY KEY
-ALTER TABLE CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE ADD CONSTRAINT CLI_PROPIETARIO_INMUEBLE_PK PRIMARY KEY(num_propietario_inmueble);
+ALTER TABLE CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE ADD CONSTRAINT CLI_PROPIETARIO_INMUEBLE_PK PRIMARY KEY(num_propietario,num_inmueble_prop,num_propietario_inmueble);
 
 --PERMISOS SYNONYM Y GRANT 
 CREATE OR REPLACE PUBLIC SYNONYM CLI_PROPIETARIO_INMUEBLE FOR CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE;
 
-GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE TO webuser;
+GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_PROPIETARIO_INMUEBLE TO CACTUS_SAFI;
 
 select *from CLI_EXPEDIENTE_PROP;
 
@@ -531,10 +531,10 @@ create table CACTUS_SAFI.CLI_EXPEDIENTE_PROP
 )
 
 comment on table CACTUS_SAFI.CLI_EXPEDIENTE_PROP
-  is 'Tabla que contiene informaciï¿½n sobre el expediente de los propietarios.';
+  is 'Tabla que contiene información sobre el expediente de los propietarios.';
   
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.num_expediente_prop
-  is 'COLUMNA num_inmueble Nï¿½mero de identificaciï¿½n ï¿½nico asignado automï¿½ticamente a cada expediente. Este es el identificador principal de la tabla.';
+  is 'COLUMNA num_inmueble Número de identificación único asignado automáticamente a cada expediente. Este es el identificador principal de la tabla.';
   
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_nombres
   is 'COLUMNA des_nombres Nombres del propietario en el expediente.';
@@ -546,7 +546,7 @@ comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_apellido_paterno
   is 'COLUMNA des_apellido_paterno Apellido paterno del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_dni
-  is 'COLUMNA des_dni Nï¿½mero de documento de identidad (DNI) del propietario en el expediente.';
+  is 'COLUMNA des_dni Número de documento de identidad (DNI) del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_cargo
   is 'COLUMNA des_cargo Cargo del propietario en el expediente.';
@@ -555,19 +555,19 @@ comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_edad
   is 'COLUMNA des_edad Edad del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_genero
-  is 'COLUMNA des_genero Gï¿½nero del propietario en el expediente.';
+  is 'COLUMNA des_genero Género del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.fec_fecha_nacimiento
   is 'COLUMNA fec_fecha_nacimiento Fecha de nacimiento del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.fec_fecha_expedicion
-  is 'COLUMNA fec_fecha_expedicion Fecha de expediciï¿½n del expediente.';
+  is 'COLUMNA fec_fecha_expedicion Fecha de expedición del expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_departamento_nac
   is 'COLUMNA des_departamento_nac Departamento de nacimiento del propietario.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_grado_instruccion
-  is 'COLUMNA des_grado_instruccion Grado de instrucciï¿½n del propietario en el expediente.';
+  is 'COLUMNA des_grado_instruccion Grado de instrucción del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_estado_civil
   is 'COLUMNA des_estado_civil Estado civil del propietario en el expediente.';
@@ -582,13 +582,13 @@ comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_distrito_dom
   is 'COLUMNA des_distrito_dom Distrito de domicilio del propietario.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_direccion_dom
-  is 'COLUMNA des_direccion_dom Direcciï¿½n de domicilio del propietario.';
+  is 'COLUMNA des_direccion_dom Dirección de domicilio del propietario.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_telefono
-  is 'COLUMNA des_telefono Nï¿½mero de telï¿½fono del propietario en el expediente.';
+  is 'COLUMNA des_telefono Número de teléfono del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_correo_electronico
-  is 'COLUMNA des_correo_electronico Correo electrï¿½nico del propietario en el expediente.';
+  is 'COLUMNA des_correo_electronico Correo electrónico del propietario en el expediente.';
 
 comment on column CACTUS_SAFI.CLI_EXPEDIENTE_PROP.des_url_foto
   is 'COLUMNA des_url_foto URL de la foto del propietario en el expediente.';
@@ -603,4 +603,3 @@ ALTER TABLE CACTUS_SAFI.CLI_EXPEDIENTE_PROP ADD CONSTRAINT CLI_EXPEDIENTE_PROP_P
 CREATE OR REPLACE PUBLIC SYNONYM CLI_EXPEDIENTE_PROP FOR CACTUS_SAFI.CLI_EXPEDIENTE_PROP;
 
 GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_EXPEDIENTE_PROP TO webuser;
-
