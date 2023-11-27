@@ -34,9 +34,12 @@ const EditarPropietario =(props)=>{
         des_provincia: props.enviarDatos2.des_provincia,
         des_tipo_dominio: props.enviarDatos2.des_tipo_dominio,
         num_acciones_derechos:props.enviarDatos2.num_acciones_derechos,
-        num_area: props.enviarDatos2.num_area,
-        numPartida:props.enviarDatos2.numPartida
-
+        numPartida:props.enviarDatos2.numPartida,
+        numAsiento:props.enviarDatos2.numAsiento,
+        des_comentario:"",
+        des_situacion:"",
+        num_acciones_derechos:"",
+        fec_registro_sunarp:""
     });
 
 
@@ -134,7 +137,7 @@ const EditarPropietario =(props)=>{
             des_codigo_asociacion: datos.des_codigo_asociacion,
             num_telefono: datos.num_telefono,
             inmuebleEntities: [
-                {
+                {   id:props.enviarDatos2.id,
                     des_codigo_asociacion: datosInmueble.des_codigo_asociacion,
                     des_departamento: datosInmueble.des_departamento,
                     des_direccion: datosInmueble.des_direccion,
@@ -143,15 +146,18 @@ const EditarPropietario =(props)=>{
                     des_tipo_dominio: datosInmueble.des_tipo_dominio,
                     num_acciones_derechos: datosInmueble.num_acciones_derechos,
                     num_area: datosInmueble.num_area,
-                    numPartida: datosInmueble.numPartida
-    
+                    numPartida: datosInmueble.numPartida,
+                    des_comentario:datosInmueble.des_comentario,
+                    des_situacion:datosInmueble.des_situacion,
+                    num_acciones_derechos:datosInmueble.num_acciones_derechos,
+                    fec_registro_sunarp:datosInmueble.fec_registro_sunarp,
     
                 }
     
             ]
-    
+          
         }
-        //console.log(camposLlenos);
+        console.log(modificarData);
        // console.log(datos)
 
         fetch(`${serverURL}/Propietarios/update/${props.enviarDatos.id}`, {
@@ -287,6 +293,25 @@ const EditarPropietario =(props)=>{
                                         >
 
                                         </input>
+                                        </div>
+                                        <div className="col-md-8">
+                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Nombres Completos
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="des_nombres"
+                                            value={datos.des_nombres}
+                                            className="form-control upload-inscripcion-directivos"
+                                            onChange={handleInputChange}
+                                        >
+
+
+                                        </input>
+                                       
+                                        </div>
+                                    <div className="col-md-4">
+                                       
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
                                             DNI   {!validateDNI && (
                                                 <span className="error-message-from-prop ">*No válido</span>
@@ -304,7 +329,7 @@ const EditarPropietario =(props)=>{
                                         </input>
 
                                         <div className="tile-form-register-socio-datos-inmueble">
-                                            Datos del comercio
+                                        Datos del Inmueble
                                         </div>
                                         <div className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
                                             Nª Partida  registra (**)
@@ -346,6 +371,19 @@ const EditarPropietario =(props)=>{
 
 
                                         </input>
+                                        <div  className="title-nuevo-propieatario-registro-formpadron-orange title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Situación
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="des_situacion"
+                                            value={datosInmueble.des_situacion}
+                                            className="form-control upload-inscripcion-directivos"
+                                            onChange={handleInputChange}
+                                        >
+
+
+                                        </input>
 
                                         <div className="tile-form-register-socio-datos-contacto">
                                             Datos de contacto
@@ -369,19 +407,6 @@ const EditarPropietario =(props)=>{
 
                                     <div className="col-md-4">
 
-                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            Apellidos Completos
-                                        </div>
-                                        <input
-                                            type="text"
-                                            name="des_Apellidos"
-                                            value={datos.des_Apellidos}
-                                            className="form-control upload-inscripcion-directivos"
-                                            onChange={handleInputChange}
-                                        >
-
-
-                                        </input>
 
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
                                             Estado Civil
@@ -437,6 +462,19 @@ const EditarPropietario =(props)=>{
 
 
                                         </input>
+                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Fecha registro Sunarp
+                                        </div>
+                                        <input
+                                            type="date"
+                                            name="fec_registro_sunarp"
+                                            value={datosInmueble.fec_registro_sunarp}
+                                            className="form-control upload-inscripcion-directivos"
+                                            onChange={handleInputChange}
+                                        >
+
+
+                                        </input>
                                         <br />
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
                                             Correo Electrónico
@@ -457,19 +495,6 @@ const EditarPropietario =(props)=>{
 
                                     </div>
                                     <div className="col-md-4">
-                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            Nombres Completos
-                                        </div>
-                                        <input
-                                            type="text"
-                                            name="des_nombres"
-                                            value={datos.des_nombres}
-                                            className="form-control upload-inscripcion-directivos"
-                                            onChange={handleInputChange}
-                                        >
-
-
-                                        </input>
                                        
                                         <div className="title-nuevo-propieatario-registro-formpadron-red title-nuevo-propieatario-registro-formpadron-black-div">
                                             DNI del cónyugue {!dniCValido && (
@@ -487,21 +512,7 @@ const EditarPropietario =(props)=>{
 
                                         </input>
                                         <br />
-                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
-                                            Área(m2) {!areaValido && (
-                                                <span className="error-message-from-prop ">*No válido</span>
-                                            )}
-                                        </div>
-                                        <input
-                                            type="text"
-                                            name="num_area"
-                                            value={datosInmueble.num_area}
-                                            className={!areaValido ? 'form-control input-error-form-prop' : 'form-control upload-inscripcion-directivos'}
-                                            onChange={handleInputChange}
-                                        >
-
-
-                                        </input>
+                                       
 
                                         <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
                                             Provincia
@@ -513,6 +524,32 @@ const EditarPropietario =(props)=>{
                                             className="form-control upload-inscripcion-directivos"
                                             onChange={handleInputChange}
                                         >
+
+                                        </input>
+                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Asiento
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="numAsiento"
+                                            value={datosInmueble.numAsiento}
+                                            className="form-control upload-inscripcion-directivos"
+                                            onChange={handleInputChange}
+                                        >
+
+
+                                        </input>
+                                        <div className="title-nuevo-propieatario-registro-formpadron-green title-nuevo-propieatario-registro-formpadron-black-div">
+                                            Detalle Inmueble 
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="des_comentario"
+                                            value={datosInmueble.des_comentario}
+                                            className={ "form-control upload-inscripcion-directivos"}
+                                            onChange={handleInputChange}
+                                        >
+
 
                                         </input>
                                     </div>
