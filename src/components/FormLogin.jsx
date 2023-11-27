@@ -50,17 +50,16 @@ const FormLogin = (props) => {
       .then(({ data }) => {
         setIsLoading(false);
         console.log(data);
-
+         
         saveToLocalStorage(data);
         login();
         const successMessage = true;
         navigate(`/home-conglomerado?successLogin=${successMessage}`);
         //console.log(data.nomColaborador);
+        toast.info("Sesión exitosa  .");
       })
       .catch((error) => {
-        saveToLocalStorage(error);
         console.error("función enRechazo invocada: ", error);
-        saveToLocalStorage(error);
         setIsLoading(false);
         toast.error("Intente Nuevamente .");
       });

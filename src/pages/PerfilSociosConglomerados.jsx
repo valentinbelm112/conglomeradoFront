@@ -104,7 +104,7 @@ const PerfilSociosConglomerados = ({ estadoGlobal }) => {
                     </span>
 
                     {format(
-                      new Date(dataPerfil?.data?.fec_fecha_nac),
+                      new Date(dataPerfil?.data?.fec_nacimiento),
                       "dd-MM-yyyy"
                     )}
                   </p>

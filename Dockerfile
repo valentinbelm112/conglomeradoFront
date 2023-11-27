@@ -10,7 +10,6 @@ COPY . .
 # Instala las dependencias
 RUN npm install
 
-
 # Construye la aplicación React
 RUN npm run build
 

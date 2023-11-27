@@ -360,13 +360,19 @@ const ExpedientePropietario = (props) => {
       pdf.setFontSize(12);
       pdf.setTextColor("#000000"); // Color negro
       pdf.setFont("Playfair Display", "bold");
-      textoTemporal = "Asiento: ";
+      textoTemporal = "Oficina Registral: ";
       anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
-      pdf.text("Asiento: ", startX, calculateYPosition(19));
+      pdf.text("Oficina Registral: ", startX, calculateYPosition(19));
       pdf.setFont("Playfair Display", "normal");
       pdf.text(
         selectedValueAsiento,
         startX + anchoTextoTemporal,
+        calculateYPosition(19)
+      );
+
+      pdf.text(
+        `Nombre del Negocio: ${inmuebleSelect?.des_negocio}s`,
+        startX,
         calculateYPosition(19)
       );
 
