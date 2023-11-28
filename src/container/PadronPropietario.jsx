@@ -32,6 +32,7 @@ import { UseDeletePadronPropietario } from "../hooks/useDeletePadronPropietario"
 import ReactPaginate from "react-paginate";
 import PdfUploader from "../components/PdfUploader";
 import Loader from "../components/Loader/Loader";
+import axios from 'axios';
 const PadronPropietario = ({ EstadoGlobal }) => {
     const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
     const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
@@ -51,6 +52,9 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(7);
     const [isLoadingTable, SetIsLoadingTable] = useState(false);
+    const [nombre, setNombre] = useState('');
+    const [pageSize, setPageSize] = useState(10);
+    const [dni, setDni] = useState('46397024');
     const { isLoading, codigoPropietario, estadoActivoP, estadoInactivoP, numPage } =
         UseGetPadronPropietario(
             `${serverURL}/Propietarios/Obtener`,
@@ -242,35 +246,18 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         console.log(refrescar);
     };
 
-    const handleSearch = (e) => {
-        const searchText = e.value;
-
-        if (typeof searchText === "string") {
-            // Si searchText es una cadena (texto), aplicamos toUpperCase
-            const searchTextUpper = searchText.toUpperCase();
-
-            setSearch(
-                refrescar.filter(
-                    (item) =>
-                        item.desDni?.includes(searchText) ||
-                        item.des_Apellidos?.toUpperCase().includes(searchTextUpper) ||
-                        item.des_nombres?.toUpperCase().includes(searchTextUpper)
-                )
-            );
-        } else if (typeof searchText === "number") {
-            // Si searchText es un número, no aplicamos toUpperCase
-            setSearch(
-                refrescar.filter(
-                    (item) =>
-                        item.desDni?.includes(searchText.toString()) ||
-                        item.des_Apellidos?.includes(searchText.toString()) ||
-                        item.des_nombres?.includes(searchText.toString())
-                )
-            );
-        } else {
-            // Manejar otros tipos de datos si es necesario
-            console.log("Tipo de búsqueda no admitido");
-        }
+    const handleSearch = async (e) => {
+        console.log(e)
+        try {
+            const response = await axios.get(`${serverURL}/Propietarios/api/data`, {
+              params: { nombre, dni, page: currentPage, pageSize }
+            });
+            console.log(response)
+            setRefrescar(response.data);
+            //setTotalPages(response.data.totalPages);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
     };
 
     const handleSort = () => {
