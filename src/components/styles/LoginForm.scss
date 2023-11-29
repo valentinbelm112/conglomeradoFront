@@ -33,7 +33,8 @@ a {
   height: 100%;
   position: absolute;
   padding: 90px 70px 50px 70px;
-  background: rgba(40, 57, 101, 0.9);
+  background: rgb(18 66 81 / 90%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .login-html .sign-in-htm {
@@ -90,16 +91,34 @@ a {
   color: #fff;
   display: block;
 }
-
+.login-form .group-submit .label,
+.login-form .group-submit .input,
+.login-form .group-submit .button {
+  width: 100%;
+  color: #fff;
+  display: block;
+}
 
 .login-form .group .input,
 .login-form .group .button {
   border: none;
-  padding: 15px 20px;
-  border-radius: 25px;
+  padding: 13px 20px;
+  border-bottom: 2px solid #fff;
+  /* border-radius: 25px; */
   background: rgba(255, 255, 255, 0.1);
 }
 
+
+
+.login-form .group-submit .input,
+.login-form .group-submit .button {
+  border: none;
+  padding: 13px 20px;
+  font-family: "Playfair Display", serif;
+  //border-bottom: 2px solid #fff;
+  // border-radius: 25px; 
+  background: #005d80;
+}
 
 .login-form .group input[data-type="password"] {
   text-security: circle;
@@ -112,7 +131,7 @@ a {
 }
 
 .login-form .group .button {
-  background: #1161ee;
+  background: #279920;
 }
 
 .login-form .group label .icon {

@@ -544,7 +544,7 @@ td {
 
 .pagination.pagination-right {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 
@@ -634,7 +634,7 @@ td {
   .upload-documents-propietarios {
     padding: 15px !important;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: flex-start;
     margin-left: 2%;
   }
@@ -642,7 +642,7 @@ td {
   .container-title-show-iamgen-ins {
     padding: 15px !important;
     display: flex !important;
-    align-items: start !important;
+    align-items: flex-start !important;
     justify-content: flex-start !important;
     margin-left: 2% !important;
   }

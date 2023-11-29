@@ -1,20 +1,27 @@
-# Utiliza la imagen oficial de Node como base
-FROM node:16-alpine 
+# Fetching the latest node image on apline linux
+FROM node:alpine AS builder
 
-# Establece el directorio de trabajo dentro del contenedor
+# Declaring env
+ENV NODE_ENV production
+
+# Setting up the work directory
 WORKDIR /app
 
-# Copia los archivos del proyecto al contenedor
-COPY . .
-
-# Instala las dependencias
+# Installing dependencies
+COPY ./package.json ./
 RUN npm install
 
-# Construye la aplicación React
+# Copying all the files in our project
+COPY . .
+
+# Building our application
 RUN npm run build
 
-# Expone el puerto 80
-EXPOSE 80
+# Fetching the latest nginx image
+FROM nginx
 
-# Comando para iniciar la aplicación cuando se ejecute el contenedor
-CMD ["npm", "start"]
+# Copying built assets from builder
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Copying our nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf

@@ -62,7 +62,7 @@
 
 .search-register-socios {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   width: 100% !important;
 
@@ -459,7 +459,7 @@
   .upload-documents-socios {
     padding: 15px !important;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: flex-start;
     margin-left: 2%;
   }
@@ -597,7 +597,7 @@ body, html {
   .upload-documents-propietarios {
     padding: 15px !important;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: flex-start;
     margin-left: 2%;
   }
@@ -605,7 +605,7 @@ body, html {
   .container-title-show-iamgen-ins {
     padding: 15px !important;
     display: flex !important;
-    align-items: start !important;
+    align-items: flex-start !important;
     justify-content: flex-start !important;
     margin-left: 2% !important;
   }

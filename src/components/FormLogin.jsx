@@ -2,18 +2,17 @@ import React, { useState, useContext } from "react";
 import "./styles/LoginForm.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { serverURL } from "../utils/Configuration";
 import { saveToLocalStorage } from "../hooks/useLocalStorage";
 import AuthContext from "../context/AuthContext";
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-const FormLogin = (props) => {
+
+const FormLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useContext(AuthContext);
-  const [click,setClick]=useState(false);
+  
   const navigate = useNavigate();
   
   const [datos, setDatos] = useState({
@@ -22,9 +21,7 @@ const FormLogin = (props) => {
   });
 
 
-  const changeStateEyes=()=>{
-    console.log("Ingreso al stado")
-  }
+
   const handleInputChange = (event) => {
     setDatos({
       ...datos,
@@ -38,7 +35,7 @@ const FormLogin = (props) => {
     event.preventDefault();
     console.log("Enviando");
     console.log("Enviando datos" + datos.email);
-    const user = await axios
+    await axios
       .post(
         `${serverURL}/api/auth/generatetoken`,
 
@@ -67,6 +64,7 @@ const FormLogin = (props) => {
   return (
     <div className="login-wrap">
       <div className="login-html">
+    
         <div className="title">
           <span className="texto-negrita-cgm">
             Plataforma de Gestión de Propietarios, Socios e Inquilinos
@@ -80,6 +78,7 @@ const FormLogin = (props) => {
           className="sign-in-cgm"
           checked
         />
+       
         <label htmlFor="tab-1" className="tab">
           Iniciar Sesión
         </label>
@@ -113,7 +112,7 @@ const FormLogin = (props) => {
               />
             </div>
             <div className="group"></div>
-            <div className="group">
+            <div className="group-submit">
               <input
                 type="submit"
                 value={isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
