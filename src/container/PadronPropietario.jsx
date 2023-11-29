@@ -18,7 +18,7 @@ import "./styles/PadronPropietrio.scss";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import RegistrarNuevoPropietario from "../components/RegistrarNuevoPropietario";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import ContainerNavSidbLoad from "../components/Container_Nav_Sidb_Load";
 import { useGetPadronPropietarioComponenteRender } from "../hooks/useGetPadronPropietario";
 import { UseGetPadronPropietario } from "../hooks/useGetPadronPropietario";
 import FormDarBajaPropietario from "../components/FormDarBajaPropietario";
@@ -41,7 +41,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [modalIsOpenPdf, setModalIsOpenPdf] = useState(false);
     const [refrescar, setRefrescar] = useState([]);
     const [search, setSearch] = useState([]);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [sortOrder, setSortOrder] = useState("asc");
     const [togle, setTogle] = useState(true);
     const [clickR, setClickR] = useState(true);
@@ -53,7 +52,6 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [itemsPerPage, setItemsPerPage] = useState(7);
     const [isLoadingTable, SetIsLoadingTable] = useState(false);
     const [nombre, setNombre] = useState('');
-    const [dni, setDni] = useState('');
     const [codigoAsociacion, setCodigoAsociacion] = useState(EstadoGlobal.des_codigo_asociacion);
     const { isLoading, codigoPropietario, estadoActivoP, estadoInactivoP, numPage } =
         UseGetPadronPropietario(
@@ -74,7 +72,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
             selected,
             itemsPerPage
         );
-        console.log(selected);
+       // console.log(selected);
         SetIsLoadingTable(false);
 
         setRefrescar(response.data.content);
@@ -83,13 +81,10 @@ const PadronPropietario = ({ EstadoGlobal }) => {
 
     const handleItemsPerPageChange = (e) => {
         const newItemsPerPage = parseInt(e.target.value, 10);
-        console.log(e.target.value);
+        //console.log(e.target.value);
         setItemsPerPage(newItemsPerPage);
-    };
-
-
-    const startIndex = currentPage * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+    }
+ 
 
     const handleClickOpenEditFrom = (data, datainmueble) => {
         setClick(!click);
@@ -97,9 +92,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         SetExtraerDatosInmueble(datainmueble);
     };
 
-    const openModal = () => {
-        setModalIsOpen(true);
-    };
+  
 
     const ModeloPropsPdf = {
         titulo: "Documentos de Inscripción de Registro de Predios",
@@ -154,10 +147,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                 setTimeout(checkTokenExpiry, 4000);
                 */
     };
-    const closeModal = () => {
-        setModalIsOpen(false);
-    };
-
+ 
 
     useEffect(() => {
         // Inicia la verificación al cargar el componente
@@ -231,8 +221,8 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     };
 
     const RefrescarInformacionEdit = async () => {
-        console.log(refrescar.length);
-        console.log(refrescar);
+        //console.log(refrescar.length);
+        //console.log(refrescar);
         const { response } = await useGetPadronPropietarioComponenteRender(
             `${serverURL}/Propietarios/Obtener`,
             EstadoGlobal,
@@ -243,7 +233,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
         setRefrescar(response.data.content);
         setClick(!click);
         setItemsPerPage(7);
-        console.log(refrescar);
+        //console.log(refrescar);
     };
 
     const handleSearch = async (e) => {
@@ -324,7 +314,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
             "#modal-mostrar-form-documento-socios-person-add-import"
         );
         parrafo.style.top = "95px";
-        console.log(clickR);
+       // console.log(clickR);
         setClickR(!clickR);
     };
 
@@ -348,7 +338,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     if (isLoading) {
         return (
             <>
-                <Container_Nav_Sidb_Load />
+                <ContainerNavSidbLoad />
             </>
         );
     }
@@ -494,7 +484,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                 <div>
                                     <input
                                         id="mostrar-modal-documento-propietario"
-                                        onClick={openModal}
+                                    
                                         name="modal"
                                         type="radio"
                                     />
@@ -510,7 +500,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                             <PdfUploader
                                                 info={ModeloPropsPdf}
                                                 codigo={EstadoGlobal.des_codigo_asociacion}
-                                                estado={EstadoGlobal}
+                                                estado={EstadoGlobal.des_codigo_asociacion}
                                             />
                                         ]}
                                     />
@@ -728,7 +718,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                     .map((propietario) =>
                                                         propietario.inmuebleEntities.map((indexInmueble) => (
                                                             <tr key={`${propietario.id}-${indexInmueble.id}`}>
-                                                                {console.log(propietario.id)}
+                                                               
                                                                 <td
                                                                     style={{
                                                                         overflow: "hidden",

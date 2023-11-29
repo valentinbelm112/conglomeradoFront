@@ -15,7 +15,7 @@ export function saveToLocalStorage(state) {
   
   export function loadFromLocalStorage() {
     try {
-      console.log( "Obteniendo LocalStorege");
+      //console.log( "Obteniendo LocalStorege");
       const serializerStateEcommerce = localStorage.getItem("stateSerializerCGM");
       //console.log(serializerStateEcommerce, "FFF");
       if (serializerStateEcommerce === null) return undefined;
@@ -30,7 +30,7 @@ export function saveToLocalStorage(state) {
   export function removeFromLocalStorage() {
     
     try {
-      console.log("Borrando local storage")
+     // console.log("Borrando local storage")
       localStorage.removeItem("stateSerializerCGM");
       window.location.href ='/login'
      

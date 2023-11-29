@@ -6,7 +6,7 @@ import ExpedientePropietarioSocio from "../components/ExpedientePropietarioSocio
 import { useGetExpedienteSocio } from "../hooks/useGetExpedienteSocio";
 import { serverURL } from "../utils/Configuration";
 import AuthContext from "../context/AuthContext";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import ContainerNavSidbLoad from "../components/Container_Nav_Sidb_Load";
 const ListExpedientesSocios=(props)=>{
     const[open,setOpen]=useState(false);
     const { login } = useContext(AuthContext);
@@ -51,7 +51,7 @@ const ListExpedientesSocios=(props)=>{
    if(isLoading ){
   
           return (
-                  <Container_Nav_Sidb_Load/>
+                  <ContainerNavSidbLoad/>
             );
       }
     return (

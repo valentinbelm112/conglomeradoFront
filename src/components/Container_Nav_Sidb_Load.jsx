@@ -2,7 +2,7 @@ import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import Loader from "../components/Loader/Loader";
 
-const Container_Nav_Sidb_Load=()=>{
+const ContainerNavSidbLoad=()=>{
 
 
     return(
@@ -17,4 +17,4 @@ const Container_Nav_Sidb_Load=()=>{
     );
 }
 
-export default Container_Nav_Sidb_Load;
+export default ContainerNavSidbLoad;

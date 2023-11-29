@@ -33,9 +33,9 @@ const ExpedientePropietario = (props) => {
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
-  console.log(props);
+   //console.log(props);
   const handleDescargarClick = async () => {
-    // Configura las dimensiones del PDF
+    //Configura las dimensiones del PDF
     const tuContenidoDelArchivoTTF = await import(
       "../assets/styles/PlayfairDisplay-Regular.ttf"
     );
@@ -278,7 +278,7 @@ const ExpedientePropietario = (props) => {
 
     pdf.setFont("Playfair Display", "bold");
     textoTemporal = "Dirección de Domicilio:";
-    // Obtener el ancho del texto temporal
+    //Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Dirección de Domicilio:", startX, calculateYPosition(13));
    pdf.setFont("Playfair Display", "regular");
@@ -447,7 +447,7 @@ const ExpedientePropietario = (props) => {
     setExpedienteSelect(props.expediente.data);
 
     if (props.propietario.length > 0) {
-      console.log("Found co propietario");
+     // console.log("Found co propietario");
       const foundCopropietario = props.propietario.filter(
         (element) => element.desNombreCompleto !== props.nombreExpedienteProp
       );
@@ -455,7 +455,7 @@ const ExpedientePropietario = (props) => {
       setCoPropietarios(foundCopropietario);
     }
 
-    console.log(props);
+    //console.log(props);
   }, []);
 
   const ModeloProps1 = {
@@ -495,7 +495,7 @@ const ExpedientePropietario = (props) => {
   }
 
   const handleChange = (event) => {
-    console.log(event.target.value);
+    //console.log(event.target.value);
 
     const inmuebleEncontrado = props.padron.data.inmuebleEntities.find(
       (inmueble) => inmueble.numPartida === event.target.value

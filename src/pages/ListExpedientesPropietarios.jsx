@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import ExpedientePropietario from "../components/ExpedientePropietario";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import ContainerNavSidbLoad from "../components/Container_Nav_Sidb_Load";
 import {useGetExpedientePropietario} from "../hooks/useGetExpedientePropietario";
 import { serverURL } from "../utils/Configuration";
 import { useState } from "react";
@@ -11,7 +11,6 @@ import AuthContext from "../context/AuthContext";
 const ListExpedientesPropietarios=(props)=>{
       const { login } = useContext(AuthContext);
       const { auth } =useContext(AuthContext);
-    const { id,id2} = useParams();
     const [Estado,SetEstado]=useState(false);
     const [togle, setTogle] = useState(true);
     const [open, setOpen] = useState(false);
@@ -28,6 +27,7 @@ const ListExpedientesPropietarios=(props)=>{
 }, [Estado]); // The second argument is an optional dependency array
   
 useEffect(() => {
+       login();
       // Función para verificar el tamaño de la pantalla y actualizar el estado
       const checkScreenSize = () => {
           setOpen(window.innerWidth < 767); // Cambiar a true si el ancho de la pantalla es menor a 768px
@@ -57,7 +57,7 @@ const EstadoNavbar = () => {
     if(isLoading && auth){
   
         return (
-                <Container_Nav_Sidb_Load/>
+                <ContainerNavSidbLoad/>
           );
     }
     

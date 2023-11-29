@@ -2,7 +2,7 @@ import "./Loader.css";
 
 export default function Loader(props) {
 
-    console.log("DdD")
+    //console.log("DdD")
   return (
     <div style={{width:`100%`}}>
       <div className="overlay-loader"></div>
