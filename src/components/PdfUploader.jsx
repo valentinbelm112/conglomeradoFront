@@ -24,6 +24,7 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "react-tooltip";
 import Loader from "./Loader/Loader";
+import { South } from "@mui/icons-material";
 const PdfUploader = (props) => {
   const [open, setOpen] = useState(false);
   const [openCarga, setOpenCarga] = useState(false);
@@ -38,12 +39,21 @@ const PdfUploader = (props) => {
 
  
   const fetchData = async () => {
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${props.estado.accessToken}`,
+      },
+    };
+
+  console.log(config)
+    
     try {
-      const response = await fetch(
-        `${serverURL}/CGM/download/all-pdfs/${props.codigo}/${props.info.tipo_usuario}`
+      const response = await axios(
+        `${serverURL}/CGM/download/all-pdfs/${props.codigo}/${props.info.tipo_usuario}`,
+        config
       );
 
-    
       const data = await response.json().then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -106,12 +116,17 @@ const PdfUploader = (props) => {
     formData.append("des_tipo_usuario",props.info.tipo_usuario);
 
     try {
+      const config = {
+        headers: {
+            Authorization: `Bearer ${props.estado.accessToken}`,
+            "Content-Type": "multipart/form-data", // Puedes incluir otros encabezados según sea necesario
+    
+        },
+    };
+  
+    
       await axios
-        .post(`${serverURL}/CGM/upload/pdf`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post(`${serverURL}/CGM/upload/pdf`, formData, config)
         .then((response) => {
           fetchData();
           toast.success("Documento pdf agregado con éxito.");
@@ -128,10 +143,16 @@ const PdfUploader = (props) => {
   const EliminarRegistro = async (identificador)=>{
     const formData = new FormData();
     formData.append("id_documento", identificador);
+    const config = {
+      headers: {
+          Authorization: `Bearer ${props.estado.accessToken}`
+      },
+  };
+
     
     try {
        await axios.delete(
-        `${serverURL}/CGM/delete/doc/pdf/directivo/${identificador}`
+        `${serverURL}/CGM/delete/doc/pdf/directivo/${identificador}`,config
       
       ).then((response) => {
         fetchData();
@@ -145,9 +166,18 @@ const PdfUploader = (props) => {
 
   }
   const loadPdf = async (pdfId) => {
+
+    const config = {
+      headers: {
+          Authorization: `Bearer ${props.estado.accessToken}`
+      },
+  };
+
+
+
     try {
       const response = await axios(
-        `${serverURL}/CGM/get/pdf/${pdfId}`,
+        `${serverURL}/CGM/get/pdf/${pdfId}`,config,
         {
           responseType: "arraybuffer", 
         }
@@ -173,9 +203,17 @@ const PdfUploader = (props) => {
 
 
   const loadPdfDowload = async (pdfId ,nombre_archivo) => {
+
+    const config = {
+      headers: {
+          Authorization: `Bearer ${props.estado.accessToken}`
+      },
+  };
+
+
     try {
       const response = await axios(
-        `${serverURL}/CGM/get/pdf/${pdfId}`,
+        `${serverURL}/CGM/get/pdf/${pdfId}`,config,
         {
           responseType: "arraybuffer", // Solicitar el tipo de respuesta como arraybuffer
         }

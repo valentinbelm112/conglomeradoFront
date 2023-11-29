@@ -53,8 +53,8 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     const [itemsPerPage, setItemsPerPage] = useState(7);
     const [isLoadingTable, SetIsLoadingTable] = useState(false);
     const [nombre, setNombre] = useState('');
-    const [pageSize, setPageSize] = useState(10);
-    const [dni, setDni] = useState('46397024');
+    const [dni, setDni] = useState('');
+    const [codigoAsociacion, setCodigoAsociacion] = useState(EstadoGlobal.des_codigo_asociacion);
     const { isLoading, codigoPropietario, estadoActivoP, estadoInactivoP, numPage } =
         UseGetPadronPropietario(
             `${serverURL}/Propietarios/Obtener`,
@@ -247,14 +247,15 @@ const PadronPropietario = ({ EstadoGlobal }) => {
     };
 
     const handleSearch = async (e) => {
-        console.log(e)
+
         try {
+            SetIsLoadingTable(true)
             const response = await axios.get(`${serverURL}/Propietarios/api/data`, {
-              params: { nombre, dni, page: currentPage, pageSize }
+              params: { nombre,value: e.value,codigoAsociacion }
             });
-            console.log(response)
-            setRefrescar(response.data);
-            //setTotalPages(response.data.totalPages);
+            SetIsLoadingTable(false)
+            setSearch(response.data);
+   
           } catch (error) {
             console.error('Error fetching data:', error);
           }
@@ -509,6 +510,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                             <PdfUploader
                                                 info={ModeloPropsPdf}
                                                 codigo={EstadoGlobal.des_codigo_asociacion}
+                                                estado={EstadoGlobal}
                                             />
                                         ]}
                                     />
@@ -744,7 +746,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
                                                                         textOverflow: "ellipsis",
                                                                     }}
                                                                 >
-                                                                    {propietario.des_nombres}
+                                                                    {propietario.desNombres}
                                                                 </td>
                                                                 <td
                                                                     style={{

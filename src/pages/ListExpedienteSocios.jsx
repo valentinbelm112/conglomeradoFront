@@ -10,14 +10,13 @@ import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
 const ListExpedientesSocios=(props)=>{
     const[open,setOpen]=useState(false);
     const { login } = useContext(AuthContext);
-    const { id,id2} = useParams();
     const [Estado,SetEstado]=useState(false);
   
     const {dataExpediente,isLoading,dataDetallePropietario,sociosPabellon,expedienteConyugue,coPropietario,pabellones}=useGetExpedienteSocio(`${serverURL}/cliente/consultar-reniec`,props.id1,
     props.id2,
     props.estadoGlobal);
     const Estado1=()=>{
-        console.log("HHHH")
+
         setOpen(!open)
        }
     
