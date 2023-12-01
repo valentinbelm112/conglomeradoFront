@@ -10,7 +10,7 @@ const ConsejoDirectivoView =()=>{
     useEffect(() => {
         //console.log("Hola")
         login();
-      }, [login]);
+      }, []);
 
     return(
         <div className="consejo-directivo-page">{

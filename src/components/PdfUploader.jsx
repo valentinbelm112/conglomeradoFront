@@ -204,7 +204,7 @@ const PdfUploader = (props) => {
 
     try {
       const response = await axios(
-        `${serverURL}/CGM/get/pdf/${pdfId}`,config,
+        `${serverURL}/CGM/get/pdf/${pdfId}`,
         {
           responseType: "arraybuffer", // Solicitar el tipo de respuesta como arraybuffer
         }
