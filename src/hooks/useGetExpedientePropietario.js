@@ -50,17 +50,19 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
 const response =[];
 
  
-console.log(response);
+
+
 
    
     const obtenerDetalleInmueble = padronPropietariosDetalle.data.inmuebleEntities.map(async(inmueble) => {
-      console.log(inmueble,padronPropietariosDetalle.data.id)
-console.log("AQeUII")
+   
+      
+
       const response = await axios.get(
           `${serverURL}/Propietarios/obtener/detalle/inmueble/id?id_inmueble=${inmueble.id}&id_propietario=${padronPropietariosDetalle.data.id}`
         );
 
-        console.log(response)
+       
         return {
             asiento:inmueble.numAsiento,
             situacion:response.data.des_situacion ,
@@ -81,10 +83,10 @@ console.log("AQeUII")
    //capturar el nombre del  propeitario
   // const resultadosCopropietarios = await Promise.all(padronDetalleObtener);
 
-  console.log("hola");
+ 
   setSituacionAsiento(resultados);
     //obtener los resultados
-    console.log(resultados);  
+   
 
     const NombrePropietario=padronPropietariosDetalle.data.des_nombres;
     
@@ -94,7 +96,7 @@ console.log("AQeUII")
       (element) =>element.numPartida
     );
 
-    console.log(found)
+   
     const PartidasUnicos = [];
     for(var i = 0; i < found.length; i++) {
  
@@ -129,13 +131,15 @@ console.log("AQeUII")
     setPartidasRegistrales(PartidasUnicos)
 //consultar si existen expedientes
 
-    console.log(padronPropietariosDetalle.data.desDni)
+  
+
     const existeCliente = await axios.get(
       `${serverURL}/Expediente?dni=${padronPropietariosDetalle.data.desDni}`,
       config
     );
 
-  console.log(existeCliente)
+
+    
     if (existeCliente.data) {
       const responsepostExpediente = await axios.get(
         `${serverURL}/Expediente/get?dni=${padronPropietariosDetalle.data.desDni}`,
@@ -144,8 +148,10 @@ console.log("AQeUII")
    
       SetDataExpediente(responsepostExpediente);
     } else {
-      console.log("Else");
-      console.log(isLoading);
+    
+      
+     
+      
       const objetoRequest = {
         codempresa: "0001",
         option: "7",
@@ -155,8 +161,8 @@ console.log("AQeUII")
       await axios
         .post(API, objetoRequest)
         .then(async (response) => {
-          console.log(response.data.data.apellido_materno);
-          console.log(response.data);
+         
+          
           const bodyExpediente = {
             data: {
               des_apellido_materno: response.data.data.apellido_materno,
@@ -190,8 +196,8 @@ console.log("AQeUII")
             config
           );
 
-          console.log(responsepostExpediente);
-          console.log(response.data.data);
+        
+          
           SetDataExpediente(bodyExpediente);
         })
         .catch((error) => {
@@ -214,8 +220,8 @@ console.log("AQeUII")
         SetExpedienteConyugue(responseExpedienteConyugue);
      
       } else {
-        console.log("Else");
-        console.log(isLoading);
+      
+        
         const objetoRequest = {
           codempresa: "0001",
           option: "7",
@@ -224,8 +230,8 @@ console.log("AQeUII")
         await axios
           .post(API, objetoRequest)
           .then(async (response) => {
-            console.log(response.data.data.apellido_materno);
-            console.log(response.data);
+           
+            
             const bodyExpediente = {
               data: {
                 des_apellido_materno: response.data.data.apellido_materno,
@@ -258,8 +264,8 @@ console.log("AQeUII")
               config
             );
 
-            console.log(responsepostExpediente);
-            console.log(response.data.data);
+           
+            
             SetExpedienteConyugue(bodyExpediente);
            
           })

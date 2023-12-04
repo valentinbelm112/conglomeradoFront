@@ -46,8 +46,8 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth,startIndex,endIn
                 );
                setEstadoActivoP(estadoActivoP.data);
                setEstadoInactivoP(estadoInactivoP.data);
-
-                //console.log(codigoPropietario);
+ 
+                console.log(response.data.content);
                 SetCodigoPropietario(codigoPropietario);
                 SetDataPropietario(response);
                 SetLoading(false);

@@ -20,7 +20,7 @@ const EditarPropietario =(props)=>{
         des_dni_conyugue: props.enviarDatos.des_dni_conyugue,
         des_documento_link:props.enviarDatos.des_documento_link,
         des_estado_civil: props.enviarDatos.des_estado_civil,
-        des_nombres: props.enviarDatos.des_nombres,
+        desNombres: props.enviarDatos.desNombres,
         des_codigo_asociacion: props.enviarDatos.des_codigo_asociacion,
         num_telefono: props.enviarDatos.num_telefono
 
@@ -84,11 +84,10 @@ const EditarPropietario =(props)=>{
     };
 
     const validarPorcentajeAcciones = (valor) => {
-        // Expresión regular para verificar números decimales en el rango de 1 a 100
-        const numeroRegex = /^(100(\.0{1,2})?|[1-9]?\d(\.\d{1,2})?)$/;
+        // Expresión regular para verificar números decimales con hasta 8 cifras en total
+        const numeroRegex = /^(0|[1-9]\d{0,7})(,\d{1,8})?$/;
         return numeroRegex.test(valor);
     };
-
     const validarNumeroDecimal = (cadena) => {
         const regex = /^\d+(\.\d+)?$/;
         return regex.test(cadena);
@@ -133,7 +132,7 @@ const EditarPropietario =(props)=>{
             des_dni_conyugue: datos.des_dni_conyugue,
             des_documento_link: datos.des_documento_link,
             des_estado_civil: datos.des_estado_civil,
-            des_nombres: datos.des_nombres,
+            desNombres: datos.desNombres,
             des_codigo_asociacion: datos.des_codigo_asociacion,
             num_telefono: datos.num_telefono,
             inmuebleEntities: [
@@ -204,7 +203,7 @@ const EditarPropietario =(props)=>{
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         console.log(name,value)
-        if (name === 'des_nombres' || name === 'des_Apellidos' || name === 'desDni' || name === 'codigoPropietario' || name === 'des_correo' || name === 'des_dni_conyugue' || name === 'des_documento_link' || name === 'des_estado_civil' || name === 'des_nombres' || name === 'num_telefono') {
+        if (name === 'desNombres' || name === 'des_Apellidos' || name === 'desDni' || name === 'codigoPropietario' || name === 'des_correo' || name === 'des_dni_conyugue' || name === 'des_documento_link' || name === 'des_estado_civil' || name === 'desNombres' || name === 'num_telefono') {
             setDatos((prevData) => ({
 
                 ...prevData,
@@ -300,8 +299,8 @@ const EditarPropietario =(props)=>{
                                         </div>
                                         <input
                                             type="text"
-                                            name="des_nombres"
-                                            value={datos.des_nombres}
+                                            name="desNombres"
+                                            value={datos.desNombres}
                                             className="form-control upload-inscripcion-directivos"
                                             onChange={handleInputChange}
                                         >

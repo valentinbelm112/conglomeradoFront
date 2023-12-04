@@ -116,7 +116,7 @@ const PadronPropietario = ({ EstadoGlobal }) => {
             currentPage * itemsPerPage,
             currentPage * itemsPerPage + itemsPerPage
         );
-        setRefrescar(response.data);
+        setRefrescar(response.data.content);
     };
 
     useEffect(() => {

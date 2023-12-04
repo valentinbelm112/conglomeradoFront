@@ -631,142 +631,149 @@ if(props.propietario != undefined){
             <div className="title-info-personal-expediente">
               Información Personal
             </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Nombres :
-              </div>
-              <div>
-                {capitalizeFirstLetter(expedienteSelect?.des_nombres?.trim())}
-              </div>
-            </div>
+            {
+              expedienteSelect !=null ||  expedienteSelect !=undefined ?    <div>
 
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Apellidos :
+              expedienteSelect 
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Nombres :
+                </div>
+                <div>
+                  {capitalizeFirstLetter(expedienteSelect?.des_nombres?.trim())}
+                </div>
               </div>
-              <div>
-                {`${capitalizeFirstLetter(
-                  expedienteSelect?.des_apellido_paterno?.trim()
-                )}  ${capitalizeFirstLetter(
-                  expedienteSelect?.des_apellido_materno?.trim()
-                )}`}
+  
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Apellidos :
+                </div>
+                <div>
+                  {`${capitalizeFirstLetter(
+                    expedienteSelect?.des_apellido_paterno?.trim()
+                  )}  ${capitalizeFirstLetter(
+                    expedienteSelect?.des_apellido_materno?.trim()
+                  )}`}
+                </div>
               </div>
-            </div>
-
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Dni :
+  
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Dni :
+                </div>
+                <div>{expedienteSelect?.dni?.trim()}</div>
               </div>
-              <div>{expedienteSelect?.dni?.trim()}</div>
-            </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Fecha de expedicion :
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Fecha de expedicion :
+                </div>
+                <div>
+                  {expedienteSelect?.fec_expedicion &&
+                  expedienteSelect?.fec_expedicion
+                    ? format(
+                        new Date(expedienteSelect?.fec_expedicion),
+                        "dd/MM/yyyy"
+                      )
+                    : "Fecha no disponible"}
+                </div>
               </div>
-              <div>
-                {expedienteSelect?.fec_expedicion &&
-                expedienteSelect?.fec_expedicion
-                  ? format(
-                      new Date(expedienteSelect?.fec_expedicion),
-                      "dd/MM/yyyy"
-                    )
-                  : "Fecha no disponible"}
+  
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Sexo :
+                </div>
+                <div>{expedienteSelect?.des_genero?.trim()}</div>
               </div>
-            </div>
-
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Sexo :
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Fecha de Nacimiento :
+                </div>
+                <div>
+                  {expedienteSelect?.fec_nacimiento &&
+                  expedienteSelect?.fec_nacimiento
+                    ? format(
+                        new Date(expedienteSelect?.fec_nacimiento),
+                        "dd/MM/yyyy"
+                      )
+                    : "Fecha no disponible"}
+                </div>
               </div>
-              <div>{expedienteSelect?.des_genero?.trim()}</div>
-            </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Fecha de Nacimiento :
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Departamento de nacimiento :
+                </div>
+                <div>
+                  {capitalizeFirstLetter(
+                    expedienteSelect?.des_departamento_nacimiento?.trim()
+                  )}
+                </div>
               </div>
-              <div>
-                {expedienteSelect?.fec_nacimiento &&
-                expedienteSelect?.fec_nacimiento
-                  ? format(
-                      new Date(expedienteSelect?.fec_nacimiento),
-                      "dd/MM/yyyy"
-                    )
-                  : "Fecha no disponible"}
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Grado de Instruccion :
+                </div>
+                <div>
+                  {capitalizeFirstLetter(
+                    expedienteSelect?.des_grado_instruccion?.trim()
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Departamento de nacimiento :
+  
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Estado Civil :
+                </div>
+                <div>
+                  {capitalizeFirstLetter(
+                    expedienteSelect?.des_estado_civil?.trim()
+                  )}
+                </div>
               </div>
-              <div>
-                {capitalizeFirstLetter(
-                  expedienteSelect?.des_departamento_nacimiento?.trim()
-                )}
+  
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Deparatamento de Domicilio :
+                </div>
+  
+                <div>
+                  {capitalizeFirstLetter(
+                    expedienteSelect?.des_departamento_dom?.trim()
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Grado de Instruccion :
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Provincia de Domicilio :
+                </div>
+                <div>
+                  {capitalizeFirstLetter(
+                    expedienteSelect?.des_provincia_dom?.trim()
+                  )}
+                </div>
               </div>
-              <div>
-                {capitalizeFirstLetter(
-                  expedienteSelect?.des_grado_instruccion?.trim()
-                )}
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Distrito de Domicilio :
+                </div>
+                <div>
+                  {capitalizeFirstLetter(
+                    expedienteSelect?.des_distrito_dom?.trim()
+                  )}
+                </div>
               </div>
-            </div>
-
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Estado Civil :
+              <div className="container-info-personal">
+                <div className="title-datos-personales-expediente-filter">
+                  Dirección de Domicilio :
+                </div>
+                <div>
+                  {capitalizeFirstLetter(
+                    expedienteSelect?.des_direccion_dom?.trim()
+                  )}
+                </div>
               </div>
-              <div>
-                {capitalizeFirstLetter(
-                  expedienteSelect?.des_estado_civil?.trim()
-                )}
-              </div>
-            </div>
-
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Deparatamento de Domicilio :
-              </div>
-
-              <div>
-                {capitalizeFirstLetter(
-                  expedienteSelect?.des_departamento_dom?.trim()
-                )}
-              </div>
-            </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Provincia de Domicilio :
-              </div>
-              <div>
-                {capitalizeFirstLetter(
-                  expedienteSelect?.des_provincia_dom?.trim()
-                )}
-              </div>
-            </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Distrito de Domicilio :
-              </div>
-              <div>
-                {capitalizeFirstLetter(
-                  expedienteSelect?.des_distrito_dom?.trim()
-                )}
-              </div>
-            </div>
-            <div className="container-info-personal">
-              <div className="title-datos-personales-expediente-filter">
-                Dirección de Domicilio :
-              </div>
-              <div>
-                {capitalizeFirstLetter(
-                  expedienteSelect?.des_direccion_dom?.trim()
-                )}
-              </div>
-            </div>
+              </div> :"Verificar si existe el dni ingresado"
+            }
+        
             <div className="container-info-personal"></div>
           </div>
           <div className="container-info-contacto">
@@ -776,15 +783,15 @@ if(props.propietario != undefined){
             <div className="container-info-contacto-expediente-filter">
               <div className="container-info-personal">
                 <div className="title-datos-personales-expediente-filter">
-                  Numero de telefono :
+                  Número de teléfono :
                 </div>
-                <div>{props.padron.data.num_telefono}</div>
+                <div>{props.padron.data.num_telefono==0 ?"Sin número de teléfono":props.padron.data.num_telefono}</div>
               </div>
               <div className="container-info-personal">
                 <div className="title-datos-personales-expediente-filter">
                   Correo electronico :
                 </div>
-                <div>{props.padron.data.des_correo}</div>
+                <div>{props.padron.data.des_correo ==null?"Sin correo":props.padron.data.des_correo}</div>
               </div>
             </div>
           </div>
@@ -862,11 +869,14 @@ if(props.propietario != undefined){
                   </div>
                   <div className="col-md-4">
                     <div className="title-acciones-drechos">
-                      % Acciones y Derechos
+                       Acciones y Derechos
                     </div>
 
                     <div className="title-acciones-drechos-p">
-                      {inmuebleSelect?.num_acciones_derechos}
+                    {situacionAsiento.length > 0
+                        ? situacionAsiento[0].acciones
+                        : "Nº Accion no dispobible"}
+                  
                     </div>
                   </div>
                   <div className="col-md-4">
