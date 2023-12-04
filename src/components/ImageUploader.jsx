@@ -58,7 +58,7 @@ const ImageUploader = (props) => {
           `${serverURL}/CGM/Documento-detalle-directivo?Codigo_Asociacion=${codAs}`
         )
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           props.refrescarDocumento(response);
         })
         .catch((error) => {
@@ -66,14 +66,14 @@ const ImageUploader = (props) => {
           console.error(error);
         });
     } else {
-      console.log(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
+      //console.log(`${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`)
       await axios
         .get(
           `${props.request}?desDni=${desDni}&codAs=${codAs}&desTipoDoc=${desTipoDoc}`
         )
         .then((response) => {
           // Handle the response data
-            console.log(response)
+           // console.log(response)
           setDbImage(response.data.des_link_documento);
         })
         .catch((error) => {
@@ -84,7 +84,7 @@ const ImageUploader = (props) => {
   };
 
   useEffect(() => {
-  console.log(props.dataPropietario)
+  //console.log(props.dataPropietario)
     setUploadedImage(null);
     setDbImage(null);
 
@@ -185,7 +185,7 @@ const ImageUploader = (props) => {
      )
      
      .then((response) => {
-      console.log("GGG")
+      //console.log("GGG")
        setDbImage(null);
        toast.success("Registro Eliminado con éxito.");
      })
@@ -251,7 +251,7 @@ const ImageUploader = (props) => {
     } else {
       if (uploadedImage) {
         const reader = new FileReader();
-        console.log("Ingresooo")
+        //console.log("Ingresooo")
         reader.onload = () => {
           setUploadedImage(reader.result);
         };

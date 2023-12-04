@@ -17,7 +17,7 @@ import ReactPaginate from "react-paginate";
 import { ToastContainer, toast } from "react-toastify";
 import useGetExportConsejoDirectivo from "../hooks/useGetExportExcelConsejoDirectivo";
 import { UseDeleteConsejoDirectivo } from "../hooks/useDeleteConsejoDirectivo";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import ContainerNavSidbLoad from "../components/Container_Nav_Sidb_Load";
 import NavbarConglomerado from "../components/NavbarConglomerados";
 import SidebarMenu from "../components/SidebarMenu";
 import UseGetDoccumentoConsejoDirectivo from "../hooks/useGetDocumentoConsejoDirectivo";
@@ -98,7 +98,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
       );
     } else {
       // Manejar otros tipos de datos si es necesario
-      console.log("Tipo de búsqueda no admitido");
+      //console.log("Tipo de búsqueda no admitido");
     }
   };
 
@@ -116,8 +116,8 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   };
 
   const RefrescarInformacion = async () => {
-    console.log(refrescar.length);
-    console.log(refrescar);
+    //console.log(refrescar.length);
+    //console.log(refrescar);
     const { response } = await useGetConsejoDirectivoListarRefre(
       `${serverURL}/CGM/listar`,
       EstadoGlobal
@@ -130,12 +130,12 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     );
     setRefrescarDocument(resporesponseDocument);
 
-    console.log(refrescar);
+    //console.log(refrescar);
   };
 
   const RefrescarInformacionEdit = async () => {
-    console.log(refrescar.length);
-    console.log(refrescar);
+    //console.log(refrescar.length);
+    //console.log(refrescar);
     const { response } = await useGetConsejoDirectivoListarRefre(
       `${serverURL}/CGM/listar`,
       EstadoGlobal
@@ -143,7 +143,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
     setRefrescar(response.data);
 
     setClick(!click);
-    console.log(refrescar);
+    //console.log(refrescar);
   };
 
   const closeModal = () => {
@@ -158,12 +158,12 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
 
   const handleItemsPerPageChange = (e) => {
     const newItemsPerPage = parseInt(e.target.value, 10);
-    console.log(e.target.value);
+    //console.log(e.target.value);
     setItemsPerPage(newItemsPerPage);
   };
   const DeleteRegisterConsejo = async (id) => {
     toast.dismiss();
-    console.log(id + "identificador");
+    //console.log(id + "identificador");
     await UseDeleteConsejoDirectivo(
       `${serverURL}/CGM/delete/${id}`,
       EstadoGlobal
@@ -258,7 +258,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
   if (isLoading || isLoadingDoc) {
     return (
       <>
-        <Container_Nav_Sidb_Load />
+        <ContainerNavSidbLoad />
       </>
     );
   }
@@ -412,6 +412,7 @@ const ConsejoDirectivo = ({ EstadoGlobal }) => {
                           <PdfUploader
                             info={ModeloPropsPdf}
                             codigo={EstadoGlobal.des_codigo_asociacion}
+                            estado={EstadoGlobal}
                           />,
                         ]}
                       />

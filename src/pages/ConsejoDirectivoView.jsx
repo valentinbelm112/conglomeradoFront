@@ -4,11 +4,11 @@ import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 const ConsejoDirectivoView =()=>{
     const navigate = useNavigate();
-  console.log("Ingreso consejo")
+  //console.log("Ingreso consejo")
     const { login } = useContext(AuthContext);
     const { auth } =useContext(AuthContext);
     useEffect(() => {
-        console.log("Hola")
+        //console.log("Hola")
         login();
       }, []);
 

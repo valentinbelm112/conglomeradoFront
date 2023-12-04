@@ -7,7 +7,6 @@ export const useGetConsejoDirectivo=(API,setRefrescar,auth)=>{
     const [isLoading, SetLoading] = useState(true);
     const [directivos, setDirectivos] = useState([]);
 
-    console.log(auth);
     const doSomething = async() =>{
         const config = {
         
@@ -20,7 +19,7 @@ export const useGetConsejoDirectivo=(API,setRefrescar,auth)=>{
             config
             )
             .then((response)=>{
-                console.log(response)
+                //console.log(response)
                 setDirectivos(response);
                 SetLoading(false);
                 setRefrescar(response.data)
@@ -48,7 +47,7 @@ export const useGetConsejoDirectivoListarRefre = async (API,EstadoGlobal) => {
         },
     };
 
-    console.log(EstadoGlobal);
+   // console.log(EstadoGlobal);
 
     const response = await axios.get(
         API,
@@ -60,11 +59,11 @@ export const useGetConsejoDirectivoListarRefre = async (API,EstadoGlobal) => {
 
 
   export const useGetConsejoDirectivoDocument = async (API,auth) => {
-   console.log(auth);
+   //console.log(auth);
     const resporesponseDocument = await axios.get(
         `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`
     );
-    console.log(resporesponseDocument);
+   // console.log(resporesponseDocument);
     return { resporesponseDocument};
   };
 

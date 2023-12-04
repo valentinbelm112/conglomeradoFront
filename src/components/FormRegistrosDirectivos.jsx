@@ -6,6 +6,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import ExcelDownloadButton from "./ExcelDownloadFormatoConsejo";
+import { serverURL } from "../utils/Configuration";
 const FormRegistrosDirectivos = ({
   RefrescarInformacion,
   EstadoGlobal,
@@ -62,7 +63,8 @@ const FormRegistrosDirectivos = ({
 
     // Realizar la solicitud POST con Axios
     //http://localhost:8080/upload/imagenes
-    fetch("http://localhost:9090/CGM/Upload-info-directivo", {
+    
+    fetch(`${serverURL}/CGM/Upload-info-directivo`, {
       method: "POST",
       body: formData,
     })
@@ -124,7 +126,7 @@ const FormRegistrosDirectivos = ({
         <div className="form form-registro-directivos">
           <div className="close-form-register-directivo">
             <input id="cerrar-modal" name="modal" type="radio" />
-            <label for="cerrar-modal">
+            <label htmlFor="cerrar-modal">
               <CloseIcon
                 onClick={handleClickCloseFrom}
                 style={{ position: `absolute`, zindex: 99999 }}
@@ -241,7 +243,7 @@ const FormRegistrosDirectivos = ({
               className="btn-register-directivo-info"
               style={{ width: `100%` }}
             >
-              <button type="submit" class="btn-enviar-carga-masiva-directivos">
+              <button type="submit" className="btn-enviar-carga-masiva-directivos">
                 Inscribir Asociación
               </button>
             </div>

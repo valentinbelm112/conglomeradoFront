@@ -10,8 +10,8 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth,startIndex,endIn
     const [estadoActivoP,setEstadoActivoP]=useState(null);
      const [estadoInactivoP,setEstadoInactivoP]=useState(null);
      const [numPage,setNumPage]=useState(null);
-    console.log("hola")
-    console.log(auth)
+    //console.log("hola")
+    //console.log(auth)
     const doSomething = async () => {
 
         const config = {
@@ -34,20 +34,20 @@ export const UseGetPadronPropietario = (API, setRefrescar, auth,startIndex,endIn
          
       
 
-       console.log(config)
+       //console.log(config)
        await axios.get( `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&startIndex=${startIndex}&endIndex=${endIndex}`, config).then(response => {
             const codigoPropietario = response.data.content
             .map((e) => ({
                 value: e.codigoPropietario,
                 label: e.codigoPropietario,
             }));
-              console.log(response.data)
+             // console.log(response.data)
               setNumPage(response.data.totalPages
                 );
                setEstadoActivoP(estadoActivoP.data);
                setEstadoInactivoP(estadoInactivoP.data);
 
-                console.log(codigoPropietario);
+                //console.log(codigoPropietario);
                 SetCodigoPropietario(codigoPropietario);
                 SetDataPropietario(response);
                 SetLoading(false);
@@ -92,7 +92,7 @@ export const UseGetPadronInquilino = (API, setRefrescar, auth) => {
         );
  
        // console.log(API);
-        console.log(response)
+       // console.log(response)
         SetDataPropietario(response);
         SetLoading(false);
         setRefrescar(response.data)
@@ -124,7 +124,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
 
     const doSomething = async () => {
 
-        console.log(auth)
+        //console.log(auth)
        
         const config = {
         
@@ -147,7 +147,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
           }).then((response) => {
            
         
-        console.log(response)
+        //console.log(response)
         // Array para almacenar los valores extraídos
         const listPabellonPuesto = [];
         const codigoPropietario = response.data
@@ -168,7 +168,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
             });
   
 
-        console.log(listPabellonPuesto);
+       // console.log(listPabellonPuesto);
         SetDataSocioPabPuesto(listPabellonPuesto);
         SetCodigoPropietario(codigoPropietario);
         SetDataPropietario(response);
@@ -193,7 +193,7 @@ export const useGetPadronPropietarioComponenteRender = async (API, auth,startInd
   
     const response = await axios(`${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&startIndex=${startIndex}&endIndex=${endIndex}`);
 
-    console.log(response)
+   // console.log(response)
 
     return { response };
 };

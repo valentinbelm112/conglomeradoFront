@@ -37,7 +37,7 @@ const PdfUploader = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [uploadedFile, setUploadedFile] = useState(null);
 
- 
+   
   const fetchData = async () => {
 
     const config = {
@@ -46,20 +46,18 @@ const PdfUploader = (props) => {
       },
     };
 
-  console.log(config)
-    
+  //console.log(config)
+
     try {
-      const response = await axios(
+      await axios(
         `${serverURL}/CGM/download/all-pdfs/${props.codigo}/${props.info.tipo_usuario}`,
         config
-      );
-
-      const data = await response.json().then((response) => {
-        console.log(response);
+      ).then((response) => {
+       // console.log(response);
         setIsLoading(false);
-        setPdfs(response);
+        setPdfs(response.data);
       });
-      console.log(data);
+      //console.log(data);
     } catch (error) {
       console.error("Error fetching PDFs", error);
     }
@@ -78,15 +76,6 @@ const PdfUploader = (props) => {
   };
 
 
-  const handleZoom = (event) => {
-    setOpen(true);
-
-    event.stopPropagation();
-    // Detiene la propagación del evento de clic
-    // Abrir el modal al hacer clic en el botón de "Zoom"
-
-    setIsLightboxOpen(true);
-  };
 
 
   const handleZoomCarga = (event) => {
@@ -132,6 +121,7 @@ const PdfUploader = (props) => {
           toast.success("Documento pdf agregado con éxito.");
         });
     } catch (error) {
+
       console.error("Error uploading file:", error);
       toast.error("Intente Nuevamente.");
     } finally {
@@ -156,7 +146,7 @@ const PdfUploader = (props) => {
       
       ).then((response) => {
         fetchData();
-        console.log("Registro eliminado con éxito");
+       // console.log("Registro eliminado con éxito");
         toast.success("El documento se eliminó con éxito ");
       })
       
@@ -167,6 +157,7 @@ const PdfUploader = (props) => {
   }
   const loadPdf = async (pdfId) => {
 
+   
     const config = {
       headers: {
           Authorization: `Bearer ${props.estado.accessToken}`
@@ -177,7 +168,7 @@ const PdfUploader = (props) => {
 
     try {
       const response = await axios(
-        `${serverURL}/CGM/get/pdf/${pdfId}`,config,
+        `${serverURL}/CGM/get/pdf/${pdfId}`,
         {
           responseType: "arraybuffer", 
         }
@@ -213,12 +204,12 @@ const PdfUploader = (props) => {
 
     try {
       const response = await axios(
-        `${serverURL}/CGM/get/pdf/${pdfId}`,config,
+        `${serverURL}/CGM/get/pdf/${pdfId}`,
         {
           responseType: "arraybuffer", // Solicitar el tipo de respuesta como arraybuffer
         }
       );
-      console.log(response);
+     // console.log(response);
      
 
       const file = new Blob([response.data], { type: "application/pdf" });
@@ -322,7 +313,7 @@ const PdfUploader = (props) => {
                   </thead>
                   <tbody>
                     {pdfs.map((pdf) => (
-                      <tr>
+                      <tr key={pdf.id}>
                         <td>{pdf.des_nombre_documento}</td>
                         <td>{pdf.fec_actualizacion}</td>
                         <td>

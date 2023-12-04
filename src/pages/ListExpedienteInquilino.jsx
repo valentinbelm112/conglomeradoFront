@@ -6,7 +6,7 @@ import ExpedienteInquilino from "../components/ExpedienteInquilino";
 import { useGetExpedienteInquilino } from "../hooks/useGetExpedienteInquilino";
 import { serverURL } from "../utils/Configuration";
 import AuthContext from "../context/AuthContext";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import ContainerNavSidbLoad from "../components/Container_Nav_Sidb_Load";
 const ListExpedientesInquilino = (props) => {
   const [open, setOpen] = useState(false);
   const { login } = useContext(AuthContext);
@@ -65,7 +65,7 @@ const ListExpedientesInquilino = (props) => {
 
 
   if (isLoading) {
-    return <Container_Nav_Sidb_Load/>;
+    return <ContainerNavSidbLoad/>;
   }
 
 

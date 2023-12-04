@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import axios from "axios";
+import  { useState } from "react";
+
 import { loadFromLocalStorage } from "./useLocalStorage";
 const useInitialAuth = () => {
 
   const [auth, setAuth] = useState(null);
 
-  console.log("Agregando al load localstorage")
+  //console.log("Agregando al load localstorage")
   const login = async (props) => {
     const payload = loadFromLocalStorage();
-
     if (payload) {
-     
+    
       setAuth(payload);
       return payload;
     } else {

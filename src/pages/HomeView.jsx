@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate();
-
+ 
     const { login } = useContext(AuthContext);
     const { auth } =useContext(AuthContext);
     
@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <>
           {
-            auth &&<HomeConglomerado EstadoGlobal={auth} />
+             auth?<HomeConglomerado EstadoGlobal={auth} />:navigate(`/login`)
           } 
 
         </>

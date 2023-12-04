@@ -19,7 +19,6 @@ const RegistrarNuevoPropietario = ({
   const [showInputConyugue, setShowInputConyugue] = useState(true);
 
   const [datos, setDatos] = useState({
-    des_Apellidos: "",
     desDni: "",
     codigoPropietario: "",
     des_correo: "",

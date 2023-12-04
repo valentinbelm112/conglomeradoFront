@@ -6,7 +6,7 @@ import { useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { UseGetPerfilUsuario } from "../hooks/useGetPerfil";
 import { serverURL } from "../utils/Configuration";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import ContainerNavSidbLoad from "../components/Container_Nav_Sidb_Load";
 import { format } from "date-fns";
 const PerfilSociosConglomerados = ({ estadoGlobal }) => {
   const { login } = useContext(AuthContext);
@@ -24,7 +24,7 @@ const PerfilSociosConglomerados = ({ estadoGlobal }) => {
 
   if (isLoading) {
 
-    return <Container_Nav_Sidb_Load />;
+    return <ContainerNavSidbLoad />;
 
   }
   return (

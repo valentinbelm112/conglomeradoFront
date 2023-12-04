@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./styles/NavbarConglomerados.scss";
 import { Link } from "react-router-dom";
 import logo_proempresa from "./assets/logoJosefej.png";
@@ -7,7 +7,7 @@ import AuthContext from "../context/AuthContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const NavbarConglomerado = ({ Estado }) => {
   const { auth } = useContext(AuthContext);
-  console.log(auth);
+  //console.log(auth);
 
   return (
     <nav className="header sticky-top navbar-conglomerado-pro">

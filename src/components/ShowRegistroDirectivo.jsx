@@ -13,7 +13,7 @@ import { useEffect } from "react";
 const ShowRegistroDirectivo = (props) => {
     const [open, setOpen] = useState(false);
     const[dataDocument,setDataDocument]=useState([]);
-    console.log(props);
+    //console.log(props);
 
     const [combo, SetCombo] = useState(1)
     
@@ -29,8 +29,8 @@ const ShowRegistroDirectivo = (props) => {
    
 
     const handleChange = (event) => {
-        console.log("RRRRRRRRRRRRR")
-        console.log(`Seleccionaste ${event.target.value}`);
+        //console.log("RRRRRRRRRRRRR")
+        //console.log(`Seleccionaste ${event.target.value}`);
         SetCombo(event.target.value);
 
         setTimeout(() => console.clear(), 1000);
@@ -46,7 +46,7 @@ const ShowRegistroDirectivo = (props) => {
             <div className="container-showr-documents-directivos-child">
                 <div className="row  container-showr-documents-directivos-child-row">
                     <input id="cerrar-modal-reg-direct" name="modal" type="radio" />
-                    <label for="cerrar-modal">
+                    <label htmlFor="cerrar-modal">
                         <CloseIcon onClick={handleClickCloseFrom} style={{ marginLeft: `96%`, margintop: `2%` }} className="icono-close-register-directivo-show-ins" /> </label>
                     <div className="col-md-4 container-show-documents-directivos-child-col " >
 

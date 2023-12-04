@@ -40,7 +40,7 @@ const ModalImagesConglomerado = ({ isOpen, onClose, components }) => {
     const nuevoContador = currentSection - 1;
     if (currentSection > 0) {
       setCurrentSection(currentSection - 1);
-      console.log("DDDDw" + nuevoContador)
+      //console.log("DDDDw" + nuevoContador)
       if (completedSections.includes(nuevoContador)) {
         setCompletedSections(completedSections.filter((index) => index !== nuevoContador));
       }
@@ -51,6 +51,7 @@ const ModalImagesConglomerado = ({ isOpen, onClose, components }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
+      ariaHideApp={false}
       contentLabel="Ventana emergente"
       style={{
         content: {

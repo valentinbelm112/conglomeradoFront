@@ -33,9 +33,9 @@ const ExpedientePropietario = (props) => {
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
-  console.log(props);
+   //console.log(props);
   const handleDescargarClick = async () => {
-    // Configura las dimensiones del PDF
+    //Configura las dimensiones del PDF
     const tuContenidoDelArchivoTTF = await import(
       "../assets/styles/PlayfairDisplay-Regular.ttf"
     );
@@ -278,7 +278,7 @@ const ExpedientePropietario = (props) => {
 
     pdf.setFont("Playfair Display", "bold");
     textoTemporal = "Dirección de Domicilio:";
-    // Obtener el ancho del texto temporal
+    //Obtener el ancho del texto temporal
     anchoTextoTemporal = pdf.getTextWidth(textoTemporal);
     pdf.text("Dirección de Domicilio:", startX, calculateYPosition(13));
    pdf.setFont("Playfair Display", "regular");
@@ -461,7 +461,7 @@ if(props.propietario != undefined){
 }
     
 
-    console.log(props);
+    //console.log(props);
   }, []);
 
   const ModeloProps1 = {
@@ -501,7 +501,7 @@ if(props.propietario != undefined){
   }
 
   const handleChange = (event) => {
-    console.log(event.target.value);
+    //console.log(event.target.value);
 
     const inmuebleEncontrado = props.padron.data.inmuebleEntities.find(
       (inmueble) => inmueble.numPartida === event.target.value

@@ -50,6 +50,7 @@ const ModalUploadPdfAsiento = ({ isOpen, onClose, components }) => {
     return (
       <Modal
         isOpen={isOpen}
+        ariaHideApp={false}
         onRequestClose={onClose}
         contentLabel="Ventana emergente"
         style={{

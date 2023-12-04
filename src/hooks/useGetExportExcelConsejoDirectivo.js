@@ -11,7 +11,7 @@ const UseGetExportConsejoDirectivo = async (API) => {
         })
 
         .then((blob) => {
-            console.log("Link temporal")
+            //console.log("Link temporal")
             // Crear una URL temporal para el blob y descargar el archivo Excel
             const url = window.URL.createObjectURL(new Blob([blob]));
             const a = document.createElement('a');

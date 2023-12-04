@@ -7,10 +7,9 @@ import { Doughnut } from "react-chartjs-2";
 import "chart.js/auto";
 import "./styles/HomeConglomerado.scss";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS} from "react-chartjs-2";
 import AuthContext from "../context/AuthContext";
 import { useGetObtenerNumPropietarios } from "../hooks/useObtenerGetEstadistica";
-import Container_Nav_Sidb_Load from "../components/Container_Nav_Sidb_Load";
+import ContainerNavSidbLoad from "../components/Container_Nav_Sidb_Load";
 import { serverURL } from "../utils/Configuration";
 const HomeConglomerado = ({ EstadoGlobal }) => {
   const { auth } = useContext(AuthContext);
@@ -41,7 +40,7 @@ const HomeConglomerado = ({ EstadoGlobal }) => {
   //Composicion conglomerado Inicio
   //Actualiza estos valores con tus estadísticas reales
 
-  //Estado propietario Fin
+ 
 
   useEffect(() => {
     console.log(auth);
@@ -53,7 +52,7 @@ const HomeConglomerado = ({ EstadoGlobal }) => {
   }, [successMessage]);
 
   if (isLoading) {
-    return <Container_Nav_Sidb_Load />;
+    return <ContainerNavSidbLoad />;
   } else {
     const data = {
       labels: ["Propietarios", "Socios", "Inquilinos"],
