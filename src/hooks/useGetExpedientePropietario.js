@@ -47,10 +47,7 @@ export const useGetExpedientePropietario = (API, id, id2,auth) => {
 
 */
 
-const response = await axios.get(
-  `${serverURL}/Asiento/obtener/copropietario/id?id_propietario=${padronPropietariosDetalle.data.desDni}`,
-  config
-  );
+const response =[];
 
  
 console.log(response);

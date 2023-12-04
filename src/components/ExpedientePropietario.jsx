@@ -444,16 +444,22 @@ const ExpedientePropietario = (props) => {
     if (props.padron.data.inmuebleEntities.length > 0) {
       setInmuebleSelect(props.padron.data.inmuebleEntities[0]);
     }
-    setExpedienteSelect(props.expediente.data);
+    if (props.expediente && props.expediente.data) {
+      setExpedienteSelect(props.expediente.data);
+    } 
+    
 
-    if (props.propietario.length > 0) {
-      console.log("Found co propietario");
-      const foundCopropietario = props.propietario.filter(
-        (element) => element.desNombreCompleto !== props.nombreExpedienteProp
-      );
+if(props.propietario != undefined){
+  if (props.propietario.length > 0) {
+    console.log("Found co propietario");
+    const foundCopropietario = props.propietario.filter(
+      (element) => element.desNombreCompleto !== props.nombreExpedienteProp
+    );
 
-      setCoPropietarios(foundCopropietario);
-    }
+    setCoPropietarios(foundCopropietario);
+  }
+}
+    
 
     console.log(props);
   }, []);
