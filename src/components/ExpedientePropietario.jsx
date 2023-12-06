@@ -20,6 +20,8 @@ import jsPDF from "jspdf";
 import oswaldBold from "../styles/Oswald-Bold.ttf";
 import oswaldRegular from "../styles/Oswald-Regular.ttf";
 import { format } from "date-fns";
+import ModalUploadPdfAsiento from "./ModalUploadPdfAsiento";
+import PdfUploaderProp from "./PdfUploaderProp";
 import logo_proempresa from "./assets/logoJosefej.png";
 const ExpedientePropietario = (props) => {
   const [open, setOpen] = useState(false);
@@ -27,12 +29,28 @@ const ExpedientePropietario = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [expedienteSelect, setExpedienteSelect] = useState(null);
   const [inmuebleSelect, setInmuebleSelect] = useState(null);
+  const [modalIsOpenPdf, setModalIsOpenPdf] = useState(false);
   const [coPropietarios, setCoPropietarios] = useState([]);
   const [opcionSeleccionada, setOpcionSeleccionada] = useState("opcion1");
   const [situacionAsiento, setSituacionAsiento] = useState([]);
   const [selectedValueAsiento, setSelectedValueAsiento] = useState("");
   const [selectAsientoDisabled, setSelectAsientoDisabled] = useState(true);
   const navigate = useNavigate();
+
+  const closeModalPdf = () => {
+    setModalIsOpenPdf(false);
+};
+
+const ModeloPropsPdf = {
+  titulo: "Documentos de Inscripción de Registro de Predios",
+  tipo_usuario: "Propietario"
+
+};
+
+const openModalPdf = () => {
+  console.log("holi");
+  setModalIsOpenPdf(true);
+};
    //console.log(props);
   const handleDescargarClick = async () => {
     //Configura las dimensiones del PDF
@@ -1119,7 +1137,26 @@ if(props.propietario != undefined){
                   ]}
                 />
               </div>
-              <div className="col-md-3"></div>
+              <div className="col-md-3">
+               
+                <input id="mostrar-modal-prop" name="modal" type="radio" />
+
+<label htmlFor="mostrar-modal-prop" onClick={openModalPdf}>
+                  {" "}
+                  <FontAwesomeIcon icon={faFolderOpen} />{" "}
+                </label>
+                <ModalUploadPdfAsiento
+                  isOpen={modalIsOpenPdf}
+                  onClose={closeModalPdf}
+                  components={[
+                      <PdfUploaderProp
+                          info={ModeloPropsPdf}
+                          codigo={props.estadoGlobal.des_codigo_asociacion}
+                          estado={props.estadoGlobal.des_codigo_asociacion}
+                      />
+                  ]}
+                />
+              </div>
               <div className="col-md-3"></div>
               <div className="col-md-3"></div>
             </div>

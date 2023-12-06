@@ -71,7 +71,7 @@ const EstadoNavbar = () => {
               <SidebarMenu setTogle={setTogle} />
             </div>
           )}
-                <ExpedientePropietario expediente={dataExpediente} expedienteCony={expedienteConyugue} padron={dataDetallePropietario} propietario={propietariosPartida} cambiarEstado={cambiarEstadoPadre}  nombreExpedienteProp={coPropietario} partidasRegistrales={partidasRegistrales} situacionAsiento={situacionAsiento}/>
+                <ExpedientePropietario estadoGlobal={props.estadoGlobal} expediente={dataExpediente} expedienteCony={expedienteConyugue} padron={dataDetallePropietario} propietario={propietariosPartida} cambiarEstado={cambiarEstadoPadre}  nombreExpedienteProp={coPropietario} partidasRegistrales={partidasRegistrales} situacionAsiento={situacionAsiento}/>
           </div>
           
           

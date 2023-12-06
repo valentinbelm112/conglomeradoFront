@@ -234,6 +234,34 @@ td {
   width: 100%;
 }
 
+#mostrar-modal-prop {
+	display: none;
+	+ label {
+    background: linear-gradient(to bottom right, #ed2d36, #68b8cf);
+    display: table;
+    margin: auto;
+    color: #fff;
+    line-height: 3.7;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 7%;
+		&:hover {
+			background: darken(steelblue,10%);
+		}
+	}
+  &:checked { 
+    & ~ #modal {
+        top: 64px;
+    
+	  }
+    & ~ #cerrar-modal + label {
+      display: block;
+    }
+  }
+}
+
+
 #modal-mostrar-form-documento-propietarios-person-add-import {
   //background:rgba(#000,.9);
   z-index: 9999;
