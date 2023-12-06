@@ -42,7 +42,7 @@ const ExpedientePropietario = (props) => {
 };
 
 const ModeloPropsPdf = {
-  titulo: "Documentos de Inscripción de Registro de Predios",
+  titulo: "Documentos de Inscripcion de los propietarios",
   tipo_usuario: "Propietario"
 
 };
@@ -1094,6 +1094,7 @@ if(props.propietario != undefined){
             <div className="Documentos-asociado-padron-propietario">
               Documentos del Propietario
             </div>
+            {console.log(props)}
             <p>Adjuntar documentacion del Propietario</p>
             <div className="row">
               <div className="col-md-3">
@@ -1108,6 +1109,7 @@ if(props.propietario != undefined){
                   {" "}
                   <FontAwesomeIcon icon={faFolderOpen} />{" "}
                 </label>
+                
                 <ModalImagesConglomerado
                   isOpen={modalIsOpen}
                   onClose={closeModal}
@@ -1153,6 +1155,8 @@ if(props.propietario != undefined){
                           info={ModeloPropsPdf}
                           codigo={props.estadoGlobal.des_codigo_asociacion}
                           estado={props.estadoGlobal.des_codigo_asociacion}
+                          dataPropietario={props.padron.data}
+                          documentoPropietario={props.padron.data.documentoPropietariopdfEntities}
                       />
                   ]}
                 />

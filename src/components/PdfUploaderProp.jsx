@@ -37,7 +37,6 @@ const PdfUploaderProp = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [uploadedFile, setUploadedFile] = useState(null);
 
-   
   const fetchData = async () => {
 
     const config = {
@@ -47,7 +46,6 @@ const PdfUploaderProp = (props) => {
     };
 
   //console.log(config)
-
     try {
       await axios(
         `${serverURL}/CGM/download/all-pdfs/${props.codigo}/${props.info.tipo_usuario}`,
@@ -76,8 +74,6 @@ const PdfUploaderProp = (props) => {
   };
 
 
-
-
   const handleZoomCarga = (event) => {
     setOpenCarga(true);
 
@@ -99,11 +95,14 @@ const PdfUploaderProp = (props) => {
 
   const handleUpload = async () => {
     setIsUploading(true);
+    console.log(props);
+
+   
     const formData = new FormData();
     formData.append("file", uploadedFile);
     formData.append("des_codigo_Asociacion",props.codigo);
-    formData.append("des_tipo_usuario",props.info.tipo_usuario);
-
+    formData.append("des_dni",props.dataPropietario.desDni);
+    formData.append("id_propietario",props.dataPropietario.codigoPropietario);
     try {
       const config = {
         headers: {
@@ -115,7 +114,7 @@ const PdfUploaderProp = (props) => {
   
     
       await axios
-        .post(`${serverURL}/CGM/upload/pdf`, formData, config)
+        .post(`${serverURL}/Propietarios/upload/pdf`, formData, config)
         .then((response) => {
           fetchData();
           toast.success("Documento pdf agregado con éxito.");
@@ -127,6 +126,7 @@ const PdfUploaderProp = (props) => {
     } finally {
       setIsUploading(false);
     }
+ 
   };
 
 
@@ -168,12 +168,14 @@ const PdfUploaderProp = (props) => {
 
     try {
       const response = await axios(
-        `${serverURL}/CGM/get/pdf/${pdfId}`,
+        `${serverURL}/Propietarios/get/pdf/${pdfId}`,
         {
           responseType: "arraybuffer", 
         }
       );
     
+
+      console.log(response)
       const file = new Blob([response.data], { type: "application/pdf" });
 
       // IE
@@ -194,15 +196,18 @@ const PdfUploaderProp = (props) => {
 
 
   const loadPdfDowload = async (pdfId ,nombre_archivo) => {
-
+    
+    
     const config = {
       headers: {
           Authorization: `Bearer ${props.estado.accessToken}`
       },
   };
-
+    
+     
 
     try {
+      
       const response = await axios(
         `${serverURL}/CGM/get/pdf/${pdfId}`,
         {
@@ -248,6 +253,7 @@ const PdfUploaderProp = (props) => {
   };
   return (
     <div className="container-image-upload-show-cgm">
+      {console.log(props)}
       <div className="title-socio-upload-image-padron">{props.info.titulo}</div>
       <div style={containerStyles}>
         {/* Columna de carga con el Dropzone */}
@@ -306,14 +312,16 @@ const PdfUploaderProp = (props) => {
                 <table className="pdf-list-table">
                   <thead>
                     <tr>
+                      <th>Codigo Asociación</th>
                       <th>Nombre del PDF</th>
                       <th>Fecha de Actualización</th>
                       <th>Opciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {pdfs.map((pdf) => (
+                    {props.documentoPropietario.map((pdf) => (
                       <tr key={pdf.id}>
+                         <td>{pdf.desCodigoAsociacion}</td>
                         <td>{pdf.des_nombre_documento}</td>
                         <td>{pdf.fec_actualizacion}</td>
                         <td>
