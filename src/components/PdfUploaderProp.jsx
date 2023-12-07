@@ -213,7 +213,7 @@ console.log(props.dataPropietario.desDni)
     try {
       
       const response = await axios(
-        `${serverURL}/CGM/get/pdf/${pdfId}`,
+        `${serverURL}/Propietarios/get/pdf/${pdfId}`,
         {
           responseType: "arraybuffer", // Solicitar el tipo de respuesta como arraybuffer
         }

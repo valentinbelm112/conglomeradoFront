@@ -570,7 +570,7 @@ if(props.propietario != undefined){
                   Partidas Registral del propietario:
                 </div>
                 {props.partidasRegistrales.map((item) => (
-                  <div className="Partida-registral-propietario-title-p">
+                  <div  key={item} className="Partida-registral-propietario-title-p">
                     {item}
                   </div>
                 ))}
@@ -999,6 +999,7 @@ if(props.propietario != undefined){
                 style={{ marginTop: "3px" }}
               >
                 <table className="tabla-co-propietario-datos">
+                <thead>
                   <tr>
                     <th
                       className="title-co-propietarios-list"
@@ -1052,7 +1053,8 @@ if(props.propietario != undefined){
                       Cónyuge del propietario
                     </th>
                   </tr>
-
+                  </thead>
+                  <tbody>
                   {coPropietarios?.length === 0 ? (
                     <tr>
                       <td colSpan="8" style={{ textAlign: "center" }}>
@@ -1086,6 +1088,7 @@ if(props.propietario != undefined){
                       </tr>
                     ))
                   )}
+                   </tbody>
                 </table>
               </div>
             </div>
@@ -1105,7 +1108,7 @@ if(props.propietario != undefined){
                   type="radio"
                 />
 
-                <label for="mostrar-modal-documento-socio">
+                <label htmlFor="mostrar-modal-documento-socio">
                   {" "}
                   <FontAwesomeIcon icon={faFolderOpen} />{" "}
                 </label>

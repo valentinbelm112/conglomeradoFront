@@ -125,7 +125,7 @@ const ImageUploader = (props) => {
 
   const onDrop = (acceptedFiles) => {
 
-    // Tomar solo la primera imagen si se cargan múltiples imágenes
+    
     const firstImage = acceptedFiles[0];
 
     // Manejar la imagen cargada aquí
@@ -162,6 +162,7 @@ const ImageUploader = (props) => {
     event.stopPropagation();
     
     // Limpiar la imagen cargada
+    
 
     if (props.tipView.opcion === 1) {
          await axios
