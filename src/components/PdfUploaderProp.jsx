@@ -44,14 +44,14 @@ const PdfUploaderProp = (props) => {
         Authorization: `Bearer ${props.estado.accessToken}`,
       },
     };
-
-  //console.log(config)
+ 
+console.log(props.dataPropietario.desDni)
     try {
       await axios(
-        `${serverURL}/CGM/download/all-pdfs/${props.codigo}/${props.info.tipo_usuario}`,
+        `${serverURL}/Propietarios/download/all-pdfs/${props.codigo}/${props.dataPropietario.desDni}`,
         config
       ).then((response) => {
-       // console.log(response);
+       console.log(response);
         setIsLoading(false);
         setPdfs(response.data);
       });
@@ -61,6 +61,8 @@ const PdfUploaderProp = (props) => {
     }
   };
   useEffect(() => {
+    
+    setPdfs(props.documentoPropietario);
     fetchData();
   }, []);
 
@@ -103,6 +105,8 @@ const PdfUploaderProp = (props) => {
     formData.append("des_codigo_Asociacion",props.codigo);
     formData.append("des_dni",props.dataPropietario.desDni);
     formData.append("id_propietario",props.dataPropietario.codigoPropietario);
+
+    console.log(props.dataPropietario.desDni);
     try {
       const config = {
         headers: {
@@ -142,7 +146,7 @@ const PdfUploaderProp = (props) => {
     
     try {
        await axios.delete(
-        `${serverURL}/CGM/delete/doc/pdf/directivo/${identificador}`,config
+        `${serverURL}/Propietarios/delete/doc/pdf/prop/${identificador}`,config
       
       ).then((response) => {
         fetchData();
@@ -319,7 +323,7 @@ const PdfUploaderProp = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {props.documentoPropietario.map((pdf) => (
+                    {pdfs.map((pdf) => (
                       <tr key={pdf.id}>
                          <td>{pdf.desCodigoAsociacion}</td>
                         <td>{pdf.des_nombre_documento}</td>

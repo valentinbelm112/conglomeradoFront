@@ -611,6 +611,7 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_EXPEDIENTE_PROP TO webuser;
 
 
 --Create table CLI_DOCUMENTO_PDF ----
+drop table CACTUS_SAFI.CLI_DOCUMENTOPDF_PROP
 
 create table CACTUS_SAFI.CLI_DOCUMENTOPDF_PROP
 (
@@ -619,9 +620,10 @@ create table CACTUS_SAFI.CLI_DOCUMENTOPDF_PROP
   fec_actualizacion                   DATE,
   des_nombre_documento                VARCHAR2(200),
   des_contenido                       BLOB,
-  des_dni                           VARCHAR2(15)
+  des_dni                           VARCHAR2(15),
+  num_propietario                    NUMBER(10)
                     
-)
+);
 
 --DESCRIPCION DE LA TABLA
 comment on table CACTUS_SAFI.CLI_DOCUMENTOPDF_PROP
