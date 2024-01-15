@@ -852,7 +852,7 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_SOCIO_BAJA_DET TO webuser;
 
 -- Create table CLI_PROPIETARIO_BAJA_DET fin -----------------------------------------------------------------------------------
 
-select *from CLI_SOCIO_INMUEBLE
+ 
 drop table CACTUS_SAFI.CLI_SOCIO_INMUEBLE
 
 GRANT SELECT,INSERT,UPDATE,DELETE ON CACTUS_SAFI.CLI_SOCIO_BAJA_DET TO webuser; 
