@@ -542,14 +542,22 @@ if(props.propietario != undefined){
   };
 
   const extraerTextoDespuesParentesis = (texto) => {
-    const inicioParentesis = texto.indexOf('(');
-    const finParentesis = texto.indexOf(')');
-
-  if (inicioParentesis !== -1 && finParentesis !== -1 && finParentesis < texto.length - 1) {
-    return texto.substring(finParentesis + 1).trim();
-  } else {
-    return texto; // O manejar el caso en el que no se encuentren paréntesis o no haya texto después del paréntesis
-  }
+    console.log(texto)
+    if(texto !=null || texto != undefined){
+      const inicioParentesis = texto.indexOf('(');
+      const finParentesis = texto.indexOf(')');
+  
+    if (inicioParentesis !== -1 && finParentesis !== -1 && finParentesis < texto.length - 1) {
+      return texto.substring(finParentesis + 1).trim();
+    } else {
+      return texto; // O manejar el caso en el que no se encuentren paréntesis o no haya texto después del paréntesis
+    }
+    }
+    else{
+      
+    }
+    return texto
+   
   };
 
 
@@ -887,12 +895,12 @@ if(props.propietario != undefined){
                   </div>
                   <div className="col-md-4">
                     <div className="title-acciones-drechos">
-                       Acciones y Derechos
+                       % Acciones y Derechos 
                     </div>
 
                     <div className="title-acciones-drechos-p">
                     {situacionAsiento.length > 0
-                        ? situacionAsiento[0].acciones
+                        ? situacionAsiento[0].acciones*100
                         : "Nº Accion no dispobible"}
                   
                     </div>

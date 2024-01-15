@@ -111,13 +111,13 @@ export const UseGetPadronInquilino = (API, setRefrescar, auth) => {
 
 
 
-export const UseGetPadronSocio= (API, setRefrescar, auth) => {
+export const UseGetPadronSocio= (API, setRefrescar, auth,startIndex,endIndex) => {
 
     const [isLoading, SetLoading] = useState(true);
     const [dataPropietario, SetDataPropietario] = useState(null);
     const [dataSocioPabPuesto, SetDataSocioPabPuesto] = useState(null);
     const [codigoPropietario, SetCodigoPropietario] = useState(null)
-  
+    const [numPage,setNumPage]=useState(null);
 
 
 
@@ -138,7 +138,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
 
         axios({
             method: "get",
-            url: `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}`,
+            url: `${API}?Codigo_Asociacion=${auth.des_codigo_asociacion}&startIndex=${startIndex}&endIndex=${endIndex}`,
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
@@ -150,15 +150,16 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
         //console.log(response)
         // Array para almacenar los valores extraídos
         const listPabellonPuesto = [];
-        const codigoPropietario = response.data
-            .filter((e) => e.des_estado !== "Inactivo")
+        console.log(response.data)
+        const codigoPropietario = response.data.content
             .map((e) => ({
                 value: e.codSocio,
                 label: e.codSocio,
             }));
-
+            setNumPage(response.data.totalPages
+                );
             // Recorremos el objeto 'data' y extraemos los valores necesarios
-            response.data.forEach(obj => {
+            response.data.content.forEach(obj => {
                 const codSocio = obj.codSocio;
                 obj.inmuebleSocioEntities.forEach(inmueble => {
                 const numPuesto = inmueble.numPuesto;
@@ -173,7 +174,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
         SetCodigoPropietario(codigoPropietario);
         SetDataPropietario(response);
         SetLoading(false);
-        setRefrescar(response.data)
+        setRefrescar(response.data.content)
     });
     }
 
@@ -184,7 +185,7 @@ export const UseGetPadronSocio= (API, setRefrescar, auth) => {
     }, []);
 
 
-    return { dataPropietario, isLoading, codigoPropietario,dataSocioPabPuesto };
+    return { dataPropietario, isLoading, codigoPropietario,dataSocioPabPuesto ,numPage};
 }
 
 

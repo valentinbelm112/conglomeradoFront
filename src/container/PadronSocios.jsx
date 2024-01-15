@@ -4,6 +4,7 @@ import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import PublishIcon from "@mui/icons-material/Publish";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import "./styles/PadronSocios.scss";
+import Loader from "../components/Loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
 import NavbarConglomerado from "../components/NavbarConglomerados";
@@ -39,19 +40,35 @@ const ListPadronSocios = (props) => {
   const [clickImportProp, setClickImportProp] = useState(false);
   const [extraerDatosPerso, SetExtraerDatosPerso] = useState([]);
   const [extraerDatosInmueble, SetExtraerDatosInmueble] = useState([]);
-
-  const { isLoading, dataPropietario, codigoPropietario,dataSocioPabPuesto } = UseGetPadronSocio(
-    `${serverURL}/Socio/Obtener`,
-    setRefrescar,
-    props.EstadoGlobal
-  );
-  //estado react pagination
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(7);
+  const [isLoadingTable, SetIsLoadingTable] = useState(false);
+  const { isLoading, dataPropietario, codigoPropietario,dataSocioPabPuesto,numPage } = UseGetPadronSocio(
+    `${serverURL}/Socio/Obtener`,
+    setRefrescar,
+    props.EstadoGlobal,
+    currentPage * itemsPerPage,
+    currentPage * itemsPerPage + itemsPerPage
+  );
+
 
   //function react pagination
-  const handlePageChange = ({ selected }) => {
+  const HandlePageChange = async({ selected }) => {
     setCurrentPage(selected);
+
+    setCurrentPage(selected);
+      
+    SetIsLoadingTable(true);
+    const { response } = await useGetPadronPropietarioComponenteRender(
+      `${serverURL}/Socio/Obtener`,
+      props.EstadoGlobal,
+        selected,
+        itemsPerPage
+    );
+   // console.log(selected);
+    SetIsLoadingTable(false);
+
+    setRefrescar(response.data.content);
   };
 
   const handleItemsPerPageChange = (e) => {
@@ -538,8 +555,17 @@ const ListPadronSocios = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {(search.length === 0 ? refrescar : search)
-                      .slice(startIndex, endIndex)
+                    {isLoadingTable ? <tr>
+                                                <td colSpan="12" style={{ textAlign: 'center' }}>
+                                                    <Loader />
+                                                </td>
+                                            </tr> : refrescar.length === 0 ? (
+                                                <tr>
+                                                    <td colSpan="10" style={{ textAlign: "center" }}>
+                                                        No hay datos disponibles
+                                                    </td>
+                                                </tr>
+                                            ) : (search.length === 0 ? refrescar : search)
                       .map((socio) =>
                         socio.inmuebleSocioEntities.map((indexInmueble) => (
                           <tr>
@@ -739,12 +765,10 @@ const ListPadronSocios = (props) => {
                 </div>
               }
               breakLabel={<div className="custom-pagination-icon">...</div>}
-              pageCount={Math.ceil(
-                (search.length === 0 ? refrescar : search).length / itemsPerPage
-              )}
+              pageCount={numPage}
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
+              onPageChange={HandlePageChange}
               containerClassName={"pagination justify-content-center"}
               pageClassName={"page-item"}
               pageLinkClassName={"page-link"}

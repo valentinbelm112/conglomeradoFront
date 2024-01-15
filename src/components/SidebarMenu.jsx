@@ -145,7 +145,8 @@ const SidebarMenu = ({setTogle}) => {
                             <Link to="/register-padron-propietarios" className="no-style-link">
                                 <Item icon={<FeedIcon />} style={{fontSize: '.8125rem'}} name="Padron propietarios" />
                             </Link>
-                            <Link  className="no-style-link">
+                           
+                            <Link  className="no-style-link" to="/register-padron-socios">
                             <Item icon={<HandshakeIcon />}  style={{fontSize: '.8125rem'}} name="Padron socios" />
                             </Link>
                             <Link className="no-style-link">
